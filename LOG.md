@@ -4,6 +4,14 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- **Milestone 3 complete.** `vgacap` main b23a551: `ttcap` (board
+  profiles, raw-REPL link with length-driven chunk reads, throughput and
+  capture scripts, `ttcap probe/throughput/capture/png`), hardware-proven
+  on RP2350 (fpga-1) and RP2040 (tt07, tt08) boards over the bridge and
+  over direct serial on the Pis; 260 Python tests, warning-free. Final
+  review's M5/M6 recommendations (streaming capture API, script prelude,
+  FRAM handling, a host harness that executes the board script's main)
+  are in the M5 plan. All three Pi checkouts updated.
 - M4 Task 2 merged: `counter` and `prbs` designs; the check tool decodes
   the in-picture frame counter and verifies consecutive frames (default
   run now reconstructs three frames, counters 2, 3, 4). M4 Tasks 3-4

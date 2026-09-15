@@ -43,7 +43,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 
 - [x] M3 Task 5: clock sweep on both board types (`docs/research/2026-09-15-micropython-capture-rate.md`)
 - [x] M3 Task 4b: PIO program leak and coalesced overrun lines (merged 88b72eb; board recovered without a power cycle)
-- [~] M3 final whole-milestone review: with fixes (C1 PIO0 program removal, kbd_intr order, heap threshold vs buffers, recovery on all errors, CLI wrapping, upload import, minors); fix wave in progress
+- [x] M3 final whole-milestone review: fix wave merged (b23a551); review and ledger archived under `docs/reviews/`. **Milestone 3 complete.**
 - [x] M4 Task 2: `counter` + `prbs` with per-frame counter checking (merged 719dbb1)
 - [~] M4 Tasks 3-4: `modes` design, iCE40 build flow, bitstreams, CI (in progress)
 
