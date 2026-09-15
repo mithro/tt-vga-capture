@@ -4,6 +4,16 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- **A GStreamer pipeline can now capture a Tiny Tapeout board directly.**
+  `vgacapttsrc ! vgadecode ! ...` against fpga-1 produces frames
+  pixel-identical to the calibration reference, and the `vgacapbin` URI
+  form writes a video file carrying the project's own time base. Two fix
+  rounds were needed: a teardown that could hang when a descendant
+  outlived its parent, **arbitrary command execution through a URI query**
+  (which would have become remote code execution once the browser view
+  accepted URIs), and a stop signal that could reach a recycled process
+  group. All three were found by review, two of them reproduced with
+  strace, and each fix is pinned by a test that fails when reverted.
 - M5 Tasks 2 and 3 merged. The GStreamer path works end to end on real
   hardware data: a capture of the FPGA emulation board decodes
   pixel-identically to the calibration reference through
