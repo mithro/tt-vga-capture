@@ -46,7 +46,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 - [x] M3 final whole-milestone review: fix wave merged (b23a551); review and ledger archived under `docs/reviews/`. **Milestone 3 complete.**
 - [x] M4 Task 2: `counter` + `prbs` with per-frame counter checking (merged 719dbb1)
 - [x] M4 Tasks 3-4: `modes` design, iCE40 build flow, bitstreams, CI (merged 1209477)
-- [~] M4 Task 5: hardware validation (bars and grid done; counter, modes, prbs next)
+- [x] M4 Task 5: hardware validation of all five designs. **Milestone 4 complete.**
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
 
@@ -58,7 +58,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
 - [x] `tt_um_vgacal_bars`, `_grid`, `_counter`, `_modes`, `_prbs` with reference renderers
 - [x] iCE40UP5K builds via `tt_fpga.py harden`, five bitstreams committed (all above 25 MHz)
 - [x] Upload to fpga-1 and capture; **pixel-exact comparison passed for bars and grid** (`docs/results/2026-09-15-calibration-loop-fpga1/`)
-- [ ] Same for `counter`, `modes` and `prbs` on hardware (counter validates frame ordering, modes the three timings, prbs the bit-error rate)
+- [x] Same for `counter`, `modes` and `prbs` on hardware: all pixel-exact; counter verified across five consecutive frames; modes detected 800x600@60 with positive syncs unaided
 
 ## Milestone 5: GStreamer plugin and demo
 

@@ -4,6 +4,12 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- **Milestone 4 complete.** All five calibration designs captured from
+  fpga-1 and compared pixel-exactly: bars, grid, counter (five consecutive
+  frames, counters 4 to 8, no drops or reordering), prbs (pseudo-random
+  pixels, no redundancy to hide an error) and modes, which the board
+  happened to drive at 800x600@60 with positive syncs and which the
+  reconstruction detected unaided, matching all 480,000 pixels.
 - **The calibration loop closed.** `tt_um_vgacal_bars` and
   `tt_um_vgacal_grid` were synthesised to iCE40UP5K bitstreams, uploaded to
   fpga-1 through the daemon API, captured at a 500 kHz project clock and
