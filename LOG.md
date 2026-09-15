@@ -4,6 +4,12 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- M5 Task 1 merged: the tt08 `tt_um_rejunity_vga_logo` capture that used to
+  reconstruct nothing now yields the Tiny Tapeout logo with 19 spurious
+  sync pulses rejected and counted
+  (`docs/results/2026-09-15-tt08-tiny-logo-glitch-tolerance/`), and a
+  capture starting mid-frame no longer loses a frame. M5 Task 2 (streaming
+  capture API for the GStreamer source) is in progress.
 - **Milestone 4 complete.** All five calibration designs captured from
   fpga-1 and compared pixel-exactly: bars, grid, counter (five consecutive
   frames, counters 4 to 8, no drops or reordering), prbs (pseudo-random
