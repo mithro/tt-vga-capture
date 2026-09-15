@@ -54,3 +54,18 @@ clock pad must not be reconfigured, and hard IRQ handlers must be
 module-level functions.
 
 `tt-vga-capture` commit with these tools: see git log; `vgacap` 5893c61.
+
+## Correction (2026-09-15, later the same day)
+
+"Pixel-exact" above was verified only at bar centres. The M4 Task 1 review
+found, and an edge check confirmed on this very frame, that the picture is
+shifted by one pixel left and one line up relative to the design's intended
+coordinates: the first bar boundary is at column 79 (not 80) and the
+bars/gradient split at row 239 (not 240). The simulated frame shows the
+identical shift, so the capture path reproduces the design's output
+faithfully; the cause is the demo's `hvsync_generator` (shared with the
+Tiny Tapeout VGA playground), whose hsync leading edge lands one clock late
+and whose vsync edge is not aligned to an hsync edge, while `vgacap` places
+pixels per VESA (active video starts `h_sync + h_back` clocks after the
+hsync leading edge). Details: `tt-vga-testpatterns/docs/timing.md` and the
+M4 Task 1 review.

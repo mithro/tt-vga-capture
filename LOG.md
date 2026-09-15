@@ -4,6 +4,16 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- M4 Task 1 review settled the timing question: `libvgaframe` is
+  VESA-correct; the fpgas.online demo / VGA playground `hvsync_generator`
+  has a one-clock, one-line phase error, so the demo's picture (hardware
+  and simulation alike) sits one pixel left and one line up of its intended
+  coordinates. My earlier "pixel-exact" claims for the demo were true only
+  at the sampled bar centres; both result notes now carry a correction.
+  Ruling: the calibration designs get a VESA-correct shared generator and
+  no per-design corrections. Task 4 hit RP2040 heap pressure at script
+  load (25 KB script vs ~80 KB free heap; two board halts): round 3 shrinks
+  the uploaded script and cleans the namespace before each run.
 - **First silicon picture.** tt07 (RP2040 board, firmware v1.24/2.0.4)
   running `tt_um_rejunity_vga` at 60 kHz through the same minimal script
   with the 12-bit RP2040 layout: 1.47 M samples, zero overruns, one
