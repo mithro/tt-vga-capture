@@ -4,6 +4,18 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- M3 Tasks 2-3 merged after a fix round that caught real problems before
+  any hardware run: `rp2.asm_pio` clears globals (closures needed), the
+  plan's SHIFT_RIGHT packing was wrong (ruled SHIFT_LEFT + first-sample-MSB),
+  input pads must be initialised, DMA re-arm belongs in the IRQ handler,
+  and my dispatch quoted wrong DMA register offsets (WRITE_ADDR +0x04,
+  TRANS_COUNT +0x08; the implementer used the right ones).
+- Measured USB CDC throughput on the boards: RP2040/MicroPython 1.24
+  ~150 KB/s, RP2350/1.29-preview ~650-740 KB/s, identical through the
+  bridge and direct serial; 32 KB blocks fail to allocate on the RP2040.
+  First-capture clocks: ~60 kHz on tt07, ~500 kHz on fpga-1.
+- M3 Task 4 (host capture flow) and M4 Task 1 (calibration designs
+  scaffold) dispatched in parallel.
 - **Milestone 2 complete.** `vgacap` main f83cc99: stream format v1 with
   reader resync after framing errors and full length validation,
   `libvgaframe` with per-chunk FRAM mode and a settled output API

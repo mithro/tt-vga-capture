@@ -27,9 +27,10 @@ decisions in `LOG.md`.
 Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 
 - [x] M3 Task 1: `ttcap` board profiles and raw-REPL link (merged)
-- [~] M3 Tasks 2-3: throughput script, PIO+DMA capture script (fix round 1)
+- [x] M3 Tasks 2-3: throughput script, PIO+DMA capture script (merged)
+- [~] M3 Task 4: host capture flow with length-driven chunk reads, `ttcap capture` / `ttcap png` (in progress)
 
-- [ ] Measure USB CDC throughput of the RP2040 boards through the bridge and (once SSH works) on the Pi directly
+- [x] Measure USB CDC throughput: RP2040 ~150 KB/s, RP2350 ~650-740 KB/s, bridge = serial (`docs/research/2026-09-15-usb-cdc-throughput.md`)
 - [~] `sample_extclk` PIO program for the RP2040 map (12-bit read from GPIO5) and the RP2350 map (GPIOBASE 16) — M3 Task 3, in fix round 1 (shift-left packing ruling)
 - [~] MicroPython loader script: PIO + DMA ring + chunked output over the REPL — M3 Task 3, in fix round 1
 - [ ] Slow-clock capture of tt07 VGA Checkers / tt08 VGA Tiny Logo / tt08 Glyph Mode; first PNG committed to `docs/results/`
