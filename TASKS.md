@@ -16,12 +16,17 @@ decisions in `LOG.md`.
 ## Milestone 2: stream formats and reconstruction
 
 - [x] `vgacap/stream`: chunk container, `VGCH` header, `RAW`, `RLE`, `FRAM`, `EVNT`, `TIME`; C encoder/decoder; Python reader/writer (merged 2026-09-15)
-- [~] `vgacap/frame`: sync polarity + timing detection, mode table, active-area location, RGB24 framebuffer, frame callback (implemented, under review)
-- [ ] Synthetic stream generator (C and Python) for every mode table entry and polarity
-- [~] Partial-frame accumulation for `FRAM` (implemented, under review)
-- [ ] Unit tests and CI
+- [x] `vgacap/frame`: sync polarity + timing detection, mode table, active-area location, RGB24 framebuffer, frame callback (merged 2026-09-15)
+- [x] Synthetic stream generator (C and Python) for every mode table entry and polarity (merged 2026-09-15)
+- [x] Partial-frame accumulation for `FRAM` (merged 2026-09-15)
+- [x] Unit tests and CI (8 C test binaries, 19 pytest cases, GitHub Actions green)
+- [~] Final whole-milestone review (in progress)
 
 ## Milestone 3: first real picture from Welland (MicroPython PIO prototype)
+
+Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
+
+- [~] M3 Task 1: `ttcap` board profiles and raw-REPL link (implemented, fix round 1)
 
 - [ ] Measure USB CDC throughput of the RP2040 boards through the bridge and (once SSH works) on the Pi directly
 - [ ] `sample_extclk` PIO program for the RP2040 map (12-bit read from GPIO5) and the RP2350 map (GPIOBASE 16)
