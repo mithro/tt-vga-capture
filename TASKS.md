@@ -45,7 +45,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 - [x] M3 Task 4b: PIO program leak and coalesced overrun lines (merged 88b72eb; board recovered without a power cycle)
 - [x] M3 final whole-milestone review: fix wave merged (b23a551); review and ledger archived under `docs/reviews/`. **Milestone 3 complete.**
 - [x] M4 Task 2: `counter` + `prbs` with per-frame counter checking (merged 719dbb1)
-- [x] M4 Tasks 3-4: `modes` design, iCE40 build flow, bitstreams, CI (merged 1209477)
+- [x] M4 Tasks 3-4: `modes` design, iCE40 build flow, bitstreams, CI (merged 1209477; CI green on its first run)
 - [x] M4 Task 5: hardware validation of all five designs. **Milestone 4 complete.**
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
