@@ -65,7 +65,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
 Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
 
 - [x] M5 Task 1: `libvgaframe` glitch-tolerant line starts + retroactive first frame (merged 20421f9)
-- [~] M5 Task 2: streaming capture API (fix round re-review in progress)
+- [x] M5 Task 2: streaming capture API and `ttcap capture --out -` (merged c25be83; 730 k samples/s to stdout on hardware)
+- [~] M5 Task 4: `vgacapttsrc` source element and `vgacapbin` (next)
 - [x] M5 Task 3: `vgadecode` GStreamer element (merged e80fe84; pixel-exact on hardware data, MKV carries the project's time base)
 
 - [ ] `vgadecode` element

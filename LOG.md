@@ -4,6 +4,17 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- M5 Tasks 2 and 3 merged. The GStreamer path works end to end on real
+  hardware data: a capture of the FPGA emulation board decodes
+  pixel-identically to the calibration reference through
+  `filesrc ! vgadecode ! pngenc`, and encodes to a Matroska file whose
+  duration (9.24 s) and frame rate (25/21) are the project's own time
+  base rather than wall clock. Streaming to stdout sustained 730,714
+  samples/s at the board's maximum clean clock with no overruns, and a
+  consumer that stops reading now ends the capture cooperatively in about
+  a second. Reviews caught two defects testing had not: timestamps that
+  ran backwards on a mid-stream clock change (which would have corrupted
+  the video file) and a stop-byte race whose commit had no coverage.
 - M5 Task 1 merged: the tt08 `tt_um_rejunity_vga_logo` capture that used to
   reconstruct nothing now yields the Tiny Tapeout logo with 19 spurious
   sync pulses rejected and counted
