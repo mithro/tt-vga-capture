@@ -18,3 +18,5 @@ The same session's `tt_um_rejunity_vga_logo` capture produced no complete
 frame: its hsync carries short spurious pulses (2 to 30 clocks, a few per
 capture) that the timing learner currently counts as line starts; see
 `TASKS.md` for the follow-up.
+
+`tiny-logo-capture.vgacap.gz` is the `tt_um_rejunity_vga_logo` stream from the same session (no complete frame yet; hsync glitches), kept as the regression input for the learner fix in Milestone 5 Task 1.
