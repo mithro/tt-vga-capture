@@ -4,6 +4,13 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- Clock sweep with `ttcap capture` over direct serial: RP2350 clean up to
+  750 kHz (727 k samples/s), overruns from 1 MHz; RP2040 clean at 60 kHz,
+  two overruns at 75 kHz. The 100 kHz run on tt07 failed with ENOMEM: the
+  capture script never removes its PIO program, so about ten runs fill
+  the block's instruction memory; a fix (remove in finally, defensive
+  removal before adding, coalesced overrun lines) is in progress.
+  `docs/research/2026-09-15-micropython-capture-rate.md`.
 - M3 Task 4 merged after four hardware-driven fix rounds (cooperative
   stop byte, uo_out-only pad init, byte/frame limits, CLI error handling,
   minified upload, heap cleanup). Production path proven: `ttcap capture`

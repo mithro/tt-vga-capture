@@ -40,6 +40,9 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 - [ ] `libvgaframe`: start the first frame retroactively once the first short sync phase ends (saves one frame per capture)
 - [ ] Cross-check the tt07 VGA Checkers frame against an Icarus simulation of the project's source
 
+- [x] M3 Task 5: clock sweep on both board types (`docs/research/2026-09-15-micropython-capture-rate.md`)
+- [~] M3 Task 4b: PIO program leak (ENOMEM after ~10 runs) and coalesced overrun lines (fix in progress)
+
 ## Milestone 4: calibration designs on the FPGA emulation boards
 
 Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
