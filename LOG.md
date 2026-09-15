@@ -4,6 +4,11 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- M4 Task 2 merged: `counter` and `prbs` designs; the check tool decodes
+  the in-picture frame counter and verifies consecutive frames (default
+  run now reconstructs three frames, counters 2, 3, 4). M4 Tasks 3-4
+  (modes design, iCE40 builds, CI) dispatched. M3 final fix wave passed
+  its hardware checks (PIO0 refusal, fpga-1, tt07) and is in re-review.
 - PIO program leak fixed and merged (a board with full PIO memory
   recovered without a power cycle); both Pi checkouts updated. M3 final
   whole-milestone review dispatched.
