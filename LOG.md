@@ -4,6 +4,14 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- M3 Task 4 merged after four hardware-driven fix rounds (cooperative
+  stop byte, uo_out-only pad init, byte/frame limits, CLI error handling,
+  minified upload, heap cleanup). Production path proven: `ttcap capture`
+  on the tt07 Pi over direct serial with `--profile auto`, 1.68 M samples
+  at 59 k/s, zero overruns, daemon restored
+  (`docs/results/2026-09-15-ttcap-capture-serial-tt07/`). M4 Task 1
+  merged (VESA-correct generator, bars + grid pixel-exact with the bar
+  boundary at column 10); M4 Task 2 (counter, prbs) in progress.
 - M4 Task 1 review settled the timing question: `libvgaframe` is
   VESA-correct; the fpgas.online demo / VGA playground `hvsync_generator`
   has a one-clock, one-line phase error, so the demo's picture (hardware

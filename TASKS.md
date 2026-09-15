@@ -28,14 +28,16 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 
 - [x] M3 Task 1: `ttcap` board profiles and raw-REPL link (merged)
 - [x] M3 Tasks 2-3: throughput script, PIO+DMA capture script (merged)
-- [~] M3 Task 4: host capture flow with length-driven chunk reads, `ttcap capture` / `ttcap png` (in progress)
+- [x] M3 Task 4: host capture flow, `ttcap capture` / `ttcap png` (merged 4783a08; four hardware-driven fix rounds)
 
 - [x] Measure USB CDC throughput: RP2040 ~150 KB/s, RP2350 ~650-740 KB/s, bridge = serial (`docs/research/2026-09-15-usb-cdc-throughput.md`)
 - [~] `sample_extclk` PIO program for the RP2040 map (12-bit read from GPIO5) and the RP2350 map (GPIOBASE 16) — M3 Task 3, in fix round 1 (shift-left packing ruling)
 - [~] MicroPython loader script: PIO + DMA ring + chunked output over the REPL — M3 Task 3, in fix round 1
 - [x] First slow-clock capture from hardware: fpga-1 `tt_um_vga_pattern` at 500 kHz, six frames, pixel-exact (`docs/results/2026-09-15-first-capture-fpga1-tt_um_vga_pattern/`)
 - [x] Slow-clock capture of tt07 VGA Checkers at 60 kHz (exploration path, one frame, positive syncs)
-- [ ] Repeat with `ttcap capture` on the Pi (direct serial) once M3 Task 4 lands; tt08 VGA Tiny Logo / Glyph Mode
+- [x] `ttcap capture` on the Pi over direct serial (tt07 VGA Checkers, `docs/results/2026-09-15-ttcap-capture-serial-tt07/`)
+- [ ] tt08 VGA Tiny Logo / Glyph Mode captures
+- [ ] `libvgaframe`: start the first frame retroactively once the first short sync phase ends (saves one frame per capture)
 - [ ] Cross-check the tt07 VGA Checkers frame against an Icarus simulation of the project's source
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
