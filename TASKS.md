@@ -36,7 +36,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 - [x] First slow-clock capture from hardware: fpga-1 `tt_um_vga_pattern` at 500 kHz, six frames, pixel-exact (`docs/results/2026-09-15-first-capture-fpga1-tt_um_vga_pattern/`)
 - [x] Slow-clock capture of tt07 VGA Checkers at 60 kHz (exploration path, one frame, positive syncs)
 - [x] `ttcap capture` on the Pi over direct serial (tt07 VGA Checkers, `docs/results/2026-09-15-ttcap-capture-serial-tt07/`)
-- [ ] tt08 VGA Tiny Logo / Glyph Mode captures
+- [x] tt08 Glyph Mode captured over direct serial (`docs/results/2026-09-15-ttcap-capture-serial-tt08-glyph-mode/`)
+- [ ] tt08 VGA Tiny Logo: hsync carries spurious 2-30 clock pulses; `libvgaframe` learner should ignore pulses that do not match the learned width once locked (then re-check this capture: `tmp/tt08_tt_um_rejunity_vga_logo.vgacap` on the workstation)
 - [ ] `libvgaframe`: start the first frame retroactively once the first short sync phase ends (saves one frame per capture)
 - [ ] Cross-check the tt07 VGA Checkers frame against an Icarus simulation of the project's source
 
