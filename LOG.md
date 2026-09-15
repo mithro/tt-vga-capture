@@ -4,6 +4,20 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- M2 stream chain (Tasks 2-5) reviewed clean and merged into `vgacap` main.
+  Frame chain (Tasks 6-8) review found a run-clip overflow, a crop-clamp
+  underflow, FRAM reassembly never completing without a forced mode, and
+  stale rows after a FRAM flush; all fixed with regression tests. Rulings:
+  FRAM resolves its mode by clocks-per-line table match when nothing else
+  is known; the continuous emit gate accepts a table-matched mode as
+  sufficient evidence (`locked || mode || force_mode`). Parked: a stream
+  of exactly two frame periods starting mid-frame can never yield a
+  complete frame (needs a boundary plus a full frame); real captures run
+  longer.
+- First real-design cross-check: the fpgas.online `tt_um_vga_pattern`
+  demo simulated with Icarus (3 frames, `tt-vga-testpatterns/tools/`)
+  and wrapped with `vgacap-bin2stream` reconstructs pixel-exact through
+  `vgacap-frames` (640x480@60 detected, locked, bars and gradient correct).
 - Created `mithro/vgacap` (C skeleton: CMake, test harness, Python package,
   CI, the public `stream.h`) and `mithro/tt-vga-testpatterns` (README only)
   with the standard settings. Milestone 2 execution started with two
