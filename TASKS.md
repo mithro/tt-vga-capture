@@ -34,7 +34,9 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 - [~] `sample_extclk` PIO program for the RP2040 map (12-bit read from GPIO5) and the RP2350 map (GPIOBASE 16) — M3 Task 3, in fix round 1 (shift-left packing ruling)
 - [~] MicroPython loader script: PIO + DMA ring + chunked output over the REPL — M3 Task 3, in fix round 1
 - [x] First slow-clock capture from hardware: fpga-1 `tt_um_vga_pattern` at 500 kHz, six frames, pixel-exact (`docs/results/2026-09-15-first-capture-fpga1-tt_um_vga_pattern/`)
-- [ ] Slow-clock capture of tt07 VGA Checkers / tt08 VGA Tiny Logo / tt08 Glyph Mode (RP2040 boards, via `ttcap capture` on the Pi)
+- [x] Slow-clock capture of tt07 VGA Checkers at 60 kHz (exploration path, one frame, positive syncs)
+- [ ] Repeat with `ttcap capture` on the Pi (direct serial) once M3 Task 4 lands; tt08 VGA Tiny Logo / Glyph Mode
+- [ ] Cross-check the tt07 VGA Checkers frame against an Icarus simulation of the project's source
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
 

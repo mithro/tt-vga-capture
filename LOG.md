@@ -4,6 +4,14 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- **First silicon picture.** tt07 (RP2040 board, firmware v1.24/2.0.4)
+  running `tt_um_rejunity_vga` at 60 kHz through the same minimal script
+  with the 12-bit RP2040 layout: 1.47 M samples, zero overruns, one
+  complete 640x480@60 frame with positive syncs detected automatically
+  (`docs/results/2026-09-15-first-silicon-capture-tt07-tt_um_rejunity_vga/`).
+  Board-side rate 114 KB/s at two bytes per sample, so ~57 k samples/s;
+  60 kHz is the ceiling for this path on RP2040 boards. Cross-check
+  against a simulation of the project's own Verilog is a follow-up.
 - **First real picture.** fpga-1 (RP2350, stock firmware) running
   `tt_um_vga_pattern` at a 500 kHz project clock, captured with a minimal
   MicroPython PIO+DMA script through the debug bridge: 3.28 M samples,
