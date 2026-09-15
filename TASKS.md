@@ -43,14 +43,14 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 
 - [x] M3 Task 5: clock sweep on both board types (`docs/research/2026-09-15-micropython-capture-rate.md`)
 - [x] M3 Task 4b: PIO program leak and coalesced overrun lines (merged 88b72eb; board recovered without a power cycle)
-- [~] M3 final whole-milestone review (in progress)
+- [~] M3 final whole-milestone review: with fixes (C1 PIO0 program removal, kbd_intr order, heap threshold vs buffers, recovery on all errors, CLI wrapping, upload import, minors); fix wave in progress
+- [~] M4 Task 2: `counter` + `prbs` implemented, under review
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
 
 Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
 
 - [x] M4 Task 1: scaffolding, VESA-correct timing generator, `bars` + `grid`, cocotb, render/check tools (merged 59382ba)
-- [~] M4 Task 2: `counter` + `prbs` designs (in progress)
 
 - [x] `tt-vga-testpatterns` repo skeleton with the TT template layout and cocotb
 - [ ] `tt_um_vgacal_bars`, `_grid`, `_counter`, `_modes`, `_prbs` with reference renderers
