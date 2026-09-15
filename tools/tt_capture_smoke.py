@@ -49,6 +49,7 @@ def main() -> int:
     ap.add_argument("--pio", type=int, default=0)
     ap.add_argument("--script", help="alternative MicroPython script file (e.g. tools/mp_capture_min.py)")
     ap.add_argument("--max-chunks", type=int, default=400)
+    ap.add_argument("--max-bytes", type=int, default=0, help="board-side byte limit (packaged script)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     profile = RP2040_TT06 if a.profile == "rp2040" else RP2350_DBV3
@@ -64,7 +65,7 @@ def main() -> int:
                      f"print(tt.clock_project_PWM({a.clock_hz}))", "tt.reset_project(False)"]:
             out, err = repl.exec(code)
             print(f"{code}: {out.strip()} {err.strip()}")
-        cfg = capture_cfg(profile, buf_words=a.buf_words, max_bytes=0, edge="falling")
+        cfg = capture_cfg(profile, buf_words=a.buf_words, max_bytes=a.max_bytes, edge="falling")
         cfg["pio"] = a.pio
         print("cfg:", cfg)
         cfg["max_chunks"] = a.max_chunks
@@ -109,7 +110,7 @@ def main() -> int:
         while b"OK" not in buf:
             buf += link.read(0.5)
             if time.time() - t0 > 10:
-                print("no OK:", bytes(buf[:200]), file=sys.stderr)
+                print("no OK:", bytes(buf[:1200]), file=sys.stderr)
                 return 1
         i = buf.index(b"OK")
         del buf[: i + 2]
