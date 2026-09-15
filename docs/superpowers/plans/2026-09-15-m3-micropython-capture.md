@@ -18,7 +18,8 @@
 - The WebSocket bridge (`ws://<pi>:8765/serial`) is for debugging and tests only. Performance captures run on the Pi, own `/dev/ttboard` directly, and stop/start `fpgas-tt` around the capture (`sudo systemctl stop fpgas-tt` / `start`), always restoring it.
 - One board at a time; leave the board with the project disabled and the daemon running.
 - Board facts (verified 2026-09-15): tt07 RP2040, clk GPIO0, uo_out GPIO 5,6,7,8,13,14,15,16, MicroPython 1.24, ~85 KB free heap, 133 MHz. fpga-1 RP2350, clk GPIO16, uo_out GPIO33..40, `PIO.gpio_base(16)` required, ~417 KB free heap, 133 MHz.
-- Stream layout for RP2040 boards: `sample_bits=12`, `samples_per_word=2`, `flags=0` (PIO `in_shiftdir=SHIFT_RIGHT` puts the first sample in the low half), `signal_map=(11,3,0,8,1,9,2,10)`. For RP2350 boards: `sample_bits=8`, `samples_per_word=4`, `flags=0`, Tiny VGA map `(7,3,0,4,1,5,2,6)`.
+- Stream layout for RP2040 boards: `sample_bits=12`, `samples_per_word=2`, `flags=1` (FIRST_SAMPLE_MSB: the PIO uses `in_shiftdir=SHIFT_LEFT`, so after two `in pins, 12` the ISR holds sample0 in bits 23:12 and sample1 in bits 11:0 and autopush at 24 pushes bits 23:0), `signal_map=(11,3,0,8,1,9,2,10)`. For RP2350 boards: `sample_bits=8`, `samples_per_word=4`, `flags=1` (SHIFT_LEFT, sample0 in bits 31:24), Tiny VGA map `(7,3,0,4,1,5,2,6)`. **Superseded assumption (2026-09-15 review):** the original plan said SHIFT_RIGHT with flags=0; with shift-right the 24 valid bits land in ISR bits 31:8, which the format cannot describe without an extra shift.
+- The MicroPython raw REPL ends a script's stdout with an unescaped 0x04 that binary sample data can also contain, so the host must read the board's output **length-driven**: parse each chunk's tag and u32 length and read exactly that many payload bytes; an 8-byte header that starts with 0x04 marks the end of script output (stderr and the `>` prompt follow). `RawRepl.exec_stream` is for text-only output.
 
 ## File structure
 
@@ -114,10 +115,10 @@ MicroPython script (uploaded and run via `exec_stream`): `import sys; b = bytear
 
 The script is parameterised by a dict literal the host prepends (`CFG = {...}`): `clk_gpio`, `in_base`, `in_count`, `gpio_base`, `push_thresh` (24 for 12-bit x2, 32 for 8-bit x4), `buf_words` (e.g. 4096), `max_bytes` (0 = until stopped), `edge` ("falling" default: `wait(1, pin, 0); wait(0, pin, 0); in_(pins, in_count)`; "rising": the other order).
 
-PIO program (external clock, `jmp_pin`/`wait` on the clock via `in_base`-relative pin index; the clock must be inside the SM's input window: for RP2040 `in_base=0` is impossible because uo_out starts at 5... so the sampler uses `wait(1, gpio, CLK)` with an absolute GPIO index — MicroPython `wait(polarity, "gpio", n)` — and `in_(pins, n)` with `in_base` at the first uo_out pin):
+PIO program (external clock; `wait(1, gpio, n)` takes the GPIO index relative to the PIO's GPIOBASE, so n = clk_gpio - gpio_base; `in_(pins, n)` with `in_base` at the first uo_out pin). The `rp2.asm_pio` decorator clears the function's globals while assembling, so CFG-derived values must be closure variables of a factory function, not module globals:
 
 ```python
-@rp2.asm_pio(in_shiftdir=rp2.PIO.SHIFT_RIGHT, autopush=True, push_thresh=PUSH, fifo_join=rp2.PIO.JOIN_RX)
+@rp2.asm_pio(in_shiftdir=rp2.PIO.SHIFT_LEFT, autopush=True, push_thresh=PUSH, fifo_join=rp2.PIO.JOIN_RX)
 def sampler():
     wrap_target()
     wait(1, gpio, CLK)
@@ -126,7 +127,7 @@ def sampler():
     wrap()
 ```
 
-`in_(pins, 12)` with `SHIFT_RIGHT` and `push_thresh=24`: after two samples the ISR holds sample0 in bits 0-11 and sample1 in bits 12-23 (bits 24-31 zero); autopush pushes 32 bits. That is `samples_per_word=2`, `flags=0`, exactly the header the host writes.
+`in_(pins, 12)` with `SHIFT_LEFT` and `push_thresh=24`: after two samples the ISR holds sample0 in bits 23:12 and sample1 in bits 11:0; autopush pushes the ISR. That is `samples_per_word=2`, `flags=1` (FIRST_SAMPLE_MSB), exactly the header the host writes. Input pads (clock and the `in_count` pins) must be configured as inputs with `machine.Pin(n, machine.Pin.IN)` before the state machine starts (RP2350 pads reset isolated). The DMA re-arm happens inside each channel's IRQ handler (chaining does not reload WRITE_ADDR/TRANS_COUNT); an overrun is a full flag that is still set when the handler fires again, reported in a `TIME` chunk, never silent.
 
 DMA: two `rp2.DMA()` channels, each `config(read=PIO RX FIFO address, write=buf_i, count=buf_words, ctrl=pack_ctrl(size=2, inc_read=False, inc_write=True, treq_sel=DREQ, chain_to=other, irq_quiet=False))`, started on channel 0; `irq(handler)` sets a flag for "buffer i full"; main loop waits for the flag, writes `RAW ` chunk header (`b"RAW " + u32 len + u32 sample_count`) then `buf_i` to `sys.stdout.buffer`, and counts overruns (flag already set for the buffer being written = overrun; emit a `TIME` chunk with `dropped_samples`). The RX FIFO register address: `0x50200000 + 0x20 + 4*sm` for PIO0 on RP2040 (`PIO0_BASE + RXF0`), RP2350 PIO0_BASE `0x50200000` too; DREQ = `pio_num*8 + sm + 4` (RX DREQs are TX+4: `DREQ_PIO0_RX0 = 4`). The host verifies these constants against the datasheets and quotes the table in the code comment.
 
