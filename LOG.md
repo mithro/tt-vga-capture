@@ -4,6 +4,18 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- Lesson: cloning `vgacap` on the tt07 Pi (Pi 3B+, armv7, 916 MB) and
+  running `uv sync` started building numpy and Pillow from source, which
+  made the Pi unresponsive (pings fine, SSH and the daemon hung). Power
+  cycled it once through the PoE API (`tools/tt_power_cycle.py`, port 7
+  on switch 2; back in 75 s), moved numpy/Pillow to an optional `synth`
+  extra in `vgacap`, and documented `UV_NO_DEV=1` + `uv run --no-sync`
+  for Pi use. A second accidental build (plain `uv run` re-syncs the dev
+  group) was killed in time.
+- M3 Tasks 2-3 delivered (throughput script, PIO+DMA capture script, host
+  tests); review in progress. Ruling: the host reads the board's output
+  length-driven by chunk headers because MicroPython's raw REPL ends
+  stdout with an unescaped 0x04 that binary sample data can contain.
 - M2 Task 9 (Python synthetic generator + end-to-end tests) merged after a
   fix round; its tests caught a real C bug (FRAM timing metadata ignored
   the resolved mode) which was fixed in the same task. M2 final
