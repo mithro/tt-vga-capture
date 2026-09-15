@@ -67,13 +67,13 @@ Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
 - [x] M5 Task 1: `libvgaframe` glitch-tolerant line starts + retroactive first frame (merged 20421f9)
 - [x] M5 Task 2: streaming capture API and `ttcap capture --out -` (merged c25be83; 730 k samples/s to stdout on hardware)
 - [x] M5 Task 4: `vgacapttsrc` live source and `vgacapbin` (merged 6cb248a; live board to video verified)
-- [~] M5 Task 5: `ttcap demo` with PNG, video file, local window and browser view (next)
+- [~] M5 Task 5: `ttcap demo` (implemented and proven on hardware; under review)
 - [x] M5 Task 3: `vgadecode` GStreamer element (merged e80fe84; pixel-exact on hardware data, MKV carries the project's time base)
 
 - [ ] `vgadecode` element
 - [ ] `vgacapttsrc` (serial device and WebSocket URI)
 - [ ] `vgacapbin`
-- [ ] `ttvga-demo`: PNG + MKV, `autovideosink`, HLS/MJPEG endpoint
+- [x] `ttcap demo`: PNG, MKV, `--window`, MJPEG browser view (proven on fpga-1)
 
 ## Milestone 6: whole-frame and windowed capture
 

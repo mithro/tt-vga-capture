@@ -4,6 +4,15 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- **The demo runs.** One command against fpga-1 through the bridge:
+  51 PNG frames, a 640x480 video file at the requested 5 fps, a live
+  browser stream that served 32 JPEG frames, and the detected mode
+  reported from the signal rather than echoed from configuration. Frame 25
+  is pixel-identical to the calibration reference
+  (`docs/results/2026-09-15-demo-fpga1/`). `ttcap demo --help` crashed on
+  first use (argparse interpolating an unescaped `%04d` in a help string,
+  a path 380 passing tests never exercised); fixed, with a test that now
+  exercises `--help` for every subcommand automatically.
 - **A GStreamer pipeline can now capture a Tiny Tapeout board directly.**
   `vgacapttsrc ! vgadecode ! ...` against fpga-1 produces frames
   pixel-identical to the calibration reference, and the `vgacapbin` URI
