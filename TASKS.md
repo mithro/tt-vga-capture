@@ -41,7 +41,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 - [ ] Cross-check the tt07 VGA Checkers frame against an Icarus simulation of the project's source
 
 - [x] M3 Task 5: clock sweep on both board types (`docs/research/2026-09-15-micropython-capture-rate.md`)
-- [~] M3 Task 4b: PIO program leak (ENOMEM after ~10 runs) and coalesced overrun lines (fix in progress)
+- [x] M3 Task 4b: PIO program leak and coalesced overrun lines (merged 88b72eb; board recovered without a power cycle)
+- [~] M3 final whole-milestone review (in progress)
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
 

@@ -4,6 +4,9 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- PIO program leak fixed and merged (a board with full PIO memory
+  recovered without a power cycle); both Pi checkouts updated. M3 final
+  whole-milestone review dispatched.
 - Clock sweep with `ttcap capture` over direct serial: RP2350 clean up to
   750 kHz (727 k samples/s), overruns from 1 MHz; RP2040 clean at 60 kHz,
   two overruns at 75 kHz. The 100 kHz run on tt07 failed with ENOMEM: the
