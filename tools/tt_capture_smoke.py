@@ -47,6 +47,8 @@ def main() -> int:
     ap.add_argument("--seconds", type=float, default=8.0)
     ap.add_argument("--buf-words", type=int, default=2048)
     ap.add_argument("--pio", type=int, default=0)
+    ap.add_argument("--script", help="alternative MicroPython script file (e.g. tools/mp_capture_min.py)")
+    ap.add_argument("--max-chunks", type=int, default=400)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     profile = RP2040_TT06 if a.profile == "rp2040" else RP2350_DBV3
@@ -65,29 +67,34 @@ def main() -> int:
         cfg = capture_cfg(profile, buf_words=a.buf_words, max_bytes=0, edge="falling")
         cfg["pio"] = a.pio
         print("cfg:", cfg)
-        script = with_cfg(load("capture_rp2.py"), cfg)
-        # Hardware finding 2026-09-15: the firmware already sets PIO1/PIO2's
-        # gpio_base to 16 and the sdk refuses to set it again while the block
-        # holds a program; only set it when it differs.
-        guarded = (
-            "        _want = GPIO_BASE\n"
-            "        _have = str(rp2.PIO(PIO_NUM).gpio_base())\n"
-            "        if not _have.startswith('Pin(GPIO%d,' % _want):\n"
-            "            rp2.PIO(PIO_NUM).gpio_base(_want)\n"
-        )
-        assert "        rp2.PIO(PIO_NUM).gpio_base(GPIO_BASE)\n" in script
-        script = script.replace("        rp2.PIO(PIO_NUM).gpio_base(GPIO_BASE)\n", guarded)
-        # Hardware finding 2026-09-15: machine.Pin(clk, Pin.IN) switches the
-        # clock pad away from its PWM function and kills the project clock.
-        assert "init_input_pins(machine.Pin, CLK_GPIO, IN_BASE, IN_COUNT)" in script
-        script = script.replace("init_input_pins(machine.Pin, CLK_GPIO, IN_BASE, IN_COUNT)",
-                                "init_input_pins(machine.Pin, IN_BASE, IN_BASE, IN_COUNT)")
-        # Hardware findings 2026-09-15 (fpga-1): wait-gpio needs the absolute
-        # GPIO number on this build, and in_base must be relative to gpio_base.
-        assert "CLK_PIO_INDEX = CLK_GPIO - GPIO_BASE\n" in script
-        script = script.replace("CLK_PIO_INDEX = CLK_GPIO - GPIO_BASE\n", "CLK_PIO_INDEX = CLK_GPIO\n")
-        assert "in_base=machine.Pin(IN_BASE))" in script
-        script = script.replace("in_base=machine.Pin(IN_BASE))", "in_base=machine.Pin(IN_BASE - GPIO_BASE))")
+        cfg["max_chunks"] = a.max_chunks
+        if a.script:
+            script = with_cfg(open(a.script).read(), cfg)
+        else:
+            script = with_cfg(load("capture_rp2.py"), cfg)
+        if not a.script:  # patches for the packaged capture_rp2.py only
+            # Hardware finding 2026-09-15: the firmware already sets PIO1/PIO2's
+            # gpio_base to 16 and the sdk refuses to set it again while the block
+            # holds a program; only set it when it differs.
+            guarded = (
+                "        _want = GPIO_BASE\n"
+                "        _have = str(rp2.PIO(PIO_NUM).gpio_base())\n"
+                "        if not _have.startswith('Pin(GPIO%d,' % _want):\n"
+                "            rp2.PIO(PIO_NUM).gpio_base(_want)\n"
+            )
+            assert "        rp2.PIO(PIO_NUM).gpio_base(GPIO_BASE)\n" in script
+            script = script.replace("        rp2.PIO(PIO_NUM).gpio_base(GPIO_BASE)\n", guarded)
+            # Hardware finding 2026-09-15: machine.Pin(clk, Pin.IN) switches the
+            # clock pad away from its PWM function and kills the project clock.
+            assert "init_input_pins(machine.Pin, CLK_GPIO, IN_BASE, IN_COUNT)" in script
+            script = script.replace("init_input_pins(machine.Pin, CLK_GPIO, IN_BASE, IN_COUNT)",
+                                    "init_input_pins(machine.Pin, IN_BASE, IN_BASE, IN_COUNT)")
+            # Hardware findings 2026-09-15 (fpga-1): wait-gpio needs the absolute
+            # GPIO number on this build, and in_base must be relative to gpio_base.
+            assert "CLK_PIO_INDEX = CLK_GPIO - GPIO_BASE\n" in script
+            script = script.replace("CLK_PIO_INDEX = CLK_GPIO - GPIO_BASE\n", "CLK_PIO_INDEX = CLK_GPIO\n")
+            assert "in_base=machine.Pin(IN_BASE))" in script
+            script = script.replace("in_base=machine.Pin(IN_BASE))", "in_base=machine.Pin(IN_BASE - GPIO_BASE))")
 
         header = Header(sample_bits=profile.sample_bits, samples_per_word=profile.samples_per_word,
                         flags=profile.flags, signal_map=profile.signal_map, mode=0,
