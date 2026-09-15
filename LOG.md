@@ -4,6 +4,13 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- Usage limit hit mid-afternoon: two sub-agents (the M2 final fix-wave
+  re-review and the M3 Tasks 2-3 fix round) were killed before doing any
+  work; both re-dispatched after the reset. Work already merged: M2 Tasks
+  1-10; M3 Task 1. Pending: M2 final fix wave (resync, length validation,
+  per-chunk FRAM mode, output API) awaiting re-review; M3 Tasks 2-3 fix
+  round (asm_pio globals, shift-left packing ruling, pad init, IRQ-driven
+  DMA re-arm, cleanup).
 - Lesson: cloning `vgacap` on the tt07 Pi (Pi 3B+, armv7, 916 MB) and
   running `uv sync` started building numpy and Pillow from source, which
   made the Pi unresponsive (pings fine, SSH and the daemon hung). Power
