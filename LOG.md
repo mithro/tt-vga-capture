@@ -4,6 +4,11 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- Created `mithro/vgacap` (C skeleton: CMake, test harness, Python package,
+  CI, the public `stream.h`) and `mithro/tt-vga-testpatterns` (README only)
+  with the standard settings. Milestone 2 execution started with two
+  sub-agents in parallel worktrees: stream chain (Tasks 2-5) and frame
+  chain (Tasks 6-8) of the M2 plan.
 - Created `mithro/tt-vga-capture` on GitHub with the standard settings
   (merge commits only, branch protection, secret scanning, tag ruleset
   `vXX.ZZZ`, `v0.0` on the first commit).
