@@ -37,8 +37,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 - [x] Slow-clock capture of tt07 VGA Checkers at 60 kHz (exploration path, one frame, positive syncs)
 - [x] `ttcap capture` on the Pi over direct serial (tt07 VGA Checkers, `docs/results/2026-09-15-ttcap-capture-serial-tt07/`)
 - [x] tt08 Glyph Mode captured over direct serial (`docs/results/2026-09-15-ttcap-capture-serial-tt08-glyph-mode/`)
-- [ ] tt08 VGA Tiny Logo: hsync carries spurious 2-30 clock pulses; `libvgaframe` learner should ignore pulses that do not match the learned width once locked (then re-check this capture: `tmp/tt08_tt_um_rejunity_vga_logo.vgacap` on the workstation)
-- [ ] `libvgaframe`: start the first frame retroactively once the first short sync phase ends (saves one frame per capture)
+- [~] tt08 VGA Tiny Logo: learner glitch tolerance (M5 Task 1, with the capture as a regression fixture)
+- [~] `libvgaframe`: start the first frame retroactively once the first short sync phase ends (M5 Task 1)
 - [ ] Cross-check the tt07 VGA Checkers frame against an Icarus simulation of the project's source
 
 - [x] M3 Task 5: clock sweep on both board types (`docs/research/2026-09-15-micropython-capture-rate.md`)
@@ -59,6 +59,10 @@ Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
 - [ ] Upload to fpga-1 and capture; pixel-exact comparison
 
 ## Milestone 5: GStreamer plugin and demo
+
+Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
+
+- [~] M5 Task 1: `libvgaframe` glitch-tolerant line starts + retroactive first frame (in progress)
 
 - [ ] `vgadecode` element
 - [ ] `vgacapttsrc` (serial device and WebSocket URI)
