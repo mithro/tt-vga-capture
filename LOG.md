@@ -4,6 +4,13 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- **Milestone 2 complete.** `vgacap` main f83cc99: stream format v1 with
+  reader resync after framing errors and full length validation,
+  `libvgaframe` with per-chunk FRAM mode and a settled output API
+  (stride, documented buffer lifetime, `vgaframe_reset`), tools, Python
+  mirror and synthetic end-to-end tests. Final review and its SDD ledger
+  archived under `docs/reviews/`. Measured on the host during review:
+  ~70 Msample/s RAW decode + reconstruct, ~280 Msample/s RLE.
 - Usage limit hit mid-afternoon: two sub-agents (the M2 final fix-wave
   re-review and the M3 Tasks 2-3 fix round) were killed before doing any
   work; both re-dispatched after the reset. Work already merged: M2 Tasks

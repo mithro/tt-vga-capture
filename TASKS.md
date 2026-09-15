@@ -20,17 +20,18 @@ decisions in `LOG.md`.
 - [x] Synthetic stream generator (C and Python) for every mode table entry and polarity (merged 2026-09-15)
 - [x] Partial-frame accumulation for `FRAM` (merged 2026-09-15)
 - [x] Unit tests and CI (8 C test binaries, 19 pytest cases, GitHub Actions green)
-- [~] Final whole-milestone review (in progress)
+- [x] Final whole-milestone review: four Important findings fixed (reader resync + validation, per-chunk FRAM mode, output API stride/lifetime/reset); vgacap main f83cc99. Deferred minors listed in `docs/reviews/2026-09-15-m2-sdd-ledger.md`
 
 ## Milestone 3: first real picture from Welland (MicroPython PIO prototype)
 
 Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 
-- [~] M3 Task 1: `ttcap` board profiles and raw-REPL link (implemented, fix round 1)
+- [x] M3 Task 1: `ttcap` board profiles and raw-REPL link (merged)
+- [~] M3 Tasks 2-3: throughput script, PIO+DMA capture script (fix round 1)
 
 - [ ] Measure USB CDC throughput of the RP2040 boards through the bridge and (once SSH works) on the Pi directly
-- [ ] `sample_extclk` PIO program for the RP2040 map (12-bit read from GPIO5) and the RP2350 map (GPIOBASE 16)
-- [ ] MicroPython loader script: PIO + DMA ring + chunked output over the REPL
+- [~] `sample_extclk` PIO program for the RP2040 map (12-bit read from GPIO5) and the RP2350 map (GPIOBASE 16) — M3 Task 3, in fix round 1 (shift-left packing ruling)
+- [~] MicroPython loader script: PIO + DMA ring + chunked output over the REPL — M3 Task 3, in fix round 1
 - [ ] Slow-clock capture of tt07 VGA Checkers / tt08 VGA Tiny Logo / tt08 Glyph Mode; first PNG committed to `docs/results/`
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
