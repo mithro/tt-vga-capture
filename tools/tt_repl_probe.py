@@ -60,5 +60,5 @@ async def main(url: str, snippets: list[str]) -> None:
 
 if __name__ == "__main__":
     url = sys.argv[1]
-    code = sys.argv[2:] or DEFAULT_CODE
+    code = [open(a[1:]).read() if a.startswith("@") else a for a in sys.argv[2:]] or DEFAULT_CODE
     asyncio.run(main(url, code))
