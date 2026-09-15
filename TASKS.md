@@ -6,12 +6,12 @@ decisions in `LOG.md`.
 ## Milestone 1: tracking repo, spec, plan, repos
 
 - [x] Brainstorm with Tim and record decisions
-- [~] Write the design spec and commit it
-- [ ] Write `docs/research/2026-09-15-welland-boards-and-gpio.md`
-- [ ] Create GitHub repos `tt-vga-capture`, `vgacap`, `tt-vga-testpatterns` with the standard settings
-- [ ] Write the implementation plan (writing-plans skill)
-- [ ] Sort out SSH access to the Welland Pis (user / key)
-- [ ] Local tooling: pico-sdk, oss-cad-suite, GStreamer dev headers, verilator/iverilog, cocotb
+- [x] Write the design spec and commit it
+- [x] Write `docs/research/2026-09-15-welland-boards-and-gpio.md`
+- [~] Create GitHub repos `tt-vga-capture` (done), `vgacap`, `tt-vga-testpatterns` with the standard settings
+- [x] Write the Milestone 2 implementation plan (`docs/superpowers/plans/2026-09-15-m2-stream-and-frame.md`); later milestones get their own plans
+- [x] SSH to the Welland Pis works as `pi` via tweed (`ssh pi-sw2-p33`)
+- [x] Local tooling: pico-sdk and oss-cad-suite in `~/tools/`, GStreamer dev headers installed; cocotb still to add per repo
 
 ## Milestone 2: stream formats and reconstruction
 

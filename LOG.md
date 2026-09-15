@@ -4,6 +4,18 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- Created `mithro/tt-vga-capture` on GitHub with the standard settings
+  (merge commits only, branch protection, secret scanning, tag ruleset
+  `vXX.ZZZ`, `v0.0` on the first commit).
+- Wrote the Milestone 2 plan (stream formats + reconstruction library).
+  Decision: the stream reader emits `(value, run)` pairs for every chunk
+  type, and `RAW` chunks store DMA words verbatim with the packing
+  described in the header, so the MCU never repacks.
+- Probed the Welland Pis: tt07 is on a Pi 3B+ (armv7l, 916 MB), fpga-1 on
+  a Pi 4 (aarch64); both boards present (`2e8a:0005`), `fpgas-tt` active;
+  python3 3.11, uv, gcc, gst-launch-1.0 and mpremote are installed on the
+  Pis. SSH works as `pi` through tweed; `~/.ssh/config_extra` gained a
+  `Host pi-sw2-p* 10.21.2.*` block.
 - Brainstormed the project with Tim. Decisions recorded in
   `docs/superpowers/specs/2026-09-15-tt-vga-capture-design.md`. Key points:
   three repos (`tt-vga-capture`, `vgacap`, `tt-vga-testpatterns`); all
