@@ -2,6 +2,20 @@
 
 Newest entries at the top. Dates are ISO 8601.
 
+## 2026-09-16
+
+- **Milestone 5 complete** (`vgacap` main 375e368). `ttcap demo` merged
+  after four fix rounds and re-run from main against fpga-1: 51 frames, a
+  video file, the mode measured from the signal. The review loop earned
+  its keep here: a `--help` crash 380 passing tests never hit, orphaned
+  processes that could hold a shared board indefinitely, a summary that
+  reported success having written nothing, and then the correction of that
+  fix when it began reporting failure for runs that had worked. The last
+  one is the lesson: an instruction to stop lying in one direction
+  produced a lie in the other, and only running the unusual shapes
+  (window-only, a short browser-only run) exposed it.
+- Reviews and the SDD ledger for M5 archived under `docs/reviews/`.
+
 ## 2026-09-15
 
 - **The demo runs.** One command against fpga-1 through the bridge:
