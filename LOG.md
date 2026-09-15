@@ -4,6 +4,14 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- M2 Task 9 (Python synthetic generator + end-to-end tests) merged after a
+  fix round; its tests caught a real C bug (FRAM timing metadata ignored
+  the resolved mode) which was fixed in the same task. M2 final
+  whole-milestone review running. M3 Task 1 (`ttcap` board profiles and
+  raw-REPL link) merged after a fix round; `uv run ttcap probe
+  ws://127.0.0.1:18765/serial` reads the tt07 board's version and GPIO map
+  through the debug bridge. M3 Tasks 2-3 (MicroPython throughput and
+  PIO+DMA capture scripts) dispatched.
 - M2 stream chain (Tasks 2-5) reviewed clean and merged into `vgacap` main.
   Frame chain (Tasks 6-8) review found a run-clip overflow, a crop-clamp
   underflow, FRAM reassembly never completing without a forced mode, and
