@@ -109,7 +109,7 @@ Header chunk `VGCH` (first in every stream):
 
 Data chunk types:
 - `RAW`: N packed samples, one per project clock, contiguous in time.
-- `RLE`: (value, run length) pairs; run length width fixed by the header.
+- `RLE`: (u32 value, u32 run length) pairs.
 - `FRAM`: a whole frame or a line range of one frame: frame counter, first
   line index, line count, then samples. Produced by the whole-frame and
   windowed capture modes; the decoder places it by counter and line.
