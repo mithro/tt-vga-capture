@@ -36,6 +36,10 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
 
+Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
+
+- [~] M4 Task 1: scaffolding, timing generator, `bars` + `grid`, cocotb, render/check tools (in progress)
+
 - [ ] `tt-vga-testpatterns` repo skeleton with the TT template layout and cocotb
 - [ ] `tt_um_vgacal_bars`, `_grid`, `_counter`, `_modes`, `_prbs` with reference renderers
 - [ ] iCE40UP5K builds via `tt_fpga.py harden`, bitstreams committed
