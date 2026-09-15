@@ -74,6 +74,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
 
 ## Milestone 6: whole-frame and windowed capture
 
+Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
+
 - [ ] `sample_frame` PIO program
 - [ ] Whole-frame to SRAM on RP2350; packed / half-frame on RP2040
 - [ ] Windowed reassembly validated with `tt_um_vgacal_counter`
