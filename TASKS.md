@@ -15,10 +15,10 @@ decisions in `LOG.md`.
 
 ## Milestone 2: stream formats and reconstruction
 
-- [ ] `vgacap/stream`: chunk container, `VGCH` header, `RAW`, `RLE`, `FRAM`, `EVNT`, `TIME`; C encoder/decoder; Python reader/writer
-- [ ] `vgacap/frame`: sync polarity + timing detection, mode table, active-area location, RGB24 framebuffer, frame callback
+- [x] `vgacap/stream`: chunk container, `VGCH` header, `RAW`, `RLE`, `FRAM`, `EVNT`, `TIME`; C encoder/decoder; Python reader/writer (merged 2026-09-15)
+- [~] `vgacap/frame`: sync polarity + timing detection, mode table, active-area location, RGB24 framebuffer, frame callback (implemented, under review)
 - [ ] Synthetic stream generator (C and Python) for every mode table entry and polarity
-- [ ] Partial-frame accumulation for `FRAM`
+- [~] Partial-frame accumulation for `FRAM` (implemented, under review)
 - [ ] Unit tests and CI
 
 ## Milestone 3: first real picture from Welland (MicroPython PIO prototype)
