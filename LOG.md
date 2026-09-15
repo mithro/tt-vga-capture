@@ -4,6 +4,15 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- **The calibration loop closed.** `tt_um_vgacal_bars` and
+  `tt_um_vgacal_grid` were synthesised to iCE40UP5K bitstreams, uploaded to
+  fpga-1 through the daemon API, captured at a 500 kHz project clock and
+  reconstructed: all 307,200 pixels of each frame identical to the
+  reference renderer, zero overruns, ten frames per 10 s capture
+  (`docs/results/2026-09-15-calibration-loop-fpga1/`). This validates the
+  capture path itself rather than agreement with someone else's design.
+  M4 Tasks 3-4 merged beforehand (modes design, build flow, five
+  bitstreams, CI); M5 Task 1 (learner robustness) is in a fix round.
 - **Milestone 3 complete.** `vgacap` main b23a551: `ttcap` (board
   profiles, raw-REPL link with length-driven chunk reads, throughput and
   capture scripts, `ttcap probe/throughput/capture/png`), hardware-proven

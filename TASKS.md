@@ -45,7 +45,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m3-micropython-capture.md`.
 - [x] M3 Task 4b: PIO program leak and coalesced overrun lines (merged 88b72eb; board recovered without a power cycle)
 - [x] M3 final whole-milestone review: fix wave merged (b23a551); review and ledger archived under `docs/reviews/`. **Milestone 3 complete.**
 - [x] M4 Task 2: `counter` + `prbs` with per-frame counter checking (merged 719dbb1)
-- [~] M4 Tasks 3-4: `modes` design, iCE40 build flow, bitstreams, CI (in progress)
+- [x] M4 Tasks 3-4: `modes` design, iCE40 build flow, bitstreams, CI (merged 1209477)
+- [~] M4 Task 5: hardware validation (bars and grid done; counter, modes, prbs next)
 
 ## Milestone 4: calibration designs on the FPGA emulation boards
 
@@ -54,9 +55,10 @@ Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
 - [x] M4 Task 1: scaffolding, VESA-correct timing generator, `bars` + `grid`, cocotb, render/check tools (merged 59382ba)
 
 - [x] `tt-vga-testpatterns` repo skeleton with the TT template layout and cocotb
-- [~] `tt_um_vgacal_bars`, `_grid`, `_counter`, `_prbs` done with reference renderers; `_modes` in progress
-- [ ] iCE40UP5K builds via `tt_fpga.py harden`, bitstreams committed
-- [ ] Upload to fpga-1 and capture; pixel-exact comparison
+- [x] `tt_um_vgacal_bars`, `_grid`, `_counter`, `_modes`, `_prbs` with reference renderers
+- [x] iCE40UP5K builds via `tt_fpga.py harden`, five bitstreams committed (all above 25 MHz)
+- [x] Upload to fpga-1 and capture; **pixel-exact comparison passed for bars and grid** (`docs/results/2026-09-15-calibration-loop-fpga1/`)
+- [ ] Same for `counter`, `modes` and `prbs` on hardware (counter validates frame ordering, modes the three timings, prbs the bit-error rate)
 
 ## Milestone 5: GStreamer plugin and demo
 
