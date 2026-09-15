@@ -4,6 +4,18 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-09-15
 
+- **First real picture.** fpga-1 (RP2350, stock firmware) running
+  `tt_um_vga_pattern` at a 500 kHz project clock, captured with a minimal
+  MicroPython PIO+DMA script through the debug bridge: 3.28 M samples,
+  zero overruns, six complete 640x480@60 frames, pixel values matching the
+  design (`docs/results/2026-09-15-first-capture-fpga1-tt_um_vga_pattern/`).
+  Getting there took an afternoon of board experiments, all recorded in
+  `docs/research/2026-09-15-rp2350-micropython-pio-findings.md`: the PIO
+  base must be cleared and set for real, `in_base` and `wait gpio` are
+  absolute GPIO numbers on this firmware, the clock pad must not be
+  touched, hard IRQ handlers must be module-level. Two power cycles of
+  fpga-1 were needed along the way. M3 Task 4 is in a fix round with the
+  corrected rules.
 - M3 Tasks 2-3 merged after a fix round that caught real problems before
   any hardware run: `rp2.asm_pio` clears globals (closures needed), the
   plan's SHIFT_RIGHT packing was wrong (ruled SHIFT_LEFT + first-sample-MSB),

@@ -2,7 +2,7 @@
 # Minimal MicroPython capture (exploration, 2026-09-15): PIO sampler + two
 # chained DMA channels + module-level hard IRQ handlers, emitting RAW and
 # TIME chunks to stdout. The host prepends CFG = {...}. Applies the fpga-1
-# findings: PIO1, absolute wait-gpio index, in_base relative to gpio_base,
+# findings: PIO1 with its base set for real, absolute wait-gpio index and in_base,
 # clock pin untouched, handlers at module level with precomputed addresses.
 import sys, rp2, machine, uctypes, struct
 

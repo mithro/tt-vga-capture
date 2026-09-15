@@ -19,21 +19,29 @@ program ("Configuring PIO with frequency: 16000000 Hz" during
 GPIOBASE register read 0x10. Rule: use PIO1 (or PIO2), and only call
 `gpio_base(16)` if the current base differs.
 
-## 2. `in_base` must be relative to the GPIO base
+## 2. The GPIO base must be set for real, after clearing the block
 
-With PIO1 (base 16): `in_base=machine.Pin(17)` gave PINCTRL 0x88000
-(IN_BASE = 17) and read GPIO33..40; `in_base=machine.Pin(33)` left PINCTRL
-at 0 and the state machine executing garbage at low addresses (never our
-program). The sdk's `sm_config_set_in_pins` requires a value below 32.
+Correction of the first version of this note: the `Pin(GPIO16)` that
+`gpio_base()` reported earlier was stale; after a power cycle PIO1
+reported `Pin(GPIO0)`, and every capture made while the hardware base was
+0 read the static `ui_in` pins (constant 0x01). The sequence that works:
+`rp2.PIO(1).remove_program()` (no argument removes every MicroPython
+managed program on the block), then `rp2.PIO(1).gpio_base(16)`, which
+then succeeds. With the base genuinely at 16, `in_base=machine.Pin(33)`
+(the ABSOLUTE GPIO; MicroPython subtracts the base, PINCTRL IN_BASE reads
+17) delivers the test pattern's bar values 0x88, 0x99, 0xaa, 0xbb, 0xcc,
+0xdd, 0xee, 0xff. `in_base=Pin(17)` reads GPIO17 (constant 0x01). With
+the base at 0, `Pin(33)` is invalid for the sdk and silently leaves
+PINCTRL at 0.
 
 ## 3. `wait gpio` needs the absolute GPIO number on this build
 
-Sampler with `wait(1, gpio, 16); wait(0, gpio, 16); in_(pins, 8)` and
-`in_base=Pin(17)`: RX FIFO fills (8 words). The same with index 0 stalls
-on `wait 1 gpio 0` (SM0_INSTR 0x2080, FIFO empty) while GPIO16 toggles.
-Pin-relative `wait(1, pin, 15)` with `in_base=Pin(17)` also stalls, so
-the input mapping does not wrap modulo 32 inside the window. On RP2040
-(base 0) absolute and relative coincide.
+With the base at 16, `wait(1, gpio, 16)` runs and `wait(1, gpio, 0)`
+stalls; the stalled instruction reads back as 0x2010 (`wait 0 gpio 16`),
+so the loader relocates gpio-wait indices by the base and the hardware
+adds the base again: 0 becomes GPIO32, 16 wraps to GPIO16. Pin-relative
+`wait(1, pin, k)` does not wrap modulo 32 inside the window either. On
+RP2040 (base 0) absolute and relative coincide.
 
 ## 4. The project clock pin must not be reconfigured
 
