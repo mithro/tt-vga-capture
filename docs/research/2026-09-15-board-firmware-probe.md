@@ -56,3 +56,25 @@ Consequences:
 - uo_out on GPIO 33..40 is above the RP2350 PIO's default 32-pin window:
   MicroPython's `rp2.PIO(n).gpio_base(16)` (MicroPython 1.24+) selects the
   upper window. Must be set before the state machine is created.
+
+## Register constants for the MicroPython DMA path (from pico-sdk `hardware_regs`)
+
+Verified 2026-09-15 against `src/rp2040/hardware_regs/include/hardware/regs/{dreq,pio,addressmap}.h`
+and the `src/rp2350/...` equivalents in `raspberrypi/pico-sdk` master:
+
+| constant | RP2040 | RP2350 |
+|---|---|---|
+| `PIO0_BASE` | 0x50200000 | 0x50200000 |
+| `PIO1_BASE` | 0x50300000 | 0x50300000 |
+| `PIO2_BASE` | n/a | 0x50400000 |
+| `PIO_RXF0_OFFSET` (RX FIFO of SM0; SM n at +4n) | 0x020 | 0x020 |
+| `PIO_TXF0_OFFSET` | 0x010 | 0x010 |
+| `PIO_FSTAT_OFFSET` / `PIO_FDEBUG_OFFSET` | 0x004 / 0x008 | 0x004 / 0x008 |
+| `FDEBUG.RXSTALL` (bits 3:0, write 1 to clear) | yes | yes |
+| `DREQ_PIO0_TX0` / `DREQ_PIO0_RX0` | 0 / 4 | 0 / 4 |
+| `DREQ_PIO1_TX0` / `DREQ_PIO1_RX0` | 8 / 12 | 8 / 12 |
+| `DREQ_PIO2_RX0` | n/a | 20 |
+
+So for PIO block `p`, state machine `s`: RX FIFO address = `PIO{p}_BASE + 0x20 + 4*s`,
+RX DREQ = `8*p + 4 + s`. `FDEBUG.RXSTALL` bit `s` tells whether the sampler ever
+stalled on a full FIFO (a dropped-sample indicator independent of DMA IRQs).
