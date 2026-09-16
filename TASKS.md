@@ -62,6 +62,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
 
 ## Milestone 5: GStreamer plugin and demo — **complete** (Task 6, CI and hardware-in-the-loop, remains)
 
+- [ ] M5 Task 6: CI for the GStreamer plugin and `tools/hil.sh` (dispatched 2026-09-16, stopped by the weekly usage limit before any change; re-dispatch from a clean worktree)
+
 Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
 
 - [x] M5 Task 1: `libvgaframe` glitch-tolerant line starts + retroactive first frame (merged 20421f9)

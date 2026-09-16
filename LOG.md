@@ -2,6 +2,21 @@
 
 Newest entries at the top. Dates are ISO 8601.
 
+## 2026-09-17
+
+- Weekly usage limit reached; the session pauses until 2026-09-19. State
+  left safe and recoverable: all three repositories clean and pushed
+  (`tt-vga-capture` 333889e, `vgacap` 375e368, `tt-vga-testpatterns`
+  2473da6), no capture process running on either board and both
+  `fpgas-tt` daemons active, so the shared hardware is free for others.
+  The SSH tunnel to the Welland daemons has dropped and must be reopened
+  on resumption.
+- Outstanding when work resumes, in order: M5 Task 6 (CI covering the
+  GStreamer plugin, plus `tools/hil.sh` for the checks only hardware can
+  settle) — dispatched but stopped before it made any change, so nothing
+  is half-done; then Milestone 6, whose plan is written
+  (`docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`).
+
 ## 2026-09-16
 
 - **Milestone 5 complete** (`vgacap` main 375e368). `ttcap demo` merged
