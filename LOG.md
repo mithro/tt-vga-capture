@@ -2,6 +2,19 @@
 
 Newest entries at the top. Dates are ISO 8601.
 
+## 2026-09-19
+
+- Resumed. Bench state on return: all six Tiny Tapeout ASIC boards
+  (tt03p5, tt04, tt05, tt06, tt07, tt08) and fpga-2 are **down**, not
+  responding to ping from tweed; fpga-1, fpga-3 and fpga-4 are up with
+  healthy daemons. tt07 was power cycled once through the PoE API and did
+  not return, so this is a bench-wide condition rather than one board, and
+  it is not something to fix remotely: reported to Tim. Work continues on
+  fpga-1, which is what the calibration loop and the demo use.
+- Note for reopening the tunnel: `-o ExitOnForwardFailure=yes` turns the
+  harmless clipboard remote-forward warning into a fatal error, so leave
+  it off.
+
 ## 2026-09-17
 
 - Weekly usage limit reached; the session pauses until 2026-09-19. State
