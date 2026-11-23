@@ -21,9 +21,14 @@ writer too, and its tests prove the RTL against the same reader.
 
 ## Scope
 
-- `vgacap/rtl/`: plain synthesizable Verilog-2005 (yosys for iCE40,
-  Vivado/LiteX for Arty, Verilator/Icarus for simulation). No vendor
-  primitives in the core; FIFOs/BRAM behind a small wrapper.
+- `vgacap/rtl/`: **Migen/LiteX source with its generated Verilog
+  committed alongside** (Tim, 2026-11-23, chosen over hand-written Verilog:
+  "migen/litex with generate verilog included. most projects here are
+  litex"). LiteX users import the Migen module; yosys-only flows (iCE40)
+  and Verilator/Icarus use the `.v`. The generated file carries a header
+  naming its source, is never hand-edited, and a test regenerates it and
+  fails if the committed copy is stale. No vendor primitives in the core;
+  FIFOs/BRAM behind a small wrapper.
 - A sampler that registers `uo_out` on the design clock from the first reset
   clock (reset-aligned, gap-free while the sink keeps up).
 - A run-length encoder and chunk framer that emit a byte stream
@@ -81,8 +86,8 @@ Leaning on the open points, from that session's review:
 
 Tim, 2026-11-23: "Don't create complicated dependencies between projects, a
 little bit of code duplication is better than having a huge complex
-dependency tree." So `vgacap/rtl/` is a leaf: a few self-contained `.v`
-files with no includes from the rest of `vgacap` and no build-system
+dependency tree." So `vgacap/rtl/` is a leaf: a few self-contained Migen modules and
+their generated `.v` files with no includes from the rest of `vgacap` and no build-system
 coupling. A harness may pin it as a submodule or simply copy the files in
 (with the vgacap commit noted); the contract between projects is the stream
 format, which the readers check, not the RTL source.
