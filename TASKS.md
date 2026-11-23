@@ -62,7 +62,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
 
 ## Milestone 5: GStreamer plugin and demo — **complete** (Task 6, CI and hardware-in-the-loop, remains)
 
-- [ ] M5 Task 6: CI for the GStreamer plugin and `tools/hil.sh` (dispatched 2026-09-16, stopped by the weekly usage limit before any change; re-dispatch from a clean worktree)
+- [ ] M5 Task 6: CI for the GStreamer plugin and `tools/hil.sh` — branch `m5-task6-ci-hil` (vgacap). Code, tests and README done; reviewed 2026-11-23 and the review's important findings fixed (stop signals, stale outputs, hil.sh cwd, bridge restore, CI skips). Remaining: green CI, a real run against fpga-1 (busy with another client on 2026-11-23), merge.
 
 Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
 
