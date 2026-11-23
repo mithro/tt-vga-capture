@@ -2,6 +2,21 @@
 
 Newest entries at the top. Dates are ISO 8601.
 
+## 2026-11-23
+
+- Coordinated with three other sessions sharing the Welland boards and
+  frame code. Board claims: `~/github/TinyTapeout/tmp/board-claims/<board>-p<port>.json`
+  (expired = void), check `status.json` before use; this project keeps
+  fpga-1, which is now on sw2 **p34** (p33 is `tt-fd1a167bd863a198`; the
+  2026-09-15 port map and tunnel command are stale; confirm by USB serial).
+- Proposed shared arrangement, pending Tim's approval of each design:
+  `vgacap` owns the stream format, `libvgaframe` and a new per-frame hash
+  (FNV-1a 64 over RGB888 active area, as `tinytapeout-vga-videos`
+  `ttvga/harness/tb.cpp`) plus a frames-and-hashes entry point. The
+  `tt-harness-fpga-vga` session will contribute these as PRs for review.
+  Board-side additions (stepped reset, pinned `ui_in`, full-speed sync
+  period timer) wait until M6 Task 1's shared prelude lands.
+
 ## 2026-09-19
 
 - Resumed. Bench state on return: all six Tiny Tapeout ASIC boards
