@@ -57,3 +57,13 @@ reconstructed frame, one definition for every source).
 
 First implementation contributed by the `tt-harness-handheld-vga` session
 (its Arty build needs it first), as a PR into `vgacap` reviewed here.
+
+## Keeping the dependency small
+
+Tim, 2026-11-23: "Don't create complicated dependencies between projects, a
+little bit of code duplication is better than having a huge complex
+dependency tree." So `vgacap/rtl/` is a leaf: a few self-contained `.v`
+files with no includes from the rest of `vgacap` and no build-system
+coupling. A harness may pin it as a submodule or simply copy the files in
+(with the vgacap commit noted); the contract between projects is the stream
+format, which the readers check, not the RTL source.
