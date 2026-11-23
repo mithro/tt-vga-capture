@@ -53,10 +53,29 @@ reconstructed frame, one definition for every source).
   and the 750 kHz streaming ceiling stops applying to compressible content.
   This overlaps M6 Task 4 / M8 (board-side RLE) and is worth measuring.
 
-## Who
+## Who, and in what order (updated 2026-11-23)
 
-First implementation contributed by the `tt-harness-handheld-vga` session
-(its Arty build needs it first), as a PR into `vgacap` reviewed here.
+1. **Sampler** (`tt-harness-handheld-vga`, PR into `vgacap`, after Tim
+   approves that project's design): `uo_out` registered on the design clock
+   from the first reset clock, a sample-valid / overflow interface and a
+   clock count, no vendor primitives. Its LiteX wrapper stays in its own
+   repo. On Arty it stores RAW bytes straight to DDR3 (25 MB/s, ~10 s per
+   capture) and the host builds the stream, because a busy design such as
+   Anton's dottee changes ~64% of pixels per frame and 8-byte `RLE ` pairs
+   would be several times larger than the raw samples.
+2. **RLE encoder and chunk framer**: for the byte-limited paths (iCE40 to
+   RP2350, UART). Its real users are this project and `tt-harness-fpga-vga`,
+   so it is specified here; not started.
+
+Leaning on the open points, from that session's review:
+
+- Buffer a chunk's pairs in one block RAM (e.g. 256 pairs = 2 KiB, fits a
+  UP5K EBR budget) and emit the header when the chunk is full or flushed, so
+  `pair_count` is always exact and the flush path is the ordinary path.
+- If a compact chunk is added: `u8 value` + LEB128 run (worst case 2 bytes
+  a sample), and the encoder falls back to `RAW ` for any chunk where RLE
+  would be larger, so no content can expand the stream. Needs Tim's
+  agreement and C + Python reader support.
 
 ## Keeping the dependency small
 
