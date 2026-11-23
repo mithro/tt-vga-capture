@@ -60,14 +60,21 @@ reconstructed frame, one definition for every source).
 
 ## Who, and in what order (updated 2026-11-23)
 
-1. **Sampler** (`tt-harness-handheld-vga`, PR into `vgacap`, after Tim
-   approves that project's design): `uo_out` registered on the design clock
-   from the first reset clock, a sample-valid / overflow interface and a
-   clock count, no vendor primitives. Its LiteX wrapper stays in its own
-   repo. On Arty it stores RAW bytes straight to DDR3 (25 MB/s, ~10 s per
-   capture) and the host builds the stream, because a busy design such as
-   Anton's dottee changes ~64% of pixels per frame and 8-byte `RLE ` pairs
-   would be several times larger than the raw samples.
+1. **Sampler** (`tt-harness-handheld-vga`): `uo_out` registered on the
+   design clock from the first reset clock, a sample-valid / overflow
+   interface and a clock count, no vendor primitives. Developed and used in
+   that repo first, then contributed to `vgacap/rtl/` (Migen source,
+   generated Verilog, staleness test, a test against the vgacap readers);
+   that repo keeps its own copy recording the vgacap commit it matches
+   rather than pulling from vgacap. On Arty the project clock is *stepped*
+   from the 50 MHz domain, one pulse whenever the recorder has room, and one
+   `uo_out` byte per project clock goes over the UART; the host writes the
+   `RAW ` chunk. Project, sampler and recorder share one synchronous domain,
+   so nothing can be dropped. Byte 0 is the value after the first reset
+   clock's rising edge. Raw rather than `RLE ` because a busy design (Anton's
+   dottee changes ~64% of pixels per frame) would make 8-byte pairs several
+   times larger than the samples. (Corrected 2026-11-23: an earlier draft
+   said DDR3.)
 2. **RLE encoder and chunk framer**: for the byte-limited paths (iCE40 to
    RP2350, UART). Its real users are this project and `tt-harness-fpga-vga`,
    so it is specified here; not started.
