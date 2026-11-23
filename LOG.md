@@ -4,6 +4,10 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-23
 
+- Tim: a shared RTL capture library belongs in the shared code too. Scope
+  and open points in `docs/design/2026-11-23-shared-rtl-capture.md`:
+  `vgacap/rtl/`, plain Verilog sampler + RLE chunk framer, tested against
+  the existing readers and the calibration designs.
 - Coordinated with three other sessions sharing the Welland boards and
   frame code. Board claims: `~/github/TinyTapeout/tmp/board-claims/<board>-p<port>.json`
   (expired = void), check `status.json` before use; this project keeps

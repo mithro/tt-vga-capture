@@ -77,6 +77,14 @@ Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
 - [ ] `vgacapbin`
 - [x] `ttcap demo`: PNG, MKV, `--window`, MJPEG browser view (proven on fpga-1)
 
+## Shared code with the harness projects (agreed 2026-11-23)
+
+Design note: `docs/design/2026-11-23-shared-rtl-capture.md`.
+
+- [ ] Per-frame hash (FNV-1a 64, `tb.cpp` definition) and frames-and-hashes entry point in `vgacap` (PR from `tt-harness-fpga-vga`, review here)
+- [ ] `vgacap/rtl/`: shared Verilog sampler + RLE chunk writer, cocotb-tested against the C/Python readers (first PR from `tt-harness-handheld-vga`, review here)
+- [ ] Decide `RLE ` chunk-length handling and whether a compact RLE chunk is justified
+
 ## Milestone 6: whole-frame and windowed capture
 
 Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
