@@ -81,8 +81,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
 
 Design note: `docs/design/2026-11-23-shared-rtl-capture.md`.
 
-- [ ] Per-frame hash (FNV-1a 64, `tb.cpp` definition) and frames-and-hashes entry point in `vgacap` (PR from `tt-harness-fpga-vga`, review here)
-- [ ] `vgacap/rtl/`: shared Verilog sampler + RLE chunk writer, cocotb-tested against the C/Python readers (first PR from `tt-harness-handheld-vga`, review here)
+- [-] ~~Per-frame hash PR from `tt-harness-fpga-vga`~~: withdrawn 2026-11-23 under Tim's no-dependency-tree rule; that project keeps its own cutter and hash (`docs/frame-definition.md` there) and runs `ttcap` as a program
+- [ ] `vgacap/rtl/`: shared Verilog sampler + RLE chunk writer, cocotb-tested against the C/Python readers (sampler first, PR from `tt-harness-handheld-vga` after Tim approves its design; RLE encoder specified here)
 - [ ] Decide `RLE ` chunk-length handling and whether a compact RLE chunk is justified
 
 ## Milestone 6: whole-frame and windowed capture

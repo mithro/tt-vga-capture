@@ -4,6 +4,12 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-23
 
+- `tt-harness-fpga-vga` withdrew its planned vgacap PRs (frame hash,
+  ttcap reset/ui_in) under Tim's rule against dependency trees between
+  projects; it will run `ttcap` as a program and keep its own small frame
+  cutter. `tt-harness-handheld-vga` keeps `vgacap` as its single pinned
+  dependency and will contribute only the RTL sampler. The RLE encoder and
+  framer for the byte-limited paths is this project's to specify.
 - Tim: a shared RTL capture library belongs in the shared code too. Scope
   and open points in `docs/design/2026-11-23-shared-rtl-capture.md`:
   `vgacap/rtl/`, plain Verilog sampler + RLE chunk framer, tested against
