@@ -60,9 +60,9 @@ Plan: `docs/superpowers/plans/2026-09-15-m4-testpatterns.md`.
 - [x] Upload to fpga-1 and capture; **pixel-exact comparison passed for bars and grid** (`docs/results/2026-09-15-calibration-loop-fpga1/`)
 - [x] Same for `counter`, `modes` and `prbs` on hardware: all pixel-exact; counter verified across five consecutive frames; modes detected 800x600@60 with positive syncs unaided
 
-## Milestone 5: GStreamer plugin and demo — **complete** (Task 6, CI and hardware-in-the-loop, remains)
+## Milestone 5: GStreamer plugin and demo — **complete**
 
-- [ ] M5 Task 6: CI for the GStreamer plugin and `tools/hil.sh` — branch `m5-task6-ci-hil` (vgacap). Code, tests and README done; reviewed 2026-11-23 and the review's important findings fixed (stop signals, stale outputs, hil.sh cwd, bridge restore, CI skips). Remaining: green CI, a real run against fpga-1 (busy with another client on 2026-11-23), merge.
+- [x] M5 Task 6: CI for the GStreamer plugin and `tools/hil.py`/`hil.sh` (merged 4b005b2, CI green; review fixes applied; all nine checks PASS on fpga-4, bars pixel-exact: `docs/results/2026-11-23-hil-fpga4/`). **Milestone 5 complete.**
 
 Plan: `docs/superpowers/plans/2026-09-15-m5-gstreamer-and-demo.md`.
 

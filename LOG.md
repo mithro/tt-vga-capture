@@ -4,6 +4,22 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-23
 
+- **Milestone 5 complete** (`vgacap` main 4b005b2, CI green). Task 6
+  finished: README sections for CI and the hardware check; an independent
+  review's findings fixed (stop signals now clean up, stale outputs can no
+  longer pass a check, `hil.sh` works from any directory, the bridge is
+  always restored, CI fails on skipped GStreamer tests); CI made to really
+  run the GStreamer job (H.264 decoder for `gst-discoverer`, xvfb and
+  `ximagesink` for the window tests). The real-board run found one more
+  bug in our code: a bitstream uploaded through `fpgas-tt` is enabled but
+  not a shuttle entry, so `ttcap --design` refused it; fixed. Then all nine
+  checks passed on fpga-4 (lent by the `tt-harness-fpga-vga` session while
+  fpga-1 had an outside client), bars pixel-exact.
+- My mistake while releasing fpga-4: `machine.soft_reset()` from raw REPL
+  left the SDK not running. Recovered with Ctrl-B then Ctrl-D; the idle
+  display returned to "loaded" and the board was handed back as found.
+- This host had lost GStreamer since September; reinstalled the CI package
+  set with `sudo apt` (permission given 2026-09-15).
 - `tt-harness-fpga-vga` withdrew its planned vgacap PRs (frame hash,
   ttcap reset/ui_in) under Tim's rule against dependency trees between
   projects; it will run `ttcap` as a program and keep its own small frame
