@@ -2,6 +2,27 @@
 
 Newest entries at the top. Dates are ISO 8601.
 
+## 2026-11-24
+
+- Survey for the hardware Tim says is coming (`tools/welland_survey.py`,
+  read-only): **no Pi 5 with a Tiny Tapeout board yet, no USB VGA capture
+  card, no VGA-screen camera.** p41-p47 are Pi 5s hosting Acorn CLE-101
+  FPGAs (PCIe), nothing TT on them. p4 is a new Pi 5 with a CH340 USB
+  serial adapter; its own verify.json says no board found and nothing on
+  its header, so it may be where the Pi 5 TT setup goes. p48, which should
+  host the TT04 board `tt-de637061074b1838`, has no link and draws 0 mW
+  PoE; a PoE power-cycle was refused by the session's permission checks, so
+  it is left for Tim. Every live TT board is on a Pi 3B+ (p9-p14) or Pi 4
+  (p33-p36).
+- Tim: check daily until the Pi 5 + TT board, the capture card and the
+  camera appear (session cron, 09:17 daily); building the BIO backend
+  against its simulator is fine; reinstall GStreamer as needed; the
+  `tt-harness-fpga-vga` harness may depend on vgacap. That session plans
+  to contribute a clock-generating PIO body with credit flow control and a
+  clock-low FPGA load once M6 Task 1's prelude lands.
+- Hourly background-process health check set up (`tools/bg_health.py`,
+  session cron at :43).
+
 ## 2026-11-23
 
 - **Milestone 5 complete** (`vgacap` main 4b005b2, CI green). Task 6

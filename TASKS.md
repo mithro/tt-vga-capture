@@ -107,6 +107,6 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 
 ## Milestone 9: later backends
 
-- [ ] RP1 backend (needs a Pi 5 wired to a TT board)
-- [ ] BIO note and interface stub
-- [ ] Comparison against a USB VGA capture card when one exists
+- [ ] RP1 backend (needs a Pi 5 wired to a TT board; none on the site as of 2026-11-24 -- checked daily; p4 Pi 5 has no board yet, p48 unpowered)
+- [ ] BIO backend built against the BIO simulator (Tim, 2026-11-24: fine to build against it)
+- [ ] Comparison against a USB VGA capture card (Tim: will appear on tinytapeout.fpgas.online, with a camera on a VGA screen; checked daily)
