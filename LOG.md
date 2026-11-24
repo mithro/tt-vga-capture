@@ -4,6 +4,16 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **MicroPython C module (M7)**: vgacap PR #10 and the firmware fork's
+  `vgacap-module` branch. Written by a sub-agent; I reproduced its tests
+  (651 passed, 18 module tests). It is a binding over the pico-sdk
+  firmware's own engines. It is not hardware-tested yet: it needs a
+  flashed image on a public board, and if that image hung at boot nobody
+  could press BOOTSEL. That decision is put to Tim.
+- **pico-sdk firmware on tt09 silicon** (PR #9): the ASIC project is lost
+  across BOOTSEL (no sync at all), so the firmware now selects it itself
+  (`--asic-index`). The tt09 logo is clean through it.
+
 - **pico-sdk capture firmware on hardware (M7)**: vgacap PR #7, written by
   a sub-agent against a simulated board, run here on fpga-4 from RAM
   (no_flash UF2 via BOOTSEL; flash never written).
