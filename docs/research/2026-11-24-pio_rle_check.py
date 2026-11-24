@@ -134,7 +134,11 @@ def main() -> int:
                       "(line %d, x %d)" % (len(got), label, start, (start % CLOCKS) // 800,
                                            start % 800))
                 return 0
-            diff = int(np.flatnonzero(ref_part != got[: len(ref_part)])[0]) if len(ref_part) else 0
+            # The reference may end before the stream does (counter/prbs build
+            # only frames_needed frames): a match all the way to its end is a
+            # match for len(ref_part) samples, not an empty diff to index.
+            mismatch = np.flatnonzero(ref_part != got[: len(ref_part)])
+            diff = int(mismatch[0]) if len(mismatch) else len(ref_part)
             if best is None or diff > best[1]:
                 best = (label, diff, start)
             start = hay_b.find(head, start + 1)

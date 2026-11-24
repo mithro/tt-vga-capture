@@ -6,7 +6,8 @@ so that only the changes cross the DMA and the USB link -- and up to what
 project clock. This note answers with a working program
 (`vgacap/python/ttcap/mp/rle_rp2.py`, branch `pio-rle`) proven cycle-exact on
 the emulator (`ttcap.emu`, MicroPython v1.24's own `asm_pio`), and numbers
-measured there. **No hardware was used**; the hardware check is at the end.
+measured there. The hardware check, run afterwards on fpga-4 the same day,
+passed: **exact at 25 MHz on real hardware** (see "Hardware result" at the end).
 
 Labels: **MEASURED (emu)** came from the cycle-level emulator running the
 real assembled program; **INFERRED** is arithmetic on those or on earlier
@@ -314,3 +315,50 @@ helper functions called inside the `asm_pio` body under real MicroPython;
 DMA held off by the CPU and USB on the bus; the real input synchroniser
 (a fixed delay on every pin, which moves the sample point but not the
 spacing); any RP2040 hardware.
+
+## Hardware result (fpga-4, 2026-11-24)
+
+Run by the parent session on fpga-4 (RP2350, SDK 3.1.0, USB serial
+a2961e5cac65b25f) through the daemon's bridge, every capture checked
+sample for sample by `2026-11-24-pio_rle_check.py`:
+
+| capture | style chosen by the board | samples | result |
+|---|---|---|---|
+| bars, 500 kHz, 4 s, `--mode rle` | edge, period 266 (133 MHz) | 1,852,419 | PASS, unbroken |
+| bars, 500 kHz, 4 s, `--mode stream` (RAW, for comparison) | -- | 1,900,544 | PASS, unbroken |
+| prbs, 50 kHz, 25 s | edge, period 2660 | 1,250,007 | PASS, unbroken |
+| prbs, 16.67 MHz, one shot | locked, P=6 (100 MHz) | 25,166 | PASS |
+| prbs, 12.5 MHz, one shot | locked, P=10 (125 MHz) | 25,165 | PASS |
+| prbs x2, 25 MHz, one shot | locked, P=6 (150 MHz) | ~25,200 each | PASS |
+| bars x2, 25 MHz, one shot | locked, P=6 (150 MHz) | 242,412 / 277,373 | PASS |
+
+Every run: `overruns=0 rxstall=0 saturated=0`. So the hardware-only
+questions above are answered for the RP2350: `IN_COUNT` via the SET alias
+took (mask=1 throughout), the viper fix-up and the in-`asm_pio` helpers
+run on real MicroPython, and DMA kept up.
+
+Two things the hardware run changed:
+
+- **25 MHz needs the 150 MHz system clock, now asked for.** The SDK
+  scans down from 133 MHz for an even multiple, so 25 MHz got 100 MHz
+  (P=4) and the board refused, as designed. `ttcap` now passes
+  `max_rp2040_freq=150_000_000` for `--mode rle` on the RP2350 (vgacap
+  PR #6), the chip's rated clock, giving P=6. Other modes keep the SDK's
+  choice, under which their sample points were measured.
+- **Sample point at P=6 (25 MHz, 150 MHz):** offsets 0, 1, 4, 5 system
+  clocks after the rising edge are exact; offsets 2 and 3 are not
+  (`uo_out` changes there, about 13-20 ns after the edge, consistent with
+  the ~25 ns frame capture measured at 100 MHz). The CLI's default for
+  `--mode rle` is rising+0, inside the window. `CaptureRequest`'s own
+  default edge is `falling` (offset 3 at P=6), so code that builds a
+  request directly must pass `edge="rising"`.
+
+The checker itself needed two fixes on the way (both in this branch):
+it searched only the first place a 20,000-sample head fits, which for
+bars (identical active lines) is usually the wrong line, so the first
+pass "failed" every bars capture, RAW included, with what looked like a
+mid-capture reset; and it raised IndexError when a match ran to the end of
+the reference. Negative control after the fix: one flipped bit in a RAW or
+an RLE copy of a passing capture FAILs.
+
+Still open: RP2040 hardware (none connected anywhere, 2026-11-24 survey).
