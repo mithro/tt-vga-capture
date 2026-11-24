@@ -4,6 +4,15 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- CI audit, all three repos: no open PRs or issues. vgacap and
+  tt-vga-testpatterns moved to Node 24 actions (checkout@v5, setup-uv@v7).
+  Bumping testpatterns' vgacap pin from b23a551 (September) to 4b005b2
+  exposed a break the pin had hidden: vgacap 2291264 appended `glitches=N`
+  to `vgacap-frames`' frame line, check.py's regex was anchored before it,
+  and every `tt_um_vgacal_modes` sub-case failed "reported no frames".
+  Fixed (testpatterns a959d51); all 23 cocotb tests, all five pixel-exact
+  checks (modes: 5 sub-cases) and the bitstream check pass. Lesson: move
+  that pin whenever vgacap main moves, or its CI tests a stale vgacap.
 - Survey for the hardware Tim says is coming (`tools/welland_survey.py`,
   read-only): **no Pi 5 with a Tiny Tapeout board yet, no USB VGA capture
   card, no VGA-screen camera.** p41-p47 are Pi 5s hosting Acorn CLE-101
