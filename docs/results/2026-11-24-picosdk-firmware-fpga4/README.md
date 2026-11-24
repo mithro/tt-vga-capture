@@ -57,7 +57,8 @@ in those numbers:
 - **ASIC boards:** the firmware doesn't drive the project mux pins, so
   whether the selected project survives the switch there is untested.
 - **RP2040:** no board is connected anywhere.
-- **Not wired to the firmware yet:** `ttcap demo` and the GStreamer source.
+- ~~Not wired to the firmware yet: `ttcap demo` and the GStreamer source.~~
+  Done and run live; see below.
 
 ## Live: GStreamer and `ttcap demo` on the capture firmware
 
