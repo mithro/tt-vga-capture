@@ -127,3 +127,66 @@ been tried.
 - The replay repeats one frame's runs, so the input is cache-warm. A real
   stream reads its input once; the effect was not measured.
 - Single thread, shared host; numbers are not isolated.
+
+## After the fast path (M10 Task 7a)
+
+Code: vgacap branch `m10-format-v2`, `a26c942` plus the bench tool
+cherry-picked (`1ca169d`, `e8f60c0`) as the before, and `ead2e39` as the after.
+Behaviour is unchanged: `test_frame_fastpath` runs the three profiles and a
+random glitchy stream (five signal maps, FRAM windows included) through both
+the new `vgaframe_push` and the `a26c942` code kept in `tests/fastpath_ref/`,
+and compares state after every push and frames, raw, rgb and cover byte for
+byte. `frames=3570` is the same before and after on every run.
+
+Method as above (Release `build-rel/`, `bench-runs`), but measured on
+2026-11-25 at load average 25.6 to 27.7 (about 0.3 per core), the before and
+after binaries interleaved, 3 runs each at 1.5e9 clocks, median reported.
+
+**The host load matters more than it seemed.** Task 2's own code (`18b3468`),
+rebuilt and run at this lower load, gives busy 18.57, bars 4.54, static 2.83
+ns/clock (150e6 clocks, median of 3), against the 45.67 / 10.66 / 5.00 recorded
+above at load 95 to 116. So the before figures below come from the same
+conditions as the after figures, not from the table above.
+
+| profile | Task 2 (load ~95) | before, today (3 runs) | after, today (3 runs) | before median | after median | speed-up |
+|---|---|---|---|---|---|---|
+| busy   | 45.673 | 18.473, 18.435, 18.508 | 6.836, 6.804, 6.705 | 18.473 | **6.804** | 2.7x |
+| bars   | 10.657 | 4.602, 4.490, 4.484    | 1.402, 1.424, 1.531 | 4.490  | **1.424** | 3.2x |
+| static | 4.997  | 2.801, 2.910, 2.810    | 0.620, 0.639, 0.627 | 2.810  | **0.627** | 4.5x |
+
+ns per run, after: busy 9.26, bars 18.8, static 131.
+
+Each change, `bench-runs --clocks 150000000`, median of 3, load 25 to 45:
+
+| change (vgacap commit) | busy | bars | static |
+|---|---|---|---|
+| before (`e8f60c0`) | 19.373 | 4.827 | 3.054 |
+| per-sample pixel table instead of `vgaframe_colour` (`3b32bd7`) | 14.582 | 4.235 | 2.863 |
+| no-edge inline `vgaframe_timing_push_no_edge`, one copy of the additions (`c6fb755`) | 13.770 | 3.984 | 2.816 |
+| clear only raw's dirty box after a frame, not 4 MB (`883bfa8`) | 12.195 | 3.117 | 2.138 |
+| crop through a 256-entry rgb table (`d087948`) | 10.782 | 1.592 | 0.602 |
+| fast path kept small, the rest in `push_rest` (`ecb2ef4`) | 9.588 | 1.490 | 0.618 |
+| a one-clock run is one store, not a `memset` call (`ead2e39`) | 6.849 | 1.525 | 0.640 |
+
+Rejected: storing runs of 1 to 8 clocks with a loop instead of `memset` was
+no faster after the pixel table (14.58 to 14.88) and slower after the split
+(10.69 to 11.23, A/B). The two largest wins came from measurement, not from
+the gprof hypotheses above: with emit's 4 MB raw clear removed outright busy
+fell from 13.8 to 9.2, and with the crop loop removed from 12.2 to 10.1.
+
+gprof of the after build (`-pg`, busy, 150e6 clocks, load 30): 1.06 s of
+samples out of 2.60 s wall. `vgaframe_push` 72.7%, the replay loop in `main`
+20.8%, `emit` 5.7%, `push_rest` 0.9%. The learner's slow path runs only on
+the 375000 hsync edges and no longer shows.
+
+### Against the 11 ns/clock budget
+
+At today's load the after figures are all inside it: busy 6.8 ns/clock leaves
+4.2 for the samplers, bars 1.4 leaves 9.6, static 0.6 leaves 10.4.
+
+**Concern, not measured:** Task 2's code ran 2.46x slower at load 95 to 116
+than at load 26 (45.67 against 18.57). If the after build slowed by the same
+factor at that load, busy would be about 16.7 ns/clock, over the budget; bars
+(3.5) and static (1.5) would stay inside it. Whether the slowdown is
+proportional was not measured; the cause is presumably hyperthread siblings
+and shared cache under a full host.
