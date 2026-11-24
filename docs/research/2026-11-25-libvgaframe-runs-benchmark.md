@@ -192,3 +192,35 @@ factor at that load, busy would be about 16.7 ns/clock, over the budget; bars
 (3.5) and static (1.5) would stay inside it. Whether the slowdown is
 proportional was not measured; the cause is presumably hyperthread siblings
 and shared cache under a full host.
+
+## vgacap-sample on a 1.5e9-clock busy trace (M10 Task 16)
+
+`bench-runs --profile busy --clocks 1500000000 --write-trace tmp/busy.trace.zst`
+(vgacap `m10-sample-tool` 9ff2019, Release build) wrote the busy stream as a
+tt-um-43 trace: 3e9 samples, 462 blocks, 16,035,812 bytes, in 15.0 s
+(10.0 ns/clock). `vgacap-sample` then read it in one pass
+(`trace_passes=1 blocks_decoded=462`), host load average 30 to 52 (of 88):
+
+| run | wall s | ns/clock |
+|---|---|---|
+| both samplers (the default) | 131.18 | 87.5 |
+| `--sampler tb-v1` | 93.16 | 62.1 |
+| `--sampler centre-v1` | 103.28 | 68.9 |
+| `vgacap-calib-dump` (trace read, calibration, frame clock only) | 66.67 | 44.4 |
+
+Each sampler wrote 3,566 frames, one distinct (the busy picture is static);
+tb-v1 and centre-v1 stored the same picture (same SHA-256). Peak RSS 64 MB.
+
+### Against the 11 ns/clock budget
+
+The budget is for all post-simulation work; vgacap-sample takes 87.5
+ns/clock, 8x over it. By subtraction (not profiled): reading the trace with
+the calibration and the frame clock is about 44 ns/clock, tb-v1 about 18,
+centre-v1 (libvgaframe plus the pick) about 25. The read path is the largest
+part: busy has one run per clock (1.5e9 callbacks from
+`vgacap_trace_read`, each also fed to the frame clock), so the per-run cost
+of the stream decoder and the callback chain dominates; libvgaframe itself
+measured 6.8 ns/clock above. Levers (hypotheses, unmeasured): a batched run
+reader (arrays of runs per block instead of a callback per run), a cheaper
+frame-clock push for runs that cannot end a vsync pulse, and decoding blocks
+on a second thread.
