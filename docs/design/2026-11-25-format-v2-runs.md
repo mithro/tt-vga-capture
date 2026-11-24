@@ -2,11 +2,11 @@
 
 Date: 2026-11-25.
 
-Status: proposed, awaiting Tim's decision (decision 1 of the
-tinytapeout-vga-videos spec). The decisions are listed in one place, with
+Status: decided 2026-11-25 (decision 1 of the tinytapeout-vga-videos spec).
+The decisions are listed in one place, with
 recommendations, in "Decisions for Tim" at the end.
 
-Decision: (pending)
+Decision (2026-11-25): Tim left (a)-(c) to the recommendations, which are adopted: RUNS; board adoption decided after Milestone 10; skip-by-length.
 
 Sources, cited by short name below:
 
@@ -482,12 +482,12 @@ Each with a recommendation.
   and add 64-bit runs) or alternative A (planar). Recommendation: `RUNS`.
   It answers the compact-RLE question with the one chunk, serves the
   simulation trace unchanged, is 2.1-2.3x smaller than B, and leaves planar
-  as a measured-need follow-up (A is additive later).
+  as a measured-need follow-up (A is additive later). Adopted.
 - **(b) Whether boards adopt `RUNS` later.** Recommendation: yes, as a
   separate decision after Milestone 10, once a LEB128 encoder has been
   measured on the board (the rle-note's compact row is an estimate). This
   note keeps the door open (the chunk, the `sample_bits = 8`/12 profiles) and
-  lists the board-side changes above, but changes none of them.
+  lists the board-side changes above, but changes none of them. Adopted.
 - **(c) Skip-by-length for well-framed invalid chunks.** The proposal: for
   the new chunk types and chunk types a header forbids, a known tag with a
   plausible length is trusted for framing; content errors skip the chunk by
@@ -495,4 +495,4 @@ Each with a recommendation.
   a byte-wise search. Recommendation: yes, because a byte-wise search inside
   a payload of up to 16 MiB could match a false tag; the cost is that a
   corrupt length field on a known tag is trusted, as it already is for v1
-  chunks by the plausibility bound.
+  chunks by the plausibility bound. Adopted.
