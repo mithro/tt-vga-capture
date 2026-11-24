@@ -133,10 +133,12 @@ been tried.
 Code: vgacap branch `m10-format-v2`, `a26c942` plus the bench tool
 cherry-picked (`1ca169d`, `e8f60c0`) as the before, and `ead2e39` as the after.
 Behaviour is unchanged: `test_frame_fastpath` runs the three profiles and a
-random glitchy stream (five signal maps, FRAM windows included) through both
-the new `vgaframe_push` and the `a26c942` code kept in `tests/fastpath_ref/`,
-and compares state after every push and frames, raw, rgb and cover byte for
-byte. `frames=3570` is the same before and after on every run.
+random glitchy stream (five signal maps, FRAM windows included; also forced
+modes, buffers narrower and shorter than the line and frame, and a timing no
+table mode matches, auto-cropped) through both the new `vgaframe_push` and the
+`a26c942` code kept in `tests/fastpath_ref/`. It compares state and emitted
+frames after every push, and the raw, rgb and cover buffers byte for byte
+every 4096 pushes and at flush. `frames=3570` is the same before and after on every run.
 
 Method as above (Release `build-rel/`, `bench-runs`), but measured on
 2026-11-25 at load average 25.6 to 27.7 (about 0.3 per core), the before and
