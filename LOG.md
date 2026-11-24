@@ -4,6 +4,16 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **BIO capture feasibility, in simulation** (branch `bio-research`).
+  Built `baochip/bio-sim` (Verilator model of the chip's own BIO RTL) in
+  Docker; Verilator 5.020 needed `-j 8` instead of `-j 0`. Wrote BIO
+  capture programs and a driver that injects a clock + uo_out waveform:
+  one core packing bytes captures up to 30.4 MHz, a sampler core + packer
+  core up to 63.6 MHz (fclk 700 MHz); 4,800-sample runs at 40 MHz
+  bit-exact, including a Dabao-pin layout (16-bit samples). Sample point is
+  4-7 ns after the clock edge. Host/BDMA FIFO drain rate is not modelled
+  and is the open question. Note:
+  `docs/research/2026-11-24-bio-capture-feasibility.md`.
 - **Milestone 6 Tasks 1-3 done, on hardware.** Prelude split (vgacap PR
   #1, HIL 9/9 on fpga-1). Frame/window capture (PR #2): all five
   calibration designs pixel-exact at their real pixel clocks on fpga-4,
