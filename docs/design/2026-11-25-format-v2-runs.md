@@ -82,6 +82,22 @@ Validity rules:
 - in every value, bits at or above `sample_bits` must be 0, so each value
   has one encoding.
 
+A header is invalid, and the reader rejects it by resynchronising, as for
+other bad VGCH fields, for each of:
+
+| invalid header | `what` string |
+|---|---|
+| `sample_bits` outside 1..64 | "bad sample_bits" |
+| `samples_per_word` not 0 when `sample_bits > 32`, or, when `sample_bits <= 32`, outside the version 1 rules | "bad samples_per_word" |
+| `samples_per_clock` not 1 or 2 | "bad VGCH v2 clock fields" |
+| `clock_bit` neither below `sample_bits` nor 0xFF | "bad VGCH v2 clock fields" |
+| `clock_bit` other than 0xFF with `samples_per_clock` not 2 | "bad VGCH v2 clock fields" |
+| `clock_first` above 1, or non-zero with no clock bit | "bad VGCH v2 clock fields" |
+| reserved byte 23 not 0 | "bad VGCH v2 clock fields" |
+
+("bad sample_bits" and "bad samples_per_word" are the strings the reader
+already uses, reader.c.)
+
 A version 1 header reads as `samples_per_clock = 1`, `clock_bit = 0xFF`,
 `clock_first = 0`. A stream with a `clock_bit` may contain only `RUNS`,
 `BLKH`, `META` and `TIME` chunks.
@@ -95,7 +111,8 @@ a v2 stream instead of misreading it. A v2 reader reads v1 streams unchanged.
 Payload: `u32 pair_count`, then `pair_count` pairs. Each pair is:
 
 - `value`: `vbytes = ceil(sample_bits / 8)` bytes, little-endian, with the
-  clock bit stored as 0;
+  clock bit stored as 0 (a stored value with the clock bit set is
+  malformed);
 - `run`: LEB128 u64, at least 1, minimal encoding (no trailing `0x80 0x00`),
   at most 10 bytes, with the 10th byte at most `0x01`.
 
@@ -227,8 +244,11 @@ compression alone at 4-14% of a core for the busiest designs, using zstd's
   both halves kept, no run overhead) and the other 34 pins as change events
   (spec, "Performance budget").
 - Cost against `RUNS`: at the fastest simulation `uo_out` is 2 x 4.61 M =
-  9.2 MB/s regardless of content (my arithmetic), against 35-70 MB/s for
-  `RUNS` on the busiest designs. A quiet design loses: `RUNS` stores
+  9.2 MB/s regardless of content (my arithmetic). That is a lower bound for
+  planar: it omits the other 34 pins, stored as change events with a 64-bit
+  clock and a 64-bit value, whose rate is unmeasured and is to be measured
+  in rollout step 2. `RUNS` on the busiest designs is 35-70 MB/s. A quiet
+  design loses: `RUNS` stores
   nothing during long constant stretches, planar still stores two bytes a
   clock.
 - Format work it adds, beyond `RUNS`: an `EVNT` with a 64-bit value (today
@@ -269,10 +289,19 @@ measured-need follow-up.
 
 ## Open points for the decision
 
-- Reader error handling: a pair with bits at or above `sample_bits` set, a
-  non-minimal LEB128, or a chunk length not matching exactly is a malformed
-  chunk. The note does not say whether the reader errors or resyncs
-  (stream.h's reader resyncs on framing errors, errors on others); the
-  implementation plan (Tasks 5-9) picks, matching existing behaviour.
+- Reader error handling (settled by the implementation plan): malformed
+  `RUNS` data is a framing error, so the reader resynchronises (as
+  stream.h's reader does for other framing errors) and does not stop. The
+  `what` strings:
+  - "RUNS value has the clock bit set"
+  - "RUNS run not minimally encoded"
+  - "RUNS run over 64 bits"
+  - "RUNS run is zero"
+  - "RUNS pairs do not fill the chunk"
+  - "RUNS value has bits above sample_bits"
+  - "chunk not allowed with a sample clock": a chunk type other than
+    `RUNS`, `BLKH`, `META` or `TIME` in a stream whose header has a
+    `clock_bit` is a resync, not an error;
+  - "bad VGCH v2 clock fields": see the header validity table.
 - `desc` stays at most 255 bytes (stream.h `VGACAP_DESC_MAX`); long
   provenance goes in `META`, which holds up to 4096 bytes.
