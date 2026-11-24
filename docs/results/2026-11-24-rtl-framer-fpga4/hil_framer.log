@@ -1,0 +1,23 @@
+logic capture at 250000 Hz: CaptureStats(bytes=1000222, samples=499712, chunks=62, overruns=0, seconds=2.236957178916782, rxstall=0, stderr='', messages=('overruns=0 rxstall=0 sysclk_hz=133000000',), timed_out=False, dropped=0, error='', mem_free_before=418320)
+logic: 61 board chunks, 499712 clocks, TIME ['overruns=0 rxstall=0 sysclk_hz=133000000']
+logic: 261568 valid bytes, framer stream from byte 124: 249600 samples, other chunks []
+logic: PASS, 249600 framer samples (1.19 frames of every-other-clock samples) are the bars picture from frame offset 66560
+RESULT PASS
+logic capture at 250000 Hz: CaptureStats(bytes=1000222, samples=499712, chunks=62, overruns=0, seconds=2.237226603087038, rxstall=0, stderr='', messages=('overruns=0 rxstall=0 sysclk_hz=133000000',), timed_out=False, dropped=0, error='', mem_free_before=418320)
+logic: 61 board chunks, 499712 clocks, TIME ['overruns=0 rxstall=0 sysclk_hz=133000000']
+logic: 261568 valid bytes, framer stream from byte 112: 249600 samples, other chunks []
+logic: PASS, 249600 framer samples (1.19 frames of every-other-clock samples) are the bars picture from frame offset 66048
+RESULT PASS
+speed: board ['INFO words=16384 base=Pin(GPIO16, mode=ALT, pull=PULL_DOWN, alt=PWM) sysclk=100000000 dma_active=0 rxstall=1']
+speed: 32768 clocks, 17152 valid bytes (0.523 a clock)
+speed: PASS, 63 framer chunks are bars samples, 0 are not, other chunks []; all of them one contiguous run 512 clocks apart: True (last chunk at frame offset [31872, 31873, 32672])
+RESULT PASS
+logic capture at 250000 Hz: CaptureStats(bytes=1000222, samples=499712, chunks=62, overruns=0, seconds=2.241572478786111, rxstall=0, stderr='', messages=('overruns=0 rxstall=0 sysclk_hz=133000000',), timed_out=False, dropped=0, error='', mem_free_before=352752)
+logic: 61 board chunks, 499712 clocks, TIME ['overruns=0 rxstall=0 sysclk_hz=133000000']
+logic: 261568 valid bytes, framer stream from byte 236: 249600 samples, other chunks []
+logic: PASS, 249600 framer samples (1.19 frames of every-other-clock samples) are the bars picture from frame offset 67584
+RESULT PASS
+speed: board ['INFO words=16384 base=Pin(GPIO16, mode=ALT, pull=PULL_DOWN, alt=PWM) sysclk=100000000 dma_active=0 rxstall=1']
+speed: 32768 clocks, 17152 valid bytes (0.523 a clock)
+speed: PASS, 63 framer chunks are bars samples, 0 are not, other chunks []; all of them one contiguous run 512 clocks apart: True (last chunk at frame offset [32064, 32065, 32864])
+RESULT PASS

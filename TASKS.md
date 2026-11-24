@@ -83,6 +83,7 @@ Design note: `docs/design/2026-11-23-shared-rtl-capture.md`.
 
 - [-] ~~Per-frame hash PR from `tt-harness-fpga-vga`~~: withdrawn 2026-11-23 under Tim's no-dependency-tree rule; that project keeps its own cutter and hash (`docs/frame-definition.md` there) and runs `ttcap` as a program
 - [ ] `vgacap/rtl/`: shared Verilog sampler + RLE chunk writer, cocotb-tested against the C/Python readers (sampler first, PR from `tt-harness-handheld-vga` after Tim approves its design; RLE encoder specified here)
+  - [x] `vgacap_raw_framer` (RAW + overrun TIME chunks, Migen + generated Verilog; vgacap PR #4): Migen and Icarus simulation, cocotb in tt-vga-testpatterns `tt_um_vgacal_framer` (branch `framer-design`), and on fpga-4 at 250 kHz (whole frame exact) and 25 MHz (gap-free RAM windows); `docs/results/2026-11-24-rtl-framer-fpga4/`
 - [ ] Decide `RLE ` chunk-length handling and whether a compact RLE chunk is justified
 
 ## Milestone 6: whole-frame and windowed capture
@@ -123,3 +124,16 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
   - [ ] FIFO drain path (BDMA core or host `RXFn`) in the full-SoC Verilator flow
   - [ ] Firmware + host transport (vgacap chunks over USB HS)
 - [ ] Comparison against a USB VGA capture card (Tim: will appear on tinytapeout.fpgas.online, with a camera on a VGA screen; checked daily)
+
+## Milestone 10: simulation traces (with tinytapeout-vga-videos)
+
+Agreed 2026-11-24. That project's spec is
+`tinytapeout-vga-videos/docs/superpowers/specs/2026-11-24-raw-frames-and-hash-methods-design.md`.
+It writes these on vgacap branches; this project reviews them before merge.
+
+- [ ] Design note: 64-bit samples plus an RLE64 chunk (format v2), put to Tim together with the compact-RLE decision
+- [ ] Benchmark libvgaframe on run-encoded input at 1.5e9 clocks
+- [ ] Samplers `tb-v1` / `centre-v1` (clocks per pixel other than 1, including below 1); longer lines and modes not in the table
+- [ ] rgb6 output beside rgb24
+- [ ] Vendored zstd, SHA-256 and fstapi as an optional CMake target
+- [ ] `vgacap-export --format fst|vcd`, including decoded signals and a .gtkw file

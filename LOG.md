@@ -4,6 +4,24 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **RTL capture framer on a real FPGA, at 250 kHz and at 25 MHz**
+  (`docs/results/2026-11-24-rtl-framer-fpga4/`): vgacap's Migen
+  `vgacap_raw_framer` (PR #4) inside tt-vga-testpatterns'
+  `tt_um_vgacal_framer` on fpga-4. A 16-pin capture of uio[0]+uo_out:
+  at 250 kHz, 249,600 framed samples are the bars picture exactly, with no
+  overruns; at 25 MHz, one-shot RAM windows of up to 65,536 clocks give
+  framer chunks that form one gap-free run. Along the way: the FIFO is now
+  block RAM (it was 157% of the LCs as flip-flops); the test design meets
+  25 MHz (33.7 MHz Fmax); and Debian yosys 0.52 / nextpnr-ice40 0.7 now
+  build the bitstreams. Board borrowed from the playground session while
+  the tinytapeout.fpgas.online certificate is expired (SSH tunnel to the
+  Pi), then restored and released.
+- Agreed with the tinytapeout-vga-videos session (Tim's call: shared code
+  goes in vgacap): simulation traces will use vgacap. It needs 64-bit
+  samples, run-level samplers for clocks-per-pixel other than 1, rgb6,
+  vendored zstd/SHA-256/fstapi, and FST/VCD export. That session writes
+  them on vgacap branches; I review. Tracked as Milestone 10.
+
 - **Real silicon at its design clock**: the tt09 ASIC board (p10) captured
   `tt_um_rejunity_vga_logo` and `tt_um_a1k0n_nyancat` at 25.175 MHz and
   `tt_um_vga_clock` at 31.5 MHz (640x480@72), clean; the clock read
