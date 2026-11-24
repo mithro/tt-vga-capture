@@ -71,7 +71,7 @@ The same code then reads board captures and simulation traces.
 | (tt-vga-capture) `m10-format-note` | 1 | tt-vga-capture `main` |
 | `m10-bench` | 2 | `origin/fw-picosdk` |
 | `m10-third-party` | 3 | the stack's base (see Global Constraints) |
-| `m10-format-v2` | 5, 6, 7 | `m10-third-party` |
+| `m10-format-v2` | 5, 6, 7, 7a | `m10-third-party` |
 | `m10-trace` | 8, 9 | `m10-format-v2` |
 | `m10-frame-raw` | 10, 11 | `m10-trace` |
 | `m10-modes` | 4 | `m10-frame-raw` |
@@ -396,6 +396,35 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
 - [ ] **Step 3: Implement.** In `vgaframe_push`, store the learner's return in `f->last_report`. Fix the `timing.c:13-14` comment to say the call is made at the hsync *trailing* edge, when a line is accepted. Switch `vgacap_frames.c` and `gstvgadecode.c` to `vgaframe_push64`.
 - [ ] **Step 4: Run the tests and see them pass.** Run all of `ctest` and `pytest`.
 - [ ] **Step 5: Commit and push** on `m10-format-v2`.
+
+### Task 7a: libvgaframe fast path (added after Task 2's measurement)
+
+Task 2 measured `vgaframe_push` on big-storage (research note `docs/research/2026-11-25-libvgaframe-runs-benchmark.md`, tt-vga-capture branch `m10-bench-note`, 5107995) at:
+- `busy`: 45.67 ns per clock;
+- `bars`: 10.66;
+- `static`: 5.00.
+
+The budget for *all* post-simulation work is 11 ns per clock. The profile (gprof, a third of wall time visible) puts most of the visible time in `vgaframe_push`'s own body and in `vgaframe_colour`. Neither is inlined, and `memset` is called through the PLT for runs of one clock.
+
+**Files:**
+- Modify: `src/frame/frame.c`, `src/frame/timing.c`, `include/vgacap/frame.h`.
+- Modify: `bench/bench_runs.c`, after cherry-picking `m10-bench` (Ruling A applies here instead of at Task 16).
+- Test: the existing suites, unchanged, plus `tests/test_frame_fastpath.c`.
+
+**Interfaces:**
+- Behaviour is unchanged: every existing test passes without edits, and the new test checks equivalence.
+- Produces: `vgaframe_t` gains a 256-entry colour table built from the signal map at `vgaframe_init`, used for samples whose map bits are all below 8, as Tiny VGA's are. Wider samples keep `vgaframe_colour`.
+
+- [ ] **Step 1: Write the failing test.** `test_frame_fastpath.c`, `fastpath_equivalent`: for the three bench profiles plus a random stream (sync-shaped, with random colours and glitch pulses), the frames and raw callbacks are compared, byte for byte, between the new `vgaframe_push` and a copy of the current one kept in the test (`ref_vgaframe_push`, compiled from a snapshot of today's `frame.c` and `timing.c` under renamed symbols).
+- [ ] **Step 2: Implement the fast path, measuring each change separately with `bench-runs --profile busy --clocks 150000000` (Release, three runs, median):**
+  1. the colour table;
+  2. a run of 1 to 8 clocks stored with a plain loop instead of `memset`;
+  3. the learner's no-edge case (`h == prev_h`, no report possible) handled inline in `vgaframe_push`, before calling `vgaframe_timing_push`;
+  4. anything else the measurements point at.
+
+  Keep each change only if it helps.
+- [ ] **Step 3: Target.** `busy` at most 11 ns per clock, and `bars` and `static` no slower than Task 2's figures. If `busy` stays above 11 after step 2, stop and report the profile to the controller. The spec's own fix list (a planar pass that skips libvgaframe for pixels, or running `centre-v1` only on request) then goes to the owner. Do not change the learner's acceptance rules to win speed.
+- [ ] **Step 4: Record and commit.** Append the before and after table to the Task 2 research note. Commit and push on `m10-format-v2`.
 
 ### Task 8: the trace writer (container, inline push, compressor thread)
 
