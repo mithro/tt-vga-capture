@@ -137,3 +137,12 @@ It writes these on vgacap branches; this project reviews them before merge.
 - [ ] rgb6 output beside rgb24
 - [ ] Vendored zstd, SHA-256 and fstapi as an optional CMake target
 - [ ] `vgacap-export --format fst|vcd`, including decoded signals and a .gtkw file
+- [ ] Implementation plan: `docs/superpowers/plans/2026-11-24-m10-simulation-traces.md` (reviewed here before work starts)
+- [ ] Trace container: zstd seekable blocks with `BLKH` block headers, seek-table rebuild for cut-off traces
+- [ ] `META` chunks (opening run parameters, closing status) in the C writer/reader and the Python mirror
+- [ ] Trace writer with an inline push and a double-buffered compressor thread (host-only target)
+- [ ] Shared 12-mode table (tb.cpp's five added, marked so `vgaframe_mode_match_cpl` skips them); ttcap `--vga-mode` rejects the marked modes
+- [ ] libvgaframe raw-frame callback at every frame boundary, buffers cleared at every boundary
+- [ ] Shared calibration and frame clock (port of tb.cpp:191-230, 361-378)
+- [ ] `vgacap-sample`: both samplers and the hash methods in one pass; stores, `frames.txt`, hash files, PNG pipe
+- [ ] `tb-v1` test vectors from tinytapeout-vga-videos' `tb.cpp` comparison
