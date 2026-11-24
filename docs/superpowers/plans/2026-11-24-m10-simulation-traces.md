@@ -35,7 +35,7 @@ The same code then reads board captures and simulation traces.
   - vgacap code is C99, compiled with `-Wall -Wextra -Werror -Wshadow -Wconversion` (`CMakeLists.txt:8`).
   - SPDX `Apache-2.0` headers on new files.
   - Vendored code is never edited and is built in `third_party/` with its own flags.
-- **Board builds stay dependency-free.** `firmware/CMakeLists.txt` and `capture-rp1/Makefile` compile `src/stream/writer.c` on its own, so `writer.c` stays C99 with no `__int128`, no threads and no new includes. Everything host-only (zstd, threads, 128-bit time, mmap) lives in new files under `src/trace/`, `src/sample/` and `src/tools/`.
+- **Board builds stay dependency-free.** `firmware/CMakeLists.txt`, `capture-rp1/Makefile` and (from PR #10) `mpy/` compile `src/stream/writer.c` on its own, with `-Werror` on arm-gcc and in the MicroPython unix port. So `writer.c` stays C99 with no `__int128`, no threads and no new includes. Everything host-only (zstd, threads, 128-bit time, mmap) lives in new files under `src/trace/`, `src/sample/` and `src/tools/`.
 - **Host extras option.** The host-only libraries are built only when the CMake option `VGACAP_HOST_EXTRAS` is ON (default ON). CI's `c` and `python` jobs build with it ON. A configure with it OFF must still build and pass the existing tests.
 - **Bit layout of a simulation sample** (bit 0 least significant):
   - `uo_out` 0-7
@@ -48,7 +48,8 @@ The same code then reads board captures and simulation traces.
   - `clk` 42
 
   The trace header has `sample_bits = 43`, `samples_per_clock = 2`, `clock_bit = 42`. Sample `2c` is clk low and `2c + 1` clk high of clock `c`, and clock 0 is the first reset clock.
-- **Time rule:** sample `n` is at `round(n * 10^12 / (s * clock_hz))` ps, with halves rounded up, computed in 128-bit integer arithmetic.
+- **Time rule:** sample `n` is at `round(n * 10^12 / (s * clock_hz))` ps, with halves rounded up, computed in 128-bit integer arithmetic (a portable 64x64→128 multiply and 128/64 divide, not `__int128`).
+- **One representation of the clock:** `clock_hz` is the VGCH header's `u32`, in whole hertz, and nothing else repeats it. The samplers use `(double)header.clock_hz`, which equals what `tb.cpp`'s `atof` makes of the same integer, so the pipeline must give `tb.cpp` an integer clock. The project's identifier is the `META(open)` key `project`, everywhere.
 - **rgb6:** one byte per pixel, `R << 4 | G << 2 | B`. R = (uo[0], uo[4]), G = (uo[1], uo[5]), B = (uo[2], uo[6]), first bit most significant. Display colour is channel * 85.
 - **Performance budget** (spec "Performance budget"), measured in the pipeline's rollout step 2:
   - Recording costs at most 5% of simulation wall time (about 10 ns per clock at the fastest project).
@@ -59,8 +60,8 @@ The same code then reads board captures and simulation traces.
   - Each branch is made in `vgacap/.worktrees/<branch>`, its own worktree.
   - Commits are small, and each is pushed straight away.
   - Each group of tasks becomes one PR to `mithro/vgacap`, reviewed by the tt-vga-capture session before merge.
-  - Base: `origin/fw-picosdk` (PR #7, which stacks on #4 and carries `vgacap_writer_attach`). Once #7 is merged, use `origin/main`.
-  - Branches stack as the "Branches" table says.
+  - Bases: open PRs #7 (`fw-picosdk`, on `rtl`), #9 and #10 and the unfinished `mpy-chain` branch all touch the stream writer or its users. So `m10-bench` branches off `origin/fw-picosdk`. Everything else is one linear stack based on the tip of `mpy-chain`, or on `origin/main` once #7, #9, #10 and `mpy-chain` have merged; that base is fixed when Task 3 starts, after asking the reviewing session which tip is current.
+  - Branches stack as the "Branches" table says, each on the one before it, with no merges of several bases.
 - **Tests:** C tests via `vgacap_add_test` and `ctest`; Python tests in `python/tests/` via `uv run pytest`. Every command's output goes to a log under the worktree's `tmp/` (ignored), and failures are read from the log.
 
 ## Branches
@@ -68,16 +69,18 @@ The same code then reads board captures and simulation traces.
 | branch | tasks | stacks on |
 | --- | --- | --- |
 | (tt-vga-capture) `m10-format-note` | 1 | tt-vga-capture `main` |
-| `m10-bench` | 2 | base |
-| `m10-third-party` | 3 | base |
-| `m10-modes` | 4 | base |
-| `m10-format-v2` | 5, 6, 7 | base |
-| `m10-trace` | 8, 9 | `m10-format-v2` + `m10-third-party` (merge both) |
-| `m10-frame-raw` | 10, 11 | `m10-format-v2` |
-| `m10-samplers` | 12, 13, 14, 15 | `m10-trace` + `m10-frame-raw` + `m10-modes` |
+| `m10-bench` | 2 | `origin/fw-picosdk` |
+| `m10-third-party` | 3 | the stack's base (see Global Constraints) |
+| `m10-format-v2` | 5, 6, 7 | `m10-third-party` |
+| `m10-trace` | 8, 9 | `m10-format-v2` |
+| `m10-frame-raw` | 10, 11 | `m10-trace` |
+| `m10-modes` | 4 | `m10-frame-raw` |
+| `m10-samplers` | 12, 13, 14, 15 | `m10-modes` |
 | `m10-sample-tool` | 16 | `m10-samplers` |
-| `m10-export` | 17 | `m10-trace` |
-| `m10-tbv1-vectors` | 18 | `m10-sample-tool`, after the pipeline plan's `tb.cpp` test exists |
+| `m10-export` | 17 | `m10-sample-tool` |
+| `m10-tbv1-vectors` | 18 | `m10-export`, after the pipeline plan's `tb.cpp` test exists |
+
+Task 4 keeps its number but is done on `m10-modes`, in the stack's order.
 
 Gate: Tasks 5 onward follow the format as the owner approves it in Task 1. If the owner changes the chunk layout, Tasks 5-9 change to match before they start.
 
@@ -139,19 +142,24 @@ In tt-vga-capture: `docs/design/2026-11-25-format-v2-runs.md` (Task 1), `docs/re
       - byte 21 `clock_bit` (0..63, or 0xFF for none);
       - byte 22 `clock_first` (0 or 1, the clock bit's value in sample 0);
       - byte 23 reserved, which must be 0.
-    - Then `desc_len` bytes of description. The chunk length is `24 + desc_len`.
+    - Then `desc_len` bytes of description. The chunk length is `24 + desc_len`, so up to 279 bytes.
+    - Validity rules:
+      - a `clock_bit` other than 0xFF requires `samples_per_clock == 2`;
+      - `clock_first` must be 0 when there is no clock bit;
+      - in every value, bits at or above `sample_bits` must be 0, so each value has one encoding.
+    - A version 1 header reads as `samples_per_clock = 1`, `clock_bit = 0xFF`, `clock_first = 0`.
     - A stream with a `clock_bit` may contain only `RUNS`, `BLKH`, `META` and `TIME` chunks.
   - **`RUNS`:**
     - `u32 pair_count`, then `pair_count` pairs. Each pair is:
       - `value`, `vbytes = ceil(sample_bits / 8)` bytes, little-endian, with the clock bit stored as 0;
-      - `run`, LEB128 u64, at least 1, minimal encoding (no trailing `0x80 0x00`), at most 10 bytes.
+      - `run`, LEB128 u64, at least 1, minimal encoding (no trailing `0x80 0x00`), at most 10 bytes, with the 10th byte at most `0x01`.
     - The chunk length must equal `4 +` the pairs' bytes exactly.
     - The reader sets the clock bit of each run's value to `clock_first ^ (n & 1)`, where `n` is the run's first sample.
   - **`BLKH`:** `u64 first_sample`, the sample number of the block's first sample.
   - **`META`:**
     - 1..4096 bytes of UTF-8 text: `key=value` lines, each ending `\n`.
     - The first line is `meta=open` or `meta=close`.
-    - Keys in the opening chunk: `project`, `override`, `clock_hz`, `calib_seconds`, `seconds`, `simulator`, `harness`, `layout=tt-um-43`.
+    - Keys in the opening chunk: `project`, `override`, `calib_seconds`, `seconds`, `simulator`, `harness`, `layout=tt-um-43`. The clock is the header's `clock_hz` alone.
     - Keys in the closing chunk: `capture_after_clock`, `status`, `frames`.
   - **Container:**
     - A trace file is zstd's seekable format. Each zstd frame is one block. The seek table is a skippable frame at the end.
@@ -170,7 +178,7 @@ In tt-vga-capture: `docs/design/2026-11-25-format-v2-runs.md` (Task 1), `docs/re
 **Interfaces:**
 - Consumes: `vgaframe_init`, `vgaframe_push`, `vgaframe_timing_push`, as on the base branch.
 
-- [ ] **Step 1: Write `bench-runs`.** Usage: `bench-runs --clocks N --profile busy|bars|static`. It builds one 640x480@60 frame (800 x 525 clocks, Tiny VGA samples, the synth layout of `tests/synth.c`) as runs:
+- [ ] **Step 1: Write `bench-runs`.** Usage: `bench-runs --clocks N --profile busy|bars|static`. Task 16 later adds `--write-trace PATH`, which writes the same stream as a 43-bit trace through the trace writer instead of timing libvgaframe. It builds one 640x480@60 frame (800 x 525 clocks, Tiny VGA samples, the synth layout of `tests/synth.c`) as runs:
   - `busy`: a new colour every clock in the active area;
   - `bars`: 64 bars of 10 clocks;
   - `static`: one colour.
@@ -193,7 +201,7 @@ In tt-vga-capture: `docs/design/2026-11-25-format-v2-runs.md` (Task 1), `docs/re
 - Create (vendored):
   - `third_party/zstd/` (zstd v1.5.7: `lib/` and `contrib/seekable_format/{zstd_seekable.h,zstdseek_compress.c,zstdseek_decompress.c}`, `LICENSE`);
   - `third_party/zlib/` (zlib v1.3.1 sources and `LICENSE`);
-  - `third_party/libfst/` (gtkwave/libfst at b2681f927a092a21b42ba1f3b2a9af831deaf58d: `src/fstapi.{c,h}`, `fastlz.{c,h}`, `lz4.{c,h}`, `LICENSE`, MIT);
+  - `third_party/libfst/` (gtkwave/libfst at b2681f927a092a21b42ba1f3b2a9af831deaf58d, the commit GitHub lists as its head on 2026-11-12: `src/fstapi.{c,h}` and `fastlz.{c,h}`, MIT, with its `LICENSE`; `lz4.{c,h}`, BSD-2-Clause, whose licence text is in `lz4.c`'s header and is copied to `third_party/libfst/LICENSE.lz4`);
   - `third_party/sha256/` (Brad Conte's public-domain `sha256.{c,h}` from crypto-algorithms, with its public-domain statement).
 - Modify: `CMakeLists.txt` (`option(VGACAP_HOST_EXTRAS ... ON)`, `add_subdirectory(third_party)` under it).
 - Test: `tests/test_third_party.c`.
@@ -213,7 +221,7 @@ Note for the spec's owner: libfst needs zlib (`compress2`, `uncompress` and the 
   - starts with `set_directory_properties(PROPERTIES COMPILE_OPTIONS "")`, so vgacap's `-Werror -Wconversion` do not reach vendored code;
   - sets `-O2 -w`;
   - defines `HAVE_LIBPTHREAD`, `FST_WRITER_PARALLEL`, `HAVE_FSEEKO` and `HAVE_REALPATH` for libfst (no `config.h`);
-  - builds zstd's `lib/common`, `lib/compress` and `lib/decompress` plus the seekable files, with `ZSTD_MULTITHREAD` off and `ZSTD_LEGACY_SUPPORT=0`.
+  - builds zstd's `lib/common`, `lib/compress` and `lib/decompress` plus the seekable files, with `ZSTD_MULTITHREAD` off, `ZSTD_LEGACY_SUPPORT=0` and `ZSTD_DISABLE_ASM=1`. The project is `LANGUAGES C`, so `huf_decompress_amd64.S` is not built; the C Huffman decoder is used.
 - [ ] **Step 4: Run all tests.** Run `ctest --test-dir build --output-on-failure > tmp/ctest.log 2>&1`. Expected: all tests pass, including `test_third_party`. Then configure with `-DVGACAP_HOST_EXTRAS=OFF` into `build-off/`: everything except `test_third_party` builds and passes.
 - [ ] **Step 5: Commit.** Commit in three steps: one commit per vendored package (`third_party: vendor zstd 1.5.7` and so on), then the CMake and test commit. Push.
 
@@ -222,7 +230,7 @@ Note for the spec's owner: libfst needs zlib (`compress2`, `uncompress` and the 
 **Files:**
 - Modify: `include/vgacap/frame.h` (struct field, comments at `frame.h:27-31`), `src/frame/modes.c`, `src/frame/frame.c:42-47` (comment).
 - Modify: `python/vgacap/modes.py`.
-- Modify: `python/ttcap/capture.py` (`frame_cfg`).
+- Modify: `python/ttcap/capture.py` (`frame_cfg`), `python/ttcap/cli.py` (the `--vga-mode` choices list only non-extended modes).
 - Test: `tests/test_modes.c`, `tests/test_frame.c`, `python/tests/test_modes_table.py`, `python/tests/test_ttcap_capture.py`.
 
 **Interfaces:**
@@ -230,6 +238,7 @@ Note for the spec's owner: libfst needs zlib (`compress2`, `uncompress` and the 
   - `vgaframe_mode_t` gains `uint8_t extended;`: 1 for the five modes added from `tb.cpp`, which `vgaframe_mode_match_cpl` skips.
   - The table order is the existing seven, unchanged, then `800x600@72`, `800x600@75`, `1024x768@70`, `1280x720@60`, `1280x1024@60`.
   - Python `Mode` gains `extended: bool = False`, plus `vgacap.modes.TABLE` (the ordered list), `match(cpl, lpf)` and `match_cpl(cpl)`, which mirror the C.
+  - The pixel-domain view (spec: "a pixel-domain view beside" the clock fields): `uint32_t vgaframe_mode_line_px(const vgaframe_mode_t *m)` and `uint32_t vgaframe_mode_frame_lines(const vgaframe_mode_t *m)`. A comment in `frame.h` says the table's `h_*` fields are the mode's pixels, which are also its clocks at one clock per pixel, and that the samplers read them as pixels. The struct's meaning is unchanged.
 
 The five rows (clock fields at one clock per pixel; polarities from VESA DMT, and CEA-861 for 1280x720):
 
@@ -248,18 +257,18 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
   - `match_cpl_unchanged`: for every non-extended entry, `vgaframe_mode_match_cpl(cpl)` returns that entry, and `vgaframe_mode_match_cpl(1056)` returns `800x600@60`, not `@75`.
   - `match_sees_added`: `vgaframe_mode_match(1040, 666)` returns `800x600@72`.
 
-  In `test_frame.c`, `crop_added_modes`: a `synth_frame` stream of three frames in each added mode emits frames of exactly that mode's `h_active x v_active`, with every pixel equal to the synth pattern.
+  In `test_frame.c`, `crop_added_modes`, with its own buffers of 1688 x 1066 (the harness's 1400 x 900 is too small for 1280x1024@60): a `synth_frame` stream of three frames in each added mode emits frames of exactly that mode's `h_active x v_active`, with every pixel equal to the synth pattern.
 
   `test_modes_table.py`: run `build/test_modes --dump` (a new flag that prints every C entry as `name,h_active,h_front,h_sync,h_back,v_active,v_front,v_sync,v_back,hpos,vpos,extended`), and check that each line equals the Python `TABLE`, field by field.
 
-  `test_ttcap_capture.py::test_frame_cfg_rejects_extended`: `frame_cfg(profile, vga_mode="800x600@72")` raises `ValueError` whose message contains `"not unique by clocks per line"`.
+  `test_ttcap_capture.py::test_frame_cfg_rejects_extended`: `frame_cfg(profile, vga_mode="800x600@72")` raises `ValueError` whose message contains `"frame and window capture support only"`. `test_ttcap_cli.py` checks that `--vga-mode`'s choices are exactly the seven base modes.
 - [ ] **Step 2: Run the tests and watch them fail.** Run `ctest` and `uv run pytest python/tests/test_modes_table.py python/tests/test_ttcap_capture.py`. Expected: failures on the new tests only.
 - [ ] **Step 3: Implement.**
   - Add the field and rows, setting `extended = 0` explicitly on the existing seven.
   - `vgaframe_mode_match_cpl` skips `extended` entries.
   - Update the "unique across the built-in table" comments (`frame.c:46-47`, `frame.h:27-28`) to say uniqueness holds for the non-extended entries, which is all the function looks at.
   - Mirror the change in Python.
-  - In `frame_cfg`, after the unknown-mode check: `if mode.extended: raise ValueError(f"{vga_mode}: not unique by clocks per line, so a frame or window capture cannot recognise it; streaming capture detects it without --vga-mode")`.
+  - In `frame_cfg`, after the unknown-mode check: `if mode.extended: raise ValueError(f"{vga_mode}: frame and window capture support only the base modes, which libvgaframe recognises by clocks per line alone ({', '.join(base)}); streaming capture detects {vga_mode} without --vga-mode")`.
 - [ ] **Step 4: Run the tests and see them pass.** Run the same commands. Expected: everything passes, including every pre-existing test.
 - [ ] **Step 5: Commit and push** on `m10-modes`.
 
@@ -268,7 +277,7 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
 **Files:**
 - Modify: `include/vgacap/stream.h`, `src/stream/writer.c`, `src/stream/reader.c`, `src/tools/vgacap_dump.c`, `src/tools/vgacap_frames.c`, `gst/gstvgadecode.c`.
 - Modify: `python/vgacap/stream.py`.
-- Test: `tests/test_stream_v2.c` (new), `tests/test_stream_chunks.c`, `python/tests/test_stream_v2.py` (new), `python/tests/test_roundtrip_c.py`.
+- Test: `tests/test_stream_v2.c` (new), `tests/test_stream_chunks.c`, `tests/test_stream_raw.c` (its `got` array becomes `uint64_t`, as the widened run event requires under `-Wconversion`), `python/tests/test_stream_v2.py` (new), `python/tests/test_roundtrip_c.py`.
 
 **Interfaces:**
 - Produces (C, `stream.h`):
@@ -298,17 +307,25 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
   - `header_v2_round_trip`: a v2 header (43 bits, 2 per clock, clock bit 42, `clock_first` 0, desc `"t"`) written then read gives the same fields, and the VGCH payload length is 25.
   - `runs_round_trip_43bit`: write pairs `(0x1_0000_0001, 1)`, `(0x0FF, 2^32 + 5)`, `(0x3FF_FFFF_FFFF & ~(1ull<<42), 3)`. Reading back gives the same runs, with each value's bit 42 equal to `n & 1` for the run's first sample `n` (0, 1, 2^32 + 6).
   - `runs_reject_clock_bit_set`: a stored value with bit 42 set resyncs, `what == "RUNS value has the clock bit set"`.
-  - `runs_reject_overlong_leb`: run bytes `81 80 00` (non-minimal) resync, `what == "RUNS run not minimally encoded"`.
+  - `runs_reject_overlong_leb`: run bytes `81 80 00` (non-minimal) resync, `what == "RUNS run not minimally encoded"`. Ten bytes `ff` x 9 then `02` (over 64 bits) resync, `what == "RUNS run over 64 bits"`.
+  - `runs_reject_padding_bits`: in a 43-bit stream, a stored value with bit 43 set (inside the 6th byte) resyncs, `what == "RUNS value has bits above sample_bits"`.
+  - `header_v2_rules`: these resync with `what == "bad VGCH v2 clock fields"`: a clock bit with `samples_per_clock == 1`; `clock_first == 1` with no clock bit; a non-zero reserved byte. A v2 VGCH of length 279 (255-byte description) is accepted.
+  - `header_v1_defaults`: a v1 header read by a `memset` reader reports `samples_per_clock == 1`, `clock_bit == 0xFF` and `clock_first == 0`, and a `RAW ` chunk after it decodes as before.
   - `runs_reject_zero_run` (`what == "RUNS run is zero"`) and `runs_length_mismatch` (`what == "RUNS pairs do not fill the chunk"`).
   - `clock_stream_rejects_raw`: a `RAW ` chunk in a stream with a clock bit resyncs, `what == "chunk not allowed with a sample clock"`.
   - `block_sets_position`: `BLKH(1000)` after 10 samples gives `EV_BLOCK{first_sample = 1000, expected = 10}`, and the next run's clock bit follows sample 1000.
   - `meta_event`: `META("meta=open\nproject=x\n")` arrives intact. Lengths 0 and 4097 resync.
   - `init_header_decodes_block`: a reader made with `vgacap_reader_init_header` decodes a `BLKH` + `RUNS` byte string with no VGCH.
   - `v1_streams_unchanged`: every `test_stream_chunks.c` byte vector still decodes the same.
-- [ ] **Step 2: Write the failing Python tests.** `python/tests/test_stream_v2.py`: the same LEB128 vectors; a Python-written v2 stream read by `read_stream`; and, through the existing `vgacap-dump` C cross-check pattern, a v2 stream with `RUNS` dumps `total_samples` equal to the Python sum of runs, and prints `VGCH v2 bits=43 spc=2 clock_bit=42`.
+- [ ] **Step 2: Write the failing Python tests.** `python/tests/test_stream_v2.py` has:
+  - the same LEB128 vectors;
+  - a Python-written v2 stream read by `read_stream`;
+  - through the existing `vgacap-dump` C cross-check pattern, a v2 stream with `RUNS` that dumps `total_samples` equal to the Python sum of runs, prints `VGCH v2 bits=43 spc=2 clock_bit=42`, and prints a `crc64=` that matches the Python mirror.
+
+  For v2 streams, `vgacap-dump`'s checksum hashes each sample as `vbytes` little-endian bytes (all 43 bits), with FNV-1a 64 and the standard basis `0xcbf29ce484222325`. It prints `crc64=<16 hex>` in place of v1's `crc32=`, which stays as it is for v1 streams.
 - [ ] **Step 3: Run the tests and watch them fail.** Run `ctest` and `uv run pytest python/tests/test_stream_v2.py`. Expected: build or assertion failures in the new tests only.
 - [ ] **Step 4: Implement.**
-  - **Reader.** The fixed-header parse becomes version-dependent: 20 bytes for v1, 24 for v2, and `pbuf` grows to 24 bytes. The v2 checks are:
+  - **Reader.** The fixed-header parse becomes version-dependent: 20 bytes for v1, 24 for v2 (`pbuf` is already 24 bytes). `header_problem` accepts VGCH lengths 20..279, and `tag_known` accepts `RUNS`, `BLKH` and `META`. A v1 parse sets the three new fields to their v1 values. The v2 checks are:
     - `sample_bits` in 1..64;
     - `samples_per_word == 0` iff `sample_bits > 32`;
     - `samples_per_clock` in {1, 2};
@@ -319,7 +336,7 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
   - **Old chunks.** `RAW `, `RLE `, `FRAM` and `EVNT` widen their run event fields to 64 bits and keep their semantics. They resync in v2 streams with `sample_bits > 32` or with a clock bit.
   - **Callers:**
     - `vgacap_dump.c` prints v2 fields and counts runs in 64 bits.
-    - `vgacap_frames.c` and `gst/gstvgadecode.c` call `vgaframe_push64(&f, (uint32_t)ev->u.run.value, ev->u.run.run)`.
+    - `vgacap_frames.c` and `gst/gstvgadecode.c` call `vgaframe_push64(&f, (uint32_t)ev->u.run.value, ev->u.run.run)`. Both count every sample as a clock, so they refuse a header with `samples_per_clock != 1` or `sample_bits > 32`. `vgacap-frames` exits 1 with `"vgacap-frames: a simulation trace (samples_per_clock 2) is read with vgacap-sample, not vgacap-frames"`, and the element posts an error with the same text. Tests: `python/tests/test_frames_e2e.py` gains the CLI case; `gst/tests/test_plugin.py` gains the element case.
     - Until Task 7 lands on the same branch, they keep `vgaframe_push` with an explicit `(uint32_t)` run cast. Task 7 replaces it.
   - **Python.** Mirror all of this in `stream.py`.
 - [ ] **Step 5: Run the tests and see them pass.** Run `ctest` and the full `uv run pytest`. Expected: everything passes.
@@ -328,7 +345,7 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
 ### Task 6: the time rule and double formatting
 
 **Files:**
-- Create: `include/vgacap/time.h`, `src/stream/time.c` (added to `vgacap_stream` only when the compiler has `__int128`; checked in CMake with `check_c_source_compiles`).
+- Create: `include/vgacap/time.h`, `src/stream/time.c` (in `vgacap_stream`, but not in the board builds, which compile `writer.c` alone; it uses only 64-bit integers, as a 64x64→128 multiply and a 128/64 long division written out in 32-bit halves).
 - Create: `python/vgacap/timebase.py`.
 - Test: `tests/test_time.c`, `python/tests/test_timebase.py`.
 
@@ -350,11 +367,11 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
 
   `no_drift`: for n in 0..10^6, `t(n+1) - t(n)` is 19860 or 19861 at 25.175 MHz, s = 2.
 
-  `fmt_double_vectors`: 1.0 → `"1"`, 1.90625 → `"1.90625"`, 832.0/800 → `"1.04"`, 800.0/840 → `"0.95238095238095233"`, 25175000.0 → `"25175000"`.
+  `fmt_double_vectors`: 1.0 → `"1"`, 1.90625 → `"1.90625"`, 832.0/800 → `"1.04"`, 800.0/840 → `"0.9523809523809523"` (p = 16, as Python's `repr`), 25175000.0 → `"25175000"`.
 
   The Python tests use the same vectors, plus 10^4 random `n` below 1.3e10 checked against `Fraction` arithmetic.
 - [ ] **Step 2: Run the tests and watch them fail.** Expected: undefined references.
-- [ ] **Step 3: Implement.** Use `unsigned __int128`: `(2 * n * 10^12 + d) / (2 * d)` with `d = s * clock_hz`.
+- [ ] **Step 3: Implement.** `(2 * n * 10^12 + d) / (2 * d)` with `d = s * clock_hz`, the numerator formed as a 128-bit value in two `uint64_t` halves. Add a test of the helper's multiply and divide against `Fraction` for 10^4 random pairs.
 - [ ] **Step 4: Run the tests and see them pass.**
 - [ ] **Step 5: Commit and push** on `m10-format-v2`.
 
@@ -367,10 +384,13 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
 **Interfaces:**
 - Produces:
   - `void vgaframe_push64(vgaframe_t *f, uint32_t sample, uint64_t run)` and `int vgaframe_timing_push64(vgaframe_timing_learner_t *l, uint8_t hsync, uint8_t vsync, uint64_t run)`. Each splits `run` into pieces of at most `UINT32_MAX`; the second returns the first piece's report, since reports happen only at a run's first clock.
-  - `vgaframe_t` gains `int last_report`: the learner's return value for the most recent `vgaframe_push`, which samplers read to date line and frame starts.
+  - `vgaframe_t` gains `int last_report`: the learner's return for the first piece of the most recent `vgaframe_push` or `vgaframe_push64`, which samplers read to date line and frame starts. A later piece of the same split run does not overwrite it.
+  - **No wrapping.** The learner's `h_high`, `h_low` and `clk_in_line` (`timing.c:174-175`) and the frame's `x` (`frame.c:263`) saturate at `UINT32_MAX` instead of wrapping. A phase or line that long is no sync at all, and the learner already re-learns from the next real edges. Splitting alone would not help: the pieces wrap the same way an unsplit 64-bit run would.
 
 - [ ] **Step 1: Write the failing tests.**
-  - `split_run_equals_unsplit` (test_timing.c): a learner fed three frames, then one constant run of `2^32 + 1000` clocks, then three more frames, ends in the same state (`memcmp` of `vgaframe_timing_t` and the counters `clk_in_line`, `line_in_frame`, `h_high`, `h_low`) as one fed the long run as `2^32 - 1`, then `1001` (by hand), and as `vgaframe_timing_push64`.
+  - `split_run_equals_unsplit` (test_timing.c): a learner fed three frames, then one constant run of `2^32 + 1000` clocks through `vgaframe_timing_push64`, ends in the same state (`memcmp` of `vgaframe_timing_t` and the counters) as one fed `2^32 - 1` then `1001` by hand. Both have `h_high` or `h_low`, and `clk_in_line`, equal to `UINT32_MAX`, not a wrapped small number.
+  - `learner_recovers_after_long_run`: after that run, three more frames of 640x480@60 give `clocks_per_line == 800`, `lines_per_frame == 525` and `locked == 1` again, and a `vgaframe_t` fed the same emits those frames pixel-exact.
+  - `frame_x_saturates`: `vgaframe_push64` of a run of `2^33` clocks in mid-line leaves `f->x == UINT32_MAX`, and nothing is written past the row.
   - `last_report_values` (test_frame.c): across a synth 640x480@60 stream fed one clock at a time, `last_report` is 1 on each line start's push, 2 on each frame start's push, and 0 otherwise.
 - [ ] **Step 2: Run the tests and watch them fail.**
 - [ ] **Step 3: Implement.** In `vgaframe_push`, store the learner's return in `f->last_report`. Fix the `timing.c:13-14` comment to say the call is made at the hsync *trailing* edge, when a line is accepted. Switch `vgacap_frames.c` and `gstvgadecode.c` to `vgaframe_push64`.
@@ -432,7 +452,11 @@ void vgacap_trace_abandon(vgacap_trace_writer_t *t);
   - `test_trace_long_static_run`: a v2 header with `sample_bits = 1`, one sample per clock and no clock bit. The constant value 1 is pushed `2^32 + 10` times (a few seconds). Total samples read is `2^32 + 10`; blocks close every `2^24` samples; no run crosses a `BLKH`; and each block's single pair has run `2^24`, except the last's, which is 10.
   - `test_trace_clock_rule_violation`: push sample 0 with clk 0, then sample 1 with clk 0. The push returns -1, and `finish` returns -1 with `err == "sample 1: clock bit is 0, expected 1"`.
   - `test_trace_seek_table`: `ZSTD_seekable_initFile` on the result reports one frame per block, with decompressed sizes summing to the stream length.
-  - `test_trace_push_speed`: 2e8 pushes of a value that changes every 400 samples, timed. Print ns per push, and fail only above 10 ns per sample on this host. The spec's budget is about 10 ns per clock at two samples, so this checks the whole push side with headroom for the harness. It is labelled `perf` in CTest, so `ctest -LE perf` can skip it on slow CI runners.
+  - `test_trace_push_speed`: 2e8 samples (1e8 clocks) for each of two profiles, timed with the compressor thread running:
+    - `slow`: `uo_out` changes every 400 clocks;
+    - `busy`: `uo_out` changes every clock, so one run per clock.
+
+    It prints ns per clock for each. It fails above 10 ns per clock (5 ns per sample), the spec's budget, on big-storage. It is labelled `perf` in CTest, and CI's `ctest` steps gain `-LE perf` (a timing on a shared runner says nothing about the budget). It is run by hand on big-storage, and its output is put in the PR.
 - [ ] **Step 2: Run the tests and watch them fail.**
 - [ ] **Step 3: Implement** as the Interfaces block describes. Block 0's VGCH and `META(open)` are written by `vgacap_writer_init` and `vgacap_writer_meta` through a write callback that appends to the block buffer.
 - [ ] **Step 4: Run the tests and see them pass.** Run `ctest --test-dir build --output-on-failure > tmp/ctest.log 2>&1` and read the log.
@@ -442,7 +466,8 @@ void vgacap_trace_abandon(vgacap_trace_writer_t *t);
 
 **Files:**
 - Create: `src/trace/trace_read.c`; extend `include/vgacap/trace.h`.
-- Modify: `src/tools/vgacap_dump.c` (reads traces through it: `vgacap-dump` on a `.trace.zst` prints its chunks).
+- Modify: `src/tools/vgacap_dump.c`. With `VGACAP_HOST_EXTRAS` ON, it is linked to `vgacap_trace` and compiled with `-DVGACAP_DUMP_TRACES`, and then `vgacap-dump` on a `.trace.zst` prints its chunks. With the option OFF, it reads plain streams only, as today, and says so for a zstd file: `"vgacap-dump: built without VGACAP_HOST_EXTRAS; decompress with zstd -d first"`.
+- Modify: `.github/workflows/ci.yml`. The `c` job gains a second configure, `-DVGACAP_HOST_EXTRAS=OFF` into `build-off`, then its build and `ctest -LE perf`.
 - Test: `tests/test_trace_read.c`.
 
 **Interfaces:**
@@ -520,6 +545,8 @@ void vgaframe_set_rgb6_buffer(vgaframe_t *f, uint8_t *rgb6);   // vgaframe_raw_s
   2. run the existing `emit` decision unchanged;
   3. clear `raw` rows `0 .. min(y + 1, max_lines - 1)` and all of `cover`, whether or not `emit` ran.
 
+  `vgaframe_t` gains `uint8_t retro_frame`. It is set where report 3 starts a frame (`frame.c:211`) and cleared where report 2 starts one, and it becomes `vgaframe_raw_t.retroactive`. When `on_frame` is NULL, `emit` does only its bookkeeping (`frames_seen`, the FRAM pending state and the clearing); it skips the crop scan and the rgb24/rgb6 conversion, so `centre-v1` does not pay for pictures nobody reads. The clearing in step 3 also covers `emit`'s early returns (`frame.c:117`, `frame.c:123`), which skip clearing today.
+
   `emit`'s own FRAM-mode `clear_lines` stays. `emit` fills `rgb6` beside `rgb24` (an unwritten pixel is 0 in rgb6, and magenta in rgb24 as today). The existing callers zero `vgaframe_config_t` with `memset` (`vgacap_frames.c:88-89`, `gstvgadecode.c:438-439`), so the new fields default to off.
 
 - [ ] **Step 1: Write the failing tests.**
@@ -529,6 +556,8 @@ void vgaframe_set_rgb6_buffer(vgaframe_t *f, uint8_t *rgb6);   // vgaframe_raw_s
   - `retroactive_first_frame`: a stream starting mid-frame. The first `on_raw` has `retroactive == 1`, and rows `0 .. vsync_lines - 1` unwritten.
   - `rgb6_matches_rgb24`: for a synth 640x480@60 picture with every 6-bit colour, each `rgb6[i] == (r/85) << 4 | (g/85) << 2 | (b/85)` of `rgb24[3i..]`.
   - `existing_emit_unchanged`: the existing `test_frame` and `test_frame_partial` suites pass unmodified.
+  - `no_on_frame_skips_conversion`: with `on_frame` NULL and `on_raw` set, a 640x480@60 stream of 5 frames calls `on_raw` 4 times, and the rgb24 buffer (filled with `0xAB` before the run) is untouched.
+  - `boundary_clears_after_early_return`: a frame with no mode and nothing lit (so `emit` returns early at `frame.c:117`), followed by a lit frame. The second frame's `on_raw` shows only its own pixels written.
 - [ ] **Step 2: Run the tests and watch them fail.**
 - [ ] **Step 3: Implement.** The raw callback runs before `emit`, because `emit` clears the buffer. Add to `frame.h`: "The raw frame is valid only during the callback; it is cleared at every frame boundary."
 - [ ] **Step 4: Run the tests and see them pass.**
@@ -602,7 +631,7 @@ void vgafc_free(vgafc_t *fc);
   - **Python.** `calib.py` mirrors both, per clock, as a plain loop over `uo_out[c]`, with no runs.
   - **`synthtrace.py`** builds per-clock `uo_out`, `rst_n` and the 43-bit samples. Its timing options are:
     - any mode, polarity and clocks per pixel (fractional allowed: the design's pixel `p` covers clocks `[floor(p * cpp), floor((p + 1) * cpp))`);
-    - the sync phase: `vesa` (syncs exactly on VESA positions), `testpatterns` (tt-vga-testpatterns' `hvsync_generator`, as Task 11's `synth_frame_hvsync`), or `playground` (the VGA Playground's module, which computes the registered syncs from the pre-increment position, so the hsync leading edge is on hpos 657 and vsync changes at the hpos wrap, as `common/hvsync_generator.v:18-27` describes);
+    - the sync phase: `vesa` (syncs exactly on VESA positions), `testpatterns` (tt-vga-testpatterns' `hvsync_generator`, as Task 11's `synth_frame_hvsync`), or `playground` (the VGA Playground's module, which computes the registered syncs from the pre-increment position, so the hsync leading edge is on hpos 657 and vsync changes at hpos 1, one clock after the wrap, as `common/hvsync_generator.v:18-27` describes);
     - non-standard porches;
     - glitches (a list of (clock, length) pulses forced onto vsync or hsync);
     - a pixel function.
@@ -703,7 +732,7 @@ void centrev1_free(centrev1_t *s);
   Python `tbv1.py` is a per-clock reference of the same port. `centre.py` takes a clock-resolution frame (rows of 6-bit colour plus a written flag, as libvgaframe's `raw`) and the calibration numbers, and returns the window and the picked rgb6. It does not re-implement the learner.
 
 - [ ] **Step 1: Write the failing tests.** Each uses `synthtrace` streams of 7 frames.
-  - `tbv1_matches_python`: 640x480@60 at cpp 1, 800x600@72 at cpp 1, and 640x480@60 at cpp 2, 1.90625 and 0.9524 (800-clock lines). C frames equal `tbv1.py`'s byte for byte. Geometry: `mode` names, `cpp` printed with `vgacap_fmt_double` as `"1"`, `"2"`, `"1.90625"` and `"0.95238095238095233"`.
+  - `tbv1_matches_python`: 640x480@60 at cpp 1, 800x600@72 at cpp 1, 640x480@60 at cpp 2 and 1.90625, and 640x480@75's timing (840 line pixels, 500 lines) on 800-clock lines with a 64-clock hsync, which `tb-v1` takes as cpp 0.9524. C frames equal `tbv1.py`'s byte for byte. Geometry: `mode` names, `cpp` printed with `vgacap_fmt_double` as `"1"`, `"2"`, `"1.90625"` and `"0.9523809523809523"`.
   - `tbv1_reproduces_half_pixel_early`: at cpp 2 with distinct colours per pixel, `tb-v1`'s pixel `p` equals the design's pixel `p - 1`, for `p ≥ 1` in each row. This is the published behaviour, recorded.
   - `tbv1_frame_target`: `seconds = 0.1` at 60 fps stops after `(uint64_t)(0.1 * fps + 0.5)` frames.
   - `tbv1_tennis_lines`: 640x480 timing with 506 lines gives `height = 506 - vpulse_lines` and `vback = 0`.
@@ -713,9 +742,10 @@ void centrev1_free(centrev1_t *s);
     - 3,584 with 256 and 500 lines give `640x480@75` and cpp 4 (mandelbrot);
     - 800 with 97 and 525 lines give cpp 1, by step 1;
     - 1,525 with 183 and 525 lines give cpp 1.90625 (fractional, by step 3).
-  - `centre_pixel_exact`: for cpp 1, 2, 1.90625 and 0.95, with standard porches and a pixel function unique per pixel, every captured frame equals the design's picture exactly. `missing == 0`, `outside == 0`, `suggest == (0, 0)`.
+  - `centre_pixel_exact`: for cpp 1, 2 and 1.90625, with standard porches and a pixel function unique per pixel, every captured frame equals the design's picture exactly. `missing == 0`, `outside == 0`, `suggest == (0, 0)`.
+  - `centre_below_one`: at cpp 0.95, some design pixels get no clock (`synthtrace`'s rule) and cannot appear in any capture. So the C frames are compared with `centre.py`'s pick from the same clock-resolution frames, byte for byte, and every output pixel holds the colour of the clock `floor((hsync + hback' + p + 0.5) * cpp)` the rule names.
   - `centre_testpatterns_phase`: the `testpatterns` phase at cpp 1 is pixel-exact, with `outside == 0` and `suggest == (0, 0)`.
-  - `centre_playground_phase`: the `playground` phase at cpp 1, with content filling the active area. The window does not move, and the frames are the design's picture shifted by one pixel and one line. `outside` equals the lit clocks of the design's last column and last row. The prediction is `suggest == (-1, -1)`: the line starts one clock late and row 0 one line late, so the content sits one pixel left and one line up of the window. With `dx = -1, dy = -1`, the frames are pixel-exact. If the test shows another offset, stop and settle the reasoning with the reviewing session before changing either side.
+  - `centre_playground_phase`: the `playground` phase at cpp 1, with content filling the active area. The window does not move, and the frames are the design's picture shifted by one pixel and one line. The hsync leading edge is at hpos 657, so design pixel `p` is at raw x `143 + p` against the window's `144 + p`, and design row `y` is at raw row `34 + y` against the window's `35 + y`. `outside` therefore equals the lit clocks of the design's *first* column and *first* row (counted once where they meet), summed over the run, and `suggest == (-1, -1)`. With `dx = -1, dy = -1`, the frames are pixel-exact. If the test shows another offset, stop and settle the reasoning with the reviewing session before changing either side.
   - `centre_override`: `dx = 3, dy = -2` moves the picked window by 3 pixels and -2 lines.
   - `centre_numbers_match_frame_clock`: every centre-v1 frame's number `k` satisfies `ends[k] ∈ [start_clock, row-v trailing edge]`, and frames are numbered as `tb-v1`'s where both exist.
   - `test_centre_glitch_gap`: a 1-clock vsync glitch inside frame 3's pulse. `tb-v1` numbers frames as `tb.cpp` does (one extra number). In `centre-v1` the earlier of the two numbers has no frame. Later frames carry the same numbers in both samplers.
@@ -800,12 +830,14 @@ void centrev1_free(centrev1_t *s);
 
 **Files:**
 - Create: `src/tools/vgacap_sample.c`.
-- Modify: `pyproject.toml`: add `zstandard>=0.23` to the `dev` group, so the tests can read stores on Python 3.11-3.13. On 3.14 the tests use `compression.zstd`.
+- Modify: `pyproject.toml`: add `zstandard>=0.23` to the `dev` group. The tests read stores with it on every Python version, by one route.
+- Modify: `bench/bench_runs.c`: add `--write-trace PATH` (Task 2's stream, written as a 43-bit trace through `vgacap_trace_push`, two samples a clock).
 - Test: `python/tests/test_vgacap_sample.py`.
 
 **Interfaces:**
 - Consumes: Tasks 9, 12-15.
 - Produces:
+  - **Input:** a simulation trace: `samples_per_clock == 2`, a clock bit, and `META(open)` with `layout=tt-um-43`. Anything else, such as a board capture, exits 2 with `"vgacap-sample: <path> is not a simulation trace (needs samples_per_clock 2 and layout=tt-um-43); board captures are decoded with vgacap-frames"`.
   - **Command line:** `vgacap-sample TRACE --out DIR --name PREFIX [--sampler tb-v1] [--sampler centre-v1] [--centre-window DX,DY] [--store-level N] [--png-fd FD]`.
     - Default: both samplers.
     - `--store-level` defaults to 3.
@@ -815,7 +847,11 @@ void centrev1_free(centrev1_t *s);
     - `frames.txt`;
     - `frame_hashes.sha256-rgb6.txt`;
     - for `tb-v1` only, `frame_hashes.fnv1a64-tb2026-rgb888.txt`.
-  - **Run parameters:** `clock_hz`, `calib_seconds`, `seconds` and `id` come from `META(open)` (doubles parsed with `strtod`). `status` comes from `META(close)`, or is `truncated` when that chunk is absent.
+  - **Run parameters:**
+    - `clock_hz` is the header's;
+    - `calib_seconds` and `seconds` come from `META(open)`, parsed with `strtod`;
+    - the files' `id` is `META(open)`'s `project`;
+    - `status` comes from `META(close)`, or is `truncated` when that chunk is absent.
   - **One pass.** One `vgacap_trace_read` over the whole trace feeds, per run of clk-high samples:
     1. the calibration;
     2. then, from `capture_after_clock`, the frame clock;
@@ -827,7 +863,8 @@ void centrev1_free(centrev1_t *s);
 - [ ] **Step 1: Write the failing tests.** They use `synthtrace` traces:
   - `test_sample_both`: a 640x480@60, cpp 1 design with a changing picture gives the files above.
     - `frames.txt` equals the Python reference's frames file (from `tbv1.py`/`centre.py` and `framesfile.py`) byte for byte.
-    - The store decompresses with Python's `zstandard` (dev group) or `compression.zstd`, whichever the interpreter has, to the distinct frames whose SHA-256s are listed.
+    - The store decompresses with `zstandard` (`max_window_size = 2**27`) to the distinct frames whose SHA-256s are listed.
+  - `test_sample_rejects_board_capture`: the v1 fixture exits 2 with the message above.
     - `store_sha256` matches.
   - `test_sample_png_pipe`: reading `--png-fd`'s records gives exactly the distinct frames, in order, for both samplers.
   - `test_sample_truncated`: a trace cut as in Task 9 gives `status: truncated`, and the frames of the complete blocks only.
@@ -838,7 +875,7 @@ void centrev1_free(centrev1_t *s);
 - [ ] **Step 2: Run the tests and watch them fail.**
 - [ ] **Step 3: Implement.**
 - [ ] **Step 4: Run the tests and see them pass.**
-- [ ] **Step 5: Measure.** Time `vgacap-sample` on a synthetic 1.5e9-clock busy trace (from `bench-runs`' busy profile written through the trace writer). Append ns per clock to the Task 2 research note, against the 11 ns/clock budget.
+- [ ] **Step 5: Measure.** Time `vgacap-sample` on a synthetic 1.5e9-clock busy trace (`bench-runs --profile busy --clocks 1500000000 --write-trace tmp/busy.trace.zst`). Append ns per clock to the Task 2 research note, against the 11 ns/clock budget.
 - [ ] **Step 6: Commit, push and open the PR** on `m10-sample-tool`.
 
 ### Task 17: `vgacap-export` (FST, VCD and viewer files)
@@ -849,11 +886,11 @@ void centrev1_free(centrev1_t *s);
 
 **Interfaces:**
 - Produces:
-  - **Command line:** `vgacap-export TRACE --out FILE [--format fst|vcd] [--from CLOCK] [--to CLOCK] [--no-clk] [--sampler ID --frames FRAMES_TXT] [--scope NAME]`. The default format is from the extension, else FST. `--from`/`--to` are clocks (from inclusive, to exclusive), converted to samples by `samples_per_clock`.
+  - **Command line:** `vgacap-export TRACE --format fst|vcd --out FILE [--from CLOCK] [--to CLOCK] [--no-clk] [--frames FRAMES_TXT] [--scope NAME]`. `--format` is required and is the only thing that picks the format. The sampler is the `sampler` key of the given `frames.txt`, so nothing else names it. `--from`/`--to` are clocks (from inclusive, to exclusive), converted to samples by `samples_per_clock`.
   - **Timescale and time:** 1 ps; times from `vgacap_sample_time_ps(n, …)` of the absolute sample number.
   - **Scopes for `layout=tt-um-43` traces:**
     - `<scope>` (default the trace's `project` key with `/` replaced by `_`, else `trace`) holds `clk`, `rst_n`, `ena`, `ui_in[7:0]`, `uio_in[7:0]`, `uo_out[7:0]`, `uio_out[7:0]` and `uio_oe[7:0]`;
-    - `<scope>.decoded` holds `hsync`, `vsync`, `r[1:0]`, `g[1:0]`, `b[1:0]`, `rgb6[5:0]`, and `frame[31:0]` with `--sampler`. `frame` holds the frame number from the run lines of `frames.txt` from each start clock, and `-1` (all ones) before frame 0 and in gaps.
+    - `<scope>.decoded` holds `hsync`, `vsync`, `r[1:0]`, `g[1:0]`, `b[1:0]`, `rgb6[5:0]`, and `frame[31:0]` with `--frames`. `frame` holds the frame number from the run lines of `frames.txt` from each start clock, and `-1` (all ones) before frame 0 and in gaps.
   - **Other traces:** `sample[bits-1:0]` (board captures) plus the same decoded scope from the header's signal map.
   - **`--no-clk`** drops `clk`.
   - **VCD:** no `$date`; `$version vgacap-export $end`, so the file is reproducible.
@@ -867,7 +904,7 @@ void centrev1_free(centrev1_t *s);
   - `vcd_matches_expected`: a `synthtrace` trace of 3 frames at 640x480 with a 20-clock window (`--from 1310720 --to 1310740`) exports to bytes identical to `tests/vectors/export_small.vcd`. The vector is written by hand from the trace's known pins and checked by reading it, not generated by the tool.
   - `fst_equals_vcd`: `test_export_fst.c` reads the FST with libfst (`fstReaderIterBlocks2`) and the VCD with a small parser in the test, and compares the (time, signal name, value) lists. If `fst2vcd` is on `PATH`, the Python test also runs it and compares the value changes; otherwise it skips with the reason.
   - `range_seeks`: on a multi-block trace, exporting a range in block 3 decodes only blocks 3 and, if the range crosses, 4 (stderr reports `blocks_read=` with `VGACAP_EXPORT_DEBUG=1`).
-  - `frame_signal`: with `--sampler centre-v1 --frames frames.txt`, `frame` changes at each frame's start clock to its number.
+  - `frame_signal`: with `--frames centre-v1/frames.txt`, `frame` changes at each frame's start clock to its number.
   - `gtkw_written`: the `.gtkw` names every exported signal once and points at the output.
   - `board_capture_exports`: the v1 fixture exports with a `sample[7:0]` signal and decoded hsync/vsync.
 - [ ] **Step 2: Run the tests and watch them fail.**
