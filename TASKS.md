@@ -144,5 +144,5 @@ It writes these on vgacap branches; this project reviews them before merge.
 - [x] Shared 12-mode table (tb.cpp's five added, marked so `vgaframe_mode_match_cpl` skips them); ttcap `--vga-mode` rejects the marked modes (vgacap m10-modes 8f47687, local)
 - [ ] libvgaframe raw-frame callback at every frame boundary, buffers cleared at every boundary
 - [x] Shared calibration and frame clock (port of tb.cpp:191-230, 361-378) (vgacap m10-samplers 4133c8f, local)
-- [ ] `vgacap-sample`: both samplers and the hash methods in one pass; stores, `frames.txt`, hash files, PNG pipe
+- [x] `vgacap-sample`: both samplers and the hash methods in one pass; stores, `frames.txt`, hash files, PNG pipe (vgacap m10-sample-tool 12dfaf7, local; speed in Task 16a)
 - [ ] `tb-v1` test vectors from tinytapeout-vga-videos' `tb.cpp` comparison
