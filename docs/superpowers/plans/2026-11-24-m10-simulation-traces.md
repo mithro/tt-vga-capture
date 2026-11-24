@@ -76,7 +76,7 @@ The same code then reads board captures and simulation traces.
 | `m10-frame-raw` | 10, 11 | `m10-trace` |
 | `m10-modes` | 4 | `m10-frame-raw` |
 | `m10-samplers` | 12, 13, 14, 15 | `m10-modes` |
-| `m10-sample-tool` | 16 | `m10-samplers` |
+| `m10-sample-tool` | 16, 16a | `m10-samplers` |
 | `m10-export` | 17 | `m10-sample-tool` |
 | `m10-tbv1-vectors` | 18 | `m10-export`, after the pipeline plan's `tb.cpp` test exists |
 
@@ -911,6 +911,49 @@ void centrev1_free(centrev1_t *s);
 - [ ] **Step 4: Run the tests and see them pass.**
 - [ ] **Step 5: Measure.** Time `vgacap-sample` on a synthetic 1.5e9-clock busy trace (`bench-runs --profile busy --clocks 1500000000 --write-trace tmp/busy.trace.zst`). Append ns per clock to the Task 2 research note, against the 11 ns/clock budget.
 - [ ] **Step 6: Commit, push and open the PR** on `m10-sample-tool`.
+
+### Task 16a: `vgacap-sample` fast path (added after Task 16's measurement)
+
+Task 16 measured `vgacap-sample` on a 1.5e9-clock busy trace (`bench-runs --profile busy --write-trace`) at:
+- both samplers: 87.5 ns per clock;
+- tb-v1 alone: 62.1;
+- centre-v1 alone: 68.9;
+- reading, calibration and the frame clock: about 44, by subtraction, not profiled.
+
+The budget for *all* post-simulation work is 11 ns per clock. The Task 16 review's notes:
+- each run costs one indirect read callback, plus 4-5 library calls;
+- the frame clock and tb-v1 each re-scan the same run for vsync edges;
+- SHA-256 of every captured frame (portable C, about 156 MB/s) is the main per-frame cost.
+
+**Files:**
+- Modify: `src/trace/trace_read.c` and `include/vgacap/trace.h` (a batched read).
+- Modify: `src/tools/vgacap_sample.c`, `src/sample/*.c`.
+- Test: the existing suites unchanged, plus an equivalence test.
+
+**Interfaces:**
+- Behaviour is unchanged: every output file (stores, frames.txt, hash files, PNG pipe) must be byte-identical to Task 16's on the same inputs.
+- Produces: whatever batched interfaces the measurements justify, documented in the headers.
+
+- [ ] **Step 1: Profile first.**
+  - Build with `-pg` (gprof; perf is not installed) and run a 1.5e8-clock busy trace.
+  - Attribute the time between: the zstd decode; the stream reader's per-byte parse; the run callback; vgacal, vgafc, tbv1 and centrev1 (and libvgaframe under it); SHA-256; store compression.
+  - Record the table in the Task 2 research note.
+- [ ] **Step 2: Write the equivalence test.**
+  - Run Task 16's binary (built from its commit into a separate directory) and the new one on the same set of synthtrace traces: normal, truncated, playground, cpp 2 and 1.90625, no-sync, ends in calibration, a missing-pixel case.
+  - Compare every output file byte for byte, and the PNG pipe stream.
+- [ ] **Step 3: Remove the largest costs first, measuring each change separately** (busy, 1.5e8 clocks, Release, median of 3, interleaved A/B). Candidates, in the order the profile suggests:
+  - a batched run reader (arrays of first, value and run per call, decoded straight from `RUNS` pairs);
+  - one dispatch per batch to calibration, frame clock and samplers;
+  - tb-v1 reading the frame clock's ends instead of re-scanning;
+  - a faster SHA-256 (multi-buffer or SIMD, vendored and public-domain or BSD-licensed, with its licence);
+  - the zstd store at a faster level for mostly-distinct stores.
+
+  Keep each change only if it helps.
+- [ ] **Step 4: Target.**
+  - Both samplers on the busy trace at most 11 ns per clock.
+  - If that is not reached after Step 3, stop and report the profile to the controller. The spec's remaining fixes (running the second sampler only on request for cpp = 1 projects where both agree; hashing on a separate thread) then go to the owner.
+  - Do not change any output to win speed.
+- [ ] **Step 5: Record and commit.** Append the before and after table to the Task 2 research note. Commit on `m10-sample-tool`.
 
 ### Task 17: `vgacap-export` (FST, VCD and viewer files)
 
