@@ -4,6 +4,32 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **Milestone 6 Tasks 1-3 done, on hardware.** Prelude split (vgacap PR
+  #1, HIL 9/9 on fpga-1). Frame/window capture (PR #2): all five
+  calibration designs pixel-exact at their real pixel clocks on fpga-4,
+  whole frames from one captured frame; hil.py gained a `frame` check, 10/10.
+  Hardware taught four things, each now under an emulator or C test that
+  fails without its fix: sample on the rising edge (uo_out settles ~25 ns
+  after it; sweep in the results); control-block DMA (one channel per heap
+  block ran out of channels before the 142 KB-largest-block heap did, and
+  the torn prbs picture showed it); phase-locked free-running sampling
+  (the SDK's system clock is a whole multiple of the project clock, and
+  800x600 at 40 MHz is 2 clocks a pixel); window re-anchoring must take the
+  hsync level from the data, not the mode table. Results:
+  `docs/results/2026-11-24-frame-capture-fpga4/`.
+- Built `ttcap.emu`, which runs the exact built board script under CPython
+  on an emulated RP2040/RP2350 (MicroPython v1.24's own rp2.py for asm_pio,
+  cycle-level PIO, DMA with control blocks, heap fragmentation, USB rate).
+  It caught the GPIO 40 `wait` index overflowing into the source field
+  before the board did.
+- The background check found five orphaned `hil_stub_ttcap.py` processes:
+  test_hil killed hil.py with SIGKILL. Fixed (SIGTERM, and the test now
+  asserts nothing is left).
+- Merging PR #1 was refused by the permission classifier; left for Tim.
+- Agreed the clock-exact capture interface with the tt-harness-fpga-vga
+  session (their PRs to vgacap, my review; vgacap chunk framing, no new
+  format).
+
 - CI audit, all three repos: no open PRs or issues. vgacap and
   tt-vga-testpatterns moved to Node 24 actions (checkout@v5, setup-uv@v7).
   Bumping testpatterns' vgacap pin from b23a551 (September) to 4b005b2

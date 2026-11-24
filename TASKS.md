@@ -89,9 +89,14 @@ Design note: `docs/design/2026-11-23-shared-rtl-capture.md`.
 
 Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 
-- [ ] `sample_frame` PIO program
-- [ ] Whole-frame to SRAM on RP2350; packed / half-frame on RP2040
-- [ ] Windowed reassembly validated with `tt_um_vgacal_counter`
+- [x] Task 1: shared board prelude `ttcap/mp/prelude.py` (vgacap PR #1, CI green, HIL 9/9 on fpga-1; awaiting Tim's merge)
+- [x] Tasks 2+3: `frame_rp2.py` whole-frame + windowed capture at the real clock (vgacap PR #2): PIO vsync/hsync trigger, phase-locked `in [P-1]` sampler, control-block DMA, stopper; all five calibration designs pixel-exact on fpga-4 at 25/28.25/40 MHz; `docs/results/2026-11-24-frame-capture-fpga4/`
+- [x] Windowed reassembly validated with `tt_um_vgacal_counter` (torn, and reported as such) and `grid` (exact)
+- [x] `ttcap.emu`: emulated RP2040/RP2350 running the exact built script (vgacap PR #2)
+- [ ] Frame mode on a real RP2040 board (emulated only so far; the RP2040 chip boards report "safe_start failed")
+- [ ] `vgacap-frames` reports the mode table's sync polarities in frame mode, not the measured ones
+- [ ] Task 4: board-side RLE and its measurement; Task 5: measurement write-up per mode and board
+- [ ] Frame/window modes in `vgacapttsrc` / `ttcap demo`
 
 ## Milestone 7: C firmware and MicroPython module
 
