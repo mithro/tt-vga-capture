@@ -66,6 +66,10 @@ def main() -> int:
     header, items = read_stream(a.stream.read_bytes())
     runs = [(i[1], i[2]) for i in items if i[0] == "run"]
     msgs = [i[4] for i in items if i[0] == "time"]
+    wide = [v for v, _ in runs if not 0 <= v <= 0xFF]
+    if wide:
+        print("FAIL: %d run value(s) do not fit an 8-bit sample, first 0x%x" % (len(wide), wide[0]))
+        return 1
     got = np.repeat(np.array([v for v, _ in runs], dtype=np.uint8),
                     np.array([r for _, r in runs], dtype=np.int64))
     print("%s: %d samples, sample_bits=%d; board said: %s" % (
@@ -113,20 +117,27 @@ def main() -> int:
         ref = build()
         hay = np.tile(ref, len(got) // len(ref) + 2) if frames_needed == 1 else ref
         hay_b = hay.tobytes()
+        # Every place the head fits, not just the first: in bars and grid
+        # every active line (or every grid cell row) is the same, so a head
+        # inside the active area fits hundreds of line offsets and the first
+        # one is usually wrong -- the stream then seems to "break" where its
+        # real vertical blanking arrives. Measured on fpga-4, 2026-11-24.
+        limit = len(ref) if frames_needed == 1 else len(hay)
         start = hay_b.find(head)
-        if start < 0:
-            continue
-        ref_part = hay[start : start + len(got)]
-        if len(ref_part) == len(got) and np.array_equal(ref_part, got):
-            if bad_time:
-                print("FAIL: samples match %s, but the board reported %s" % (label, bad_time))
-                return 1
-            print("PASS: all %d samples are an unbroken stretch of %s, from clock %d "
-                  "(line %d, x %d)" % (len(got), label, start, (start % CLOCKS) // 800, start % 800))
-            return 0
-        diff = int(np.flatnonzero(ref_part != got[: len(ref_part)])[0]) if len(ref_part) else 0
-        if best is None or diff > best[1]:
-            best = (label, diff, start)
+        while 0 <= start < limit:
+            ref_part = hay[start : start + len(got)]
+            if len(ref_part) == len(got) and np.array_equal(ref_part, got):
+                if bad_time:
+                    print("FAIL: samples match %s, but the board reported %s" % (label, bad_time))
+                    return 1
+                print("PASS: all %d samples are an unbroken stretch of %s, from clock %d "
+                      "(line %d, x %d)" % (len(got), label, start, (start % CLOCKS) // 800,
+                                           start % 800))
+                return 0
+            diff = int(np.flatnonzero(ref_part != got[: len(ref_part)])[0]) if len(ref_part) else 0
+            if best is None or diff > best[1]:
+                best = (label, diff, start)
+            start = hay_b.find(head, start + 1)
     if best is None:
         print("FAIL: the first %d samples are not anywhere in the design's signal" % len(head))
     else:
