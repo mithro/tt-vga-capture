@@ -125,3 +125,18 @@ Afterwards, tt09 was put back exactly as it was found:
 - no power cycle was needed.
 
 ![tt09 logo through the capture firmware](tt09_logo_asic_select.png)
+
+### tt09: window and stream through the firmware too (`tt09_window_stream.log`)
+
+A third run, same procedure with `--asic-index 806`:
+- **Window, 25.175 MHz:** 48 lines, a picture from 11 frames; 0 glitches,
+  positive/positive sync.
+- **Stream, 175 kHz for 6 s:** 1,048,576 samples (172.5 k/s, the most
+  this Pi 3B+ carries); overruns 0, rxstall 0; a frame reconstructed with
+  0 glitches (`tt09_logo_stream.png`).
+
+So the firmware's stream, frame and window captures have all run on
+silicon. The board was put back with its 46 files identical and its
+pre-existing safe-start state.
+
+![tt09 logo, streamed through the capture firmware](tt09_logo_stream.png)

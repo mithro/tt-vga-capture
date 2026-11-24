@@ -1,0 +1,36 @@
+14:57:00 before: "clients": 0
+14:57:00 stopping fpgas-tt
+14:57:00 fpgas-tt inactive
+Installed 2 packages in 17ms
+profile=rp2350-dbv3 project=tt_um_rejunity_vga_logo enable=index
+bytes=769852 samples=769600 chunks=6 seconds=5.203 overruns=0 dropped=0 rxstall=0 samples_per_s=147928 mem_free=408368
+  board: frame window=434 buffers=35 hsync_active=1 vsync_active=1
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=101000000
+wrote ref_frame.vgacap
+note: each picture is assembled from 2 captured frames (434 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+14:57:11 rc=0 for: ttcap capture serial:/dev/ttboard --project tt_um_rejunity_vga_logo --mode frame --clock-hz 25175000 --frames 2 --out ref_frame.vgacap
+rebooting to bootsel
+14:57:12 rc=0 for: ttcap reboot serial:/dev/ttboard --to bootsel
+14:57:17 bootsel drive: /dev/sda1; usb: Bus 001 Device 019: ID 2e8a:000f Raspberry Pi RP2350 Boot
+14:57:20 INFO_UF2: UF2 Bootloader v1.1 Model: Raspberry Pi RP2350 Board-ID: RP2350 
+14:57:22 firmware port: /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00; usb: Bus 001 Device 020: ID 2e8a:0009 vgacap vgacap capture firmware
+profile=rp2350-dbv3 project=None enable=kept (capture firmware)
+bytes=385218 samples=384800 chunks=13 seconds=2.023 overruns=0 dropped=0 rxstall=0 samples_per_s=190229
+  board: frame window=48 buffers=1 hsync_active=1 vsync_active=1
+  board: frames=1 stalls=0 rxstall=0 sysclk_hz=101000000
+wrote fw_window.vgacap
+note: each picture is assembled from 11 captured frames (48 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+14:57:27 rc=0 for: ttcap capture --firmware picosdk serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00 --clock-hz 25175000 --mode window --frames 1 --asic-index 806 --out fw_window.vgacap
+profile=rp2350-dbv3 project=None enable=kept (capture firmware)
+bytes=1049410 samples=1048576 chunks=65 seconds=6.077 overruns=0 dropped=0 rxstall=0 samples_per_s=172540
+  board: overruns=0 rxstall=0 sysclk_hz=133000000
+wrote fw_stream.vgacap
+14:57:36 rc=0 for: ttcap capture --firmware picosdk serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00 --clock-hz 175000 --seconds 6 --asic-index 806 --out fw_stream.vgacap
+-rw-r--r-- 1 pi pi 1049495 Nov 24 14:57 fw_stream.vgacap
+-rw-r--r-- 1 pi pi  385354 Nov 24 14:57 fw_window.vgacap
+-rw-r--r-- 1 pi pi  770019 Nov 24 14:57 ref_frame.vgacap
+rebooting to flash
+14:57:37 rc=0 for: ttcap reboot serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00 --firmware picosdk
+14:57:38 after reboot: ttboard=lrwxrwxrwx 1 root root 7 Nov 24 14:57 /dev/ttboard -> ttyACM0
+14:57:38 usb: Bus 001 Device 021: ID 2e8a:0005 MicroPython Board in FS mode
+14:57:38 fpgas-tt active
