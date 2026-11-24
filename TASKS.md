@@ -135,7 +135,7 @@ It writes these on vgacap branches; this project reviews them before merge.
 - [x] Benchmark libvgaframe on run-encoded input at 1.5e9 clocks (`docs/research/2026-11-25-libvgaframe-runs-benchmark.md` on m10-bench-note; busy 45.7 ns/clock, 4.2x over budget: plan Task 7a)
 - [ ] Samplers `tb-v1` / `centre-v1` (clocks per pixel other than 1, including below 1); longer lines and modes not in the table
 - [ ] rgb6 output beside rgb24
-- [ ] Vendored zstd, zlib (libfst needs it), SHA-256 and fstapi as an optional CMake target
+- [x] Vendored zstd, zlib (libfst needs it), SHA-256 and fstapi as an optional CMake target (vgacap m10-third-party 6c0e45f)
 - [ ] `vgacap-export --format fst|vcd`, including decoded signals and a .gtkw file
 - [ ] Implementation plan: `docs/superpowers/plans/2026-11-24-m10-simulation-traces.md` (reviewed here before work starts)
 - [ ] Trace container: zstd seekable blocks with `BLKH` block headers, seek-table rebuild for cut-off traces
