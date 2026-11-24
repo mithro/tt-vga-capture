@@ -48,14 +48,8 @@ profile=bars clocks=1500000000 runs=113463280 seconds=15.985 ns_per_clock=10.657
 profile=static clocks=1500000000 runs=7178540 seconds=7.496 ns_per_clock=4.997 ns_per_run=1044.247 frames=3570
 ```
 
-Spread is large for `bars` and `static` (first run 20-35% slower than the
-others; likely the other tenants on the host, or a cold cache/frequency state
-for the first pass). Treat `bars` as 8.8 to 10.7 ns/clock.
-
-A 1.5e8-clock pilot gave busy 48.9, bars 10.8, static 6.5 ns/clock. I estimated
-the 1.5e9 runs from it at about 50 minutes total, but that was a 10x arithmetic
-error on my part: 10 x 7 s is 70 s per busy run, and the nine runs took 4.6
-minutes in all.
+Spread is large for `bars` and `static`: the first run was 20 to 35% slower
+than the other two. Cause unknown. Treat `bars` as 8.8 to 10.7 ns/clock.
 
 ## Against the 11 ns/clock budget
 
@@ -68,37 +62,68 @@ minutes in all.
   libvgaframe time per project.
 
 Cost is dominated by the per-run work, not per clock: about 62 ns/run on busy
-(one clock per run), 141 ns/run on bars, and roughly 1 us/run on static, where
-each run is a long `memset` plus a full line of idle time.
+(one clock per run) and 141 ns/run on bars. Static's roughly 1 us/run is
+**hypothesis, not measured**: each of its runs is about 209 clocks and so a long
+`memset`, but nothing here separates that from the learner's cost over those
+clocks.
 
-## What costs it (no profile)
+## What costs it (gprof)
 
-`perf` is not installed on big-storage (`perf: command not found`), so there is
-no `perf record`. From reading `vgaframe_push` (`src/frame/frame.c`) and
-`vgaframe_timing_push`, every call, even for a 1-clock run, does:
+`perf` is not installed on big-storage, so this uses gprof. Build: a separate
+`build-pg/` with `-DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=-pg
+-DCMAKE_EXE_LINKER_FLAGS=-pg`. One run, `bench-runs --clocks 100000000
+--profile busy`, on the shared host (load average 41.55 at the start; another
+build was running on the host at the same time):
 
-1. two signal-map bit extractions (hsync and vsync) with `VGACAP_SIG_ABSENT`
-   checks;
-2. a full `vgaframe_timing_push` learner update (edge detection, glitch filter,
-   line/frame counters);
-3. the chain of `fram_active`/`r == 3`/`r == 2`/`r == 1` branches, with
-   `fram_anchor` and `resolved_mode()` checks;
-4. `vgaframe_colour` via the signal map, then a `memset` of `n` bytes, which on a
-   1-byte run is a libc call (not inlined) for one byte;
-5. a `cover[y]` store and x advance.
+```
+profile=busy clocks=100000000 runs=73483645 seconds=5.441 ns_per_clock=54.410 ns_per_run=74.043 frames=237
+```
 
-This is a hypothesis, not a measurement. If the budget needs `busy` to fit, the
-likely levers are: a batch entry point taking a run array, a fast path in the
-learner for runs with no sync change (no edge, so only counters advance), a
-per-sample precomputed colour/sync lookup, and replacing the 1-byte memset with
-a store. Those need a profile (install `perf`, or use `valgrind --tool=callgrind`)
-before choosing.
+(The `-pg` instrumentation makes it slower: 54.4 ns/clock against 45.7 for the
+Release build.) gprof's flat profile, total 1.79 s of samples:
+
+| function | self s | % of samples | % of wall (5.441 s) |
+|---|---|---|---|
+| `vgaframe_push` (own body) | 0.51 | 28.2 | 9.4 |
+| `vgaframe_colour` (called per push, 73174930 calls) | 0.48 | 26.8 | 8.8 |
+| `vgaframe_timing_push` | 0.34 | 19.0 | 6.2 |
+| `emit` (237 frames) | 0.17 | 9.5 | 3.1 |
+| `main` (replay loop) | 0.13 | 7.3 | 2.4 |
+| `_init`, `vgaframe_init`, others | 0.16 | 9.2 | 2.9 |
+
+**gprof covers only 1.79 s of the 5.441 s wall time (33%).** The other 3.65 s
+(67%) is not attributed: libc is not built with `-pg`, so `memset` does not
+appear, and the `mcount` instrumentation cost and any kernel time (page
+faults on the 27 MB rgb buffer, say) are not sampled either. gprof therefore
+cannot say how the missing two thirds splits between `memset` and the
+instrumentation.
+
+What is confirmed: `objdump -d build-rel/bench-runs` (the Release build)
+shows `vgaframe_push` makes `call` instructions to `vgaframe_timing_push`,
+`vgaframe_colour` and `memset@plt`, so in the optimised build `memset` is a real libc call
+through the PLT, not inlined (gprof's call counts show the colour call runs
+on 73174930 of 73483645 pushes, the rest being outside a frame). `vgaframe_colour` is also a call, not inlined.
+
+Of the sampled time, the learner (`vgaframe_timing_push`) is only 19%.
+`vgaframe_push`'s own body and `vgaframe_colour` take 55% between them, so the
+sync-level branch chain and the colour lookup matter more than the learner.
+
+The per-push steps, read from `vgaframe_push` in `src/frame/frame.c`: two
+signal-map bit extractions, the learner update, the `fram_active`/`r == 1/2/3`
+branch chain, `vgaframe_colour`, a `memset` of the run, and the `cover[y]`
+store.
+
+**Hypotheses (not measured):** the unattributed 67% is mostly `memset` call
+overhead plus `mcount`; levers that might help are a fast path for runs
+without a sync change, a precomputed per-sample colour table, a batch entry
+point for a run array, and a store in place of the 1-byte `memset`. None has
+been tried.
 
 ## Caveats
 
 - `busy` is a worst case: real simulated projects have fewer runs per clock.
   `busy` has 0.73 runs/clock; `bars` 0.076; `static` 0.0048. Interpolating
   at ~62 to 141 ns/run, a project's cost is roughly runs x ~100 ns.
-- The replay is cache-warm: one frame's runs (4 to 9 MB of buffers touched)
-  are repeated. A real stream with unique runs also reads its input once.
+- The replay repeats one frame's runs, so the input is cache-warm. A real
+  stream reads its input once; the effect was not measured.
 - Single thread, shared host; numbers are not isolated.
