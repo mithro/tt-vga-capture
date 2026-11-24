@@ -210,6 +210,10 @@ others; `ttcap capture --mode rle` (CaptureRequest script `rle_rp2.py`,
   clocks of bars (64% of a frame) or 57,744 of prbs at 25 MHz, exact.
 - Edge sampling defaults to `rising` with `--sample-delay 0`, frame
   capture's measured sample point.
+- A chunk leaves only when a buffer of pairs is full, so a nearly static
+  picture at a slow clock is slow to arrive (counter at 50 kHz: ~6 s for
+  2,048 pairs) and an output that never changes sends nothing until the
+  host's 30 s chunk timeout; a smaller `--buf-words` shortens the wait.
 
 The emulator gained what the program needs, each to the datasheet: `in`
 from registers, `out`, pin reads that wrap round the window from `in_base`
