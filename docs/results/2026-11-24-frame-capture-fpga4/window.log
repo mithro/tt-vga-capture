@@ -1,0 +1,2 @@
+tt_um_vgacal_grid rc 0 | bytes=385218 samples=384800 chunks=13 seconds=1.232 overruns=0 dropped=0 rxstall=0 samples | tt_um_vgacal_grid: captured 640x480, reference 640x480 (fixed picture) / PASS: 307200 pixels identical to the reference render
+tt_um_vgacal_counter rc 0 | bytes=385218 samples=384800 chunks=13 seconds=1.212 overruns=0 dropped=0 rxstall=0 samples | tt_um_vgacal_counter: captured 640x480, reference 640x480 (frame counter 35 decoded from the picture) / FAIL: 1040 mismatching pixels of 307200 /   (400, 47): captured (255, 255, 255), reference (0, 0, 255)

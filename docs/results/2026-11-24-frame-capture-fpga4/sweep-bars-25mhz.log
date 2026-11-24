@@ -1,0 +1,8 @@
+tt_um_vgacal_bars-25000000-falling-0 FAIL: 4287 mismatching pixels of 307200 | board: frame window=466 buffers=8 hsync_active=0 vsync_active=0 board: frames=1 stalls=0 rxstall=0 sysclk_hz=100000000
+tt_um_vgacal_bars-25000000-falling-1 PASS: 307200 pixels identical to the reference render | board: frame window=463 buffers=8 hsync_active=0 vsync_active=0 board: frames=1 stalls=0 rxstall=0 sysclk_hz=100000000
+tt_um_vgacal_bars-25000000-falling-2 NO PICTURE frames=0 glitches_total=0 | 
+tt_um_vgacal_bars-25000000-falling-3 NO PICTURE frames=0 glitches_total=0 | 
+tt_um_vgacal_bars-25000000-rising-0 PASS: 307200 pixels identical to the reference render | board: frame window=464 buffers=8 hsync_active=0 vsync_active=0 board: frames=1 stalls=0 rxstall=0 sysclk_hz=100000000
+tt_um_vgacal_bars-25000000-rising-1 FAIL: 30240 mismatching pixels of 307200 | board: frame window=466 buffers=8 hsync_active=0 vsync_active=0 board: frames=1 stalls=0 rxstall=0 sysclk_hz=100000000
+tt_um_vgacal_bars-25000000-rising-2 NO PICTURE frames=0 glitches_total=0 | 
+tt_um_vgacal_bars-25000000-rising-3 NO PICTURE frames=0 glitches_total=0 | 
