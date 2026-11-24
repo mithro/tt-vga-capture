@@ -110,9 +110,9 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 
 ## Milestone 8: compression research
 
-- [ ] CPU RLE throughput on RP2040 / RP2350
-- [~] PIO-side run counting feasibility (vgacap branch `pio-rle`, in progress 2026-11-24: emulator first, then fpga-4)
-- [ ] Write-up in `docs/research/`
+- [~] CPU RLE throughput: RP2350 measured (`docs/research/2026-11-24-board-rle-throughput.md`); RP2040 needs a board
+- [x] PIO-side run counting: `ttcap capture --mode rle` (vgacap PR #6), exact on the emulator and on fpga-4 up to 25 MHz (locked, 150 MHz sysclk) on bars and prbs; RP2040 emulated only
+- [x] Write-up in `docs/research/` (`2026-11-24-board-rle-throughput.md`, `2026-11-24-pio-run-counting.md`)
 
 ## Milestone 9: later backends
 

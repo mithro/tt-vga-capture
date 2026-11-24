@@ -4,6 +4,20 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **PIO run counting on hardware (M8)**: `ttcap capture --mode rle`
+  (vgacap PR #6, written by a sub-agent on the emulator, hardware-checked
+  here). On fpga-4, every capture was checked sample for sample:
+  - edge style: bars 1.85 M and prbs 1.25 M samples, exact;
+  - locked style, one-shot: exact at 12.5, 16.67 and **25 MHz** (prbs and
+    bars), with the RP2350 at its rated 150 MHz, which ttcap now asks the
+    SDK for in this mode (P=6);
+  - the sample-point window at P=6 is offsets 0, 1, 4, 5.
+
+  The first check "failed" every bars capture, RAW included, with what
+  looked like a mid-capture reset. It was the checker matching the first of
+  hundreds of identical bars lines. Fixed, with a negative control.
+  `docs/research/2026-11-24-pio-run-counting.md`.
+
 - **Direct serial ownership on the Pi (M7)**
   (`docs/results/2026-11-24-direct-serial-fpga4/`): ttcap on the board's own
   Pi (static armv7 uv, the Pi's Python 3.11) with `fpgas-tt` stopped only
