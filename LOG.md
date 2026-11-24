@@ -4,6 +4,15 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **tinytapeout.fpgas.online's offline boards**, from each board's
+  `status.json`:
+  - Only one offline entry is a real board: `tt-de637061074b1838`, the tt04
+    RP2040 board (SDK 2.0.4), last seen on Pi 10.21.2.48 (sw2 p48). sw2 p48
+    now draws 0 mW with the link down, and the serial appears on no Pi at
+    Welland or PS1, so the board is disconnected and needs someone on site.
+  - The other offline entries are generic slugs with no board behind them:
+    tt03p5-tt10, ttgf, kianv-* and fpga-2.
+
 - **Offline boards checked (Tim: "Check the boards which are offline").**
   Every PoE port on both switches is administratively on, so nothing is
   simply switched off. The offline devices are:
