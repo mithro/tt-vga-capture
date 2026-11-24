@@ -104,14 +104,14 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 
 ## Milestone 7: C firmware and MicroPython module
 
-- [ ] pico-sdk firmware with the command protocol
+- [~] pico-sdk firmware with the command protocol (vgacap branch `fw-picosdk`, in progress 2026-11-24: no_flash UF2 run from SRAM, so a board's stock flash is never touched)
 - [ ] Fork tt-micropython-firmware, USER_C_MODULE
 - [x] Direct serial ownership on the Pi (stop `fpgas-tt`, capture, restart): fpga-4 stream + 25 MHz frame pixel-exact, tt09 silicon frame mode; no throughput gain over the bridge on either Pi (`docs/results/2026-11-24-direct-serial-fpga4/`)
 
 ## Milestone 8: compression research
 
 - [ ] CPU RLE throughput on RP2040 / RP2350
-- [ ] PIO-side run counting feasibility
+- [~] PIO-side run counting feasibility (vgacap branch `pio-rle`, in progress 2026-11-24: emulator first, then fpga-4)
 - [ ] Write-up in `docs/research/`
 
 ## Milestone 9: later backends
