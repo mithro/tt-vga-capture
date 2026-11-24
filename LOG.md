@@ -4,6 +4,34 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **Real silicon at its design clock**: the tt09 ASIC board (p10) captured
+  `tt_um_rejunity_vga_logo` and `tt_um_a1k0n_nyancat` at 25.175 MHz and
+  `tt_um_vga_clock` at 31.5 MHz (640x480@72), clean; the clock read
+  00:00:06 since reset. Also live through GStreamer
+  (`vgacapttsrc capture-mode=frame`) and `ttcap demo --mode frame`.
+- Frame capture on that board first took 11.7 s for two pictures: buffer
+  planning bisected each heap block with a collect per probe (3.8 s).
+  Fixed-size chunks: 0.34 s, the capture became link-bound (176 KB/s on
+  that Pi 3B+). The emulator then caught the control-block table no longer
+  fitting after planning; it is allocated first now.
+- libvgaframe reports a frame-mode picture's measured sync polarities
+  (it printed the mode table's for inverted designs).
+- Board-side RLE measured (M6 Task 4): viper encodes 3.06 M samples/s on
+  RP2350, so the CPU is not the limit; the 8-byte `RLE ` pair is. A
+  compact pair would give ~2x; that format change is Tim's call
+  (`docs/research/2026-11-24-board-rle-throughput.md`).
+- tt-vga-testpatterns `make check-frame` (PR #1 there): the real frame-mode
+  board program on the emulated RP2350, pins driven by each calibration
+  design's RTL, all 9 cases pixel-exact. Installed iverilog on big-storage
+  (apt) for it.
+- No RP2040 board is reachable: the only one (tt04, SDK 2.0.4) is on p48,
+  which has no power. RP2040 frame/window capture is emulated only.
+- Released boards are now restored first (Ctrl-B, Ctrl-D; vgacap
+  `tools/board_restart.py`): my leftover counter bitstream on fpga-4 held up
+  the harness session's census for 25 minutes.
+- BIO: research agent looking for the BIO simulator and what it models
+  (branch `bio-research` here).
+
 - **Milestone 6 Tasks 1-3 done, on hardware.** Prelude split (vgacap PR
   #1, HIL 9/9 on fpga-1). Frame/window capture (PR #2): all five
   calibration designs pixel-exact at their real pixel clocks on fpga-4,
