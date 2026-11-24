@@ -55,7 +55,7 @@ The same code then reads board captures and simulation traces.
   - Recording costs at most 5% of simulation wall time (about 10 ns per clock at the fastest project).
   - Everything after the simulation, plus the compressor thread, costs at most 5% of simulation CPU.
   - Memory is fixed per job.
-- **Doubles are formatted** by `vgacap_fmt_double()`: the shortest `%.{p}g`, for p in 1..17, that reads back to the same double. The Python reference uses the same loop. Every `clocks_per_pixel` and every double in a file goes through it.
+- **Doubles are formatted** by `vgacap_fmt_double()`: the first `%.{p}g`, for p in 1..17, that reads back to the same double and has no exponent; if no precision gives exponent-free text that reads back, the first that reads back at all (so 25175000.0 is `25175000`, not `2.5175e+07`). The Python reference uses the same loop. Every `clocks_per_pixel` and every double in a file goes through it.
 - **Branches.**
   - Each branch is made in `vgacap/.worktrees/<branch>`, its own worktree.
   - Commits are small, and each is pushed straight away.
