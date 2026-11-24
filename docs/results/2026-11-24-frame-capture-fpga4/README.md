@@ -81,8 +81,9 @@ Each of these is now covered by an emulator test (vgacap `ttcap.emu`, which
 runs the exact built board script) or a C test in libvgaframe, and each such
 test was checked to fail without its fix.
 
-## Known gap
+## Fixed after these runs
 
-In frame mode `vgacap-frames` prints the *mode table's* sync polarities
-(`modes.log`, ui_in=4 and 8 show `hsync=neg vsync=neg`); the board's TIME
-message has the measured ones.
+In frame mode `vgacap-frames` printed the *mode table's* sync polarities
+(`modes.log`, ui_in=4 and 8 show `hsync=neg vsync=neg`). libvgaframe now
+measures them over the picture (vgacap PR #2); re-run on the same streams it
+reports ui4 hsync=pos, ui8 vsync=pos, ui1 pos/pos, ui2 neg/pos, ui0 neg/neg.

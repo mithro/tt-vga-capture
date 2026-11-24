@@ -94,7 +94,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 - [x] Windowed reassembly validated with `tt_um_vgacal_counter` (torn, and reported as such) and `grid` (exact)
 - [x] `ttcap.emu`: emulated RP2040/RP2350 running the exact built script (vgacap PR #2)
 - [ ] Frame mode on a real RP2040 board (emulated only so far; the RP2040 chip boards report "safe_start failed")
-- [ ] `vgacap-frames` reports the mode table's sync polarities in frame mode, not the measured ones
+- [x] `vgacap-frames` reports measured sync polarities in frame mode (was the mode table's)
 - [ ] Task 4: board-side RLE and its measurement; Task 5: measurement write-up per mode and board
 - [ ] Frame/window modes in `vgacapttsrc` / `ttcap demo`
 
