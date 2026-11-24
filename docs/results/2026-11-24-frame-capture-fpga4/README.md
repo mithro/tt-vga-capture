@@ -45,6 +45,30 @@ a static design, torn for one that changes from frame to frame".
 
 ![prbs at 25 MHz](pictures/prbs-25mhz.png)
 
+## Real silicon: tt09 at its design clocks
+
+The same code on the tt09 ASIC board (`tt-3b0880b48ee5c388`, pi-sw2-p10,
+RP2350, MicroPython 670d775365, SDK 3.0.7), selecting each project through
+`tt.shuttle` (`--project`), two pictures each, every one `partial=0
+glitches=0` (`tt09-asic.log`):
+
+| project | clock (system clock) | VGA mode | board-measured syncs |
+|---|---|---|---|
+| tt_um_rejunity_vga_logo | 25.175 MHz (101 MHz) | 640x480@60 | positive / positive |
+| tt_um_a1k0n_nyancat | 25.175 MHz (101 MHz) | 640x480@60 | negative / negative |
+| tt_um_vga_clock | 31.5 MHz (126 MHz) | 640x480@72 | negative / negative |
+
+There is no reference render for these, so they are judged by eye and by
+reconstruction: clean pictures, and the VGA clock reads 00:00:06, the
+seconds since the capture released reset -- the chip was running at its
+real clock, which slowed-down streaming could never show. This board's heap
+gave 434-451 lines, so each picture is two captured frames, and `ttcap`
+says so.
+
+![tt09 VGA logo](pictures/tt09-vga-logo-25mhz.png)
+![tt09 Nyan Cat](pictures/tt09-nyancat-25mhz.png)
+![tt09 VGA clock at 31.5 MHz](pictures/tt09-vga-clock-31_5mhz.png)
+
 ## What it took, in the order the board taught it
 
 1. **The sample point.** The first capture at 25 MHz had 4,287 wrong pixels

@@ -1,0 +1,27 @@
+profile=rp2350-dbv3 project=tt_um_rejunity_vga_logo enable=index
+bytes=769851 samples=769600 chunks=6 seconds=11.668 overruns=0 dropped=0 rxstall=0 samples_per_s=65958 mem_free=408560
+  board: frame window=450 buffers=9 hsync_active=1 vsync_active=1
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=101000000
+wrote <workspace>/m6/asic/logo.vgacap
+note: each picture is assembled from 2 captured frames (450 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=pos vsync=pos partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=pos vsync=pos partial=0 glitches=0
+frames=2 glitches_total=0
+profile=rp2350-dbv3 project=tt_um_a1k0n_nyancat enable=index
+bytes=769851 samples=769600 chunks=6 seconds=10.816 overruns=0 dropped=0 rxstall=0 samples_per_s=71151 mem_free=406544
+  board: frame window=451 buffers=8 hsync_active=0 vsync_active=0
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=101000000
+wrote <workspace>/m6/asic/tt_um_a1k0n_nyancat.vgacap
+note: each picture is assembled from 2 captured frames (451 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
+profile=rp2350-dbv3 project=tt_um_vga_clock enable=index
+bytes=800635 samples=800384 chunks=6 seconds=10.791 overruns=0 dropped=0 rxstall=0 samples_per_s=74172 mem_free=406336
+  board: frame window=434 buffers=9 hsync_active=0 vsync_active=0
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=126000000
+wrote <workspace>/m6/asic/tt_um_vga_clock.vgacap
+note: each picture is assembled from 2 captured frames (434 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+frame 0: 640x480 mode=640x480@72 cpl=832 lpf=520 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@72 cpl=832 lpf=520 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
