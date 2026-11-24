@@ -1,0 +1,26 @@
+board link: serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_A2961E5CAC65B25F-if00 (from --link)
+writing ../../../../tmp/m6/fwdemo/frame-%04d.png
+writing ../../../../tmp/m6/fwdemo/capture.mkv
+
+gst-launch-1.0 -e -m vgacapttsrc name=src link=serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_A2961E5CAC65B25F-if00 clock-hz=25000000 seconds=12 profile=auto 'ttcap-command=ssh -o ConnectTimeout=15 -o BatchMode=yes -J tweed.welland.mithis.com pi@10.21.2.35 cd vgacap-run && UV_PYTHON_PREFERENCE=only-system UV_CACHE_DIR=uvcache PYTHONPATH=python ./uv/uv run --no-project --python /usr/bin/python3.11 --with pyserial --with websockets python -m ttcap.cli' capture-mode=frame firmware=picosdk ! vgadecode name=dec repeat-last-frame=true output-fps=2/1 ! tee name=t \
+    t. ! queue ! pngenc ! multifilesink post-messages=true location=../../../../tmp/m6/fwdemo/frame-%04d.png \
+    t. ! queue ! videoconvert ! x264enc tune=zerolatency speed-preset=veryfast key-int-max=30 ! matroskamux ! filesink location=../../../../tmp/m6/fwdemo/capture.mkv
+
+  mode 640x480@60: 800 clocks/line, 525 lines/frame, hsync negative, vsync negative, glitches 0
+  1 frame(s), 3s elapsed
+  3 frame(s), 4s elapsed
+  5 frame(s), 5s elapsed
+  7 frame(s), 6s elapsed
+  9 frame(s), 7s elapsed
+  11 frame(s), 8s elapsed
+  13 frame(s), 9s elapsed
+  15 frame(s), 10s elapsed
+  17 frame(s), 11s elapsed
+  19 frame(s), 12s elapsed
+  21 frame(s), 13s elapsed
+  23 frame(s), 14s elapsed
+
+capture finished after 14.7s (gst-launch exit 0)
+  mode 640x480@60: 800 clocks/line, 525 lines/frame, hsync negative, vsync negative, glitches 0
+  24 png(s) in ../../../../tmp/m6/fwdemo
+  ../../../../tmp/m6/fwdemo/capture.mkv, 10.3 KiB

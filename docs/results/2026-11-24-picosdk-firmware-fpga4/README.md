@@ -58,3 +58,32 @@ in those numbers:
   whether the selected project survives the switch there is untested.
 - **RP2040:** no board is connected anywhere.
 - **Not wired to the firmware yet:** `ttcap demo` and the GStreamer source.
+
+## Live: GStreamer and `ttcap demo` on the capture firmware
+
+The same board was used a second time (12:52Z), this time with vgacap
+branch `fw-demo-gst` (vgacap PR #8): `vgacapttsrc` and `vgacapbin` gained
+a `firmware` property, and `ttcap demo` gained `--firmware`.
+
+Steps:
+- `fw_load.sh` stopped `fpgas-tt` (clients 0) and loaded the RAM firmware.
+- `ttcap demo` ran **on big-storage**, its pipeline using `vgacapttsrc`.
+  The element's `ttcap-command` was an `ssh` that runs ttcap on the
+  board's Pi against the firmware's serial port. A remote ttcap needs no
+  GStreamer on the Pi.
+- `fw_restore.sh` did the watchdog reboot to stock, and `fpgas-tt` came
+  back. It was down 46 s.
+
+```
+ttcap demo --link serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_A2961E5CAC65B25F-if00 \
+    --firmware picosdk --mode frame --clock-hz 25000000 --seconds 12 --fps 2 \
+    --outdir fwdemo --ttcap-command "ssh ... pi@10.21.2.35 cd vgacap-run && ... python -m ttcap.cli"
+```
+
+Results (`live_demo.log`):
+- Mode 640x480@60, 0 glitches, a frame about every 0.5 s, 24 PNGs and an MKV.
+- **All 24 frames pixel-identical** to the reference render.
+- Board files identical before and after (`board_manifest_*_demo.txt`).
+- No power cycle was needed.
+
+![a frame from the live demo](live_demo_frame.png)
