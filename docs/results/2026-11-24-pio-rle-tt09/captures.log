@@ -1,0 +1,9 @@
+profile=rp2350-dbv3 project=tt_um_vga_clock enable=index
+bytes=1377330 samples=1376256 chunks=85 seconds=14.167 overruns=0 dropped=0 rxstall=0 samples_per_s=97146 mem_free=408416
+  board: overruns=0 rxstall=0 sysclk_hz=133000000
+wrote ../../../../tmp/m6/rle_tt09/clock-stream.vgacap
+profile=rp2350-dbv3 project=tt_um_vga_clock enable=index
+bytes=82117 samples=1513243 chunks=7 seconds=15.619 overruns=0 dropped=0 rxstall=0 samples_per_s=96886 mem_free=405776
+  board: rle style=edge period=1500 mask=1
+  board: overruns=0 rxstall=0 saturated=0 sysclk_hz=150000000
+wrote ../../../../tmp/m6/rle_tt09/clock-rle.vgacap

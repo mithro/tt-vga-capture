@@ -1,0 +1,4 @@
+reference tmp/m6/rle_tt09/stream/f-0000.ppm (480, 640, 3)
+tmp/m6/rle_tt09/stream/f-0001.ppm differing pixels 0 bbox None distinct colours 8
+tmp/m6/rle_tt09/rle/f-0000.ppm differing pixels 0 bbox None distinct colours 8
+tmp/m6/rle_tt09/rle/f-0001.ppm differing pixels 0 bbox None distinct colours 8
