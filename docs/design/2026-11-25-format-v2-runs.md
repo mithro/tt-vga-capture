@@ -218,8 +218,15 @@ After a reported loss that could have carried samples, in a stream with a
 clock bit, `n` is unknown. Those losses are: a byte-wise resync; a `RUNS`
 content error; a bad `BLKH`; a forbidden `RAW `, `FRAM`, `EVNT` or `RLE `
 chunk; and an unknown tag (a clock stream forbids these, and they could be
-samples). A `META` skipped for "bad META length" or "bad META text", and any
-`TIME` chunk, carry no samples and leave `n` known. While `n` is unknown the
+samples). A `META` skipped for "bad META length" or "bad META text" carries no
+samples and leaves `n` known. A well-formed `TIME` chunk never affects `n`.
+A bad `TIME` (a version 1 chunk, recovered by a byte-wise resync) leaves `n`
+known only when the scan regains framing exactly at that `TIME` chunk's end
+(8 + its declared length), which proves only the `TIME` was lost; otherwise
+`n` is unknown. Two independent faults can defeat this check (a `TIME`
+whose length is raised to cover the next chunk, and that chunk's tag also
+destroyed); that is the same exposure as any consistently corrupted
+length. While `n` is unknown the
 reader discards runs without delivering them until the next `BLKH`, and
 counts them in the loss report, so a lost chunk never gives later runs a
 wrong clock bit. (The `BLKH` gap report below is the one exception:
