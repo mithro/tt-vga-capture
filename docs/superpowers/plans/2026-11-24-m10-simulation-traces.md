@@ -71,7 +71,7 @@ The same code then reads board captures and simulation traces.
 | (tt-vga-capture) `m10-format-note` | 1 | tt-vga-capture `main` |
 | `m10-bench` | 2 | `origin/fw-picosdk` |
 | `m10-third-party` | 3 | the stack's base (see Global Constraints) |
-| `m10-format-v2` | 5, 6, 7, 7a | `m10-third-party` |
+| `m10-format-v2` | 6, 7, 7a, then 5 (after the owner's decision 1) | `m10-third-party` |
 | `m10-trace` | 8, 9 | `m10-format-v2` |
 | `m10-frame-raw` | 10, 11 | `m10-trace` |
 | `m10-modes` | 4 | `m10-frame-raw` |
@@ -393,7 +393,7 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
   - `frame_x_saturates`: `vgaframe_push64` of a run of `2^33` clocks in mid-line leaves `f->x == UINT32_MAX`, and nothing is written past the row.
   - `last_report_values` (test_frame.c): across a synth 640x480@60 stream fed one clock at a time, `last_report` is 1 on each line start's push, 2 on each frame start's push, and 0 otherwise.
 - [ ] **Step 2: Run the tests and watch them fail.**
-- [ ] **Step 3: Implement.** In `vgaframe_push`, store the learner's return in `f->last_report`. Fix the `timing.c:13-14` comment to say the call is made at the hsync *trailing* edge, when a line is accepted. Switch `vgacap_frames.c` and `gstvgadecode.c` to `vgaframe_push64`.
+- [ ] **Step 3: Implement.** In `vgaframe_push`, store the learner's return in `f->last_report`. Fix the `timing.c:13-14` comment to say the call is made at the hsync *trailing* edge, when a line is accepted. (Switching `vgacap_frames.c` and `gstvgadecode.c` to `vgaframe_push64` happens in Task 5, which widens the run event; Tasks 6, 7 and 7a are done before Task 5.)
 - [ ] **Step 4: Run the tests and see them pass.** Run all of `ctest` and `pytest`.
 - [ ] **Step 5: Commit and push** on `m10-format-v2`.
 
@@ -415,11 +415,11 @@ The budget for *all* post-simulation work is 11 ns per clock. The profile (gprof
 - Behaviour is unchanged: every existing test passes without edits, and the new test checks equivalence.
 - Produces: `vgaframe_t` gains a 256-entry colour table built from the signal map at `vgaframe_init`, used for samples whose map bits are all below 8, as Tiny VGA's are. Wider samples keep `vgaframe_colour`.
 
-- [ ] **Step 1: Write the failing test.** `test_frame_fastpath.c`, `fastpath_equivalent`: for the three bench profiles plus a random stream (sync-shaped, with random colours and glitch pulses), the frames and raw callbacks are compared, byte for byte, between the new `vgaframe_push` and a copy of the current one kept in the test (`ref_vgaframe_push`, compiled from a snapshot of today's `frame.c` and `timing.c` under renamed symbols).
+- [ ] **Step 1: Write the failing test.** `test_frame_fastpath.c`, `fastpath_equivalent`: for the three bench profiles plus a random stream (sync-shaped, with random colours and glitch pulses, starting from a fresh `vgaframe_t`, so the first push meets `have_prev == 0` and initialises `prev_v` and `v_high_lines`/`v_low_lines`), the frames and raw callbacks are compared, byte for byte, between the new `vgaframe_push` and a copy of the current one kept in the test (`ref_vgaframe_push`, compiled from a snapshot of today's `frame.c` and `timing.c` under renamed symbols).
 - [ ] **Step 2: Implement the fast path, measuring each change separately with `bench-runs --profile busy --clocks 150000000` (Release, three runs, median):**
   1. the colour table;
   2. a run of 1 to 8 clocks stored with a plain loop instead of `memset`;
-  3. the learner's no-edge case (`h == prev_h`, no report possible) handled inline in `vgaframe_push`, before calling `vgaframe_timing_push`;
+  3. the learner's no-edge case handled by one `static inline` in a new internal header `src/frame/timing_inline.h`: `if (l->have_prev && h == l->prev_h) { (h ? l->h_high : l->h_low) += run; l->clk_in_line += run; return 0; }`, with the saturation from Task 7 applied to both additions. Nothing is done for `v`, because vsync is sampled only at an accepted trailing edge. `vgaframe_timing_push` itself starts with this inline, and `vgaframe_push` calls the inline first. There is exactly one copy of the two additions, so the fast path cannot drift from the slow path's tail;
   4. anything else the measurements point at.
 
   Keep each change only if it helps.
