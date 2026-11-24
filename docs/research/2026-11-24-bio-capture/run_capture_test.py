@@ -149,6 +149,10 @@ def main():
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--trace", action="store_true")
     ap.add_argument("--name", default=None)
+    ap.add_argument("--data-file", type=Path, default=None,
+                    help="drive these bytes (one per project clock) instead of random ones")
+    ap.add_argument("--save-samples", type=Path, default=None,
+                    help="write the captured samples here, one byte each")
     args = ap.parse_args()
     if args.chunk is None:
         args.chunk = 6 * MODES[args.mode][2]
@@ -161,7 +165,11 @@ def main():
                      + ("-sb" if args.sync_bypass else ""))
 
     rng = random.Random(args.seed)
-    data = [rng.randrange(256) for _ in range(args.clocks)]
+    if args.data_file is not None:
+        data = list(args.data_file.read_bytes()[:args.clocks])
+        args.clocks = len(data)
+    else:
+        data = [rng.randrange(256) for _ in range(args.clocks)]
     cfg = build_config(args, data)
     rc, log = run_sim(args, cfg)
     words = parse_words(log)
@@ -174,6 +182,8 @@ def main():
             got.append(sum(((sample >> (pin - base)) & 1) << b
                            for b, pin in enumerate(lay["data"])))
 
+    if args.save_samples is not None:
+        args.save_samples.write_bytes(bytes(got))
     result = {"name": args.name, "rc": rc, "log": str(log), "words": len(words),
               "samples": len(got), "pixclk_mhz": round(args.fclk_mhz / args.period, 3)}
     # Find the start offset o such that got == seq[o:o+len(got)], where seq is

@@ -621,3 +621,22 @@ around 40 MB/s in practice. 40 MHz (40 MB/s) and the 16-bit Dabao layout
 7. Dabao `VDDIO` = 3.3 V was read from the schematic drawing, not from a
    netlist or a measurement.
 8. Whether the 800 MHz RTL comment reflects any shipping clock option.
+
+## End to end in simulation: VGA signal in, picture out (added 2026-11-24)
+
+`2026-11-24-bio-capture/bio_picture.py` drives bio-sim with 20 lines of a
+real 640x480@60 bars frame (starting one line above the active area, as
+vgacap's frame mode does) at a 40 MHz pixel clock (period 17.5 aclk at
+700 MHz, the two-core sampler), keeps what the BIO captured
+(`run_capture_test.py --data-file/--save-samples`), wraps it in a vgacap
+`FRAM` chunk and reconstructs it with `vgacap-frames`:
+
+    bio-sim: {"words": 4000, "samples": 16000, "pixclk_mhz": 40.0, "ok": true, "offset": 0}
+    frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=1 glitches=0
+    visible rows 0..18: pixel-exact (0 of 12160 pixels differ)
+
+(`partial=1` because a 20-line window is not a whole picture.) So the BIO's
+output needs nothing new on the host side: the existing vgacap chunks and
+libvgaframe take it as it is. What remains untested is everything off the
+simulator: the FIFO drain rate on silicon (BDMA or the host CPU) and real
+pads -- there is no BIO hardware on fpgas.online to test it on.
