@@ -98,7 +98,8 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 - [x] Task 4 measurement: viper RLE 3.06 M samples/s on RP2350; the 8-byte `RLE ` pair caps the gain at +12%, a compact pair would give ~2x (`docs/research/2026-11-24-board-rle-throughput.md`)
 - [ ] DECISION FOR TIM: add a compact RLE chunk (u8 value + LEB128 run) to the vgacap format? Then build it (board viper encoder, C/Python readers, RTL encoder)
 - [ ] Task 5: measurement write-up per mode and board
-- [ ] Frame/window modes in `vgacapttsrc` / `ttcap demo`
+- [x] Frame/window modes in `vgacapttsrc`, `vgacapbin` and `ttcap demo` (live on tt09 silicon)
+- [x] Real silicon at its design clock: tt09 VGA logo, Nyan Cat (25.175 MHz), VGA clock (31.5 MHz)
 
 ## Milestone 7: C firmware and MicroPython module
 

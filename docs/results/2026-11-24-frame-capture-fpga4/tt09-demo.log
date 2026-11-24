@@ -1,0 +1,23 @@
+board link: ws://127.0.0.1:18010/serial (from --link)
+writing <workspace>/m6/demo_nyan/frame-%04d.png
+writing <workspace>/m6/demo_nyan/capture.mkv
+
+gst-launch-1.0 -e -m vgacapttsrc name=src link=ws://127.0.0.1:18010/serial clock-hz=25175000 seconds=20 profile=auto 'ttcap-command=uv run --no-sync ttcap' project=tt_um_a1k0n_nyancat capture-mode=frame ! vgadecode name=dec repeat-last-frame=true output-fps=2/1 ! tee name=t \
+    t. ! queue ! pngenc ! multifilesink post-messages=true location=<workspace>/m6/demo_nyan/frame-%04d.png \
+    t. ! queue ! videoconvert ! x264enc tune=zerolatency speed-preset=veryfast key-int-max=30 ! matroskamux ! filesink location=<workspace>/m6/demo_nyan/capture.mkv
+
+  mode 640x480@60: 800 clocks/line, 525 lines/frame, hsync negative, vsync negative, glitches 0
+  1 frame(s), 5s elapsed
+  2 frame(s), 7s elapsed
+  3 frame(s), 9s elapsed
+  4 frame(s), 11s elapsed
+  5 frame(s), 13s elapsed
+  6 frame(s), 16s elapsed
+  7 frame(s), 18s elapsed
+  8 frame(s), 20s elapsed
+  9 frame(s), 22s elapsed
+
+capture finished after 24.0s (gst-launch exit 0)
+  mode 640x480@60: 800 clocks/line, 525 lines/frame, hsync negative, vsync negative, glitches 0
+  9 png(s) in <workspace>/m6/demo_nyan
+  <workspace>/m6/demo_nyan/capture.mkv, 519.4 KiB

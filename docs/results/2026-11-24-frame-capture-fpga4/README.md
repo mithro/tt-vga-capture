@@ -69,6 +69,20 @@ says so.
 ![tt09 Nyan Cat](pictures/tt09-nyancat-25mhz.png)
 ![tt09 VGA clock at 31.5 MHz](pictures/tt09-vga-clock-31_5mhz.png)
 
+### Live: GStreamer and `ttcap demo`
+
+`vgacapttsrc capture-mode=frame` and `ttcap demo --mode frame` on the same
+chip (Nyan Cat, 25.175 MHz, 20 s): 9 pictures, a 519 KiB MKV, mode detected
+as 640x480@60 with no glitches (`tt09-demo.log`). About 0.4 pictures a
+second: this Pi 3B+'s bridge carries ~176 KB/s (`ttcap throughput`) and a
+picture is 385 KB. The animation moves between pictures:
+
+![Nyan Cat from the live demo](pictures/tt09-nyancat-demo-frame.png)
+
+The first frame-mode runs here spent 3.8 s planning buffers (bisecting
+each heap block with a collect per probe); fixed-size chunks do it in
+0.34 s, and a two-picture capture went from 11.7 s to 5.2 s, link-bound.
+
 ## What it took, in the order the board taught it
 
 1. **The sample point.** The first capture at 25 MHz had 4,287 wrong pixels
