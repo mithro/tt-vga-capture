@@ -93,7 +93,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 - [x] Tasks 2+3: `frame_rp2.py` whole-frame + windowed capture at the real clock (vgacap PR #2): PIO vsync/hsync trigger, phase-locked `in [P-1]` sampler, control-block DMA, stopper; all five calibration designs pixel-exact on fpga-4 at 25/28.25/40 MHz; `docs/results/2026-11-24-frame-capture-fpga4/`
 - [x] Windowed reassembly validated with `tt_um_vgacal_counter` (torn, and reported as such) and `grid` (exact)
 - [x] `ttcap.emu`: emulated RP2040/RP2350 running the exact built script (vgacap PR #2)
-- [ ] Frame mode on a real RP2040 board (emulated only so far; the RP2040 chip boards report "safe_start failed")
+- [ ] Frame/window mode on a real RP2040 board: emulated only -- no RP2040 Tiny Tapeout board is reachable (tt04's listed Pi, sw2 p48, is the label-station port; PS1 has only Artys). Needs one connected.
 - [x] `vgacap-frames` reports measured sync polarities in frame mode (was the mode table's)
 - [x] Task 4 measurement: viper RLE 3.06 M samples/s on RP2350; the 8-byte `RLE ` pair caps the gain at +12%, a compact pair would give ~2x (`docs/research/2026-11-24-board-rle-throughput.md`)
 - [ ] DECISION FOR TIM: add a compact RLE chunk (u8 value + LEB128 run) to the vgacap format? Then build it (board viper encoder, C/Python readers, RTL encoder)
@@ -115,8 +115,10 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 
 ## Milestone 9: later backends
 
-- [ ] RP1 backend (needs a Pi 5 wired to a TT board; none on the site as of 2026-11-24 -- checked daily; p4 Pi 5 has no board yet, p48 unpowered)
-- [ ] BIO backend built against the BIO simulator (Tim, 2026-11-24: fine to build against it)
+- [x] RP1 backend `vgacap-rp1` (vgacap PR #3): proven by loopback on pi-sw2-p4 at 500 k samples/s (counter exact, bars pixel-identical); emulation test of its program words
+  - [ ] Against a real TT board once a Pi 5 is wired to one (checked daily)
+  - [ ] Above 0.5 M samples/s: cyclic-DMA kernel module (rpi5-rp1-pio-bench) instead of stock rp1-pio
+- [~] BIO backend built against the BIO simulator (Tim, 2026-11-24: fine to build against it): capture programs bit-exact to 40 MHz in bio-sim; no BIO hardware on fpgas.online
   - [x] Research note + capture programs passing in `bio-sim` (`docs/research/2026-11-24-bio-capture-feasibility.md`)
   - [ ] FIFO drain path (BDMA core or host `RXFn`) in the full-SoC Verilator flow
   - [ ] Firmware + host transport (vgacap chunks over USB HS)
