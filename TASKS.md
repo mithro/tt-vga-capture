@@ -131,7 +131,7 @@ Agreed 2026-11-24. That project's spec is
 `tinytapeout-vga-videos/docs/superpowers/specs/2026-11-24-raw-frames-and-hash-methods-design.md`.
 It writes these on vgacap branches; this project reviews them before merge.
 
-- [ ] Design note: 64-bit samples plus an RLE64 chunk (format v2), put to Tim together with the compact-RLE decision
+- [x] Design note: 64-bit samples plus an RLE64 chunk (format v2), put to Tim together with the compact-RLE decision (`docs/design/2026-11-25-format-v2-runs.md`, m10-format-note 84de19c; decided 2026-11-25: RUNS, boards after M10, skip-by-length)
 - [x] Benchmark libvgaframe on run-encoded input at 1.5e9 clocks (`docs/research/2026-11-25-libvgaframe-runs-benchmark.md` on m10-bench-note; busy 45.7 ns/clock, 4.2x over budget: plan Task 7a)
 - [ ] Samplers `tb-v1` / `centre-v1` (clocks per pixel other than 1, including below 1); longer lines and modes not in the table
 - [ ] rgb6 output beside rgb24

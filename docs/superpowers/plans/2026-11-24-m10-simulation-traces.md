@@ -274,6 +274,11 @@ The five rows (clock fields at one clock per pixel; polarities from VESA DMT, an
 
 ### Task 5: format v2 in the C stream library and the Python mirror
 
+**Authority:** the decided format note, tt-vga-capture `docs/design/2026-11-25-format-v2-runs.md` (branch `m10-format-note`, 84de19c; decision 1 taken 2026-11-25), is the format's definition. Where this task's text and the note differ, the note wins. In particular:
+- Content errors in `RUNS`, `BLKH` and `META`, and chunk types a header forbids, are skipped by the chunk's length and reported as `VGACAP_EV_RESYNC` ("data lost, framing kept"), not resynced byte by byte. Every test below that says "resyncs" for those cases means this.
+- The full error table, with its `what` strings, is the note's. It includes `"chunk needs a version 2 header"`, `"BLKH first_sample does not follow"`, `"bad BLKH length"`, `"bad META length"`, `"bad META text"`, `"chunk not allowed with sample_bits over 32"`, `"RLE  chunk not allowed in version 2"`, `"RUNS has no pairs"` and `"RUNS adjacent pairs have equal values"`. Each gets a test.
+- The sample index `n`, its discard-until-`BLKH` rule after a loss, `desc_len ≤ 251` for v2, and `samples_per_clock == 2` if and only if there is a clock bit, are as the note defines them. Each gets a test.
+
 **Files:**
 - Modify: `include/vgacap/stream.h`, `src/stream/writer.c`, `src/stream/reader.c`, `src/tools/vgacap_dump.c`, `src/tools/vgacap_frames.c`, `gst/gstvgadecode.c`.
 - Modify: `python/vgacap/stream.py`.
