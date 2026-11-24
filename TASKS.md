@@ -95,7 +95,9 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 - [x] `ttcap.emu`: emulated RP2040/RP2350 running the exact built script (vgacap PR #2)
 - [ ] Frame mode on a real RP2040 board (emulated only so far; the RP2040 chip boards report "safe_start failed")
 - [x] `vgacap-frames` reports measured sync polarities in frame mode (was the mode table's)
-- [ ] Task 4: board-side RLE and its measurement; Task 5: measurement write-up per mode and board
+- [x] Task 4 measurement: viper RLE 3.06 M samples/s on RP2350; the 8-byte `RLE ` pair caps the gain at +12%, a compact pair would give ~2x (`docs/research/2026-11-24-board-rle-throughput.md`)
+- [ ] DECISION FOR TIM: add a compact RLE chunk (u8 value + LEB128 run) to the vgacap format? Then build it (board viper encoder, C/Python readers, RTL encoder)
+- [ ] Task 5: measurement write-up per mode and board
 - [ ] Frame/window modes in `vgacapttsrc` / `ttcap demo`
 
 ## Milestone 7: C firmware and MicroPython module
