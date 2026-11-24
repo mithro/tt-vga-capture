@@ -4,6 +4,18 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **ps1.fpgas.online surveyed for missing hardware**, because the goal names
+  it. Only three hosts answered:
+  - pi3: Pi 4 with an FT2232, an Arty;
+  - pi20: Compute Module 5, nothing on USB;
+  - pi21: Pi 5 with a MicroPython USB device (serial de640cb1d3975a26)
+    belonging to another project's Arty CI rig. It refuses a raw REPL and
+    prints nothing, so it is not a Tiny Tapeout demo board running the SDK,
+    and nothing connects it to the Pi's GPIO. It was left as found.
+
+  So the four hardware-blocked paths stay blocked on both sites: RP2040
+  frame/window, BIO, a Pi 5 wired to a TT board, and the capture card.
+
 - **MicroPython C module on hardware (M7 done)**: with Tim's approval,
   fpga-1 was flashed with a firmware-region-only image, after backing up
   the region (identical to the stock v3.1.0 release) and all 65 files.
