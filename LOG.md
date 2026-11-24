@@ -4,6 +4,18 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **Switch check for the missing RP2040 boards**, from the PoE and link
+  state of both switches over SNMP from tweed:
+  - sw2 p3 and p5-p8, where the RP2040 boards tt03p5 to tt08 used to be,
+    draw 0 mW with the link down. Nothing is connected, so a power cycle
+    cannot help.
+  - The only powered ports with no link are sw2 p12 (1.9 W) and p18-p24
+    (the Orange Pi PC boards, not Tiny Tapeout hosts).
+  - p12 was power-cycled once (15:29:35Z, `/snmp/toggle`). After 3 minutes
+    it still had no Ethernet link at 1.9 W, the same stall as 2026-11-22.
+    It needs someone on site.
+  - So no RP2040 board is reachable at Welland or PS1.
+
 - **ps1.fpgas.online surveyed for missing hardware**, because the goal names
   it. Only three hosts answered:
   - pi3: Pi 4 with an FT2232, an Arty;
