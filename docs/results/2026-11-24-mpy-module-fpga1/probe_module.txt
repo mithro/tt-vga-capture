@@ -1,0 +1,7 @@
+version 3.4.0; MicroPython b006887db6 on 2026-11-24
+uname b006887db6 on 2026-11-24 (GNU 14.2.1 MinSizeRel)
+fs_blocks 824 block_size 4096 fs_bytes 3375104
+VERSION version=3.1.0
+revision=baaf0a2758b475d6e099b8ef65dbd1b5667ea0aa
+fw_sha256 debaebe7e5d4759feaf9384f5d4af62b8cbda6c966d627ca9c7fe9a8b726c8d5
+free 423184

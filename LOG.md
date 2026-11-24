@@ -4,6 +4,17 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **MicroPython C module on hardware (M7 done)**: with Tim's approval,
+  fpga-1 was flashed with a firmware-region-only image, after backing up
+  the region (identical to the stock v3.1.0 release) and all 65 files.
+  - `import vgacap` gave API 1.
+  - Frame, window and stream captures with `--firmware mpy-module` were
+    pixel-exact.
+  - The board's own original bytes were then flashed back. Firmware hash,
+    build and all 65 files verified identical; no power cycle needed.
+  - `docs/results/2026-11-24-mpy-module-fpga1/` holds the UF2 tooling that
+    made it reversible.
+
 - **MicroPython C module (M7)**: vgacap PR #10 and the firmware fork's
   `vgacap-module` branch. Written by a sub-agent; I reproduced its tests
   (651 passed, 18 module tests). It is a binding over the pico-sdk
