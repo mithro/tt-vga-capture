@@ -4,6 +4,24 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **Offline boards checked (Tim: "Check the boards which are offline").**
+  Every PoE port on both switches is administratively on, so nothing is
+  simply switched off. The offline devices are:
+  - sw2 p12, a Pi 3B+ at 1.9 W with no link. Cycled at 15:29:35Z; still
+    no link.
+  - sw2 p30 (`pi-sw2-p30`, the Raspberry Pi 5 hub host that FEL-boots the
+    Orange Pis, per fpgas.online-infra `docs/orange-pi/`). Link up at 5 W
+    but no ARP. Cycled at 17:32:22Z as its runbook says; after 5 minutes
+    still no ARP or SSH. That is an SD-boot or hardware fault, not
+    something a remote cycle can fix.
+  - sw2 p18-p24, the seven Orange Pi PC boards (Digilent Pmod HATs), which
+    are down because their hub is.
+
+  None of these carries a Tiny Tapeout board or an RP2040. sw1 p46 (link,
+  no PoE) is a Supermicro management port (MAC 0c:c4:7a:…). The RP2040
+  boards' old ports (sw2 p3, p5-p8) have nothing connected (0 mW, link
+  down).
+
 - **Switch check for the missing RP2040 boards**, from the PoE and link
   state of both switches over SNMP from tweed:
   - sw2 p3 and p5-p8, where the RP2040 boards tt03p5 to tt08 used to be,
