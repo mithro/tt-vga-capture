@@ -1,0 +1,8 @@
+15:16:09 uf2 ebc464253796851efbde1720885bd4bcc277bf7d03d75d6ff5d7265c611bc148
+15:16:09 before: "clients": 0
+15:16:09 fpgas-tt inactive
+15:16:10 mpremote bootloader rc=0
+15:16:13 bootsel drive: /dev/sda1; usb: Bus 001 Device 013: ID 2e8a:000f Raspberry Pi RP2350 Boot
+15:16:14 copied rc=0
+15:16:31 after: usb: Bus 001 Device 014: ID 2e8a:0005 MicroPython Board in FS mode; ttboard: lrwxrwxrwx 1 root root 7 Nov 24 15:16 /dev/ttboard -> ttyACM0
+15:16:34 fpgas-tt active

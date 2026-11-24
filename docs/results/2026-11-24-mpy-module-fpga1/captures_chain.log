@@ -1,0 +1,15 @@
+profile=rp2350-dbv3 project=None enable=None
+bytes=769804 samples=769600 chunks=4 seconds=0.986 overruns=0 dropped=0 rxstall=0 samples_per_s=780217 mem_free=417760
+  board: frame window=481 buffers=46 hsync_active=0 vsync_active=0
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=100000000
+wrote ../../../../tmp/m6/mpycap2/frame.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=385218 samples=384800 chunks=13 seconds=0.684 overruns=0 dropped=0 rxstall=0 samples_per_s=562368 mem_free=417632
+  board: frame window=48 buffers=1 hsync_active=0 vsync_active=0
+  board: frames=1 stalls=0 rxstall=0 sysclk_hz=100000000
+wrote ../../../../tmp/m6/mpycap2/window.vgacap
+note: each picture is assembled from 11 captured frames (48 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+profile=rp2350-dbv3 project=None enable=None
+bytes=2016774 samples=2015232 chunks=124 seconds=4.018 overruns=0 dropped=0 rxstall=0 samples_per_s=501595 mem_free=417632
+  board: overruns=0 rxstall=0 sysclk_hz=133000000
+wrote ../../../../tmp/m6/mpycap2/stream.vgacap

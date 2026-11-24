@@ -62,3 +62,31 @@ After restoring (`flash_restore.log`, `probe_after.txt`,
 - after an SDK restart: SDK 3.1.0, idle display `loaded`, clients 0.
 
 No power cycle was needed at any point.
+
+## Second flash: frame capture chained over heap blocks (vgacap PR #11)
+
+The same procedure, with the release asset
+`tt-demo-rp2350-vgacap-module-v3.1.1-dev-14a09314.uf2` (sha256 `6d2308a6…`),
+built from vgacap `mpy-chain` 5d84564. `frame()` now spreads a capture
+over several heap blocks and chains the DMA through them, as
+`frame_rp2.py` does.
+- Before flashing, the board again matched the backup: firmware
+  `69745ff3…` and all files identical.
+- After flashing, the firmware region was `5dc230b2…`, the image's own;
+  `import vgacap` gave API 1; the files were unchanged.
+
+| capture | board report | result |
+|---|---|---|
+| frame, 25 MHz, 2 pictures | **window 481 lines, buffers=46**, frames=2 stalls=0 | both pixel-exact: one captured frame per picture (was 3) |
+| window, 48 lines | frames=1 | pixel-exact |
+| stream, 500 kHz, 4 s | overruns 0, rxstall 0 | 3 frames pixel-exact; 2,015,232 samples unbroken |
+
+Then the original bytes were restored (`flash_restore_chain.log`,
+`probe_after_chain.txt`): the firmware hash, build date and all 65 files
+matched the first backup exactly; `vgacap` was absent; SDK 3.1.0; idle
+display `loaded`. No power cycle was needed.
+
+The same session also ran the pico-sdk RAM firmware from that branch,
+whose frame engine now goes through the same control-block path (one
+block plus the stopper). Frame (481 lines, 1 buffer), window and stream
+were all pixel-exact, 9 of 9 pictures.
