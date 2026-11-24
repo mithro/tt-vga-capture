@@ -54,8 +54,8 @@ in those numbers:
 
 ## Still open
 
-- **ASIC boards:** the firmware doesn't drive the project mux pins, so
-  whether the selected project survives the switch there is untested.
+- ~~ASIC boards: whether the selected project survives the switch.~~ It
+  doesn't, and the firmware now selects it itself; see below.
 - **RP2040:** no board is connected anywhere.
 - ~~Not wired to the firmware yet: `ttcap demo` and the GStreamer source.~~
   Done and run live; see below.
@@ -88,3 +88,40 @@ Results (`live_demo.log`):
 - No power cycle was needed.
 
 ![a frame from the live demo](live_demo_frame.png)
+
+## ASIC board: tt09 silicon, with `asic_select`
+
+Board: tt09 (pi-sw2-p10, USB serial 3b0880b48ee5c388, MicroPython
+670d775365, SDK 3.0.7). Design: `tt_um_rejunity_vga_logo` at 25.175 MHz.
+
+1. **First run, firmware as in PR #7 (`tt09_no_select.log`).** The stock
+   firmware's frame capture was clean. After the switch, the capture
+   firmware saw no sync at all, and its frame trigger waited until the
+   host timed out. The project-mux lines (GPIO 0/1/2) float while the
+   RP2350 is in its bootloader, so the mux comes back with nothing
+   selected.
+2. **The fix (vgacap PR #9, branch `fw-asic-select`).** A firmware command
+   `asic_select index=N` replays the stock SDK's
+   `ProjectMux.reset_and_clock_mux()`. `ttcap capture --firmware picosdk
+   --asic-index N` sends it, where N is the SDK's
+   `tt.shuttle.<name>.count`, 806 for the logo on tt09. It is never used
+   on an FPGA carrier, where GPIO 1 is the iCE40's `CRESET_B`. The
+   simulated board models the mux.
+3. **Second run, with `--asic-index 806` (`tt09_asic_select.log`,
+   `fw_hil_asic2.sh`).**
+   - 2 pictures, positive/positive sync, 0 glitches, frame window 481
+     lines in 1 buffer, no overruns.
+   - A clean logo; one picture is `tt09_logo_asic_select.png`.
+   - This design dithers randomly every frame, so it has no reference
+     render to compare against.
+   - The stock firmware needed 2 captured frames per picture on this
+     board; the capture firmware needs 1.
+
+Afterwards, tt09 was put back exactly as it was found:
+- 46 files hashed identical (`tt09_manifest_*.txt`);
+- MicroPython 670d775365 and SDK 3.0.7;
+- `fpgas-tt` restarted at 0 clients until its safe-start state was back to
+  the pre-existing `failed: the board did not take the safe state`;
+- no power cycle was needed.
+
+![tt09 logo through the capture firmware](tt09_logo_asic_select.png)
