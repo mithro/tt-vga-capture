@@ -1,0 +1,150 @@
+{"name": "tco-dual-rise-14", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-dual-rise-12", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-dual-rise-0", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-2", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p24", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 29.167, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-5", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual16-fall-p23", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 30.435, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-16", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-single-rise-sb-0", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-sb-3", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-dual-rise-5", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual-fall-p40", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 17.5, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-dual-rise-2", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-sb-12", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-dual-rise-16", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual16-rise-p23", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 30.435, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-fall-p40", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 17.5, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-sb-7", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-dual-rise-3", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-single-rise-p21", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 33.333, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "tco-single-rise-sb-4", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-sb-14", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-dual-rise-1", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-fall-p28", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-dual-rise-7", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-single-fall-p23", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 30.435, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p40", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 17.5, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-8", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual-fall-p24", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 29.167, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-sb-1", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p28", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p28", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p22", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 31.818, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual-rise-p22", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 31.818, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p24", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 29.167, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-10", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-dual-rise-6", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-single-rise-3", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p23", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 30.435, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p22", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 31.818, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p24", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 29.167, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p40", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 17.5, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-1", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-14", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-dual-rise-4", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-single-rise-p40", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 17.5, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-12", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual16-rise-p22", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 31.818, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p40", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 17.5, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-0", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-sb-6", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-dual-rise-8", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual16-rise-p28", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-fall-p24", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 29.167, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p24", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 29.167, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-fall-p28", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-4", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": false, "best_offset": 0, "best_matches": 144, "first_bad": 2, "got_near_bad": ["0x44", "0x20", "0x20", "0x3c", "0xfd", "0xe6", "0xe6", "0xc2", "0x6b", "0x30"], "expect_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30"]}
+{"name": "tco-single-rise-sb-8", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-single-rise-sb-5", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": false, "best_offset": 0, "best_matches": 144, "first_bad": 2, "got_near_bad": ["0x44", "0x20", "0x20", "0x3c", "0xfd", "0xe6", "0xe6", "0xc2", "0x6b", "0x30"], "expect_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30"]}
+{"name": "tco-single-rise-7", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual-fall-p22", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 31.818, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-sb-10", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "tco-single-rise-6", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual-rise-p28", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-fall-p23", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 30.435, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-single-rise-sb-2", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p23", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 30.435, "ok": true, "phase": "new", "offset": 0}
+{"name": "tco-dual-rise-10", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual-rise-p10", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 70.0, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual16-fall-p22", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 31.818, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p10", "rc": 0, "words": 55, "samples": 220, "pixclk_mhz": 70.0, "ok": false, "best_offset": 21, "best_matches": 8, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xfd", "0xf1", "0x30", "0xe", "0xdd", "0xe4", "0x34", "0xf"], "expect_near_bad": ["0xb", "0xd", "0x4", "0xc3", "0x6e", "0xd8", "0xe", "0x71", "0xe0", "0xfd"]}
+{"name": "rate-single-fall-p21", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 33.333, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual-fall-p21", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 33.333, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p21", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 33.333, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p21", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 33.333, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p20", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 35.0, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-single-fall-p20", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 35.0, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual16-fall-p21", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 33.333, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-fall-p20", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 35.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p20", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 35.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p20", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 35.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p18", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 38.889, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-dual16-fall-p20", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 35.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p18", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 38.889, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-single-rise-p11", "rc": 0, "words": 60, "samples": 240, "pixclk_mhz": 63.636, "ok": false, "best_offset": 8, "best_matches": 5, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xfd", "0xf1", "0x30", "0xe", "0xdd", "0xe4", "0x75", "0xa2"], "expect_near_bad": ["0x6b", "0x30", "0xf9", "0xe", "0xc7", "0xdd", "0x1", "0xe4", "0x88", "0x75"]}
+{"name": "rate-dual-fall-p11", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 63.636, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p13", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 53.846, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p11", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 63.636, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p18", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 38.889, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p11", "rc": 0, "words": 55, "samples": 220, "pixclk_mhz": 63.636, "ok": false, "best_offset": 21, "best_matches": 8, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xfd", "0xf1", "0x30", "0xe", "0xdd", "0xe4", "0x34", "0xf"], "expect_near_bad": ["0xb", "0xd", "0x4", "0xc3", "0x6e", "0xd8", "0xe", "0x71", "0xe0", "0xfd"]}
+{"name": "rate-dual16-rise-p11", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 63.636, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p16", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 43.75, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-single-rise-p17.5", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 40.0, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-dual16-rise-p18", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 38.889, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p12", "rc": 0, "words": 60, "samples": 240, "pixclk_mhz": 58.333, "ok": false, "best_offset": 1, "best_matches": 4, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xfd", "0xf1", "0x6b", "0xf9", "0xc7", "0x1", "0x88", "0x34"], "expect_near_bad": ["0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"]}
+{"name": "rate-dual-fall-p17.5", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 40.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-fall-p14", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 50.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-fall-p18", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 38.889, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p17.5", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 40.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p16", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 43.75, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p17.5", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 40.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p16", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 43.75, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p14", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 50.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p12", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 58.333, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p14", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 50.0, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-dual-rise-p13", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 53.846, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-rise-p14", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 50.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p17.5", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 40.0, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-dual16-fall-p16", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 43.75, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p10.5", "rc": 0, "words": 55, "samples": 220, "pixclk_mhz": 66.667, "ok": false, "best_offset": 21, "best_matches": 8, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xfd", "0xf1", "0x30", "0xe", "0xdd", "0xe4", "0x34", "0xf"], "expect_near_bad": ["0xb", "0xd", "0x4", "0xc3", "0x6e", "0xd8", "0xe", "0x71", "0xe0", "0xfd"]}
+{"name": "rate-dual-fall-p12", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 58.333, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p12", "rc": 0, "words": 60, "samples": 240, "pixclk_mhz": 58.333, "ok": false, "best_offset": 1, "best_matches": 4, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xfd", "0xf1", "0x6b", "0xf9", "0xc7", "0x1", "0x88", "0x34"], "expect_near_bad": ["0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"]}
+{"name": "rate-dual-fall-p16", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 43.75, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p16", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 43.75, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-single-rise-p14", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 50.0, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-dual-rise-p12", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 58.333, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-fall-p17.5", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 40.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-fall-p13", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 53.846, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-fall-p13", "rc": 0, "words": 120, "samples": 480, "pixclk_mhz": 53.846, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual16-fall-p14", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 50.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p10.5", "rc": 0, "words": 55, "samples": 220, "pixclk_mhz": 66.667, "ok": false, "best_offset": 21, "best_matches": 8, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xfd", "0xf1", "0x30", "0xe", "0xdd", "0xe4", "0x34", "0xf"], "expect_near_bad": ["0xb", "0xd", "0x4", "0xc3", "0x6e", "0xd8", "0xe", "0x71", "0xe0", "0xfd"]}
+{"name": "rate-dual16-fall-p18", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 38.889, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-dual-rise-p10.5", "rc": 0, "words": 119, "samples": 476, "pixclk_mhz": 66.667, "ok": false, "best_offset": 2, "best_matches": 468, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9", "0xe"]}
+{"name": "rate-dual16-fall-p11", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 63.636, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-fall-p13", "rc": 0, "words": 65, "samples": 260, "pixclk_mhz": 53.846, "ok": false, "best_offset": 0, "best_matches": 5, "first_bad": 2, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x30", "0xe", "0xdd", "0xe4", "0x75"], "expect_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30"]}
+{"name": "rate-dual16-fall-p12", "rc": 0, "words": 240, "samples": 480, "pixclk_mhz": 58.333, "ok": true, "phase": "new", "offset": 0}
+{"name": "rate-single-rise-p13", "rc": 0, "words": 70, "samples": 280, "pixclk_mhz": 53.846, "ok": false, "best_offset": 26, "best_matches": 6, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x3c", "0xe6", "0xc2", "0x6b", "0xf9", "0xc7", "0x1", "0xe4"], "expect_near_bad": ["0xd8", "0xe", "0x71", "0xe0", "0xfd", "0x77", "0xb0", "0x76", "0x70", "0xeb"]}
+{"name": "rate-dual16-rise-p10.5", "rc": 0, "words": 239, "samples": 478, "pixclk_mhz": 66.667, "ok": false, "best_offset": 2, "best_matches": 470, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9", "0xe"]}
+{"name": "rate-dual-fall-p10.5", "rc": 0, "words": 119, "samples": 476, "pixclk_mhz": 66.667, "ok": false, "best_offset": 1, "best_matches": 472, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"], "expect_near_bad": ["0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"]}
+{"name": "rate-single-rise-p10", "rc": 0, "words": 55, "samples": 220, "pixclk_mhz": 70.0, "ok": false, "best_offset": 21, "best_matches": 8, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xfd", "0xf1", "0x30", "0xe", "0xdd", "0xe4", "0x34", "0xf"], "expect_near_bad": ["0xb", "0xd", "0x4", "0xc3", "0x6e", "0xd8", "0xe", "0x71", "0xe0", "0xfd"]}
+{"name": "rate-dual16-fall-p10.5", "rc": 0, "words": 239, "samples": 478, "pixclk_mhz": 66.667, "ok": false, "best_offset": 1, "best_matches": 474, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"], "expect_near_bad": ["0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"]}
+{"name": "tco-single-rise-sb-16", "rc": 0, "words": 48, "samples": 192, "pixclk_mhz": 25.0, "ok": true, "phase": "prev", "offset": 0}
+{"name": "rate-dual-fall-p10", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 70.0, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual16-rise-p10", "rc": 0, "words": 200, "samples": 400, "pixclk_mhz": 70.0, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual16-fall-p10", "rc": 0, "words": 200, "samples": 400, "pixclk_mhz": 70.0, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-single-rise-p9", "rc": 0, "words": 45, "samples": 180, "pixclk_mhz": 77.778, "ok": false, "best_offset": 1, "best_matches": 4, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xe6", "0x6b", "0xe", "0xdd", "0x88", "0xa2", "0xd", "0xc3"], "expect_near_bad": ["0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"]}
+{"name": "rate-single-fall-p9", "rc": 0, "words": 45, "samples": 180, "pixclk_mhz": 77.778, "ok": false, "best_offset": 1, "best_matches": 4, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xe6", "0x6b", "0xe", "0xdd", "0x88", "0xa2", "0xd", "0xc3"], "expect_near_bad": ["0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"]}
+{"name": "rate-dual-rise-p9", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 77.778, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual16-rise-p9", "rc": 0, "words": 200, "samples": 400, "pixclk_mhz": 77.778, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual16-fall-p9", "rc": 0, "words": 200, "samples": 400, "pixclk_mhz": 77.778, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual-fall-p9", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 77.778, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-single-rise-p8", "rc": 0, "words": 45, "samples": 180, "pixclk_mhz": 87.5, "ok": false, "best_offset": 1, "best_matches": 4, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xe6", "0x6b", "0xe", "0xdd", "0x88", "0xa2", "0xd", "0xc3"], "expect_near_bad": ["0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"]}
+{"name": "rate-single-fall-p8", "rc": 0, "words": 45, "samples": 180, "pixclk_mhz": 87.5, "ok": false, "best_offset": 1, "best_matches": 4, "first_bad": 0, "got_near_bad": ["0x44", "0x82", "0xe6", "0x6b", "0xe", "0xdd", "0x88", "0xa2", "0xd", "0xc3"], "expect_near_bad": ["0x20", "0x82", "0x3c", "0xfd", "0xe6", "0xf1", "0xc2", "0x6b", "0x30", "0xf9"]}
+{"name": "rate-dual-rise-p8", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 87.5, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual-fall-p8", "rc": 0, "words": 100, "samples": 400, "pixclk_mhz": 87.5, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual16-rise-p8", "rc": 0, "words": 200, "samples": 400, "pixclk_mhz": 87.5, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "rate-dual16-fall-p8", "rc": 0, "words": 200, "samples": 400, "pixclk_mhz": 87.5, "ok": false, "best_offset": 48, "best_matches": 13, "first_bad": 0, "got_near_bad": ["0x44", "0x20", "0x82", "0x3c", "0xe6", "0xf1", "0xc2", "0x6b", "0xf9", "0xe"], "expect_near_bad": ["0xff", "0xc9", "0x11", "0xf5", "0x7c", "0xce", "0xd4", "0x58", "0xbb", "0xbf"]}
+{"name": "long-dual-fall-40MHz", "rc": 0, "words": 1200, "samples": 4800, "pixclk_mhz": 40.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "long-single-fall-25MHz", "rc": 0, "words": 1200, "samples": 4800, "pixclk_mhz": 25.0, "ok": true, "phase": "new", "offset": 0}
+{"name": "long-dual16-dabao-fall-40MHz", "rc": 0, "words": 2400, "samples": 4800, "pixclk_mhz": 40.0, "ok": true, "phase": "new", "offset": 0}

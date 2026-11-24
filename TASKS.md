@@ -117,4 +117,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 
 - [ ] RP1 backend (needs a Pi 5 wired to a TT board; none on the site as of 2026-11-24 -- checked daily; p4 Pi 5 has no board yet, p48 unpowered)
 - [ ] BIO backend built against the BIO simulator (Tim, 2026-11-24: fine to build against it)
+  - [x] Research note + capture programs passing in `bio-sim` (`docs/research/2026-11-24-bio-capture-feasibility.md`)
+  - [ ] FIFO drain path (BDMA core or host `RXFn`) in the full-SoC Verilator flow
+  - [ ] Firmware + host transport (vgacap chunks over USB HS)
 - [ ] Comparison against a USB VGA capture card (Tim: will appear on tinytapeout.fpgas.online, with a camera on a VGA screen; checked daily)

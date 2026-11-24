@@ -24,13 +24,34 @@ Newest entries at the top. Dates are ISO 8601.
   board program on the emulated RP2350, pins driven by each calibration
   design's RTL, all 9 cases pixel-exact. Installed iverilog on big-storage
   (apt) for it.
-- No RP2040 board is reachable: the only one (tt04, SDK 2.0.4) is on p48,
-  which has no power. RP2040 frame/window capture is emulated only.
+- No RP2040 board is reachable anywhere: the site lists tt04 (SDK 2.0.4) at
+  10.21.2.48, but switch 2 port 48 is the label-station port
+  (fpgas.online-poe #18), PoE on with nothing drawing; a PoE cycle changed
+  nothing. PS1 hosts only Artys. RP2040 frame/window capture is emulated
+  only.
+- **RP1 (Pi 5) capture works on hardware** (vgacap PR #3, `capture-rp1`):
+  loopback on pi-sw2-p4 (Pi 5, nothing on its header) -- a 4,194,304-sample
+  counter exact and the 640x480 bars picture pixel-identical, at 500 k
+  samples/s, the stock rp1-pio driver's lossless ceiling. Six driver
+  quirks found the hard way (16-bit transfer size, RX threshold vs burst,
+  TX join, stale first burst, teardown that wedges the DMA, no NULL
+  read-ahead); p4 rebooted six times to recover from my wedges, restored
+  as found afterwards.
 - Released boards are now restored first (Ctrl-B, Ctrl-D; vgacap
   `tools/board_restart.py`): my leftover counter bitstream on fpga-4 held up
   the harness session's census for 25 minutes.
-- BIO: research agent looking for the BIO simulator and what it models
-  (branch `bio-research` here).
+- **BIO capture feasibility, in simulation** (branch `bio-research`).
+  Built `baochip/bio-sim` (Verilator model of the chip's own BIO RTL) in
+  Docker; Verilator 5.020 needed `-j 8` instead of `-j 0`. Wrote BIO
+  capture programs and a driver that injects a clock + uo_out waveform:
+  one core packing bytes captures up to 30.4 MHz, a sampler core + packer
+  core up to 63.6 MHz (fclk 700 MHz); 4,800-sample runs at 40 MHz
+  bit-exact, including a Dabao-pin layout (16-bit samples). Sample point is
+  4-7 ns after the clock edge. Host/BDMA FIFO drain rate is not modelled
+  and is the open question. Note:
+  `docs/research/2026-11-24-bio-capture-feasibility.md`.
+  Re-run independently with another seed: 4,800 samples bit-exact at
+  40 MHz. No BIO hardware (Dabao) exists on fpgas.online.
 
 - **Milestone 6 Tasks 1-3 done, on hardware.** Prelude split (vgacap PR
   #1, HIL 9/9 on fpga-1). Frame/window capture (PR #2): all five
