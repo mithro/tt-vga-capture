@@ -141,7 +141,7 @@ It writes these on vgacap branches; this project reviews them before merge.
 - [ ] Trace container: zstd seekable blocks with `BLKH` block headers, seek-table rebuild for cut-off traces
 - [ ] `META` chunks (opening run parameters, closing status) in the C writer/reader and the Python mirror
 - [ ] Trace writer with an inline push and a double-buffered compressor thread (host-only target)
-- [ ] Shared 12-mode table (tb.cpp's five added, marked so `vgaframe_mode_match_cpl` skips them); ttcap `--vga-mode` rejects the marked modes
+- [x] Shared 12-mode table (tb.cpp's five added, marked so `vgaframe_mode_match_cpl` skips them); ttcap `--vga-mode` rejects the marked modes (vgacap m10-modes 8f47687, local)
 - [ ] libvgaframe raw-frame callback at every frame boundary, buffers cleared at every boundary
 - [ ] Shared calibration and frame clock (port of tb.cpp:191-230, 361-378)
 - [ ] `vgacap-sample`: both samplers and the hash methods in one pass; stores, `frames.txt`, hash files, PNG pipe
