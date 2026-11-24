@@ -8,6 +8,8 @@ recommendations, in "Decisions for Tim" at the end.
 
 Decision (2026-11-25): Tim left (a)-(c) to the recommendations, which are adopted: RUNS; board adoption decided after Milestone 10; skip-by-length.
 
+Amended 2026-11-25 during implementation review (controller's Ruling K): which losses make n unknown; the discard report string; `skipped` for a skip by length.
+
 Sources, cited by short name below:
 
 - **spec**: `tinytapeout-vga-videos/docs/superpowers/specs/2026-11-24-raw-frames-and-hash-methods-design.md`
@@ -212,10 +214,15 @@ sample is a clock; with 2 a clock is two samples. The comment on
 `VGACAP_EV_RUN` in stream.h:125 says "clocks" and is corrected to
 "samples".
 
-After any reported loss of data in a stream with a clock bit, `n` is
-unknown. The reader then discards runs without delivering them until the next
-`BLKH`, and counts them in the loss report, so a lost chunk never gives later
-runs a wrong clock bit. (The `BLKH` gap report below is the one exception:
+After a reported loss that could have carried samples, in a stream with a
+clock bit, `n` is unknown. Those losses are: a byte-wise resync; a `RUNS`
+content error; a bad `BLKH`; a forbidden `RAW `, `FRAM`, `EVNT` or `RLE `
+chunk; and an unknown tag (a clock stream forbids these, and they could be
+samples). A `META` skipped for "bad META length" or "bad META text", and any
+`TIME` chunk, carry no samples and leave `n` known. While `n` is unknown the
+reader discards runs without delivering them until the next `BLKH`, and
+counts them in the loss report, so a lost chunk never gives later runs a
+wrong clock bit. (The `BLKH` gap report below is the one exception:
 it reports and adopts `first_sample` in the same step, so `n` is known
 again at once.) Streams without a clock bit are unaffected.
 
@@ -321,8 +328,13 @@ version 1 chunk handling is unchanged.
 | adjacent equal values inside one `RUNS` chunk | "RUNS adjacent pairs have equal values" |
 | `BLKH` length not 8 | "bad BLKH length" |
 | `BLKH` `first_sample` differs from the running `n` | "BLKH first_sample does not follow" |
+| a `RUNS` chunk discarded while `n` is unknown (reported once for each chunk discarded) | "RUNS discarded: sample position unknown until BLKH" |
 | `META` length 0 or above 4096 | "bad META length" |
 | `META` text malformed | "bad META text" |
+
+For a skip by length, `skipped` is 8 + the chunk's length (the chunk header
+and payload), even when some of its pairs were already delivered before a
+mid-chunk error.
 
 Header faults use the table under "VGCH version 2" instead: they are
 rejected as other bad VGCH fields are, since without a good header nothing
