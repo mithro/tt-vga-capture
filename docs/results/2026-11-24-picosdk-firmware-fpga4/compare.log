@@ -1,0 +1,10 @@
+ref_frame f-0000.ppm: PASS: 307200 pixels identical to the reference render
+fw_frame f-0000.ppm: PASS: 307200 pixels identical to the reference render
+fw_frame f-0001.ppm: PASS: 307200 pixels identical to the reference render
+fw_window f-0000.ppm: PASS: 307200 pixels identical to the reference render
+fw_stream f-0000.ppm: PASS: 307200 pixels identical to the reference render
+fw_stream f-0001.ppm: PASS: 307200 pixels identical to the reference render
+fw_stream f-0002.ppm: PASS: 307200 pixels identical to the reference render
+fw_stream f-0003.ppm: PASS: 307200 pixels identical to the reference render
+fw_stream f-0004.ppm: PASS: 307200 pixels identical to the reference render
+fw_stream f-0005.ppm: PASS: 307200 pixels identical to the reference render

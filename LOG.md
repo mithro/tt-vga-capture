@@ -4,6 +4,16 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **pico-sdk capture firmware on hardware (M7)**: vgacap PR #7, written by
+  a sub-agent against a simulated board, run here on fpga-4 from RAM
+  (no_flash UF2 via BOOTSEL; flash never written).
+  - Whole frame in one buffer (481 lines), 2 pictures pixel-exact at 25 MHz.
+  - Window pixel-exact.
+  - 750 kHz streaming of 2,998,272 samples, unbroken.
+  - The iCE40 kept its configuration through BOOTSEL.
+  - The board's 53 files hashed identical before and after; it was back
+    on stock firmware via watchdog reboot, with no power cycle.
+
 - **PIO run counting on hardware (M8)**: `ttcap capture --mode rle`
   (vgacap PR #6, written by a sub-agent on the emulator, hardware-checked
   here). On fpga-4, every capture was checked sample for sample:

@@ -1,0 +1,2 @@
+fw_stream.vgacap: 2998272 samples, sample_bits=8; board said: overruns=0 rxstall=0 sysclk_hz=132000000
+PASS: all 2998272 samples are an unbroken stretch of fixed, from clock 28694 (line 35, x 694)

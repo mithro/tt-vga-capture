@@ -104,7 +104,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 
 ## Milestone 7: C firmware and MicroPython module
 
-- [~] pico-sdk firmware with the command protocol (vgacap branch `fw-picosdk`, in progress 2026-11-24: no_flash UF2 run from SRAM, so a board's stock flash is never touched)
+- [x] pico-sdk firmware with the command protocol (vgacap PR #7, `ttcap capture --firmware picosdk`): simulated-board tests, and on fpga-4 from RAM (no_flash UF2 via BOOTSEL) frame/window/stream pixel-exact, board files unchanged (`docs/results/2026-11-24-picosdk-firmware-fpga4/`); ASIC boards and `ttcap demo`/GStreamer wiring still open
 - [ ] Fork tt-micropython-firmware, USER_C_MODULE
 - [x] Direct serial ownership on the Pi (stop `fpgas-tt`, capture, restart): fpga-4 stream + 25 MHz frame pixel-exact, tt09 silicon frame mode; no throughput gain over the bridge on either Pi (`docs/results/2026-11-24-direct-serial-fpga4/`)
 

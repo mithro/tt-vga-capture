@@ -1,0 +1,60 @@
+# The pico-sdk capture firmware on fpga-4: pixel-exact, run from RAM
+
+Date: 2026-11-24. Milestone 7, first item.
+- **Board:** fpga-4 (pi-sw2-p35, USB serial a2961e5cac65b25f, demo board
+  v3, RP2350B, stock MicroPython b006887db6 with SDK 3.1.0, FabricFox
+  iCE40UP5K).
+- **Firmware:** vgacap branch `fw-picosdk` (3203e08, then 8b85ee7), built
+  against pico-sdk 2.2.0 as a **no_flash** UF2, so it runs from SRAM and
+  never writes flash.
+
+## What was done (`fw_hil.sh`, run on the board's Pi)
+
+1. Bars was enabled through the daemon at 25 MHz. `fpgas-tt` was stopped
+   only while `/health` showed 0 clients; an EXIT trap starts it again.
+2. A reference frame capture was taken with the stock firmware, as today.
+3. `ttcap reboot serial:/dev/ttboard --to bootsel` put the board in the
+   RP2350 boot ROM (USB 2e8a:000f, drive `RP2350`). The UF2 was copied to
+   it, and the firmware enumerated as 2e8a:0009 two seconds later.
+4. `ttcap capture --firmware picosdk ...`: frame (25 MHz, 2 pictures),
+   window (25 MHz, 48 lines) and streaming (750 kHz, 4 s).
+5. `ttcap reboot ... --firmware picosdk` (a watchdog reset) brought back
+   the stock firmware, `/dev/ttboard`, and then `fpgas-tt`.
+
+`fpgas-tt` was down 12:38:51–12:39:10Z, 19 s. No power cycle was needed.
+
+## Results (`fw_hil.log`, `compare.log`, `stream_continuity.log`)
+
+| capture | firmware | board report | result |
+|---|---|---|---|
+| frame, 25 MHz | stock MicroPython | window=475 (2 frames per picture), 79 buffers | pixel-exact |
+| frame, 25 MHz, 2 pictures | **pico-sdk** | window=**481 buffers=1**, frames=2 stalls=0 rxstall=0, sysclk 100 MHz | both pixel-exact |
+| window, 48 lines, 25 MHz | **pico-sdk** | frames=1, 11 captured frames | pixel-exact |
+| stream, 750 kHz, 4 s | **pico-sdk** | 2,998,272 samples, 746 k samples/s, overruns 0, rxstall 0 | 6 frames pixel-exact; all samples one unbroken stretch |
+
+Two of the firmware's differences from the MicroPython path are visible
+in those numbers:
+- **The whole frame fits one buffer.** The firmware owns a 440 KB capture
+  buffer, so a 640x480 picture is one captured frame. MicroPython's
+  fragmented heap needed 2 frames and 79 buffers.
+- **Frame mode delivers about 0.74 M samples/s**, against 0.28 M from the
+  stock firmware on the same board and link.
+
+## Things this settled
+
+- **The iCE40 keeps its configuration** while the RP2350 is in the boot
+  ROM and switches to this firmware. The firmware's README had flagged
+  this as an assumption, because `CRESET_B` (GPIO 1) has only the pad's
+  pull-down then. Every capture after the switch was exact.
+- **The board was left exactly as it was.** A SHA-256 of every file on its
+  filesystem was taken before and after (`board_manifest_before.txt`,
+  `board_manifest_after.txt`): 53 files, identical. After an SDK restart it
+  reported MicroPython b006887db6 and `tt.sdk_version=3.1.0`, and the
+  daemon's idle display returned to `loaded`.
+
+## Still open
+
+- **ASIC boards:** the firmware doesn't drive the project mux pins, so
+  whether the selected project survives the switch there is untested.
+- **RP2040:** no board is connected anywhere.
+- **Not wired to the firmware yet:** `ttcap demo` and the GStreamer source.
