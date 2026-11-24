@@ -106,7 +106,7 @@ Plan: `docs/superpowers/plans/2026-09-15-m6-wholeframe-and-compression.md`.
 
 - [ ] pico-sdk firmware with the command protocol
 - [ ] Fork tt-micropython-firmware, USER_C_MODULE
-- [ ] Direct serial ownership on the Pi (stop `fpgas-tt`, capture, restart)
+- [x] Direct serial ownership on the Pi (stop `fpgas-tt`, capture, restart): fpga-4 stream + 25 MHz frame pixel-exact, tt09 silicon frame mode; no throughput gain over the bridge on either Pi (`docs/results/2026-11-24-direct-serial-fpga4/`)
 
 ## Milestone 8: compression research
 

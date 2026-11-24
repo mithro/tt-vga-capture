@@ -1,0 +1,13 @@
+before: "clients": 0
+stopping 2026-11-24T11:27:18Z
+fpgas-tt inactive
+profile=rp2350-dbv3 project=None enable=None
+bytes=1154700 samples=1154400 chunks=8 seconds=2.791 overruns=0 dropped=0 rxstall=0 samples_per_s=413553 mem_free=420176
+  board: frame window=475 buffers=70 hsync_active=0 vsync_active=0
+  board: frames=3 stalls=0 rxstall=0 sysclk_hz=100000000
+wrote /home/pi/vgacap-run/direct_frame.vgacap
+note: each picture is assembled from 2 captured frames (475 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+rc=0 for: capture serial:/dev/ttboard --mode frame --clock-hz 25000000 --frames 3 --out /home/pi/vgacap-run/direct_frame.vgacap
+-rw-r--r-- 1 pi pi 1154835 Nov 24 11:27 /home/pi/vgacap-run/direct_frame.vgacap
+after: fpgas-tt active
+restarted 2026-11-24T11:27:22Z

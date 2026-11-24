@@ -4,6 +4,21 @@ Newest entries at the top. Dates are ISO 8601.
 
 ## 2026-11-24
 
+- **Direct serial ownership on the Pi (M7)**
+  (`docs/results/2026-11-24-direct-serial-fpga4/`): ttcap on the board's own
+  Pi (static armv7 uv, the Pi's Python 3.11) with `fpgas-tt` stopped only
+  while `/health` showed no clients, and started again from an EXIT trap.
+  - fpga-4: streaming bars at 750 kHz pixel-exact; frame mode at 25 MHz,
+    3 of 3 pictures pixel-exact.
+  - tt09 silicon: frame mode on the VGA logo at 25.175 MHz, clean.
+  - Throughput is the same on both paths (fpga-4 700 vs 713 KB/s; tt09's Pi
+    179 vs 179 KB/s): the Pi's USB is the limit, not the bridge.
+  - Lesson: on an ASIC board, restart the SDK before fpgas-tt comes back,
+    or its safe-start state reports the capture's design.
+- Hardware survey from tweed (every Pi's `/health`): ASIC boards on sw2
+  p9/p10/p13/p14 and FPGA boards on p33-p36, all RP2350; no RP2040 board;
+  Pi 5s on p41-p47 with nothing attached.
+
 - **RTL capture framer on a real FPGA, at 250 kHz and at 25 MHz**
   (`docs/results/2026-11-24-rtl-framer-fpga4/`): vgacap's Migen
   `vgacap_raw_framer` (PR #4) inside tt-vga-testpatterns'

@@ -1,0 +1,18 @@
+before: "clients": 0
+stopping 2026-11-24T11:30:03Z
+fpgas-tt inactive
+Installed 2 packages in 17ms
+bytes=1000000 seconds=5.478 kbytes_per_s=178.3 corrupt=no
+rc=0 for: throughput serial:/dev/ttboard
+bytes=1000000 seconds=5.452 kbytes_per_s=179.1 corrupt=no
+rc=0 for: throughput serial:/dev/ttboard
+profile=rp2350-dbv3 project=tt_um_rejunity_vga_logo enable=index
+bytes=769852 samples=769600 chunks=6 seconds=5.094 overruns=0 dropped=0 rxstall=0 samples_per_s=151081 mem_free=405856
+  board: frame window=434 buffers=17 hsync_active=1 vsync_active=1
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=101000000
+wrote /home/pi/vgacap-run/direct_logo.vgacap
+note: each picture is assembled from 2 captured frames (434 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+rc=0 for: capture serial:/dev/ttboard --project tt_um_rejunity_vga_logo --mode frame --clock-hz 25175000 --frames 2 --out /home/pi/vgacap-run/direct_logo.vgacap
+-rw-r--r-- 1 pi pi 770019 Nov 24 11:30 /home/pi/vgacap-run/direct_logo.vgacap
+after: fpgas-tt active
+restarted 2026-11-24T11:30:28Z

@@ -1,0 +1,14 @@
+before: "clients": 0
+stopping 2026-11-24T11:26:43Z
+fpgas-tt inactive
+Installed 2 packages in 11ms
+bytes=1000000 seconds=1.395 kbytes_per_s=700.0 corrupt=no
+rc=0 for: throughput serial:/dev/ttboard
+profile=rp2350-dbv3 project=None enable=None
+bytes=2836574 samples=2834432 chunks=174 seconds=4.021 overruns=0 dropped=0 rxstall=0 samples_per_s=704941 mem_free=423024
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote /home/pi/vgacap-run/direct_bars.vgacap
+rc=0 for: capture serial:/dev/ttboard --clock-hz 750000 --seconds 4 --out /home/pi/vgacap-run/direct_bars.vgacap
+-rw-r--r-- 1 pi pi 2836659 Nov 24 11:26 /home/pi/vgacap-run/direct_bars.vgacap
+after: fpgas-tt active
+restarted 2026-11-24T11:26:52Z
