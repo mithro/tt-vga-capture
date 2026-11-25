@@ -224,3 +224,89 @@ measured 6.8 ns/clock above. Levers (hypotheses, unmeasured): a batched run
 reader (arrays of runs per block instead of a callback per run), a cheaper
 frame-clock push for runs that cannot end a vsync pulse, and decoding blocks
 on a second thread.
+
+## vgacap-sample fast path (M10 Task 16a)
+
+### Profile (Step 1)
+
+gprof (`-pg`, Release) of Task 16's `vgacap-sample` (12dfaf7), both
+samplers, busy trace of 1.5e8 clocks (110.2 million runs; 352 frames per
+sampler, one distinct), 11.6 s of samples:
+
+| part | share | notes |
+|---|---|---|
+| stream reader's per-byte parse (`vgacap_reader_feed`, RUNS bytes, events) | 42.7% | 8 events a pair |
+| run callbacks (`on_read`, `on_run`) | 8.2% | one indirect call a run |
+| tb-v1 (`tbv1_push`) | 12.5% | |
+| centre-v1 per run (`centrev1_push`, `vgaframe_push64`, `vgaframe_push`) | 8.9% | |
+| centre-v1 per frame (`on_raw`: pick, activity map, colour changes) | 10.0% | a modulo per colour change |
+| SHA-256 (`sha256_transform`, `sha256_update`) | 12.3% | 704 frames of 307,200 bytes |
+| frame clock (`vgafc_push`) | 1.8% | |
+| zstd decode (sequences, XXH64) | 2.2% | |
+| calibration, store compression | < 0.1% | one distinct frame: one store write |
+
+### Changes (Step 3), each measured on its own
+
+Busy trace, 1.5e8 clocks, both samplers, Release, interleaved A/B, median of
+3 (host load 23 to 25 of 88 unless noted). Every change left every output
+byte-identical (below).
+
+| change (vgacap commit) | ns/clock before -> after |
+|---|---|
+| batched run reader: `vgacap_trace_read_runs`, RUNS pairs decoded straight into the batch, the stream reader only for other or faulty chunks (9915e50) | 86.7 -> 51.5 |
+| a frame with the last frame's pixels (memcmp) is not hashed again (9e51ac0) | 51.7 -> 43.5 |
+| centre-v1's per-frame loops branch-free and vectorisable, off-grid by table (0337337) | 42.4 -> 36.5 |
+| batch as one array of runs; the decode loop on locals (0d77503) | 37.8 -> 34.6 |
+| one call a batch to the frame clock and each sampler, cut at frame-clock ends to keep frame order (701973c) | 35.5 -> 28.2 (load 75 to 111) |
+| centre-v1 calls `vgaframe_push` directly for 32-bit runs (9c5f0fa) | 29.0 -> 26.9, again 27.0 -> 25.8 |
+| tb-v1's colour from a 256-entry table (fceeafb) | 25.9 -> 25.2 (tb-v1 alone 17.5 -> 16.1) |
+
+Tried and dropped (no gain, A/B): tb-v1's pixel index from a per-x_clock
+table instead of the division (tb-v1 alone 19.06 -> 19.20, and 17.20 ->
+17.20 with the next change); tb-v1's loop state in locals for a batch
+(17.26 -> 18.33); the whole build with LTO (27.7 -> 31.7).
+
+Not done: a faster SHA-256 (the busy run hashes 2 frames once the repeat
+test is in; it matters only for mostly-distinct videos, see below); a faster
+store level (one distinct frame: one store write); tb-v1 reading the frame
+clock's ends (its edge test is one compare a run, below the noise).
+
+### Before and after, 1.5e9 clocks
+
+Release builds, interleaved (Task 16's 12dfaf7 built into a separate
+directory, then the final fceeafb, three of each), median of 3, busy trace
+of 1.5e9 clocks (16,035,812 bytes, 462 blocks), host load 24 to 31 of 88:
+
+| run | 12dfaf7 ns/clock | fceeafb ns/clock | speed-up |
+|---|---|---|---|
+| both samplers | 85.9 | 25.1 | 3.4x |
+| `--sampler tb-v1` | 61.7 | 16.2 | 3.8x |
+| `--sampler centre-v1` | 66.1 | 15.8 | 4.2x |
+
+Every output file of each pair of runs was the same (`diff -r`).
+
+### Where the time goes now
+
+gprof of the final build (both samplers, 1.5e8 clocks): tb-v1 40%,
+`vgaframe_push` 16%, the trace decode loop 13%, `on_raw` 8%, the batch
+conversion 6%, centre-v1's batch loop 6%, zstd 5%, the frame clock 2%. By
+experiment (Release, 1.5e8): reading, calibration, conversion and the frame
+clock with no sampler work take about 8 ns/clock (the read alone, zstd's
+1.25 included, 5.4); tb-v1 adds about 8, centre-v1 about 9 (libvgaframe
+alone is 7.0 on this host today, bench-runs).
+
+### Against the 11 ns/clock budget
+
+Not met: both samplers take about 25 ns/clock, 2.3x the budget. libvgaframe
+(7.0) and the read (5.4) alone already exceed 11. What is left to the owner,
+as the brief says: running the second sampler only on request for cpp = 1
+projects where both agree (tb-v1 alone is about 16 ns/clock, centre-v1 alone
+about 17), and threads (the samplers on their own threads, fed by the
+reader, would bound the wall time by the slowest stage, about 9 to 10
+ns/clock, not the CPU time).
+
+The busy picture is static, so after the repeat test it hashes nothing. A
+mostly-distinct video still pays SHA-256 on every frame: at 156 MB/s that is
+about 4.7 ns/clock a sampler at 640x480, cpp 1, plus the store's zstd
+compression; a faster SHA-256 (none of the vendored kind on this Skylake
+host has SHA-NI) or hashing on a thread is the lever there.
