@@ -300,8 +300,8 @@ alone is 7.0 on this host today, bench-runs).
 Not met: both samplers take about 25 ns/clock, 2.3x the budget. libvgaframe
 (7.0) and the read (5.4) alone already exceed 11. What is left to the owner,
 as the brief says: running the second sampler only on request for cpp = 1
-projects where both agree (tb-v1 alone is about 16 ns/clock, centre-v1 alone
-about 17), and threads (the samplers on their own threads, fed by the
+projects where both agree (tb-v1 alone is 16.2 ns/clock, centre-v1 alone
+15.8, as above), and threads (the samplers on their own threads, fed by the
 reader, would bound the wall time by the slowest stage, about 9 to 10
 ns/clock, not the CPU time).
 
@@ -310,3 +310,12 @@ mostly-distinct video still pays SHA-256 on every frame: at 156 MB/s that is
 about 4.7 ns/clock a sampler at 640x480, cpp 1, plus the store's zstd
 compression; a faster SHA-256 (none of the vendored kind on this Skylake
 host has SHA-NI) or hashing on a thread is the lever there.
+
+### After review fixes and Ruling W (vgacap 3ed8379, 6752b81)
+
+The overflow fix (a run wrapping past 2^64 now takes the clipping path)
+costs about 0.4 ns/clock: centre-v1 alone at 1.5e9 clocks, interleaved
+median of 3 (load 25 to 30), was 16.3 at fceeafb and 16.7 after. Since Ruling W,
+vgacap-sample's default is centre-v1 alone (tb-v1 only on request): the
+default on the 1.5e9-clock busy trace takes 25.36 s, **16.9 ns/clock**
+(median of 3, 25.31 to 25.72 s, load 24), still 1.5x the 11 ns/clock budget.
