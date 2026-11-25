@@ -1,14 +1,8 @@
 # tt-vga-capture
 
-The tracking repository for capturing the VGA output of
-[Tiny Tapeout](https://tinytapeout.com) designs (the `uo_out` pins that
-drive the [Tiny VGA Pmod](https://github.com/mole99/tiny-vga)) and turning
-it into pictures and video. The captures come from several capture sources
-(the Tiny Tapeout demo board's RP2040 or RP2350 microcontroller, a
-Raspberry Pi 5, an FPGA design, simulators), which all write one stream
-format, the [vgacap stream](docs/research/2026-09-15-stream-format.md).
-Shared tools reconstruct the frames from it, check them pixel by pixel and
-play them through [GStreamer](https://gstreamer.freedesktop.org).
+The tracking repository for [vgacap](https://github.com/mithro/vgacap),
+which captures the VGA output of [Tiny Tapeout](https://tinytapeout.com)
+designs and turns it into pictures and video.
 
 This repository holds the design, research, measurements, results, work
 log and task list. The code lives in sibling repositories:
@@ -31,7 +25,7 @@ log and task list. The code lives in sibling repositories:
 | [`docs/superpowers/plans/`](docs/superpowers/plans/) | implementation plans |
 | [`docs/design/`](docs/design/) | design notes |
 | [`docs/research/`](docs/research/) | research findings |
-| [`docs/results/`](docs/results/) | captured images and timing reports |
+| [`docs/results/`](docs/results/) | capture results |
 | [`LOG.md`](LOG.md) | dated work journal |
 | [`TASKS.md`](TASKS.md) | live task list |
 
