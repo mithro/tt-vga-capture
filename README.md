@@ -1,9 +1,14 @@
 # tt-vga-capture
 
-Tracking repository for capturing the Tiny VGA Pmod output of Tiny Tapeout
-projects with the PIO block of the demo board's RP2040 / RP2350 (later the
-Raspberry Pi 5 RP1 and bunnie's BIO), reconstructing the picture on a host,
-and presenting it as a virtual video source through GStreamer.
+Tracking repository for capturing the VGA output of Tiny Tapeout designs
+(the Tiny VGA Pmod's `uo_out` pins) and turning it into pictures and video.
+The captures come from several sources -- the Tiny Tapeout demo board's
+RP2040 or RP2350 microcontroller, a Raspberry Pi 5, an FPGA design,
+simulators -- all writing one stream format that shared tools reconstruct,
+check pixel by pixel and play through GStreamer.
+
+This repository holds the design, research, measurements, results, work
+log and task list. The code is in [mithro/vgacap](https://github.com/mithro/vgacap).
 
 > **Caution: AI in use.** This project is being built with Claude Code.
 > Design notes, measurements and code should be checked before relying on
@@ -22,9 +27,10 @@ and presenting it as a virtual video source through GStreamer.
 
 Code lives in sibling repositories:
 
-- [`mithro/vgacap`](https://github.com/mithro/vgacap): the C libraries
-  (stream formats, reconstruction, RP2 and RP1 capture), the GStreamer
-  plugin and the Python tools.
+- [`mithro/vgacap`](https://github.com/mithro/vgacap): the shared stream
+  format and reconstruction library, every capture source (demo-board
+  programs and firmware, Raspberry Pi 5, FPGA), the GStreamer plugin and
+  the Python tools.
 - [`mithro/tt-vga-testpatterns`](https://github.com/mithro/tt-vga-testpatterns):
   Verilog calibration designs for the Tiny Tapeout FPGA emulation boards.
 
