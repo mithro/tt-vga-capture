@@ -4,8 +4,7 @@ The tracking repository for [vgacap](https://github.com/mithro/vgacap),
 which captures the VGA output of [Tiny Tapeout](https://tinytapeout.com)
 designs and turns it into pictures and video.
 
-This repository holds the design, research, measurements, results, work
-log and task list. The code lives in sibling repositories:
+The code lives in sibling repositories:
 
 - [`mithro/vgacap`](https://github.com/mithro/vgacap): the shared stream
   format and reconstruction library, every capture source (demo board
