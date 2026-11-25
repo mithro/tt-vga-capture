@@ -136,7 +136,7 @@ It writes these on vgacap branches; this project reviews them before merge.
 - [x] Samplers `tb-v1` / `centre-v1` (clocks per pixel other than 1, including below 1); longer lines and modes not in the table (vgacap m10-samplers dbe5a68, local)
 - [ ] rgb6 output beside rgb24
 - [x] Vendored zstd, zlib (libfst needs it), SHA-256 and fstapi as an optional CMake target (vgacap m10-third-party 6c0e45f)
-- [ ] `vgacap-export --format fst|vcd`, including decoded signals and a .gtkw file
+- [x] `vgacap-export --format fst|vcd`, including decoded signals and a .gtkw file (vgacap m10-export d8df216)
 - [ ] Implementation plan: `docs/superpowers/plans/2026-11-24-m10-simulation-traces.md` (reviewed here before work starts)
 - [ ] Trace container: zstd seekable blocks with `BLKH` block headers, seek-table rebuild for cut-off traces
 - [ ] `META` chunks (opening run parameters, closing status) in the C writer/reader and the Python mirror
