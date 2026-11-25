@@ -16,7 +16,7 @@ log and task list. The code lives in sibling repositories:
   programs and firmware, Raspberry Pi 5, FPGA), the GStreamer plugin and
   the Python tools.
 - [`mithro/tt-vga-testpatterns`](https://github.com/mithro/tt-vga-testpatterns):
-  Verilog calibration designs for the Tiny Tapeout FPGA emulation boards.
+  Verilog calibration designs for the Tiny Tapeout FPGA demo boards.
 
 > **Caution: AI in use.** This project is being built with Claude Code.
 > Check the design notes, measurements and code before relying on them.
@@ -27,6 +27,7 @@ log and task list. The code lives in sibling repositories:
 |---|---|
 | [`docs/superpowers/specs/`](docs/superpowers/specs/) | the approved design |
 | [`docs/superpowers/plans/`](docs/superpowers/plans/) | implementation plans |
+| [`docs/design/`](docs/design/) | design notes |
 | [`docs/research/`](docs/research/) | findings: board wiring, measurements, format experiments |
 | [`docs/results/`](docs/results/) | captured images and timing reports, with the commands that produced them |
 | [`LOG.md`](LOG.md) | dated work journal |
