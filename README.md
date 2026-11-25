@@ -1,12 +1,14 @@
 # tt-vga-capture
 
-The tracking repository for capturing the VGA output of Tiny Tapeout
-designs (the `uo_out` pins that drive the Tiny VGA Pmod) and turning it into pictures
-and video. The captures come from several capture sources (the Tiny
-Tapeout demo board's RP2040 or RP2350 microcontroller, a Raspberry Pi 5,
-an FPGA design, simulators), which all write one stream format, the
-vgacap stream. Shared tools reconstruct the frames from it, check them
-pixel by pixel and play them through GStreamer.
+The tracking repository for capturing the VGA output of
+[Tiny Tapeout](https://tinytapeout.com) designs (the `uo_out` pins that
+drive the [Tiny VGA Pmod](https://github.com/mole99/tiny-vga)) and turning
+it into pictures and video. The captures come from several capture sources
+(the Tiny Tapeout demo board's RP2040 or RP2350 microcontroller, a
+Raspberry Pi 5, an FPGA design, simulators), which all write one stream
+format, the [vgacap stream](docs/research/2026-09-15-stream-format.md).
+Shared tools reconstruct the frames from it, check them pixel by pixel and
+play them through [GStreamer](https://gstreamer.freedesktop.org).
 
 This repository holds the design, research, measurements, results, work
 log and task list. The code lives in sibling repositories:
@@ -23,15 +25,18 @@ log and task list. The code lives in sibling repositories:
 
 ## Where things are
 
-| | |
+| path | contents |
 |---|---|
-| [`docs/superpowers/specs/`](docs/superpowers/specs/) | the approved design |
+| [`docs/superpowers/specs/`](docs/superpowers/specs/) | approved design |
 | [`docs/superpowers/plans/`](docs/superpowers/plans/) | implementation plans |
 | [`docs/design/`](docs/design/) | design notes |
-| [`docs/research/`](docs/research/) | findings: board wiring, measurements, format experiments |
-| [`docs/results/`](docs/results/) | captured images and timing reports, with the commands that produced them |
+| [`docs/research/`](docs/research/) | research findings |
+| [`docs/results/`](docs/results/) | captured images and timing reports |
 | [`LOG.md`](LOG.md) | dated work journal |
 | [`TASKS.md`](TASKS.md) | live task list |
+
+The research covers board wiring, measurements and format experiments, and
+each result keeps the commands that produced it.
 
 ## License
 
