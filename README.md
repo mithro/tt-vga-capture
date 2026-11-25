@@ -1,18 +1,25 @@
 # tt-vga-capture
 
-Tracking repository for capturing the VGA output of Tiny Tapeout designs
-(the Tiny VGA Pmod's `uo_out` pins) and turning it into pictures and video.
-The captures come from several sources -- the Tiny Tapeout demo board's
-RP2040 or RP2350 microcontroller, a Raspberry Pi 5, an FPGA design,
-simulators -- all writing one stream format that shared tools reconstruct,
-check pixel by pixel and play through GStreamer.
+The tracking repository for capturing the VGA output of Tiny Tapeout
+designs (the Tiny VGA Pmod's `uo_out` pins) and turning it into pictures
+and video. The captures come from several capture sources (the Tiny
+Tapeout demo board's RP2040 or RP2350 microcontroller, a Raspberry Pi 5,
+an FPGA design, simulators), which all write one stream format, the
+vgacap stream. Shared tools reconstruct the frames from it, check them
+pixel by pixel and play them through GStreamer.
 
 This repository holds the design, research, measurements, results, work
-log and task list. The code is in [mithro/vgacap](https://github.com/mithro/vgacap).
+log and task list. The code lives in sibling repositories:
+
+- [`mithro/vgacap`](https://github.com/mithro/vgacap): the shared stream
+  format and reconstruction library, every capture source (demo board
+  programs and firmware, Raspberry Pi 5, FPGA), the GStreamer plugin and
+  the Python tools.
+- [`mithro/tt-vga-testpatterns`](https://github.com/mithro/tt-vga-testpatterns):
+  Verilog calibration designs for the Tiny Tapeout FPGA emulation boards.
 
 > **Caution: AI in use.** This project is being built with Claude Code.
-> Design notes, measurements and code should be checked before relying on
-> them.
+> Check the design notes, measurements and code before relying on them.
 
 ## Where things are
 
@@ -24,15 +31,6 @@ log and task list. The code is in [mithro/vgacap](https://github.com/mithro/vgac
 | [`docs/results/`](docs/results/) | captured images and timing reports, with the commands that produced them |
 | [`LOG.md`](LOG.md) | dated work journal |
 | [`TASKS.md`](TASKS.md) | live task list |
-
-Code lives in sibling repositories:
-
-- [`mithro/vgacap`](https://github.com/mithro/vgacap): the shared stream
-  format and reconstruction library, every capture source (demo-board
-  programs and firmware, Raspberry Pi 5, FPGA), the GStreamer plugin and
-  the Python tools.
-- [`mithro/tt-vga-testpatterns`](https://github.com/mithro/tt-vga-testpatterns):
-  Verilog calibration designs for the Tiny Tapeout FPGA emulation boards.
 
 ## License
 
