@@ -20,7 +20,7 @@ log and task list. The code lives in sibling repositories:
 - [`mithro/tt-vga-testpatterns`](https://github.com/mithro/tt-vga-testpatterns):
   Verilog calibration designs for Tiny Tapeout demo boards with an FPGA breakout.
 
-> **Caution: AI in use.** This project is being built with Claude Code.
+> **Caution: AI in use.** This project is being built with [Claude Code](https://claude.com/claude-code).
 > Check the design notes, measurements and code before relying on them.
 
 ## Where things are
@@ -34,9 +34,6 @@ log and task list. The code lives in sibling repositories:
 | [`docs/results/`](docs/results/) | captured images and timing reports |
 | [`LOG.md`](LOG.md) | dated work journal |
 | [`TASKS.md`](TASKS.md) | live task list |
-
-The research covers board wiring, measurements and format experiments, and
-each result keeps the commands that produced it.
 
 ## License
 
