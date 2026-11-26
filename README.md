@@ -7,9 +7,9 @@ designs and turns it into pictures and video.
 The code lives in sibling repositories:
 
 - [`mithro/vgacap`](https://github.com/mithro/vgacap): the shared stream
-  format and reconstruction library, every capture source (demo board
-  programs and the vgacap firmware, Raspberry Pi 5, FPGA), the GStreamer
-  plugin and the Python tools.
+  format and reconstruction library, every
+  [capture source](https://github.com/mithro/vgacap#what-is-in-it), the
+  GStreamer plugin and the Python tools.
 - [`mithro/tt-vga-testpatterns`](https://github.com/mithro/tt-vga-testpatterns):
   Verilog calibration designs for Tiny Tapeout demo boards with an FPGA breakout.
 
