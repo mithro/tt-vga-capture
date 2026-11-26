@@ -145,4 +145,4 @@ It writes these on vgacap branches; this project reviews them before merge.
 - [ ] libvgaframe raw-frame callback at every frame boundary, buffers cleared at every boundary
 - [x] Shared calibration and frame clock (port of tb.cpp:191-230, 361-378) (vgacap m10-samplers 4133c8f, local)
 - [x] `vgacap-sample`: both samplers and the hash methods in one pass; stores, `frames.txt`, hash files, PNG pipe (vgacap m10-sample-tool 12dfaf7, local; speed in Task 16a)
-- [ ] `tb-v1` test vectors from tinytapeout-vga-videos' `tb.cpp` comparison
+- [x] `tb-v1` test vectors from tinytapeout-vga-videos' `tb.cpp` comparison (vgacap m10-vectors, six cases, `tests/vectors/tbv1`)
