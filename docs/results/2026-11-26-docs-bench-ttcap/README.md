@@ -8,46 +8,69 @@ chip board through the broker needs Tim's approval, which was not asked for.
 
 - **fpga-1:** RP2350 demo board with an FPGA breakout, USB serial
   4df39a7a6856f86f, on pi-sw2-p34; MicroPython 970468103d (2026-09-08).
-  Run from a workstation on its USB serial (`/dev/ttyACM0`) and through
-  its bridge over an SSH tunnel.
+  The USB serial runs ran on fpga-1's own Pi, from a copy of the commit in
+  `/home/pi/bench43` (`fpga1-pi-setup.log`), as `serial:/dev/ttyACM0`.
+  The bridge runs ran from a workstation through an SSH tunnel to the
+  bridge (`ws://127.0.0.1:18034/serial`).
 - **fpga-4:** RP2350 demo board with an FPGA breakout, USB serial
   a2961e5cac65b25f, on pi-sw2-p35 (Raspberry Pi 4, 64-bit kernel, 32-bit
   Raspbian 12 userland); MicroPython 970468103d, which boots as `TT SDK
-  v3.1.1` (`fpga4-pi-steps.log`).
+  v3.1.1` (`fpga4-pi-steps.log`). fpga-1 runs the same MicroPython build,
+  so its SDK is taken to be 3.1.1 too; its boot banner was not recorded.
 
-## Stream capture: 750 kHz is no longer lossless
+## Bridge stops on fpga-1's Pi
+
+Each group of USB serial runs on fpga-1's Pi was bracketed by a bridge stop
+(at 0 clients) and start. Each `fpga1-bridge-start<n>.log` shows
+`fpgas-tt` active again, with its `status.json` at `"clients": 0`:
+
+| group | runs | stop | start |
+|---|---|---|---|
+| 1 | the stream captures and USB throughput | `fpga1-bridge-stop1.log` | `fpga1-bridge-start1.log` |
+| 2 | `--ui-in` | `fpga1-bridge-stop2.log` | `fpga1-bridge-start2.log` |
+| 3 | `--mode window` | `fpga1-bridge-stop3.log` | `fpga1-bridge-start3.log` |
+| 4 | `--mode frame`, the reboots and the SDK restart | `fpga1-bridge-stop4.log` | `fpga1-bridge-start4.log` |
+
+## Stream capture on USB serial: 750 kHz is no longer lossless
 
 The design was the one already enabled; each capture was 4 s.
 
-| board | path | clock | `--buf-words` | overruns | dropped | samples/s | log |
-|---|---|---|---|---|---|---|---|
-| fpga-1 | USB serial | 750 kHz | 4096 | 7 | 114688 | 705606 | `stream-750k-a.log` |
-| fpga-1 | USB serial | 750 kHz | 4096 | 6 | 98304 | 706296 | `stream-750k-b-bufwords-700k.log` |
-| fpga-1 | USB serial | 750 kHz | 16384 | 1 | 65536 | 695718 | `stream-750k-b-bufwords-700k.log` |
-| fpga-1 | USB serial | 700 kHz | 4096 | 3 | 49152 | 659436 | `stream-750k-b-bufwords-700k.log` |
-| fpga-1 | USB serial | 650 kHz | 4096 | 2 | 32768 | 611153 | `stream-650k-600k-500k.log` |
-| fpga-1 | USB serial | 600 kHz | 4096 | 2 | 32768 | 564988 | `stream-650k-600k-500k.log` |
-| fpga-1 | USB serial | 500 kHz | 4096 | 0 | 0 | 471046 | `stream-650k-600k-500k.log` |
-| fpga-4 | its Pi, `/dev/ttboard` | 750 kHz | 4096 | 7 | 114688 | 704635 | `fpga4-pi-steps.log` |
+| board | clock | `--buf-words` | overruns | dropped | samples/s | log |
+|---|---|---|---|---|---|---|
+| fpga-1 | 750 kHz | 4096 | 7 | 114688 | 705606 | `stream-750k-a.log` |
+| fpga-1 | 750 kHz | 4096 | 6 | 98304 | 706296 | `stream-750k-b-bufwords-700k.log` |
+| fpga-1 | 750 kHz | 16384 | 1 | 65536 | 695718 | `stream-750k-b-bufwords-700k.log` |
+| fpga-1 | 700 kHz | 4096 | 3 | 49152 | 659436 | `stream-750k-b-bufwords-700k.log` |
+| fpga-1 | 650 kHz | 4096 | 2 | 32768 | 611153 | `stream-650k-600k-500k.log` |
+| fpga-1 | 600 kHz | 4096 | 2 | 32768 | 564988 | `stream-650k-600k-500k.log` |
+| fpga-1 | 500 kHz | 4096 | 0 | 0 | 471046 | `stream-650k-600k-500k.log` |
+| fpga-4 | 750 kHz | 4096 | 7 | 114688 | 704635 | `fpga4-pi-steps.log` |
 
-On 2026-11-24, before SDK 3.1.1, the same 750 kHz capture on fpga-4 had no
+The 500 kHz row is the only run at 500 kHz on USB serial, and it lasted
+4 s. On 2026-11-24, before SDK 3.1.1, a 750 kHz capture on fpga-4 had no
 overrun ([direct-serial result](../2026-11-24-direct-serial-fpga4/README.md)).
 Throughput is unchanged: `ttcap throughput` gave 716.1 and 713.7 KB/s on
 fpga-1's USB serial (`stream-750k-a.log`, `stream-750k-b-bufwords-700k.log`)
-and 709.5 KB/s through its bridge (`bridge-throughput.log`). So the link
-still carries 700 KB/s, and the overruns come from the board's loop.
+and 709.5 KB/s through its bridge (`bridge-throughput.log`).
 
-Through the bridge (10 s each, `tt_um_vgacal_bars`):
+## Stream capture through the bridge
 
-| clock | overruns | log |
-|---|---|---|
-| 500 kHz | 1 | `bridge-step5.log` |
-| 500 kHz | 1 | `bridge-step5-try2.log` |
-| 500 kHz | 2 | `bridge-step5-try3.log` |
-| 400 kHz | 0 | `bridge-step5-400000.log` |
-| 300 kHz | 0 | `bridge-step5-300000.log` |
+From the workstation, through the tunnel, `tt_um_vgacal_bars`:
 
-## Frame, window and inputs (fpga-1, 25 MHz and up)
+| clock | length | overruns | log |
+|---|---|---|---|
+| 500 kHz | 10 s | 1 | `bridge-step5.log` |
+| 500 kHz | 10 s | 1 | `bridge-step5-try2.log` |
+| 500 kHz | 10 s | 2 | `bridge-step5-try3.log` |
+| about 500 kHz | 19.5 s | 5 | `stdout-term.log` |
+| 400 kHz | 10 s | 0 | `bridge-step5-400000.log` |
+| 300 kHz | 10 s | 0 | `bridge-step5-300000.log` |
+
+The 19.5 s row is the standard-output run below (`stdout-run.sh`:
+`ttcap capture ws://127.0.0.1:18034/serial --clock-hz 500000 --seconds 0
+--out -` piped into `gst-launch-1.0 fdsrc`), with 493758 samples/s.
+
+## Frame, window and inputs (fpga-1's Pi, 25 MHz and up)
 
 - `--mode window --window-lines 48` of `tt_um_vgacal_grid`: 0 overruns, and
   the note was exactly the page's: "each picture is assembled from 11
@@ -63,12 +86,20 @@ Through the bridge (10 s each, `tt_um_vgacal_bars`):
 - `ttcap demo` through the bridge tunnel, 500 kHz, `--fps 5`, 12 s: 51 PNGs
   in `video/` and a 19.8 KiB `video/capture.mkv`; the mode line is printed
   once when detected and again in the summary (`demo.log`).
-- `ttcap capture --out -` into `gst-launch-1.0 fdsrc`: stderr ends with
-  `wrote stdout` and then `capture ended: the consumer closed the stream`
-  (`stdout-term.log`).
-- `ttcap reboot --to bootsel` printed `the board runs micropython` and
-  `rebooting to bootsel`; the board came back as `RP2350 Boot`
-  (`reboot1.log`).
+- `ttcap capture --out -` into `gst-launch-1.0 fdsrc`, through the tunnel:
+  stderr ends with `wrote stdout` and then `capture ended: the consumer
+  closed the stream` (`stdout-term.log`).
+- On fpga-1's Pi, `ttcap reboot --to bootsel` printed `the board runs
+  micropython` and `rebooting to bootsel`; the board came back as `RP2350
+  Boot` (`reboot1.log`).
+- Back to the stock firmware: the vgacap firmware's UF2 was copied onto the
+  boot drive, and the board came up as `vgacap capture firmware`
+  (`reboot2-load-vgacap-fw.log`). `ttcap reboot --firmware picosdk --to
+  flash` then printed `rebooting to flash`, and the board came back as
+  `MicroPython Board in FS mode` on `/dev/ttyACM0` (`reboot3-back-to-flash.log`).
+  After the SDK restart and the bridge start, `status.json` showed
+  `"clients": 0` and `idle_display.state` `waiting` (`fpga1-bridge-start4.log`),
+  then `loaded` (`restore-after-board-restart.log`).
 
 ## Restoring a bench board
 
@@ -82,17 +113,18 @@ Through the bridge (10 s each, `tt_um_vgacal_bars`):
 
 ## The Raspberry Pi recipe (fpga-4's Pi)
 
-`getconf LONG_BIT` printed 32 (`fpga4-pi-longbit.log`). The static uv
-0.10.8 armv7 build installed to `~/.local/bin`, and `UV_NO_DEV=1 uv sync`
-installed exactly 3 packages: pyserial 3.5, vgacap 0.0.1 and websockets
-17.1 (`fpga4-pi-recipe.log`). The Pi already had uv 0.13.1
-(armv7-unknown-linux-gnueabihf) in `/usr/local/bin`, which comes first on
-`PATH` unless `~/.local/bin` is put before it (`fpga4-preinstalled-uv.log`).
-On a bench Pi, `ttcap probe` of the board needs `fpgas-tt` stopped first.
+`getconf LONG_BIT` printed 32. The static uv 0.10.8 armv7 build installed
+to `~/.local/bin`, and `UV_NO_DEV=1 uv sync` installed exactly 3 packages:
+pyserial 3.5, vgacap 0.0.1 and websockets 17.1 (`fpga4-pi-recipe.log`). The
+Pi also has uv 0.13.1 (armv7-unknown-linux-gnueabihf) in `/usr/local/bin`,
+which a shell without `~/.local/bin` first on `PATH` will find
+(`fpga4-preinstalled-uv.log`). On a bench Pi, `ttcap probe` of the board
+needs `fpgas-tt` stopped first.
 
 ## Other boards seen
 
-The site registry (`registry.txt`) lists chip boards on pi-sw2-p3, p6, p7 and
-p8, whose pages name the shuttles tt03p5, tt06, tt07 and tt08. tt07
-(`tt-de641070db746f27`, pi-sw2-p7) is "operational" with a published
-WebSocket path. None of them was probed in this run.
+The site registry (`registry.txt`) lists chip boards on pi-sw2-p3, p6, p7
+and p8. Their board pages (`board-pages-attrs.log`) name the shuttles
+tt03p5, tt06, tt07 and tt08. tt07 (`tt-de641070db746f27`, pi-sw2-p7) and
+tt06 (`tt-de640cb1d3357125`, pi-sw2-p6) are "operational" in the registry,
+and their pages give a WebSocket path. None of them was probed in this run.
