@@ -1,0 +1,7 @@
+Thu Nov 26 11:09:18 PM UTC 2026
+board error: MemoryError: memory allocation failed, allocating 16384 bytes
+profile=rp2040-tt06map project=tt_um_rejunity_vga enable=index
+bytes=0 samples=0 chunks=0 seconds=0.443 overruns=0 dropped=0 rxstall=0 samples_per_s=0 mem_free=74880 board_error='Traceback (most recent call last):\r\n  File "<stdin>", line 292 [capture_rp2.py:363], in <module>\r\n  File "<stdin>", line 183 [capture_rp2.py:193], in main\r\nMemoryError: memory allocation failed, allocating 16384 bytes'
+wrote capture.vgacap
+EXIT 1
+Thu Nov 26 11:09:20 PM UTC 2026

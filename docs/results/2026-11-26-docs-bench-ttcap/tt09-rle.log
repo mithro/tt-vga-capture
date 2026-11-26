@@ -1,0 +1,12 @@
+Thu Nov 26 11:05:46 PM UTC 2026
+profile=rp2350-dbv3 project=tt_um_vga_clock enable=index
+bytes=82117 samples=1514018 chunks=7 seconds=15.504 overruns=0 dropped=0 rxstall=0 samples_per_s=97654 mem_free=388224
+  board: rle style=edge period=1500 mask=1
+  board: overruns=0 rxstall=0 saturated=0 sysclk_hz=150000000
+wrote clock-rle.vgacap
+EXIT 0
+frame 0: 640x480 mode=640x480@72 cpl=832 lpf=520 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@72 cpl=832 lpf=520 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
+wrote 2 png(s)
+PNG EXIT 0

@@ -121,10 +121,52 @@ which a shell without `~/.local/bin` first on `PATH` will find
 (`fpga4-preinstalled-uv.log`). On a bench Pi, `ttcap probe` of the board
 needs `fpgas-tt` stopped first.
 
+## tt07 and tt09, through their bridges
+
+Later the same day (from 23:05 UTC), at vgacap 3cc3f95, the tutorial ran
+on tt07 and the frame and run-length pages on tt09. Pi SSH was down, so
+both ran from a workstation through an SSH tunnel to each board's bridge.
+
+- **tt07:** `tt-de641070db746f27`, an RP2040 demo board with a Tiny
+  Tapeout 7 chip, on pi-sw2-p7. The probe printed `MicroPython v1.24.0 on
+  2024-10-25`, with `'rp_projclk': 0` and `'uo_out0': 5` (`tt07-probe.log`).
+- **tt09:** `tt-3b0880b48ee5c388`, an RP2350 demo board with a Tiny Tapeout
+  9 chip, on pi-sw2-p10. The probe printed `MicroPython 970468103d on
+  2026-09-08` (`tt09-probe.log`).
+
+The tutorial on tt07 (`tt_um_rejunity_vga`, 60 kHz, `--frames 2`):
+
+- The first capture failed with `board error: MemoryError: memory
+  allocation failed, allocating 16384 bytes`, `bytes=0` and
+  `mem_free=74880`, exited 1, and still printed `wrote capture.vgacap`
+  (`tt07-capture-memoryerror.log`).
+- After an SDK restart with `tools/board_restart.py` (`tt07-sdk-restart.log`),
+  the same command captured 1687552 samples in 28.65 s with no overrun,
+  `mem_free=81008` (`tt07-capture-retry.log`).
+- `ttcap png` wrote 3 PNGs, each `partial=0 glitches=0`, `frames=3
+  glitches_total=0` (`tt07-png.log`).
+
+On tt09:
+
+- `--mode frame` of `tt_um_rejunity_vga_logo` at 25.175 MHz: 2 pictures,
+  0 overruns. The board's heap held 410 of the picture's 481 lines, so
+  each picture is two captured frames (`tt09-frames.log`). The design
+  dithers every frame, so `tt09-logo-frame-torn.png` changes below about
+  line 410, where the second frame takes over.
+- `--mode rle` of `tt_um_vga_clock`, the page's command (100 kHz, 14 s): 1514018 samples in
+  82117 bytes, `rle style=edge period=1500 mask=1`, 0 overruns, and 2
+  pictures at 640x480@72 (`tt09-rle.log`).
+
+`safe_start.state` before and after: on tt07 it read `set: clock stopped
+...` both times (`tt07-status-before.json`, `tt07-status-after.json`). On
+tt09 it read `failed: the board did not take the safe state` both times
+(`tt09-status-before.json`, `tt09-status-after.json`), as it already did
+before this run.
+
 ## Other boards seen
 
 The site registry (`registry.txt`) lists chip boards on pi-sw2-p3, p6, p7
 and p8. Their board pages (`board-pages-attrs.log`) name the shuttles
 tt03p5, tt06, tt07 and tt08. tt07 (`tt-de641070db746f27`, pi-sw2-p7) and
 tt06 (`tt-de640cb1d3357125`, pi-sw2-p6) are "operational" in the registry,
-and their pages give a WebSocket path. None of them was probed in this run.
+and their pages give a WebSocket path. Of these, only tt07 was probed and captured, as above.

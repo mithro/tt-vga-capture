@@ -1,0 +1,7 @@
+Thu Nov 26 11:09:34 PM UTC 2026
+profile=rp2040-tt06map project=tt_um_rejunity_vga enable=index
+bytes=3377642 samples=1687552 chunks=207 seconds=28.650 overruns=0 dropped=0 rxstall=0 samples_per_s=58903 mem_free=81008
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote capture.vgacap
+EXIT 0
+Thu Nov 26 11:10:04 PM UTC 2026
