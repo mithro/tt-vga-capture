@@ -1,0 +1,5 @@
+profile=rp2350-dbv3 project=tt_um_vgacal_bars enable=already enabled
+bytes=2951346 samples=2949120 chunks=181 seconds=10.076 overruns=0 dropped=0 rxstall=0 samples_per_s=292692 mem_free=420912
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote bench-300000.vgacap
+EXIT 0

@@ -1,0 +1,28 @@
++ uv run ttcap capture serial:/dev/ttyACM0 --clock-hz 750000 --seconds 4 --out capture.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=2853168 samples=2850816 chunks=181 seconds=4.036 overruns=6 dropped=98304 rxstall=0 samples_per_s=706296 mem_free=421040
+  board: overrun (x6)
+  board: overruns=6 rxstall=0 sysclk_hz=132000000
+wrote capture.vgacap
+EXIT 0
++ echo 'EXIT 0'
++ uv run ttcap capture serial:/dev/ttyACM0 --clock-hz 750000 --seconds 4 --buf-words 16384 --out capture-bw.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=2818663 samples=2818048 chunks=45 seconds=4.051 overruns=1 dropped=65536 rxstall=0 samples_per_s=695718 mem_free=421040
+  board: overrun
+  board: overruns=1 rxstall=0 sysclk_hz=132000000
+wrote capture-bw.vgacap
+EXIT 0
++ echo 'EXIT 0'
++ uv run ttcap capture serial:/dev/ttyACM0 --clock-hz 700000 --seconds 4 --out capture-700.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=2656317 samples=2654208 chunks=166 seconds=4.025 overruns=3 dropped=49152 rxstall=0 samples_per_s=659436 mem_free=421040
+  board: overrun (x3)
+  board: overruns=3 rxstall=0 sysclk_hz=133000000
+wrote capture-700.vgacap
+EXIT 0
++ echo 'EXIT 0'
++ uv run ttcap throughput serial:/dev/ttyACM0
+bytes=1000000 seconds=1.368 kbytes_per_s=713.7 corrupt=no
+EXIT 0
++ echo 'EXIT 0'

@@ -1,0 +1,19 @@
++ ls -a /home/pi
+.
+..
+.bash_history
+.bash_logout
+.bashrc
+Downloads
+.profile
+.ssh
+.sudo_as_admin_successful
+Uploads
++ ls /home/pi/.local/bin
+ls: cannot access '/home/pi/.local/bin': No such file or directory
++ which uv
+/usr/local/bin/uv
++ getconf LONG_BIT
+32
++ uname -m
+aarch64

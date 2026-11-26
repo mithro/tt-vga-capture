@@ -1,0 +1,22 @@
+Thu Nov 26 06:44:06 PM UTC 2026
+board link: ws://127.0.0.1:18034/serial (from --link)
+writing video/frame-%04d.png
+writing video/capture.mkv
+
+gst-launch-1.0 -e -m vgacapttsrc name=src link=ws://127.0.0.1:18034/serial clock-hz=500000 seconds=12 profile=auto 'ttcap-command=uv run --no-sync ttcap' design=tt_um_vgacal_bars ! vgadecode name=dec repeat-last-frame=true output-fps=5/1 ! tee name=t \
+    t. ! queue ! pngenc ! multifilesink post-messages=true location=video/frame-%04d.png \
+    t. ! queue ! videoconvert ! x264enc tune=zerolatency speed-preset=veryfast key-int-max=30 ! matroskamux ! filesink location=video/capture.mkv
+
+  mode 640x480@60: 800 clocks/line, 525 lines/frame, hsync negative, vsync negative, glitches 0
+  1 frame(s), 2s elapsed
+  6 frame(s), 4s elapsed
+  14 frame(s), 5s elapsed
+  23 frame(s), 8s elapsed
+  35 frame(s), 10s elapsed
+  44 frame(s), 12s elapsed
+
+capture finished after 12.7s (gst-launch exit 0)
+  mode 640x480@60: 800 clocks/line, 525 lines/frame, hsync negative, vsync negative, glitches 0
+  51 png(s) in video
+  video/capture.mkv, 19.8 KiB
+EXIT 0

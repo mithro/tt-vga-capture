@@ -1,0 +1,26 @@
++ uv run ttcap capture serial:/dev/ttyACM0 --design tt_um_vgacal_modes --ui-in 1 --mode frame --vga-mode 800x600@60 --clock-hz 40000000 --frames 1 --out modes-ui1.vgacap
+profile=rp2350-dbv3 project=tt_um_vgacal_modes enable=already enabled
+bytes=634859 samples=634656 chunks=4 seconds=1.845 overruns=0 dropped=0 rxstall=0 samples_per_s=343906 mem_free=420864
+  board: frame window=353 buffers=53 hsync_active=1 vsync_active=1
+  board: frames=1 stalls=0 rxstall=0 sysclk_hz=80000000
+wrote modes-ui1.vgacap
+note: each picture is assembled from 2 captured frames (353 of its 601 lines per frame): exact for a static design, torn for one that changes from frame to frame
+EXIT 0
++ echo 'EXIT 0'
++ uv run ttcap capture serial:/dev/ttyACM0 --design tt_um_vgacal_modes --ui-in 2 --mode frame --vga-mode 720x400@70 --clock-hz 28322000 --frames 1 --out modes-ui2.vgacap
+profile=rp2350-dbv3 project=tt_um_vgacal_modes enable=already enabled
+bytes=361080 samples=360900 chunks=3 seconds=1.030 overruns=0 dropped=0 rxstall=0 samples_per_s=350401 mem_free=418176
+  board: frame window=401 buffers=41 hsync_active=0 vsync_active=1
+  board: frames=1 stalls=0 rxstall=0 sysclk_hz=113000000
+wrote modes-ui2.vgacap
+EXIT 0
++ echo 'EXIT 0'
++ ls -la capture-500000.vgacap capture-600000.vgacap capture-650000.vgacap capture-700.vgacap capture-bw.vgacap capture.vgacap modes-ui1.vgacap modes-ui2.vgacap
+-rw-r--r-- 1 pi pi 1902087 Nov 26 18:38 capture-500000.vgacap
+-rw-r--r-- 1 pi pi 2279261 Nov 26 18:38 capture-600000.vgacap
+-rw-r--r-- 1 pi pi 2459617 Nov 26 18:38 capture-650000.vgacap
+-rw-r--r-- 1 pi pi 2656402 Nov 26 18:37 capture-700.vgacap
+-rw-r--r-- 1 pi pi 2818748 Nov 26 18:37 capture-bw.vgacap
+-rw-r--r-- 1 pi pi 2853253 Nov 26 18:37 capture.vgacap
+-rw-r--r-- 1 pi pi  635029 Nov 26 18:38 modes-ui1.vgacap
+-rw-r--r-- 1 pi pi  361250 Nov 26 18:38 modes-ui2.vgacap

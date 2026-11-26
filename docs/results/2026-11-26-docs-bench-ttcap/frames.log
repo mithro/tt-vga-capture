@@ -1,0 +1,18 @@
++ uv run ttcap capture serial:/dev/ttyACM0 --design tt_um_vgacal_bars --mode frame --vga-mode 640x480@60 --clock-hz 25175000 --frames 2 --out frames.vgacap
+profile=rp2350-dbv3 project=tt_um_vgacal_bars enable=already enabled
+bytes=769852 samples=769600 chunks=6 seconds=2.093 overruns=0 dropped=0 rxstall=0 samples_per_s=367704 mem_free=418096
+  board: frame window=478 buffers=73 hsync_active=0 vsync_active=0
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=101000000
+wrote frames.vgacap
+note: each picture is assembled from 2 captured frames (478 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+EXIT 0
++ echo 'EXIT 0'
++ uv run ttcap capture serial:/dev/ttyACM0 --design tt_um_vgacal_bars --mode frame --vga-mode 640x480@60 --clock-hz 25000000 --frames 2 --out frames25.vgacap
+profile=rp2350-dbv3 project=tt_um_vgacal_bars enable=already enabled
+bytes=769852 samples=769600 chunks=6 seconds=2.043 overruns=0 dropped=0 rxstall=0 samples_per_s=376706 mem_free=418096
+  board: frame window=476 buffers=71 hsync_active=0 vsync_active=0
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=100000000
+wrote frames25.vgacap
+note: each picture is assembled from 2 captured frames (476 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+EXIT 0
++ echo 'EXIT 0'

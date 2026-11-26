@@ -1,0 +1,18 @@
++ uv run ttcap reboot serial:/dev/ttyACM0 --to bootsel
+the board runs micropython
+rebooting to bootsel
+EXIT 0
++ echo 'EXIT 0'
++ sleep 4
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 024: ID 2e8a:000f Raspberry Pi RP2350 Boot
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
++ ls -la /dev/disk/by-label/
+total 0
+drwxr-xr-x 2 root root  60 Nov 26 18:39 .
+drwxr-xr-x 8 root root 160 Nov 26 18:39 ..
+lrwxrwxrwx 1 root root  10 Nov 26 18:39 RP2350 -> ../../sda1
++ ls '/dev/ttyACM*'
+ls: cannot access '/dev/ttyACM*': No such file or directory

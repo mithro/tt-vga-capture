@@ -1,0 +1,27 @@
+== modes-ui1
+frame 0: 800x600 mode=800x600@60 cpl=1056 lpf=628 hsync=pos vsync=pos partial=0 glitches=0
+frames=1 glitches_total=0
+wrote 1 png(s)
+EXIT 0
+== modes-ui2
+frame 0: 720x400 mode=720x400@70 cpl=900 lpf=449 hsync=neg vsync=pos partial=0 glitches=0
+frames=1 glitches_total=0
+wrote 1 png(s)
+EXIT 0
+== window
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=1 glitches_total=0
+wrote 1 png(s)
+EXIT 0
+== frames
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
+wrote 2 png(s)
+EXIT 0
+== frames25
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
+wrote 2 png(s)
+EXIT 0
