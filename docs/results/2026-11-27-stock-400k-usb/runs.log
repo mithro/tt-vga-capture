@@ -1,0 +1,120 @@
+59d37c0 docs: fpga-1's Pi model is not recorded (bench-56)
+== activity
+06:18:37
+-- No entries --
+== health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 1328, "version": "0.1.0"}
+== enable note
+06:18:38
+{"enabled": "tt_um_vga_pattern", "clock_hz": null, "ui_in": null, "ui_in_mask": 0, "ui_in_driven": [], "ui_in_held": [], "ui_in_inputs": [], "released": []}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "in use"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 1332, "version": "0.1.0"}
+== step 3
+06:18:41
+rc=0
+== welland-pi step 4, run 1
+06:18:41
+profile=rp2350-dbv3 project=None enable=None
+bytes=1524894 samples=1523712 chunks=94 seconds=4.049 overruns=0 dropped=0 rxstall=0 samples_per_s=376349 mem_free=423056
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote bench.vgacap
+rc=0
+-rw-r--r-- 1 pi pi 1524979 Nov 27 06:18 bench.vgacap
+== welland-pi step 4, run 2
+06:18:47
+profile=rp2350-dbv3 project=None enable=None
+bytes=1524894 samples=1523712 chunks=94 seconds=4.038 overruns=0 dropped=0 rxstall=0 samples_per_s=377321 mem_free=421504
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote bench.vgacap
+rc=0
+-rw-r--r-- 1 pi pi 1524979 Nov 27 06:18 bench.vgacap
+== welland-pi step 4, run 3
+06:18:51
+profile=rp2350-dbv3 project=None enable=None
+bytes=1524894 samples=1523712 chunks=94 seconds=4.041 overruns=0 dropped=0 rxstall=0 samples_per_s=377107 mem_free=421504
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote bench.vgacap
+rc=0
+-rw-r--r-- 1 pi pi 1524979 Nov 27 06:18 bench.vgacap
+== how-to-capture-stream step 2
+06:18:56
+profile=rp2350-dbv3 project=None enable=None
+bytes=1524894 samples=1523712 chunks=94 seconds=4.039 overruns=0 dropped=0 rxstall=0 samples_per_s=377250 mem_free=421504
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote capture.vgacap
+rc=0
+-rw-r--r-- 1 pi pi 1524979 Nov 27 06:19 capture.vgacap
+== 10 s capture
+06:19:01
+profile=rp2350-dbv3 project=None enable=None
+bytes=3918710 samples=3915776 chunks=240 seconds=10.019 overruns=0 dropped=0 rxstall=0 samples_per_s=390827 mem_free=421504
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote bench10.vgacap
+rc=0
+-rw-r--r-- 1 pi pi 3918795 Nov 27 06:19 bench10.vgacap
+== step 5
+06:19:12
+ctivated, SS high
+BOOT: [32;1mResetting system clock to default 125000000.0Hz[0m
+BOOT: [32;1mIn "manual inputs" mode but clock freq set--setting up for CLK/RST RP ctrl[0m
+BOOT: [32;1mSetting RP2040 system clock to 133000000Hz[0m
+BOOT: [32;1mClocking at 10Hz[0m
+BOOT: [32;1mFirst time loading: Toggling project reset[0m
+BOOT: [32;1mChanging reset to output mode[0m
+
+
+
+The '[31;1mtt[0m' object is available.
+
+Projects may be enabled with [1mtt.shuttle.PROJECT_NAME.enable()[0m, e.g.
+tt.shuttle.tt_um_urish_simon.enable()
+
+The io ports are named as in Verilog, [1mtt.ui_in[0m, [1mtt.uo_out[0m...
+and behave as with cocotb, e.g. [1mtt.uo_out.value = 0xAA[0m or [1mprint(tt.ui_in.value)[0m
+Bits may be accessed by index, e.g. [1mtt.uo_out[7][0m (note: that's the [31;1mhigh bit![0m) to read or [1mtt.ui_in[5] = 1[0m to write.
+Direction of the bidir pins is set using [1mtt.uio_oe_pico[0m, used in the same manner as the io ports themselves.
+
+
+[36;1mTT SDK v3.1.1[0m
+
+
+
+[35mMem info
+stack: 404 out of 12032
+GC: total: 487680, used: 57440, free: 430240
+ No. of 1-blocks: 1246, 2-blocks: 140, max blk sz: 72, max free sz: 24377
+[0m
+<DemoBoard in ASIC_MANUAL_INPUTS, auto-clocking @ 10 FPGA project 'FPGA:tt_um_factory_test'>
+
+boot done: 2032
+tt.sdk_revision=d485c7a9986336024e35d790568fca33be1c5665
+tt.sdk_version=3.1.1
+MicroPython 970468103d on 2026-09-08; TinyTapeout RP2350B Core with RP2350
+Type "help()" for more information.
+>>> 
+rc=0
+== step 6
+06:19:16
+rc=0
+== step 7
+0s 
+6s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 4, "version": "0.1.0"}
+11s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 9, "version": "0.1.0"}
+16s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 14, "version": "0.1.0"}
+21s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 19, "version": "0.1.0"}
+26s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 24, "version": "0.1.0"}
+31s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 29, "version": "0.1.0"}
+36s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 34, "version": "0.1.0"}
+41s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 40, "version": "0.1.0"}
+46s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 45, "version": "0.1.0"}
+52s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 50, "version": "0.1.0"}
+57s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 55, "version": "0.1.0"}
+62s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 60, "version": "0.1.0"}
+67s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 1, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 65, "version": "0.1.0"}
+72s {"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 70, "version": "0.1.0"}
+LOADED after 72 s
+== after
+active
+                     USER        PID ACCESS COMMAND
+/dev/ttyACM0:        pi        13737 F.... python3
+{"enabled": "idle_display", "library": {"max_bytes": 16777216, "used_bytes": 0}, "designs": [{"name": "tt_um_counter_7seg", "title": "7-Segment Hex Counter", "author": "fpgas.online", "description": "Counts 0-F on a 7-segment display at a selectable rate, with a pause input", "docs_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/blob/main/demos/tt_um_counter_7seg/docs/info.md", "repo_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/tree/main/demos/tt_um_counter_7seg", "clock_hz": 10, "pinout": {"ui_in": ["Rate bit 0 (tick every 2^rate clocks)", "Rate bit 1", "Rate bit 2", "Rate bit 3", "", "", "", "Pause (hold the current digit, decimal point lights up)"], "uo_out": ["SEG_A", "SEG_B", "SEG_C", "SEG_D", "SEG_E", "SEG_F", "SEG_G", "SEG_DP (lit while paused)"], "uio": ["", "", "", "", "", "", "", ""]}, "source": "demo"}, {"name": "tt_um_factory_test", "title": "Tiny Tapeout Factory Test", "author": "Sylvain Munaut (Tiny Tapeout)", "description": "Factory test design: free-running 8-bit counter, or loopback from the bidirectional pins", "docs_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/blob/main/demos/tt_um_factory_test/docs/info.md", "repo_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/tree/main/demos/tt_um_factory_test", "clock_hz": null, "pinout": {"ui_in": ["Mode select: 1 = counter, 0 = loopback of uio_in", "", "", "", "", "", "", ""], "uo_out": ["Counter bit 0, or uio_in[0] in loopback mode", "Counter bit 1, or uio_in[1] in loopback mode", "Counter bit 2, or uio_in[2] in loopback mode", "Counter bit 3, or uio_in[3] in loopback mode", "Counter bit 4, or uio_in[4] in loopback mode", "Counter bit 5, or uio_in[5] in loopback mode", "Counter bit 6, or uio_in[6] in loopback mode", "Counter bit 7, or uio_in[7] in loopback mode"], "uio": ["Counter bit 0 (output when ui[0]=1), else loopback input 0", "Counter bit 1 (output when ui[0]=1), else loopback input 1", "Counter bit 2 (output when ui[0]=1), else loopback input 2", "Counter bit 3 (output when ui[0]=1), else loopback input 3", "Counter bit 4 (output when ui[0]=1), else loopback input 4", "Counter bit 5 (output when ui[0]=1), else loopback input 5", "Counter bit 6 (output when ui[0]=1), else loopback input 6", "Counter bit 7 (output when ui[0]=1), else loopback input 7"]}, "source": "demo"}, {"name": "tt_um_pwm_breathe", "title": "PWM Breathing Bar", "author": "fpgas.online", "description": "Eight PWM channels running a phase-shifted triangle wave, so an LED bar breathes", "docs_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/blob/main/demos/tt_um_pwm_breathe/docs/info.md", "repo_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/tree/main/demos/tt_um_pwm_breathe", "clock_hz": 10000000, "pinout": {"ui_in": ["Speed bit 0 (phase step every 2^speed PWM periods)", "Speed bit 1", "Speed bit 2", "", "", "", "", ""], "uo_out": ["PWM channel 0", "PWM channel 1", "PWM channel 2", "PWM channel 3", "PWM channel 4", "PWM channel 5", "PWM channel 6", "PWM channel 7"], "uio": ["", "", "", "", "", "", "", ""]}, "source": "demo"}, {"name": "tt_um_uart_hello", "title": "UART Hello", "author": "fpgas.online", "description": "9600 baud 8N1 transmitter that sends 'Hello from Tiny Tapeout FPGA' once a second", "docs_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/blob/main/demos/tt_um_uart_hello/docs/info.md", "repo_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/tree/main/demos/tt_um_uart_hello", "clock_hz": 1000000, "pinout": {"ui_in": ["Send now (rising edge starts the message immediately)", "", "", "", "", "", "", ""], "uo_out": ["UART TX (9600 8N1, idle high)", "TX busy (high while a message is being sent)", "", "", "", "", "", ""], "uio": ["", "", "", "", "", "", "", ""]}, "source": "demo"}, {"name": "tt_um_vga_pattern", "title": "VGA Test Pattern", "author": "fpgas.online", "description": "640x480@60 VGA colour bars over a scrolling gradient, for the Tiny VGA PMOD", "docs_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/blob/main/demos/tt_um_vga_pattern/docs/info.md", "repo_url": "https://github.com/fpgas-online/tinytapeout-fpga-demos/tree/main/demos/tt_um_vga_pattern", "clock_hz": 25175000, "pinout": {"ui_in": ["", "", "", "", "", "", "", ""], "uo_out": ["R1", "G1", "B1", "VSync", "R0", "G0", "B0", "HSync"], "uio": ["", "", "", "", "", "", "", ""]}, "source": "demo"}, {"name": "tt_um_vgacal_bars", "title": "", "author": "", "description": "", "docs_url": "", "repo_url": "", "clock_hz": null, "pinout": {}, "source": "upload"}]}
+rc=0

@@ -1,0 +1,12 @@
++ rm -rf /home/pi/vgacap /home/pi/uv-armv7-unknown-linux-musleabihf /home/pi/uv-armv7-unknown-linux-musleabihf.tar.gz /home/pi/.local/bin
++ cd /home/pi/.cache/uv
++ find . -mindepth 1 -maxdepth 3 -newermt '2026-11-27 06:18' -printf 'NEW %TT %p\n'
+NEW 06:18:24.9411824740 ./archive-v0
+NEW 06:18:24.9411824740 ./archive-v0/ppJA94BDurFedRshTT6s4
+NEW 06:18:24.9411824740 ./archive-v0/ppJA94BDurFedRshTT6s4/__editable__.vgacap-0.0.1.pth
+NEW 06:18:24.9411824740 ./archive-v0/ppJA94BDurFedRshTT6s4/vgacap-0.0.1.dist-info
+NEW 06:18:22.4892145010 ./simple-v20/pypi
+NEW 06:18:22.4892145010 ./simple-v20/pypi/setuptools.rkyv
+NEW 06:18:24.9651821600 ./builds-v0
+NEW 06:18:22.4052155980 ./sdists-v9/editable
+NEW 06:18:22.4052155980 ./sdists-v9/editable/321422a4351dd6c5

@@ -1,0 +1,18 @@
+{
+  "claim_id": "c-yQZrSYJbSzh6",
+  "board": "welland:pi-sw2-p34",
+  "holder": "cli:tim@big-storage",
+  "purpose": "vgacap stock-firmware 400 kHz USB serial measurement (no flashing)",
+  "started": "2026-11-27T06:18:07Z",
+  "expires": "2026-11-27T07:18:07Z",
+  "renewed": false,
+  "as_of": "2026-11-27T06:18:07Z",
+  "next": "connect / run / power_cycle use this claim; keep claim_id to pass it after a restart; release_board when done",
+  "in_use": {
+    "verdict": "idle",
+    "signals": [
+      "<board-output untrusted=\"true\">carries the Tiny Tapeout board tinytapeout:fpga-1</board-output>"
+    ],
+    "as_of": "2026-11-27T06:18:07Z"
+  }
+}
