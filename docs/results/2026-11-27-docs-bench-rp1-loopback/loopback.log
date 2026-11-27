@@ -1,0 +1,28 @@
++ date -u
+Fri 27 Nov 01:02:55 UTC 2026
++ cd /home/pi/bench46/vgacap
++ git log -1 --format=%H
+ad7c418998792e4f146652c0ad3573183b668218
++ ./capture-rp1/vgacap-rp1 --out counter.vgacap --samples 4194304 --gen-counter --gen-div 50 --clock-hz 500000
+rp1 samples=4194304 seconds=8.460 samples_per_s=495791 dropped=0
+step1 exit=0
++ echo 'step1 exit=0'
++ ls -l counter.vgacap
+-rw-r--r-- 1 pi pi 4195968 Nov 27 01:03 counter.vgacap
++ python3 capture-rp1/check_counter.py counter.vgacap
+ok: 4194304 samples, every step -1
+step2 exit=0
++ echo 'step2 exit=0'
++ pinctrl get 4-12
+ 4: a7    pu | hi // GPIO4 = PIO4
+ 5: a7    pu | hi // GPIO5 = PIO5
+ 6: a7    pu | hi // GPIO6 = PIO6
+ 7: a7    pu | hi // GPIO7 = PIO7
+ 8: a7    pu | hi // GPIO8 = PIO8
+ 9: a7    pd | lo // GPIO9 = PIO9
+10: a7    pd | lo // GPIO10 = PIO10
+11: a7    pd | lo // GPIO11 = PIO11
+12: a7    pd | lo // GPIO12 = PIO12
++ date -u
+Fri 27 Nov 01:03:09 UTC 2026
+ssh exit=0
