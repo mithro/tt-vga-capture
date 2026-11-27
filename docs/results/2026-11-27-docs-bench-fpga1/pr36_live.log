@@ -1,0 +1,58 @@
+######## step1 2026-11-27T01:20:52Z
+$ export GST_PLUGIN_PATH=$PWD/build
+Factory Details:
+  Rank                     none (0)
+  Long-name                Tiny Tapeout VGA capture bin
+  Klass                    Source/Video
+  Description              Decodes a vgacap URI - a board over serial or the bridge, or a file - into RGB video
+  Author                   vgacap contributors <https://github.com/mithro/vgacap>
+
+Plugin Details:
+  Name                     vgacap
+  Description              Tiny Tapeout VGA capture: stream decoding and capture sources
+  Filename                 /home/tim/github/TinyTapeout/vgacap/.worktrees/bench-36/build/libgstvgacap.so
+  Version                  0.0.1
+######## step2/3 skipped: no display (window)
+######## step4 (with step 3's design=, tt-ws:// via the tunnel in place of tt-serial:///dev/ttyACM0) 2026-11-27T01:20:52Z
+$ gst-launch-1.0 -e vgacapbin uri="tt-ws://127.0.0.1:18034/serial?design=tt_um_vga_pattern&clock-hz=500000&seconds=10" ! videoconvert ! video/x-raw,format=I420 ! x264enc ! matroskamux ! filesink location=/home/tim/github/TinyTapeout/tmp/bench-36/live.mkv
+Setting pipeline to PAUSED ...
+Pipeline is live and does not need PREROLL ...
+Pipeline is PREROLLED ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+ERROR: from element /GstPipeline:pipeline0/GstVgaCapBin:vgacapbin0/GstVgaCapTtSrc:source: the capture failed (exit status 1): capture failed: CaptureError: board rejected getattr(tt.shuttle, 'tt_um_vga_pattern').enable():
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "ttboard/fpga/fpga_mux.py", line 199, in __getattr__
+AttributeError: What is 'tt_um_vga_pattern'?
+'tt_um_vga_pattern' is not a shuttle entry on this board and is not the enabled design either; an uploaded FPGA bitstream has to be enabled through the board's daemon first
+Additional debug info:
+/home/tim/github/TinyTapeout/vgacap/.worktrees/bench-36/gst/gstvgacapttsrc.c(1030): child_finished (): /GstPipeline:pipeline0/GstVgaCapBin:vgacapbin0/GstVgaCapTtSrc:source:
+argv: uv run --no-sync ttcap capture ws://127.0.0.1:18034/serial --out - --clock-hz 500000 --design tt_um_vga_pattern --profile auto --seconds 10; 0 bytes were captured
+ERROR: from element /GstPipeline:pipeline0/GstVgaCapBin:vgacapbin0/GstVgaCapTtSrc:source: Internal data stream error.
+Additional debug info:
+../libs/gst/base/gstbasesrc.c(3187): gst_base_src_loop (): /GstPipeline:pipeline0/GstVgaCapBin:vgacapbin0/GstVgaCapTtSrc:source:
+streaming stopped, reason error (-5)
+Execution ended after 0:00:00.293832057
+Setting pipeline to NULL ...
+Freeing pipeline ...
+rc=1 elapsed=.347182909
+######## recovery: enable tt_um_vga_pattern through the bridge 2026-11-27T01:21:00Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 318, "version": "0.1.0"}
+{"enabled": "tt_um_vga_pattern", "clock_hz": null, "ui_in": null, "ui_in_mask": 0, "ui_in_driven": [], "ui_in_held": [], "ui_in_inputs": [], "released": []}
+######## step4 (attempt 2) 2026-11-27T01:21:04Z
+$ gst-launch-1.0 -e vgacapbin uri="tt-ws://127.0.0.1:18034/serial?design=tt_um_vga_pattern&clock-hz=500000&seconds=10" ! videoconvert ! video/x-raw,format=I420 ! x264enc ! matroskamux ! filesink location=/home/tim/github/TinyTapeout/tmp/bench-36/live.mkv
+Setting pipeline to PAUSED ...
+Pipeline is live and does not need PREROLL ...
+Pipeline is PREROLLED ...
+Setting pipeline to PLAYING ...
+New clock: GstSystemClock
+Redistribute latency...
+Redistribute latency...
+Got EOS from element "pipeline0".
+EOS received - stopping pipeline...
+Execution ended after 0:00:10.586556719
+Setting pipeline to NULL ...
+Freeing pipeline ...
+rc=0 elapsed=10.641865678
+-rw-rw-r-- 1 tim tim 5812 Nov 27 11:51 /home/tim/github/TinyTapeout/tmp/bench-36/live.mkv

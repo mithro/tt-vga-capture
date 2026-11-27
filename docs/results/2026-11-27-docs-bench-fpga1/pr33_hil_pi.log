@@ -1,0 +1,73 @@
+######## precondition: tunnel how-to steps 1-3 again (board_restart had put the idle display back) 2026-11-27T01:25:25Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 583, "version": "0.1.0", "reachable": true}
+rc=0
+uploading bitstreams/tt_um_vgacal_bars.bin (104090 bytes) as 'tt_um_vgacal_bars'
+upload: {'name': 'tt_um_vgacal_bars', 'size': 104090, 'evicted': []}
+enable: {'enabled': 'tt_um_vgacal_bars', 'clock_hz': 500000, 'ui_in': None, 'ui_in_mask': 0, 'ui_in_driven': [], 'ui_in_held': [], 'ui_in_inputs': [], 'released': []}
+rc=0
+tunnel pids: 3672076
+######## step1 2026-11-27T01:25:42Z
++ curl -s http://127.0.0.1:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 600, "version": "0.1.0"}######## rc=0 2026-11-27T01:25:42Z
+######## step2 2026-11-27T01:25:42Z
++ cmake -S . -B build
+bash: line 1: cmake: command not found
+######## rc=127 2026-11-27T01:25:42Z
+######## step2 workaround: cmake from PyPI via uvx 2026-11-27T01:25:50Z
++ uvx --python /usr/bin/python3 --from cmake cmake --version
+Downloading cmake (26.1MiB)
+ Downloaded cmake
+Installed 1 package in 168ms
+cmake version 4.4.5
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+######## rc=0 2026-11-27T01:25:54Z
+######## step2 (cmake = uvx --from cmake cmake) 2026-11-27T01:26:00Z
++ C='uvx --python /usr/bin/python3 --from cmake cmake'
++ uvx --python /usr/bin/python3 --from cmake cmake -S . -B build
++ uvx --python /usr/bin/python3 --from cmake cmake --build build -j --target vgacap-frames
+rc=0
++ echo rc=0
++ tail -n 5 build_cfg.log build_frames.log
+==> build_cfg.log <==
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (1.7s)
+-- Generating done (0.3s)
+-- Build files have been written to: /home/pi/bench-33/vgacap/build
+
+==> build_frames.log <==
+[ 83%] Linking C static library libvgacap_stream.a
+[ 83%] Built target vgacap_stream
+[ 83%] Building C object CMakeFiles/vgacap-frames.dir/src/tools/vgacap_frames.c.o
+[100%] Linking C executable vgacap-frames
+[100%] Built target vgacap-frames
++ ls -l build/vgacap-frames
+-rwxr-xr-x 1 pi pi 127008 Nov 27 01:26 build/vgacap-frames
+######## rc=0 2026-11-27T01:26:06Z
+######## step3 2026-11-27T01:26:10Z
++ uv run --no-dev --python /usr/bin/python3 python tools/hil.py --board fpga-1 --link serial:/dev/ttboard --design tt_um_vgacal_bars --clock-hz 500000 --no-demo --stop-bridge --ttcap 'uv run --no-dev --no-sync ttcap' tmp/hil/
+Using CPython 3.11.2 interpreter at: /usr/bin/python3
+Creating virtual environment at: .venv
+   Building vgacap @ file:///home/pi/bench-33/vgacap
+      Built vgacap @ file:///home/pi/bench-33/vgacap
+Installed 3 packages in 10ms
+hil: fpga-1 (serial:/dev/ttboard), tt_um_vgacal_bars, 500000 Hz
+PASS  probe          fpga-1 (serial:/dev/ttboard) answered in 0.8s: sys.version: 3.4.0; MicroPython 970468103d on 2026-09-08 / GPIOMap.all(): {'mng00': 3, 'mng01': 4, 'mng02': 5, 'mng03': 6, 'adc3': 43, 'mng04': 7, 'mng05': 8, 'mng06': 9, 'mng07': 10, 'uo_out6': 39, 'uo_out7': 40, 'uo_out4': 37, 'uo_out5': 38, 'rp_projclk': 16, 'uo_out0': 33, 'uo_out1': 34, 'uo_out2
+PASS  capture        fpga-1 (serial:/dev/ttboard): bytes=4902470 samples=4898816 chunks=300 seconds=10.035 overruns=0 dropped=0 rxstall=0 samples_per_s=488194 mem_free=423152, 4902581 byte(s) on disk
+PASS  reconstruct    11 frame(s) from 4902581 byte(s), wanted >=9 for 10.0s at 500000 Hz; frames=11 glitches_total=0
+SKIP  reference      tt-vga-testpatterns is not next door: no /home/pi/bench-33/tt-vga-testpatterns/tools/compare_capture.py
+SKIP  frame          tt-vga-testpatterns is not next door: no /home/pi/bench-33/tt-vga-testpatterns/tools/compare_capture.py
+SKIP  demo-frames    --no-demo: the board checks only
+SKIP  video          --no-demo: the board checks only
+SKIP  serve          --no-demo: the board checks only
+SKIP  stop           --no-demo: the board checks only
+PASS  board-usable   fpga-1 (serial:/dev/ttboard) answered in 0.5s: sys.version: 3.4.0; MicroPython 970468103d on 2026-09-08 / GPIOMap.all(): {'mng00': 3, 'mng01': 4, 'mng02': 5, 'mng03': 6, 'adc3': 43, 'mng04': 7, 'mng05': 8, 'mng06': 9, 'mng07': 10, 'uo_out6': 39, 'uo_out7': 40, 'uo_out4': 37, 'uo_out5': 38, 'rp_projclk': 16, 'uo_out0': 33, 'uo_out1': 34, 'uo_out2
+
+10 check(s): 4 passed, 0 failed, 6 skipped
+report: tmp/hil/2026-11-27-hil-fpga-1.md
+######## rc=0 2026-11-27T01:26:33Z
+######## step4 2026-11-27T01:26:33Z
++ systemctl is-active fpgas-tt
+active
+######## rc=0 2026-11-27T01:26:33Z

@@ -1,0 +1,266 @@
+== flash: before 2026-11-27T01:11:07Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 81, "version": "0.1.0"}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 81, "version": "0.1.0", "reachable": true}
+######## step1 2026-11-27T01:11:08Z
++ for f in fw_probe.py fw_dump.py fs_dump.py manifest.py unpack_backup.py uf2tool.py fs_start.py
++ curl -fsSLO https://raw.githubusercontent.com/mithro/tt-vga-capture/e4427aaadae934539590bf9ae89c17ed451bdf71/docs/results/2026-11-24-mpy-module-fpga1/fw_probe.py
++ for f in fw_probe.py fw_dump.py fs_dump.py manifest.py unpack_backup.py uf2tool.py fs_start.py
++ curl -fsSLO https://raw.githubusercontent.com/mithro/tt-vga-capture/e4427aaadae934539590bf9ae89c17ed451bdf71/docs/results/2026-11-24-mpy-module-fpga1/fw_dump.py
++ for f in fw_probe.py fw_dump.py fs_dump.py manifest.py unpack_backup.py uf2tool.py fs_start.py
++ curl -fsSLO https://raw.githubusercontent.com/mithro/tt-vga-capture/e4427aaadae934539590bf9ae89c17ed451bdf71/docs/results/2026-11-24-mpy-module-fpga1/fs_dump.py
++ for f in fw_probe.py fw_dump.py fs_dump.py manifest.py unpack_backup.py uf2tool.py fs_start.py
++ curl -fsSLO https://raw.githubusercontent.com/mithro/tt-vga-capture/e4427aaadae934539590bf9ae89c17ed451bdf71/docs/results/2026-11-24-mpy-module-fpga1/manifest.py
++ for f in fw_probe.py fw_dump.py fs_dump.py manifest.py unpack_backup.py uf2tool.py fs_start.py
++ curl -fsSLO https://raw.githubusercontent.com/mithro/tt-vga-capture/e4427aaadae934539590bf9ae89c17ed451bdf71/docs/results/2026-11-24-mpy-module-fpga1/unpack_backup.py
++ for f in fw_probe.py fw_dump.py fs_dump.py manifest.py unpack_backup.py uf2tool.py fs_start.py
++ curl -fsSLO https://raw.githubusercontent.com/mithro/tt-vga-capture/e4427aaadae934539590bf9ae89c17ed451bdf71/docs/results/2026-11-24-mpy-module-fpga1/uf2tool.py
++ for f in fw_probe.py fw_dump.py fs_dump.py manifest.py unpack_backup.py uf2tool.py fs_start.py
++ curl -fsSLO https://raw.githubusercontent.com/mithro/tt-vga-capture/e4427aaadae934539590bf9ae89c17ed451bdf71/docs/results/2026-11-24-mpy-module-fpga1/fs_start.py
++ ls -l
+total 28
+-rw-r--r-- 1 pi pi  552 Nov 27 01:11 fs_dump.py
+-rw-r--r-- 1 pi pi  472 Nov 27 01:11 fs_start.py
+-rw-r--r-- 1 pi pi  235 Nov 27 01:11 fw_dump.py
+-rw-r--r-- 1 pi pi  662 Nov 27 01:11 fw_probe.py
+-rw-r--r-- 1 pi pi  681 Nov 27 01:11 manifest.py
+-rw-r--r-- 1 pi pi 3055 Nov 27 01:11 uf2tool.py
+-rw-r--r-- 1 pi pi 2082 Nov 27 01:11 unpack_backup.py
++ sha256sum fs_dump.py fs_start.py fw_dump.py fw_probe.py manifest.py uf2tool.py unpack_backup.py
+355940b883219e84993accf75959f4ede78ebfbeda408220c711d846e09df185  fs_dump.py
+20a5888e3ed3375d888b33f42708b0f8dbb2884c3c69dfe9e1fe10189538190b  fs_start.py
+c95806a2c3808311c36ddfb2df4ff9c9cff94a0a6b6a63dfa73a639a85371cdc  fw_dump.py
+aa9fad5388531a4d02e5bee25e611a7949c567b0c95e2a5aa3352d09f0aab765  fw_probe.py
+6cecf8f37450565eb7dff8340322d7255e6b1af7b348726a9f3981799646b951  manifest.py
+f93dc5403deebf4fd2178c608ce8186c9387525ef030251aa405c71559655678  uf2tool.py
+ff19f9e5d84e5970f8beb9f1875105ad9163c9145f652134aed9ce81a8f42d18  unpack_backup.py
+######## rc=0 2026-11-27T01:11:11Z
+######## step2 2026-11-27T01:11:11Z
++ curl -s localhost:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 85, "version": "0.1.0"}######## rc=0 2026-11-27T01:11:11Z
+######## step3 2026-11-27T01:11:20Z
++ sudo systemctl stop fpgas-tt
++ systemctl is-active fpgas-tt
+inactive
+######## rc=3 2026-11-27T01:11:21Z
+######## step4 2026-11-27T01:11:21Z
++ mpremote connect /dev/ttboard run fw_probe.py
+rc=0
++ echo rc=0
++ mpremote connect /dev/ttboard run manifest.py
++ echo rc=0
+rc=0
++ mpremote connect /dev/ttboard run fw_dump.py
+rc=0
++ echo rc=0
++ mpremote connect /dev/ttboard run fs_dump.py
++ echo rc=0
+rc=0
++ wc -l fs_dump.txt fw_dump.txt manifest_before.txt probe_before.txt
+    523 fs_dump.txt
+    268 fw_dump.txt
+     48 manifest_before.txt
+      7 probe_before.txt
+    846 total
++ cat probe_before.txt
+version 3.4.0; MicroPython 970468103d on 2026-09-08
+uname 970468103d on 2026-09-08 (GNU 13.2.1 MinSizeRel)
+fs_blocks 824 block_size 4096 fs_bytes 3375104
+VERSION version=3.1.1
+revision=d485c7a9986336024e35d790568fca33be1c5665
+fw_sha256 b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1
+free 482368
++ head -n 3 manifest_before.txt
+uname 1.30.0-preview 970468103d on 2026-09-08 (GNU 13.2.1 MinSizeRel)
+sdk ? name 'tt' isn't defined
+F /VERSION 64 9b0b0458f6a5bcfe444620279ad2c288ea43cf6046c427d256976e1d1c027e50
+######## rc=0 2026-11-27T01:12:31Z
+######## step5 2026-11-27T01:12:36Z
++ python3 unpack_backup.py fw_dump.txt fs_dump.txt manifest_before.txt probe_before.txt backup
+firmware region 819200 bytes, sha256 b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1 MATCH
+files 46 match the manifest; 0 do not [] ; manifest has 46
++ ls backup
+dirs.txt
+firmware_region.bin
+fs
++ grep -c '^F ' manifest_before.txt
+46
+######## rc=0 2026-11-27T01:12:36Z
+######## step6 2026-11-27T01:12:36Z
++ python3 uf2tool.py tobin /home/pi/bench-42/tt-demo-rp2350-vgacap-module-v3.1.1-dev-14a09314.uf2 module.bin 0x10000000 0x100C8000
++ python3 uf2tool.py frombin module.bin module.uf2 0x10000000 0xe48bff59
+wrote 3200 blocks from 0x10000000 family 0xe48bff59
+######## rc=0 2026-11-27T01:12:37Z
+######## step7 2026-11-27T01:12:37Z
++ python3 uf2tool.py frombin backup/firmware_region.bin restore.uf2 0x10000000 0xe48bff59
+wrote 3200 blocks from 0x10000000 family 0xe48bff59
++ python3 uf2tool.py tobin restore.uf2 restore.bin 0x10000000 0x100C8000
++ sha256sum restore.bin backup/firmware_region.bin
+b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1  restore.bin
+b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1  backup/firmware_region.bin
+######## rc=0 2026-11-27T01:12:37Z
+######## step8 2026-11-27T01:12:37Z
++ python3 fs_start.py /home/pi/bench-42/tt-demo-rp2350-vgacap-module-v3.1.1-dev-14a09314.uf2
+/home/pi/bench-42/tt-demo-rp2350-vgacap-module-v3.1.1-dev-14a09314.uf2 littlefs magic at ['0x1003fa20', '0x100c8008', '0x100c9008']
++ sha256sum module.bin
+5dc230b2bc8703a2493165b9e2eca2c8fbfeb443b027a0da41669a992b6ece64  module.bin
+######## rc=0 2026-11-27T01:12:37Z
+######## step9 2026-11-27T01:12:45Z
++ mpremote connect /dev/ttboard bootloader
++ timeout 60 sh -c 'until [ -e /dev/disk/by-label/RP2350 ]; do sleep 1; done'
++ ls -l /dev/disk/by-label/
+total 0
+lrwxrwxrwx 1 root root 10 Nov 27 01:12 RP2350 -> ../../sda1
+######## rc=0 2026-11-27T01:12:49Z
+######## step10 2026-11-27T01:12:55Z
++ sudo mount /dev/disk/by-label/RP2350 /mnt/rp2350
++ sudo cp module.uf2 /mnt/rp2350/
++ sync
++ sudo umount /mnt/rp2350
++ timeout 60 sh -c 'until [ -e /dev/ttboard ]; do sleep 1; done'
++ sleep 3
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 011: ID 2e8a:0005 MicroPython Board in FS mode
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+######## rc=0 2026-11-27T01:13:16Z
+######## step11 2026-11-27T01:13:16Z
++ mpremote connect /dev/ttboard run fw_probe.py
++ grep fw_sha256 probe_module.txt
+fw_sha256 5dc230b2bc8703a2493165b9e2eca2c8fbfeb443b027a0da41669a992b6ece64
++ sha256sum module.bin
+5dc230b2bc8703a2493165b9e2eca2c8fbfeb443b027a0da41669a992b6ece64  module.bin
++ cat probe_module.txt
+version 3.4.0; MicroPython b006887db6 on 2026-11-24
+uname b006887db6 on 2026-11-24 (GNU 14.2.1 MinSizeRel)
+fs_blocks 824 block_size 4096 fs_bytes 3375104
+VERSION version=3.1.1
+revision=d485c7a9986336024e35d790568fca33be1c5665
+fw_sha256 5dc230b2bc8703a2493165b9e2eca2c8fbfeb443b027a0da41669a992b6ece64
+free 477440
+######## rc=0 2026-11-27T01:13:18Z
+######## step12 2026-11-27T01:13:18Z
++ mpremote connect /dev/ttboard run manifest.py
+++ grep '^F ' manifest_before.txt
++ diff /dev/fd/63 /dev/fd/62
+++ grep '^F ' manifest_module.txt
+files identical
++ echo files identical
+######## rc=0 2026-11-27T01:13:19Z
+######## step13 2026-11-27T01:13:19Z
++ mpremote connect /dev/ttboard exec 'import vgacap; print(vgacap.API)'
+1
+######## rc=0 2026-11-27T01:13:20Z
+======== restore path A: REPL (no RP2350 drive at step 15) ========
+######## step15 (path A) 2026-11-27T01:14:24Z
++ ls -l /dev/disk/by-label/
+ls: cannot access '/dev/disk/by-label/': No such file or directory
++ '[' -e /dev/disk/by-label/RP2350 ']'
++ mpremote connect /dev/ttboard bootloader
++ timeout 60 sh -c 'until [ -e /dev/disk/by-label/RP2350 ]; do sleep 1; done'
++ ls -l /dev/disk/by-label/
+total 0
+lrwxrwxrwx 1 root root 10 Nov 27 01:14 RP2350 -> ../../sda1
+######## rc=0 2026-11-27T01:14:28Z
+######## step16 (path A) 2026-11-27T01:14:34Z
++ sudo mount /dev/disk/by-label/RP2350 /mnt/rp2350
++ sudo cp restore.uf2 /mnt/rp2350/
++ sync
++ sudo umount /mnt/rp2350
++ timeout 60 sh -c 'until [ -e /dev/ttboard ]; do sleep 1; done'
++ sleep 3
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 013: ID 2e8a:0005 MicroPython Board in FS mode
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+######## rc=0 2026-11-27T01:14:55Z
+######## step17 (path A) 2026-11-27T01:14:55Z
++ mpremote connect /dev/ttboard run fw_probe.py
++ mpremote connect /dev/ttboard run manifest.py
++ cat probe_after.txt
+version 3.4.0; MicroPython 970468103d on 2026-09-08
+uname 970468103d on 2026-09-08 (GNU 13.2.1 MinSizeRel)
+fs_blocks 824 block_size 4096 fs_bytes 3375104
+VERSION version=3.1.1
+revision=d485c7a9986336024e35d790568fca33be1c5665
+fw_sha256 b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1
+free 482368
+######## rc=0 2026-11-27T01:14:58Z
+######## Check (path A) 2026-11-27T01:14:58Z
++ grep fw_sha256 probe_before.txt probe_after.txt
+probe_before.txt:fw_sha256 b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1
+probe_after.txt:fw_sha256 b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1
+++ grep '^F ' manifest_before.txt
++ diff /dev/fd/63 /dev/fd/62
+++ grep '^F ' manifest_after.txt
+files identical
++ echo files identical
++ mpremote connect /dev/ttboard exec 'import vgacap'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: no module named 'vgacap'
+######## rc=1 2026-11-27T01:14:59Z
+======== restore path B: drive-only (BOOTSEL forced before step 15) ========
+######## path B setup: keep path A results, force BOOTSEL 2026-11-27T01:15:06Z
++ cp probe_after.txt probe_after_pathA.txt
++ cp manifest_after.txt manifest_after_pathA.txt
++ mpremote connect /dev/ttboard bootloader
++ sleep 5
++ ls -l /dev/disk/by-label/
+total 0
+lrwxrwxrwx 1 root root 10 Nov 27 01:15 RP2350 -> ../../sda1
++ ls -l /dev/ttboard
+ls: cannot access '/dev/ttboard': No such file or directory
+######## rc=2 2026-11-27T01:15:11Z
+######## step15 (path B) 2026-11-27T01:15:11Z
++ '[' -e /dev/disk/by-label/RP2350 ']'
++ timeout 60 sh -c 'until [ -e /dev/disk/by-label/RP2350 ]; do sleep 1; done'
+######## rc=0 2026-11-27T01:15:11Z
+######## step16 (path B) 2026-11-27T01:15:16Z
++ sudo mount /dev/disk/by-label/RP2350 /mnt/rp2350
++ sudo cp restore.uf2 /mnt/rp2350/
++ sync
++ sudo umount /mnt/rp2350
++ timeout 60 sh -c 'until [ -e /dev/ttboard ]; do sleep 1; done'
++ sleep 3
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 015: ID 2e8a:0005 MicroPython Board in FS mode
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+######## rc=0 2026-11-27T01:15:38Z
+######## step17 (path B) 2026-11-27T01:15:38Z
++ mpremote connect /dev/ttboard run fw_probe.py
++ mpremote connect /dev/ttboard run manifest.py
++ cat probe_after.txt
+version 3.4.0; MicroPython 970468103d on 2026-09-08
+uname 970468103d on 2026-09-08 (GNU 13.2.1 MinSizeRel)
+fs_blocks 824 block_size 4096 fs_bytes 3375104
+VERSION version=3.1.1
+revision=d485c7a9986336024e35d790568fca33be1c5665
+fw_sha256 b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1
+free 482368
+######## rc=0 2026-11-27T01:15:40Z
+######## Check (path B) 2026-11-27T01:15:40Z
++ grep fw_sha256 probe_before.txt probe_after.txt
+probe_before.txt:fw_sha256 b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1
+probe_after.txt:fw_sha256 b57a7ffc4856e0ca997f551a0e88c4651df72f1ca246a7e48f681cd85d5eb6d1
+++ grep '^F ' manifest_before.txt
++ diff /dev/fd/63 /dev/fd/62
+++ grep '^F ' manifest_after.txt
++ echo files identical
+files identical
++ mpremote connect /dev/ttboard exec 'import vgacap'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: no module named 'vgacap'
+######## rc=1 2026-11-27T01:15:41Z
+######## step18 2026-11-27T01:15:41Z
++ sudo systemctl start fpgas-tt
++ systemctl is-active fpgas-tt
+active
+######## rc=0 2026-11-27T01:15:41Z
+== flash: after step 18 2026-11-27T01:15:46Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 4, "version": "0.1.0"}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 4, "version": "0.1.0", "reachable": true}

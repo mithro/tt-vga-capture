@@ -1,0 +1,11 @@
+[STREAM]
+width=640
+height=480
+r_frame_rate=25/3
+avg_frame_rate=25/21
+duration=N/A
+nb_read_frames=10
+[/STREAM]
+[FORMAT]
+duration=9.240000
+[/FORMAT]
