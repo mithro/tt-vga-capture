@@ -14,14 +14,14 @@ Both pages passed with no stops.
 | Kernel | 6.12.109+rpt-rpi-v8 (aarch64) |
 | PIO device | `/dev/pio0`, group `gpio` |
 
-Source: `identity.log`.
+Source: [`identity.log`](identity.log).
 
 ## The empty header
 
 Each of GPIO 4 to GPIO 12 was set as an input with its default pull and read,
 then put back as found (function `no`). Nothing on the header pulls against the
 defaults: GPIO 4 to GPIO 8 read 1 (pull-up), GPIO 9 to GPIO 12 read 0
-(pull-down). Source: `header.log`.
+(pull-down). Source: [`header.log`](header.log).
 
 ## The build (`how-to-build.md`)
 
@@ -32,7 +32,7 @@ defaults: GPIO 4 to GPIO 8 read 1 (pull-up), GPIO 9 to GPIO 12 read 0
 | `vgacap-rp1` with no arguments | the usage line on the page, exit status 2 |
 | `vgacap-rp1-programs 12 rising 3` | `sampler 200c 208c 4008`, as on the page |
 
-Source: `build.log`.
+Source: [`build.log`](build.log).
 
 ## The loopback capture (`how-to-capture-loopback.md`)
 
@@ -50,12 +50,12 @@ ok: 4194304 samples, every step -1
 
 So `--gen-div 50` at the default `--gen-delay 3` ran the generator at 495,791
 samples a second, measured by the tool over the whole capture. Source:
-`loopback.log`.
+[`loopback.log`](loopback.log).
 
 ## Releasing the pins
 
 After the capture, GPIO 4 to GPIO 12 were left on function `a7` (PIO).
 `for n in 4 5 6 7 8 9 10 11 12; do sudo pinctrl set $n no; done` put them back to
-`no`, as found. Source: `release.log` (the loop and `pinctrl get 4-12`; the
+`no`, as found. Source: [`release.log`](release.log) (the loop and `pinctrl get 4-12`; the
 same log shows the work directory removed and nothing left holding
 `/dev/pio0`).
