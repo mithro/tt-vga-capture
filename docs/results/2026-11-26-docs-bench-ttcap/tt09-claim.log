@@ -1,0 +1,5 @@
+CLAIM ID: c-jFfiEg527hpt
+tinytapeout:tt-3b0880b48ee5c388 is yours until 2026-11-27 00:05 UTC (started 23:05 UTC); purpose: vgacap docs bench run PR #43
+override: Tim approved use of any fpgas.online board for the vgacap docs bench runs (2026-11-27); 0 clients checked
+in-use check: unknown
+release with: fpgas-online release c-jFfiEg527hpt
