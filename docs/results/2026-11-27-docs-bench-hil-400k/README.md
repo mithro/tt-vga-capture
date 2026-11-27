@@ -39,7 +39,7 @@ In every run the `frame` check gave 2 of 2 pictures pixel-exact at
 
 Step 5 (`tools/board_restart.py`) restarted the stock firmware, ending at
 its `>>>` prompt at 01:46:42Z (`step5-restart.log`, colour codes removed).
-The idle display read `loaded` at the 66 s poll
+The idle display read `loaded` 66 s later, polled every 5 s
 (`idle-poll.log`). `status-before.json` (01:42:44Z) and `status-after.json`
 both show `"clients": 0` and `idle_display` `"state": "loaded"`. The tunnel
 was closed by killing its `ssh` process.
