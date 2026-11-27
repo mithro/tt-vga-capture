@@ -17,8 +17,13 @@ Boards:
 - **tt09:** RP2350 demo board with the TT09 ASIC, USB serial
   3b0880b48ee5c388.
 
-Claims, both under Tim's 2026-11-27 approval, as the bench runner reported
-them: p34 (fpga-1) `c-rNYD_FE9L_dp`, tt09 `c-L3lBpCRo6XOc`.
+Claims, both under Tim's 2026-11-27 approval, made through the fpgas-online
+broker:
+
+| board | claim | claimed | released |
+|---|---|---|---|
+| fpga-1 (`welland:pi-sw2-p34`) | `c-rNYD_FE9L_dp` | 01:01:00 UTC | 01:33:05 UTC |
+| tt09 | `c-L3lBpCRo6XOc` | -- | 01:17:14 UTC |
 
 Logs are copied with NUL bytes, ANSI colour codes and the SDK's boot banner
 taken out. Every log below is in this directory.
