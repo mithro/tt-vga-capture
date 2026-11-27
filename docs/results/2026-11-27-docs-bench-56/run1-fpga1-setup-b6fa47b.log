@@ -1,0 +1,51 @@
++ cd /home/pi
++ getconf LONG_BIT
+32
++ curl -LO https://github.com/astral-sh/uv/releases/download/0.10.8/uv-armv7-unknown-linux-musleabihf.tar.gz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  1 20.1M    1  264k    0     0   248k      0  0:01:23  0:00:01  0:01:22  248k100 20.1M  100 20.1M    0     0  11.2M      0  0:00:01  0:00:01 --:--:-- 27.1M
+
+real	0m1.881s
+user	0m0.644s
+sys	0m0.110s
++ tar -xzf uv-armv7-unknown-linux-musleabihf.tar.gz
++ mkdir -p /home/pi/.local/bin
++ cp uv-armv7-unknown-linux-musleabihf/uv /home/pi/.local/bin/
++ export PATH=/home/pi/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
++ PATH=/home/pi/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
++ uv --version
+uv 0.10.8
++ git clone https://github.com/mithro/vgacap.git
+Cloning into 'vgacap'...
+
+real	0m2.163s
+user	0m1.012s
+sys	0m0.260s
++ cd vgacap
++ git fetch origin docs-final-fixes
+From https://github.com/mithro/vgacap
+ * branch            docs-final-fixes -> FETCH_HEAD
++ git checkout --detach FETCH_HEAD
+HEAD is now at b6fa47b docs: wording from the review of #56
++ git log --oneline -1
+b6fa47b docs: wording from the review of #56
++ export UV_NO_DEV=1
++ UV_NO_DEV=1
++ uv sync
+Using CPython 3.11.2 interpreter at: /usr/bin/python3
+Creating virtual environment at: .venv
+Resolved 50 packages in 3ms
+   Building vgacap @ file:///home/pi/vgacap
+      Built vgacap @ file:///home/pi/vgacap
+Prepared 1 package in 2.63s
+Installed 3 packages in 13ms
+ + pyserial==3.5
+ + vgacap==0.0.1 (from file:///home/pi/vgacap)
+ + websockets==17.1
+
+real	0m2.915s
+user	0m2.148s
+sys	0m0.335s
+rc=0

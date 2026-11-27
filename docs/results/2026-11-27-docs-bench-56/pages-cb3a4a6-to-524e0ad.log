@@ -1,0 +1,5 @@
+524e0ad docs: stream clocks as table rows, with version and link (review of #56)
+ docs/reference-capture-sources.md | 30 +++++++++++++-----------------
+ 1 file changed, 13 insertions(+), 17 deletions(-)
+Previous HEAD position was cb3a4a6 docs: alt texts and the image notice match the pictures (review P1)
+HEAD is now at 524e0ad docs: stream clocks as table rows, with version and link (review of #56)

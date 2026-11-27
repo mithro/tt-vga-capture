@@ -1,0 +1,36 @@
+# fpgas.online broker (MCP) replies from the bench session, in order.
+# Copied verbatim from the session's tool results after the run; no script logged them at the time.
+# "<board-output ...>" wrappers are the broker's own. connect replies are left out (they hold only ssh command lines).
+
+claim_board welland:pi-sw2-p34
+{"claim_id":"c-d0_fbdperSJF","board":"welland:pi-sw2-p34","holder":"TinyTapeout:1856580@big-storage","purpose":"vgacap docs bench run PR #56 (no flashing)","started":"2026-11-27T03:39:29Z","expires":"2026-11-27T05:39:29Z","renewed":false,"as_of":"2026-11-27T03:39:29Z","next":"connect / run / power_cycle use this claim; keep claim_id to pass it after a restart; release_board when done","in_use":{"verdict":"idle","signals":["<board-output untrusted=\"true\">carries the Tiny Tapeout board tinytapeout:fpga-1</board-output>"],"as_of":"2026-11-27T03:39:29Z"}}
+
+claim_board welland:pi-sw2-p34
+{"claim_id":"c-iBgHwSefhKlz","board":"welland:pi-sw2-p34","holder":"TinyTapeout:1856580@big-storage","purpose":"vgacap docs bench run PR #56 (no flashing), second pass","started":"2026-11-27T05:33:22Z","expires":"2026-11-27T07:03:22Z","renewed":false,"as_of":"2026-11-27T05:33:22Z","next":"connect / run / power_cycle use this claim; keep claim_id to pass it after a restart; release_board when done","in_use":{"verdict":"idle","signals":["<board-output untrusted=\"true\">carries the Tiny Tapeout board tinytapeout:fpga-1</board-output>"],"as_of":"2026-11-27T05:33:22Z"}}
+
+release_board c-iBgHwSefhKlz
+{"released":"c-iBgHwSefhKlz","as_of":"2026-11-27T05:38:32Z"}
+
+board_status welland:pi-sw2-p10
+{"board":{"id":"welland:pi-sw2-p10","type":"TT chip","condition":"operational","offered":true,"last_seen":"2026-11-27T05:38:32Z","boot_id":"8aa72b8a-6e05-45b5-b44c-4f2cc9f28025","as_of":"2026-11-27T05:38:37Z"},"in_use":{"verdict":"unknown","signals":["<board-output untrusted=\"true\">carries the Tiny Tapeout board tinytapeout:tt-3b0880b48ee5c388; the check failed: SiteError: welland: HTTP 404 for /fpgas/pi-sw2-p10.html</board-output>"],"as_of":"2026-11-27T05:39:03Z","note":"treat this board as in use"}}
+
+claim_board welland:pi-sw2-p10 (override_reason given)
+{"claim_id":"c-eerM7kHr3CzC","board":"welland:pi-sw2-p10","holder":"TinyTapeout:1856580@big-storage","purpose":"vgacap docs bench run PR #56: build/render test in ~ only; tt09 USB and bridge untouched","started":"2026-11-27T05:40:17Z","expires":"2026-11-27T07:10:17Z","renewed":false,"as_of":"2026-11-27T05:40:17Z","next":"connect / run / power_cycle use this claim; keep claim_id to pass it after a restart; release_board when done","override_reason":"Tim's 2026-11-27 approval to use any fpgas.online board for the vgacap docs bench runs; status.json shows clients 0, and the in-use check failed only on a welland site 404","in_use":{"verdict":"unknown","signals":["<board-output untrusted=\"true\">carries the Tiny Tapeout board tinytapeout:tt-3b0880b48ee5c388; the check failed: SiteError: welland: HTTP 404 for /fpgas/pi-sw2-p10.html</board-output>"],"as_of":"2026-11-27T05:40:17Z","note":"treat this board as in use"}}
+
+connect welland:pi-sw2-p10
+Error: ssh to welland:pi-sw2-p10 failed: welland does not list this Pi (its page is a 404); this Pi is reached through its Tiny Tapeout board: claim and connect tinytapeout:tt-3b0880b48ee5c388 instead.
+
+release_board c-eerM7kHr3CzC
+{"released":"c-eerM7kHr3CzC","as_of":"2026-11-27T05:41:38Z"}
+
+claim_board tinytapeout:tt-3b0880b48ee5c388 (override_reason given)
+{"claim_id":"c-umRp-EySdgNp","board":"tinytapeout:tt-3b0880b48ee5c388","holder":"TinyTapeout:1856580@big-storage","purpose":"vgacap docs bench run PR #56: build/render test in ~ only; tt09 USB and bridge untouched","started":"2026-11-27T05:42:16Z","expires":"2026-11-27T07:12:16Z","renewed":false,"as_of":"2026-11-27T05:42:16Z","next":"connect / run / power_cycle use this claim; keep claim_id to pass it after a restart; release_board when done","override_reason":"Tim's 2026-11-27 approval to use any fpgas.online board for the vgacap docs bench runs","in_use":{"verdict":"idle","signals":[],"as_of":"2026-11-27T05:42:16Z"}}
+
+release_board c-umRp-EySdgNp
+{"released":"c-umRp-EySdgNp","as_of":"2026-11-27T05:46:15Z"}
+
+claim_board welland:pi-sw2-p34
+{"claim_id":"c-u_zA2pL29hIw","board":"welland:pi-sw2-p34","holder":"TinyTapeout:1856580@big-storage","purpose":"vgacap docs bench run PR #56 pass 2 (no flashing)","started":"2026-11-27T05:55:31Z","expires":"2026-11-27T06:55:31Z","renewed":false,"as_of":"2026-11-27T05:55:31Z","next":"connect / run / power_cycle use this claim; keep claim_id to pass it after a restart; release_board when done","in_use":{"verdict":"idle","signals":["<board-output untrusted=\"true\">carries the Tiny Tapeout board tinytapeout:fpga-1</board-output>"],"as_of":"2026-11-27T05:55:31Z"}}
+
+release_board c-u_zA2pL29hIw
+{"released":"c-u_zA2pL29hIw","as_of":"2026-11-27T05:58:27Z"}
