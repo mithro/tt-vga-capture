@@ -23,7 +23,7 @@ broker:
 | board | claim | claimed | released |
 |---|---|---|---|
 | fpga-1 (`welland:pi-sw2-p34`) | `c-rNYD_FE9L_dp` | 01:01:00 UTC | 01:33:05 UTC |
-| tt09 | `c-L3lBpCRo6XOc` | -- | 01:17:14 UTC |
+| tt09 | `c-L3lBpCRo6XOc` | not recorded | 01:17:14 UTC |
 
 Logs are copied with NUL bytes, ANSI colour codes and the SDK's boot banner
 taken out. Every log below is in this directory.
@@ -73,11 +73,18 @@ tt-vga-capture at e4427aa.
   brought it up. Path B: BOOTSEL forced first with the same command, so step
   15 found the drive and skipped the reboot.
 - After the restores `import vgacap` failed with `ImportError`, as on stock.
-- The module capture first failed with `NameError: name 'tt' isn't defined`:
-  after the flash the SDK's `main.py` had not run. `tools/board_restart.py`
-  restarted it. `--project tt_um_vga_pattern` then failed with `not a shuttle
-  entry on this board ... has to be enabled through the board's daemon
-  first`; the design was enabled through the bridge.
+- The module capture first failed with `NameError: name 'tt' isn't defined`.
+  The flash is not the cause: `manifest_before.txt`, taken on the stock
+  firmware at step 4 before any flash, already printed `sdk ? name 'tt'
+  isn't defined` (`module_flash.log`). Every `mpremote ... run` or `exec`
+  soft-resets the board, which clears the SDK's `tt`; `mpremote ... resume`
+  avoids the reset, as the tt09 restore used it. `tools/board_restart.py`
+  restarted the SDK.
+- That restart put the FPGA back to `tt_um_factory_test`. `--project
+  tt_um_vga_pattern` then failed with `not a shuttle entry on this board ...
+  has to be enabled through the board's daemon first`. The bridge was
+  started, the design enabled with `POST /designs/tt_um_vga_pattern/enable`,
+  and the bridge stopped again (01:13:48 to 01:13:55).
 
 | capture | clock | result | board report |
 |---|---|---|---|
@@ -139,9 +146,10 @@ at 1.19 fps** (`avg_frame_rate=25/21`).
   rebuilt with 0 glitches. The Pi has no CMake; `vgacap-frames` was built
   with `uvx --from cmake cmake`.
 - **Through the tunnel** (`ws://127.0.0.1:18034/serial`): the `capture`
-  check failed at 500 kHz with 3 overruns (49152 samples dropped), and on a
-  second run with 1 (16384). The demo, video, serve and stop checks passed
-  both times.
+  check failed at 500 kHz with 3 overruns (49152 samples dropped). The second
+  run added `--testpatterns`; its `capture` check failed with 1 overrun
+  (16384), and its `frame` check passed, 2 of 2 pictures pixel-exact. The
+  demo, video, serve and stop checks passed both times.
 - **SDK restart to `loaded`:** after `tools/board_restart.py` the idle
   display read `waiting`, then `loaded` after 66 to 73 s.
 
