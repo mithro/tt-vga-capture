@@ -1,6 +1,6 @@
 # fpgas.online broker (MCP) replies from the bench session, in order.
 # Copied verbatim from the session's tool results after the run; no script logged them at the time.
-# "<board-output ...>" wrappers are the broker's own. connect replies are left out (they hold only ssh command lines).
+# "<board-output ...>" wrappers are the broker's own. successful connect replies are left out (they hold only ssh command lines).
 
 claim_board welland:pi-sw2-p34
 {"claim_id":"c-d0_fbdperSJF","board":"welland:pi-sw2-p34","holder":"TinyTapeout:1856580@big-storage","purpose":"vgacap docs bench run PR #56 (no flashing)","started":"2026-11-27T03:39:29Z","expires":"2026-11-27T05:39:29Z","renewed":false,"as_of":"2026-11-27T03:39:29Z","next":"connect / run / power_cycle use this claim; keep claim_id to pass it after a restart; release_board when done","in_use":{"verdict":"idle","signals":["<board-output untrusted=\"true\">carries the Tiny Tapeout board tinytapeout:fpga-1</board-output>"],"as_of":"2026-11-27T03:39:29Z"}}
@@ -34,3 +34,6 @@ claim_board welland:pi-sw2-p34
 
 release_board c-u_zA2pL29hIw
 {"released":"c-u_zA2pL29hIw","as_of":"2026-11-27T05:58:27Z"}
+
+release_board c-d0_fbdperSJF (from the orchestrating session, after the usage-limit stop)
+{"released":"c-d0_fbdperSJF","as_of":"2026-11-27T04:21:03Z"}

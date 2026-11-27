@@ -36,13 +36,16 @@ The tt09 Pi's model and userland are in [`run1-tt09pi-baseline.log`](run1-tt09pi
 userland is in [`run1-fpga1-setup-524e0ad.log`](run1-fpga1-setup-524e0ad.log). fpga-1's firmware is in the
 restart output of [`run1-welland-pi-steps-b6fa47b.log`](run1-welland-pi-steps-b6fa47b.log).
 
+The copied logs have their terminal colour codes removed and their local paths shortened. In
+`run1-tt09pi-baseline.log`, the NUL byte that `/proc/device-tree/model` ends with, after "Rev 1.4", was removed too.
+
 On tt09's Pi only the home directory was used. The board's USB device and its bridge were not touched.
 
 ## Claims
 
 | Claim | Board id | Taken | Released |
 |---|---|---|---|
-| `c-d0_fbdperSJF` | `welland:pi-sw2-p34` | 03:39:29Z | not logged |
+| `c-d0_fbdperSJF` | `welland:pi-sw2-p34` | 03:39:29Z | 04:21:03Z |
 | `c-iBgHwSefhKlz` | `welland:pi-sw2-p34` | 05:33:22Z | 05:38:32Z |
 | `c-eerM7kHr3CzC` | `welland:pi-sw2-p10` | 05:40:17Z | 05:41:38Z |
 | `c-umRp-EySdgNp` | `tinytapeout:tt-3b0880b48ee5c388` | 05:42:16Z | 05:46:15Z |
@@ -51,7 +54,7 @@ On tt09's Pi only the home directory was used. The board's USB device and its br
 The claim IDs and times come from the broker's replies. These were copied verbatim into
 [`broker-replies.log`](broker-replies.log) after the run; no script logged them at the time.
 
-- `c-d0_fbdperSJF` was released by the coordinating session after a usage-limit stop, and no reply records when.
+- `c-d0_fbdperSJF` was released by the orchestrating session after a usage-limit stop. Its `release_board` reply was `{"released":"c-d0_fbdperSJF","as_of":"2026-11-27T04:21:03Z"}`.
 - `welland:pi-sw2-p10`'s in-use check returned `unknown`, because its welland page is a 404.
 - The two tt09 claims gave an override reason: Tim's 2026-11-27 approval to use any fpgas.online board for the vgacap docs bench runs.
 - `connect` refused `welland:pi-sw2-p10` because of the same 404. The Pi had to be claimed as `tinytapeout:tt-3b0880b48ee5c388`.
@@ -96,7 +99,7 @@ Each Pi checkout was a clone of mithro/vgacap, checked out at `docs-final-fixes`
 
 Notes on the results:
 
-- **Pass 1, welland-pi step 4:** the clean run wrote 1902002 bytes in 4.046 s with `overruns=0 dropped=0 rxstall=0`.
+- **Pass 1, welland-pi step 4:** the b6fa47b run wrote 1902002 bytes in 4.046 s with `overruns=0 dropped=0 rxstall=0`.
 - **Idle-display render:** `ttcap png` printed `frames=0` and `no frame decoded`.
 - **`--project` refusal:** ttcap said `not a shuttle entry on this board`, and that the design has to be enabled through the board's daemon first.
 - **Render on fpga-1's Pi:** it decoded 2 frames, then stopped with `Pillow is needed to write PNGs: uv sync --extra synth`. After that sync it printed `wrote 2 png(s)`.
@@ -124,7 +127,7 @@ The pages' example board is fpga-4. Its `/designs` lists `tt_um_vga_pattern` as 
 | Pass 1, steps 1 to 7 | 524e0ad | 72 | [`run1-welland-pi-steps-524e0ad.log`](run1-welland-pi-steps-524e0ad.log) |
 | Pass 1, `--project` refused | 524e0ad | 71 | [`run1-project-refused.log`](run1-project-refused.log) |
 | Pass 1, VGA capture with overrun | 524e0ad | 72 | [`run1-vga-capture-overrun.log`](run1-vga-capture-overrun.log) |
-| Pass 1, clean run | b6fa47b | 72 | [`run1-welland-pi-steps-b6fa47b.log`](run1-welland-pi-steps-b6fa47b.log) |
+| Pass 1, steps 1 to 7, second session | b6fa47b | 72 | [`run1-welland-pi-steps-b6fa47b.log`](run1-welland-pi-steps-b6fa47b.log) |
 | Pass 1, small capture | b6fa47b | 72 | [`run1-small-capture.log`](run1-small-capture.log) |
 | Pass 2 | ae02e33 | 72 | [`run2-welland-pi-enable-steps.log`](run2-welland-pi-enable-steps.log) |
 
@@ -134,7 +137,7 @@ The pages' example board is fpga-4. Its `/designs` lists `tt_um_vga_pattern` as 
 |---|---|---|
 | Pass 1, steps 1 to 7 | 67 s | [`run1-welland-pi-steps-524e0ad.log`](run1-welland-pi-steps-524e0ad.log) |
 | Pass 1, `--project` refused | 66 s | [`run1-project-refused.log`](run1-project-refused.log) |
-| Pass 1, clean run | 67 s | [`run1-welland-pi-steps-b6fa47b.log`](run1-welland-pi-steps-b6fa47b.log) |
+| Pass 1, steps 1 to 7, second session | 67 s | [`run1-welland-pi-steps-b6fa47b.log`](run1-welland-pi-steps-b6fa47b.log) |
 | Pass 2 | 67 s | [`run2-welland-pi-enable-steps.log`](run2-welland-pi-enable-steps.log) |
 
 In each, the next poll showed `"clients": 0` and `loaded`. The other two runs logged no per-poll lines.
