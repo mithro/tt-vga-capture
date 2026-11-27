@@ -1,0 +1,3 @@
+uploading bitstreams/tt_um_vgacal_bars.bin (104090 bytes) as 'tt_um_vgacal_bars'
+upload: {'name': 'tt_um_vgacal_bars', 'size': 104090, 'evicted': []}
+enable: {'enabled': 'tt_um_vgacal_bars', 'clock_hz': 400000, 'ui_in': None, 'ui_in_mask': 0, 'ui_in_driven': [], 'ui_in_held': [], 'ui_in_inputs': [], 'released': []}
