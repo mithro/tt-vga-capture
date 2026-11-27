@@ -1,0 +1,76 @@
+== scp
+rc=0
+2e1861e880ab8b30d50ffa884240dce2ecfd99e47bd2b2530a702a7563dc3899  bench.vgacap
+== uv sync
+Using CPython 3.14.3
+Creating virtual environment at: .venv
+Resolved 50 packages in 3ms
+   Building vgacap @ file://<checkout>
+      Built vgacap @ file://<checkout>
+Prepared 1 package in 3.64s
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 13 packages in 299ms
+ + colorama==0.4.6
+ + iniconfig==2.3.0
+ + migen==0.9.2
+ + numpy==2.5.3
+ + packaging==26.3
+ + pillow==12.3.0
+ + pluggy==1.6.0
+ + pygments==2.21.0
+ + pyserial==3.5
+ + pytest==9.1.1
+ + vgacap==0.0.1 (from file://<checkout>)
+ + websockets==17.1
+ + zstandard==0.25.0
+TIME real=4.197 s
+rc=0
+== cmake
+-- The C compiler identification is GNU 14.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test VGACAP_HAVE_JCC_FLAG
+-- Performing Test VGACAP_HAVE_JCC_FLAG - Success
+-- vgacap: building the GStreamer plugin against 1.26.2
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (2.4s)
+-- Generating done (0.3s)
+-- Build files have been written to: <checkout>/build
+TIME real=2.734 s
+rc=0
+[  0%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/modes.c.o
+[ 16%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/timing.c.o
+[ 16%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/frame.c.o
+[ 33%] Linking C static library libvgacap_frame.a
+[ 33%] Built target vgacap_frame
+[ 33%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/writer.c.o
+[ 50%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/reader.c.o
+[ 50%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/time.c.o
+[ 66%] Linking C static library libvgacap_stream.a
+[ 66%] Built target vgacap_stream
+[ 83%] Building C object CMakeFiles/vgacap-frames.dir/src/tools/vgacap_frames.c.o
+[100%] Linking C executable vgacap-frames
+[100%] Built target vgacap-frames
+TIME real=4.752 s
+rc=0
+== png
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 2: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=3 glitches_total=0
+wrote 3 png(s)
+TIME real=1.430 s
+rc=0
+-rw-rw-r-- 1 tim tim   1995 Nov 27 16:28 frame-0000.png
+-rw-rw-r-- 1 tim tim 921615 Nov 27 16:28 frame-0000.ppm
+-rw-rw-r-- 1 tim tim   1995 Nov 27 16:28 frame-0001.png
+-rw-rw-r-- 1 tim tim 921615 Nov 27 16:28 frame-0001.ppm
+-rw-rw-r-- 1 tim tim   1996 Nov 27 16:28 frame-0002.png
+-rw-rw-r-- 1 tim tim 921615 Nov 27 16:28 frame-0002.ppm

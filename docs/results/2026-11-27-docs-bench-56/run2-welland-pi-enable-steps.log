@@ -1,0 +1,57 @@
+== uvx cmake check (cache)
+cmake version 4.4.5
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+TIME real=0.724 s
+== step 2 (health)
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 1211, "version": "0.1.0"}
+== enable note
+05:56:15
+{"enabled": "tt_um_vga_pattern", "clock_hz": null, "ui_in": null, "ui_in_mask": 0, "ui_in_driven": [], "ui_in_held": [], "ui_in_inputs": [], "released": []}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "in use"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 1215, "version": "0.1.0"}
+== step 3
+05:56:19
+rc=0
+== step 4
+05:56:19
+profile=rp2350-dbv3 project=None enable=None
+bytes=1902035 samples=1900544 chunks=118 seconds=4.036 overruns=1 dropped=16384 rxstall=0 samples_per_s=470936 mem_free=423056
+  board: overrun
+  board: overruns=1 rxstall=0 sysclk_hz=133000000
+wrote bench.vgacap
+rc=0
+== step 5
+05:56:24
+rc=0
+tt.sdk_version=3.1.1
+MicroPython 970468103d on 2026-09-08; TinyTapeout RP2350B Core with RP2350
+Type "help()" for more information.
+>>> 
+== step 6
+05:56:28
+rc=0
+== step 7
+0s  
+5s "clients": 0 "state": "waiting"
+11s "clients": 0 "state": "waiting"
+16s "clients": 0 "state": "waiting"
+21s "clients": 0 "state": "waiting"
+26s "clients": 0 "state": "waiting"
+31s "clients": 0 "state": "waiting"
+36s "clients": 0 "state": "waiting"
+41s "clients": 0 "state": "waiting"
+47s "clients": 0 "state": "waiting"
+52s "clients": 0 "state": "waiting"
+57s "clients": 0 "state": "waiting"
+62s "clients": 0 "state": "waiting"
+67s "clients": 1 "state": "waiting"
+72s "clients": 0 "state": "loaded"
+LOADED after 72 s
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 71, "version": "0.1.0"}
+== check
+active
+                     USER        PID ACCESS COMMAND
+/dev/ttyACM0:        pi        12871 F.... python3
+-rw-r--r-- 1 pi pi 1902120 Nov 27 05:56 bench.vgacap
+2e1861e880ab8b30d50ffa884240dce2ecfd99e47bd2b2530a702a7563dc3899  bench.vgacap
+rc=0

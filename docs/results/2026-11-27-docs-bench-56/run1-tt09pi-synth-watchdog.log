@@ -1,0 +1,54 @@
+start 05:44:43
+0s memavail=494M rootavail=221M
+11s memavail=337M rootavail=84M
+21s memavail=245M rootavail=33M
+WATCHDOG: killing uv sync (memavail=245M rootavail=33M)
+uv_rc=143 after 36s
+png failed: Pillow is needed to write PNGs: uv sync --extra synth
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=1 glitches_total=0
+TIME real=1.303 s
+png_rc=1
+-rw-r--r-- 1 pi pi 921615 Nov 27 05:45 frame-0000.ppm
+DONE
+==UV
+Resolved 50 packages in 6ms
+   Building pillow==12.3.0
+   Building numpy==2.4.6
+==
+  PID     ELAPSED COMMAND
+ 1274    04:30:02 /usr/bin/python3 -m fpgas_tt --device /dev/ttboard
+ 6984       03:45 /lib/systemd/systemd --user
+ 6985       03:45 (sd-pam)
+ 7009       03:44 sshd: pi@notty
+ 7499       00:00 bash -c cat ~/synth_watch.log; echo ==UV; cat ~/synth_uv.log; echo ==; ps -u pi -o pid,etime,args; df -h /; free -m; du -sh ~/.cache/uv ~/vgacap ~/.local ~/uv-armv7*; du -sh /media/root-rw/overlay/* ; curl -s localhost:8765/health
+ 7502       00:00 ps -u pi -o pid,etime,args
+Filesystem      Size  Used Avail Use% Mounted on
+overlayroot     459M  428M   32M  94% /
+               total        used        free      shared  buff/cache   available
+Mem:             916         624          96         429         683         292
+Swap:              0           0           0
+269M	/home/pi/.cache/uv
+22M	/home/pi/vgacap
+45M	/home/pi/.local
+45M	/home/pi/uv-armv7-unknown-linux-musleabihf
+21M	/home/pi/uv-armv7-unknown-linux-musleabihf.tar.gz
+0	/media/root-rw/overlay/boot
+12K	/media/root-rw/overlay/etc
+400M	/media/root-rw/overlay/home
+0	/media/root-rw/overlay/media
+0	/media/root-rw/overlay/mnt
+du: cannot read directory '/media/root-rw/overlay/root'0	/media/root-rw/overlay/root
+0	/media/root-rw/overlay/tmp
+28K	/media/root-rw/overlay/usr
+28M	/media/root-rw/overlay/var
+: Permission denied
+du: cannot read directory '/media/root-rw/overlay/tmp/systemd-private-8aa72b8a6e0545b5b44c4f2cc9f28025-lldpd.service-dEfm1K': Permission denied
+du: cannot read directory '/media/root-rw/overlay/tmp/systemd-private-8aa72b8a6e0545b5b44c4f2cc9f28025-systemd-logind.service-AT0WDD': Permission denied
+du: cannot read directory '/media/root-rw/overlay/tmp/systemd-private-8aa72b8a6e0545b5b44c4f2cc9f28025-systemd-timesyncd.service-4JKZkr': Permission denied
+du: cannot read directory '/media/root-rw/overlay/var/tmp/systemd-private-8aa72b8a6e0545b5b44c4f2cc9f28025-lldpd.service-kSy7dp': Permission denied
+du: cannot read directory '/media/root-rw/overlay/var/tmp/systemd-private-8aa72b8a6e0545b5b44c4f2cc9f28025-systemd-logind.service-tnyrOm': Permission denied
+du: cannot read directory '/media/root-rw/overlay/var/tmp/systemd-private-8aa72b8a6e0545b5b44c4f2cc9f28025-systemd-timesyncd.service-Yuhaj3': Permission denied
+du: cannot read directory '/media/root-rw/overlay/var/lib/udisks2': Permission denied
+du: cannot read directory '/media/root-rw/overlay/var/lib/polkit-1': Permission denied
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "3b0880b48ee5c388", "chip": "asic"}, "kind": "other", "kind_reason": "/run/fpgas-online/verify.json says board 3b0880b48ee5c388 carries asic", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "not an fpga board"}, "safe_start": {"state": "set: clock stopped (was 10 Hz; its pin released), ui_in driven to 0 (read 1), uio released (uio_oe_pico was 0)"}, "uptime_s": 16201, "version": "0.1.0"}

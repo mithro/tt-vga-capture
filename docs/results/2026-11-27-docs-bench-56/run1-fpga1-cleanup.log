@@ -1,0 +1,50 @@
++ cd /home/pi/.cache/uv
++ rm -rf archive-v0/899Xc6IbclTN3P-HoQ_-3 archive-v0/8-ssukOCQzXOAL7L archive-v0/dtPkGvIrg3WT4j2AVSqbl archive-v0/eM-B-GUsafMtmc4s4bWM9 archive-v0/jpgkNK91wX50g-Sv1YpjI archive-v0/jUGWsLV9jCH7aBOMSUdwv archive-v0/Kbm5gTNMlfu7B_O1YFLnm archive-v0/lSKRQJUWsiZKEAhRp70Yr archive-v0/NarsA-lV8MlMLgzItZHWd archive-v0/-p8x0tYeiZIWOq9q archive-v0/PEMGQamrmz0KC-ufxFCL1 archive-v0/tqU3rL_lzy_9XY01CicPL archive-v0/U5ut_38gNO06t-4JSt51D archive-v0/xS5D6hGkPeQnFfoV7YJN2
++ rm -f environments-v2/678a20882754a76b/153ccf04de31d422
++ rm -rf sdists-v9/editable/321422a4351dd6c5 sdists-v9/pypi
++ rm -rf wheels-v6/pypi/cython wheels-v6/pypi/meson wheels-v6/pypi/meson-python wheels-v6/pypi/ninja wheels-v6/pypi/packaging wheels-v6/pypi/patchelf wheels-v6/pypi/pybind11 wheels-v6/pypi/pyproject-metadata
++ rm -f simple-v20/pypi/cython.rkyv simple-v20/pypi/meson-python.rkyv simple-v20/pypi/meson.rkyv simple-v20/pypi/ninja.rkyv simple-v20/pypi/packaging.rkyv simple-v20/pypi/patchelf.rkyv simple-v20/pypi/pybind11.rkyv simple-v20/pypi/pyproject-metadata.rkyv
++ cd /home/pi
++ rm -rf /home/pi/vgacap /home/pi/uv-armv7-unknown-linux-musleabihf /home/pi/uv-armv7-unknown-linux-musleabihf.tar.gz /home/pi/.local/bin /home/pi/cache_before_ls.txt
++ set +x
+/home/pi
+/home/pi/.bash_logout
+/home/pi/.bashrc
+/home/pi/.cache
+/home/pi/.cache/uv
+/home/pi/Downloads
+/home/pi/.local
+/home/pi/.local/share
+/home/pi/.profile
+/home/pi/.ssh
+/home/pi/.ssh/authorized_keys
+/home/pi/.ssh/id_ssh_rsa
+/home/pi/.ssh/id_ssh_rsa.pub
+/home/pi/.sudo_as_admin_successful
+/home/pi/Uploads
+81M	/home/pi/.cache/uv
+ANRPsg456WQWf57Yhoyk1
+Bi4QZpH7kzX4-OY2l-Rwm
+eIQbcn618ZLACSOvdJ1aB
+F0X4ciMCajtrK_9FU49ZC
+F1QRgnYbwflEl8QplYQFH
+PygXPBkkMtGkPNYLwddSt
+rw1ispDQQ7V1Rt9_ortoi
+xG2Fb8RD5R_1vnDXRCcG3
+/home/pi/.cache/uv/wheels-v7/pypi/cmake/4.4.5-py3-none-manylinux_2_31_armv7l
+/home/pi/.cache/uv/environments-v2/678a20882754a76b/92bb789eec73d037
+/home/pi/.cache/uv/environments-v2/678a20882754a76b/92bb789eec73d037/bin/python3.11
+/home/pi/.cache/uv/environments-v2/678a20882754a76b/92bb789eec73d037/bin/python3
+/home/pi/.cache/uv/environments-v2/678a20882754a76b/92bb789eec73d037/bin/python
+/home/pi/.cache/uv/wheels-v6/pypi/cmake/4.4.5-py3-none-manylinux_2_31_armv7l
+/home/pi/.cache/uv/wheels-v6/pypi/websockets/17.1-01499b0213d17349
+/home/pi/.cache/uv/wheels-v6/pypi/setuptools/84.2.1-py3-none-any
+/home/pi/.cache/uv/wheels-v6/pypi/pyserial/3.5-py2.py3-none-any
+/home/pi/.cache/uv/archive-v0/ANRPsg456WQWf57Yhoyk1/bin/python3.11
+/home/pi/.cache/uv/archive-v0/ANRPsg456WQWf57Yhoyk1/bin/python3
+/home/pi/.cache/uv/archive-v0/ANRPsg456WQWf57Yhoyk1/bin/python
+/home/pi/.cache/uv/sdists-v9/editable/fd02897fb10faaee/2ZHKDA9nGLMzBJRl_qzEh/vgacap-0.0.1-0.editable-py3-none-any
+/home/pi/.cache/uv/sdists-v9/editable/5a9ccc14606e112a/RjmbH01TskC2Oo6H-NdUU/vgacap-0.0.1-0.editable-py3-none-any
+/home/pi/.cache/uv/sdists-v9/editable/5a9ccc14606e112a/u_KLEQh1kupx8wDR466B5/vgacap-0.0.1-0.editable-py3-none-any
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 113, "version": "0.1.0"}
+active

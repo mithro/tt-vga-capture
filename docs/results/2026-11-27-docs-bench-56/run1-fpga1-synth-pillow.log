@@ -1,0 +1,28 @@
+Resolved 50 packages in 5ms
+   Building numpy==2.4.6
+   Building pillow==12.3.0
+      Built pillow==12.3.0
+      Built numpy==2.4.6
+Prepared 2 packages in 10m 33s
+Installed 2 packages in 46ms
+ + numpy==2.4.6
+ + pillow==12.3.0
+rc=0
+
+real	10m33.914s
+user	33m35.479s
+sys	2m16.053s
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
+wrote 2 png(s)
+png_rc=0
+
+real	0m0.979s
+user	0m0.616s
+sys	0m0.151s
+-rw-r--r-- 1 pi pi   1995 Nov 27 03:56 frame-0000.png
+-rw-r--r-- 1 pi pi 921615 Nov 27 03:56 frame-0000.ppm
+-rw-r--r-- 1 pi pi   1995 Nov 27 03:56 frame-0001.png
+-rw-r--r-- 1 pi pi 921615 Nov 27 03:56 frame-0001.ppm
+rc=0

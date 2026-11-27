@@ -1,0 +1,41 @@
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 84, "version": "0.1.0"}
+== enable through bridge
+03:44:26
+{"enabled": "tt_um_vga_pattern", "clock_hz": null, "ui_in": null, "ui_in_mask": 0, "ui_in_driven": [], "ui_in_held": [], "ui_in_inputs": [], "released": []}
+rc=0
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 88, "version": "0.1.0"}
+== step 3
+rc=0
+== step 4
+03:44:30
+profile=rp2350-dbv3 project=None enable=None
+bytes=1885672 samples=1884160 chunks=118 seconds=4.017 overruns=2 dropped=32768 rxstall=0 samples_per_s=469067 mem_free=423152
+  board: overrun (x2)
+  board: overruns=2 rxstall=0 sysclk_hz=133000000
+wrote vga.vgacap
+rc=0
+== step 5
+03:44:35
+rc=0
+== step 6
+rc=0
+03:44:39
+LOADED after 72 s
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 70, "version": "0.1.0"}
+active
+                     USER        PID ACCESS COMMAND
+/dev/ttyACM0:   6665       pi        F.... python3
+-rw-r--r-- 1 pi pi 1885757 Nov 27 03:44 vga.vgacap
+== render
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
+png failed: Pillow is needed to write PNGs: uv sync --extra synth
+png_rc=1
+
+real	0m0.595s
+user	0m0.380s
+sys	0m0.099s
+-rw-r--r-- 1 pi pi 921615 Nov 27 03:45 frame-0000.ppm
+-rw-r--r-- 1 pi pi 921615 Nov 27 03:45 frame-0001.ppm
+rc=0

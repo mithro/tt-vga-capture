@@ -1,0 +1,28 @@
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 86, "version": "0.1.0"}
+== enable through bridge
+05:35:51
+{"enabled": "tt_um_vga_pattern", "clock_hz": null, "ui_in": null, "ui_in_mask": 0, "ui_in_driven": [], "ui_in_held": [], "ui_in_inputs": [], "released": []}
+rc=0
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "in use"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 90, "version": "0.1.0"}
+== step 3
+rc=0
+== step 4
+05:35:55
+profile=rp2350-dbv3 project=None enable=None
+bytes=901846 samples=901120 chunks=56 seconds=2.037 overruns=0 dropped=0 rxstall=0 samples_per_s=442327 mem_free=423168
+  board: overruns=0 rxstall=0 sysclk_hz=133000000
+wrote small.vgacap
+rc=0
+== step 5
+05:35:58
+rc=0
+== step 6
+rc=0
+05:36:02
+LOADED after 72 s
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 70, "version": "0.1.0"}
+active
+                     USER        PID ACCESS COMMAND
+/dev/ttyACM0:        pi        12103 F.... python3
+-rw-r--r-- 1 pi pi 901931 Nov 27 05:35 small.vgacap
+rc=0

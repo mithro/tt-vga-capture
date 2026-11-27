@@ -1,0 +1,68 @@
++ find /home/pi -maxdepth 2
++ sort
+/home/pi
+/home/pi/.bash_logout
+/home/pi/.bashrc
+/home/pi/.cache
+/home/pi/.cache/uv
+/home/pi/Downloads
+/home/pi/.local
+/home/pi/.local/share
+/home/pi/.profile
+/home/pi/.ssh
+/home/pi/.ssh/authorized_keys
+/home/pi/.ssh/id_ssh_rsa
+/home/pi/.ssh/id_ssh_rsa.pub
+/home/pi/.sudo_as_admin_successful
+/home/pi/Uploads
++ du -sh /home/pi/.cache/uv
+80M	/home/pi/.cache/uv
++ ls /home/pi/.cache/uv
+archive-v0
+builds-v0
+CACHEDIR.TAG
+environments-v2
+interpreter-v4
+sdists-v9
+simple-v20
+wheels-v6
++ journalctl -u fpgas-tt --since -20min --no-pager
+Nov 27 05:36:03 pi-sw2-p34 fpgas-tt[12103]: 2026-11-27 05:36:03,787 fpgas_tt.server INFO fpgas-tt 0.1.0: device=/dev/ttboard kind=fpga (/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga)
+Nov 27 05:36:03 pi-sw2-p34 fpgas-tt[12103]: 2026-11-27 05:36:03,793 fpgas_tt.bridge INFO bridge: opened /dev/ttboard at 115200 baud
+Nov 27 05:37:12 pi-sw2-p34 fpgas-tt[12103]: 2026-11-27 05:37:12,439 fpgas_tt.idle INFO idle display: streamed /usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin into the unused board (was: tt_um_factory_test)
++ cd /home/pi
++ getconf LONG_BIT
+32
++ curl -sSLO https://github.com/astral-sh/uv/releases/download/0.10.8/uv-armv7-unknown-linux-musleabihf.tar.gz
++ tar -xzf uv-armv7-unknown-linux-musleabihf.tar.gz
++ mkdir -p /home/pi/.local/bin
++ cp uv-armv7-unknown-linux-musleabihf/uv uv-armv7-unknown-linux-musleabihf/uvx /home/pi/.local/bin/
++ export PATH=/home/pi/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
++ PATH=/home/pi/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
++ uv --version
+uv 0.10.8
++ type -a uvx
+uvx is /home/pi/.local/bin/uvx
+uvx is /usr/local/bin/uvx
++ uvx --version
+uvx 0.10.8
++ git clone -q https://github.com/mithro/vgacap.git
++ cd vgacap
++ git fetch -q origin docs-final-fixes
++ git checkout -q --detach FETCH_HEAD
++ git log --oneline -1
+ae02e33 docs: a bench capture for pictures needs a VGA design (bench run of #56)
++ export UV_NO_DEV=1
++ UV_NO_DEV=1
++ uv sync
+Using CPython 3.11.2 interpreter at: /usr/bin/python3
+Creating virtual environment at: .venv
+Resolved 50 packages in 3ms
+   Building vgacap @ file:///home/pi/vgacap
+      Built vgacap @ file:///home/pi/vgacap
+Prepared 1 package in 2.55s
+Installed 3 packages in 13ms
+ + pyserial==3.5
+ + vgacap==0.0.1 (from file:///home/pi/vgacap)
+ + websockets==17.1
+rc=0

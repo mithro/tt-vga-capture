@@ -1,0 +1,53 @@
+9bacf89a24a9889ebddaae8bdf2ca202abdf7d87efd48466e7aca9d48ee6e926  small.vgacap
+uvx is /usr/local/bin/uvx
+uvx 0.13.1 (armv7-unknown-linux-gnueabihf)
+== configure (includes uvx install of cmake)
+Downloading cmake (26.1MiB)
+ Downloaded cmake
+Installed 1 package in 320ms
+-- The C compiler identification is GNU 12.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- vgacap: VGACAP_JCC_PAD: -Wa,-mbranches-within-32B-boundaries is not supported here (needs GNU or Clang on x86-64 and an assembler that takes it); building without it
+-- vgacap: GStreamer development files not found, skipping the plugin
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (4.0s)
+-- Generating done (0.7s)
+-- Build files have been written to: /home/pi/vgacap/build
+TIME real=15.023 s
+rc=0
+== build
+[ 16%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/modes.c.o
+[ 16%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/reader.c.o
+[ 33%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/writer.c.o
+[ 50%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/timing.c.o
+[ 50%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/frame.c.o
+[ 66%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/time.c.o
+[ 83%] Linking C static library libvgacap_frame.a
+[ 83%] Built target vgacap_frame
+[ 83%] Linking C static library libvgacap_stream.a
+[ 83%] Built target vgacap_stream
+[ 83%] Building C object CMakeFiles/vgacap-frames.dir/src/tools/vgacap_frames.c.o
+[100%] Linking C executable vgacap-frames
+[100%] Built target vgacap-frames
+TIME real=7.803 s
+rc=0
+-rwxr-xr-x 1 pi pi 126860 Nov 27 05:43 build/vgacap-frames
+== render as written
+png failed: Pillow is needed to write PNGs: uv sync --extra synth
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=1 glitches_total=0
+TIME real=1.731 s
+rc=1
+-rw-r--r-- 1 pi pi 921615 Nov 27 05:43 frame-0000.ppm
+Filesystem      Size  Used Avail Use% Mounted on
+overlayroot     459M  239M  221M  53% /
+               total        used        free      shared  buff/cache   available
+Mem:             916         422         244         240         545         494
+Swap:              0           0           0
+rc=0
