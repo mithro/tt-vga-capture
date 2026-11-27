@@ -1,0 +1,43 @@
+pi-sw2-p10
+32
+armv7l
+Raspberry Pi 3 Model B Plus Rev 1.4
+4
+               total        used        free      shared  buff/cache   available
+Mem:             916         213         518          36         271         702
+Swap:              0           0           0
+Filesystem      Size  Used Avail Use% Mounted on
+overlayroot     459M   35M  425M   8% /
+/home/pi
+/home/pi/.bash_logout
+/home/pi/.bashrc
+/home/pi/.cache
+/home/pi/.cache/uv
+/home/pi/.cache/uv/archive-v0
+/home/pi/.cache/uv/builds-v0
+/home/pi/.cache/uv/CACHEDIR.TAG
+/home/pi/.cache/uv/.gitignore
+/home/pi/.cache/uv/interpreter-v4
+/home/pi/.cache/uv/.lock
+/home/pi/.cache/uv/sdists-v9
+/home/pi/.cache/uv/simple-v20
+/home/pi/.cache/uv/wheels-v6
+/home/pi/Downloads
+/home/pi/.profile
+/home/pi/.ssh
+/home/pi/.ssh/authorized_keys
+/home/pi/.ssh/id_ssh_rsa
+/home/pi/.ssh/id_ssh_rsa.pub
+/home/pi/.sudo_as_admin_successful
+/home/pi/Uploads
+5.9M	/home/pi/.cache
+du: cannot access '/home/pi/.local': No such file or directory
+uv is /usr/local/bin/uv
+uvx is /usr/local/bin/uvx
+cc is /usr/bin/cc
+cc is /bin/cc
+git is /usr/bin/git
+git is /bin/git
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "3b0880b48ee5c388", "chip": "asic"}, "kind": "other", "kind_reason": "/run/fpgas-online/verify.json says board 3b0880b48ee5c388 carries asic", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "not an fpga board"}, "safe_start": {"state": "set: clock stopped (was 10 Hz; its pin released), ui_in driven to 0 (read 1), uio released (uio_oe_pico was 0)"}, "uptime_s": 16012, "version": "0.1.0"}
+active
+-- No entries --

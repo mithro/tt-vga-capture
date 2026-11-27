@@ -1,0 +1,31 @@
+ docs/developing/capture-code.md                |  2 +-
+ docs/diagrams/NOTICE.md                        |  8 ++++----
+ docs/how-to-read-trace.md                      |  2 +-
+ docs/reference/index.md                        |  2 +-
+ firmware/how-to-capture.md                     |  2 +-
+ firmware/reference-files.md                    |  2 +-
+ gst/how-to-capture-live.md                     |  4 ++--
+ mpy/how-to-flash.md                            |  4 ++--
+ python/ttcap/explanation-demo-board-capture.md |  2 +-
+ python/ttcap/reference-exit-codes.md           |  2 +-
+ python/ttcap/reference-welland-boards.md       | 18 +++++++++---------
+ python/ttcap/tutorial-first-capture.md         |  4 ++--
+ rtl/README.md                                  |  2 +-
+ rtl/developing.md                              | 10 ----------
+ src/trace/how-to-write-trace.md                |  4 ++--
+ 15 files changed, 29 insertions(+), 39 deletions(-)
+diff --git a/firmware/how-to-capture.md b/firmware/how-to-capture.md
+index 5e8d0fa..3d76337 100644
+--- a/firmware/how-to-capture.md
++++ b/firmware/how-to-capture.md
+@@ -82,7 +82,7 @@ A good capture reports `overruns=0` and `rxstall=0`, and its PNG shows the desig
+ | 1 to 3 | `--asic-index is for ...; ... is an FPGA board, where asic_select pulls GPIO 1 -- the iCE40's CRESET_B -- low and erases the FPGA` | the board is a demo board with an FPGA breakout | Drop `--asic-index`: an FPGA keeps its design |
+ | 1 and 2 | `board went quiet` and a frame capture writes almost nothing | no sync on `uo_out`: an ASIC project that was not selected again, or no design | Add `--asic-index N` on an ASIC breakout; enable the design again on an FPGA breakout |
+ | 3 | `overruns=` above 0 | the project clock is faster than the USB link carries | Lower `--clock-hz`, or use `--mode frame` |
+-| 1 to 3 | `sysclk N is not 2..32 whole project clocks of N` | a frame clock with no whole system clock ratio | Choose a project clock from [the clock table](reference-board.md#clocks) |
++| 1 and 2 | `sysclk N is not 2..32 whole project clocks of N` | a frame clock with no whole system clock ratio | Choose a project clock from [the clock table](reference-board.md#clocks) |
+ | 1 to 3 | `pio 0 would have to move its pin window to GPIO 16 ...` | `--pio 0` was given: ttcap refuses it for every firmware ([issue #44](https://github.com/mithro/vgacap/issues/44)) | Use `--pio 1` or `--pio 2` |
+ | 1 to 3 | `--profile ... does not match the capture firmware` | `--profile` names another board | Drop `--profile`, or give `rp2350` |
+ 
+Previous HEAD position was 524e0ad docs: stream clocks as table rows, with version and link (review of #56)
+HEAD is now at b6fa47b docs: wording from the review of #56

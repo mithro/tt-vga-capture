@@ -1,0 +1,77 @@
+environments-v2/678a20882754a76b:
+total 0
+drwxr-xr-x 2 pi pi 80 Nov 27 03:42 .
+drwxr-xr-x 3 pi pi 60 Nov 27 01:25 ..
+lrwxrwxrwx 1 pi pi 33 Nov 27 03:42 153ccf04de31d422 -> ../../archive-v0/8-ssukOCQzXOAL7L
+lrwxrwxrwx 1 pi pi 51 Nov 27 01:25 92bb789eec73d037 -> /home/pi/.cache/uv/archive-v0/ANRPsg456WQWf57Yhoyk1
+
+wheels-v6/pypi/cmake:
+total 8
+drwxr-xr-x  2 pi pi 100 Nov 27 01:25 .
+drwxr-xr-x 14 pi pi 280 Nov 27 03:46 ..
+lrwxrwxrwx  1 pi pi  51 Nov 27 01:25 4.4.5-py3-none-manylinux_2_31_armv7l -> /home/pi/.cache/uv/archive-v0/F1QRgnYbwflEl8QplYQFH
+-rw-r--r--  1 pi pi 593 Nov 27 01:25 4.4.5-py3-none-manylinux_2_31_armv7l.http
+-rw-r--r--  1 pi pi 582 Nov 27 01:25 4.4.5-py3-none-manylinux_2_31_armv7l.msgpack
+
+wheels-v6/pypi/setuptools:
+total 8
+drwxr-xr-x  2 pi pi  100 Nov 27 01:04 .
+drwxr-xr-x 14 pi pi  280 Nov 27 03:46 ..
+lrwxrwxrwx  1 pi pi   51 Nov 27 01:04 84.2.1-py3-none-any -> /home/pi/.cache/uv/archive-v0/xG2Fb8RD5R_1vnDXRCcG3
+-rw-r--r--  1 pi pi  565 Nov 27 01:04 84.2.1-py3-none-any.http
+-rw-r--r--  1 pi pi 2766 Nov 27 01:04 84.2.1-py3-none-any.msgpack
+sdists-v9/editable:
+total 0
+drwxr-xr-x 5 pi pi 100 2026-11-27T03:40:18 .
+drwxr-xr-x 4 pi pi 120 2026-11-27T03:46:15 ..
+drwxr-xr-x 4 pi pi 120 2026-11-27T05:33:58 321422a4351dd6c5
+drwxr-xr-x 4 pi pi 120 2026-11-27T01:50:45 5a9ccc14606e112a
+drwxr-xr-x 3 pi pi 100 2026-11-27T01:26:10 fd02897fb10faaee
+
+sdists-v9/editable/321422a4351dd6c5:
+total 4
+drwxr-xr-x 4 pi pi 120 2026-11-27T05:33:58 .
+drwxr-xr-x 5 pi pi 100 2026-11-27T03:40:18 ..
+drwxr-xr-x 2 pi pi 100 2026-11-27T05:34:01 _EwujPDqusmiwcjVRwbeE
+-rw-rw-rw- 1 pi pi   0 2026-11-27T03:40:18 .lock
+-rw-r--r-- 1 pi pi  48 2026-11-27T05:33:58 revision.rev
+drwxr-xr-x 2 pi pi 100 2026-11-27T03:40:20 s_T-MZfFI6rwJS63ZAoTk
+
+sdists-v9/editable/5a9ccc14606e112a:
+total 4
+drwxr-xr-x 4 pi pi 120 2026-11-27T01:50:45 .
+drwxr-xr-x 5 pi pi 100 2026-11-27T03:40:18 ..
+-rw-rw-rw- 1 pi pi   0 2026-11-27T01:04:54 .lock
+-rw-r--r-- 1 pi pi  48 2026-11-27T01:50:45 revision.rev
+drwxr-xr-x 2 pi pi 100 2026-11-27T01:50:47 RjmbH01TskC2Oo6H-NdUU
+drwxr-xr-x 2 pi pi 100 2026-11-27T01:04:57 u_KLEQh1kupx8wDR466B5
+
+sdists-v9/editable/fd02897fb10faaee:
+total 4
+drwxr-xr-x 3 pi pi 100 2026-11-27T01:26:10 .
+drwxr-xr-x 5 pi pi 100 2026-11-27T03:40:18 ..
+drwxr-xr-x 2 pi pi 100 2026-11-27T01:26:13 2ZHKDA9nGLMzBJRl_qzEh
+-rw-rw-rw- 1 pi pi   0 2026-11-27T01:26:10 .lock
+-rw-r--r-- 1 pi pi  48 2026-11-27T01:26:10 revision.rev
+archive-v0/899Xc6IbclTN3P-HoQ_-3: Cython cython-3.3.2.dist-info cython.py pyximport  archive-v0/899Xc6IbclTN3P-HoQ_-3/cython-3.3.2.dist-info 
+archive-v0/8-ssukOCQzXOAL7L: bin CACHEDIR.TAG lib pyvenv.cfg  ls: cannot access 'archive-v0/8-ssukOCQzXOAL7L/*dist-info': No such file or directory 
+archive-v0/ANRPsg456WQWf57Yhoyk1: bin CACHEDIR.TAG lib pyvenv.cfg  ls: cannot access 'archive-v0/ANRPsg456WQWf57Yhoyk1/*dist-info': No such file or directory 
+archive-v0/Bi4QZpH7kzX4-OY2l-Rwm: __editable__.vgacap-0.0.1.pth vgacap-0.0.1.dist-info  archive-v0/Bi4QZpH7kzX4-OY2l-Rwm/vgacap-0.0.1.dist-info 
+archive-v0/dtPkGvIrg3WT4j2AVSqbl: __editable__.vgacap-0.0.1.pth vgacap-0.0.1.dist-info  archive-v0/dtPkGvIrg3WT4j2AVSqbl/vgacap-0.0.1.dist-info 
+archive-v0/eIQbcn618ZLACSOvdJ1aB: websockets websockets-17.1.dist-info  archive-v0/eIQbcn618ZLACSOvdJ1aB/websockets-17.1.dist-info 
+archive-v0/eM-B-GUsafMtmc4s4bWM9: PIL pillow-12.3.0.dist-info  archive-v0/eM-B-GUsafMtmc4s4bWM9/pillow-12.3.0.dist-info 
+archive-v0/F0X4ciMCajtrK_9FU49ZC: pyserial-3.5.dist-info serial  archive-v0/F0X4ciMCajtrK_9FU49ZC/pyserial-3.5.dist-info 
+archive-v0/F1QRgnYbwflEl8QplYQFH: cmake cmake-4.4.5.dist-info  archive-v0/F1QRgnYbwflEl8QplYQFH/cmake-4.4.5.dist-info 
+archive-v0/jpgkNK91wX50g-Sv1YpjI: meson-1.12.1.data meson-1.12.1.dist-info mesonbuild  archive-v0/jpgkNK91wX50g-Sv1YpjI/meson-1.12.1.dist-info 
+archive-v0/jUGWsLV9jCH7aBOMSUdwv: mesonpy meson_python-0.22.1.dist-info  archive-v0/jUGWsLV9jCH7aBOMSUdwv/meson_python-0.22.1.dist-info 
+archive-v0/Kbm5gTNMlfu7B_O1YFLnm: ninja ninja-1.13.2.data ninja-1.13.2.dist-info  archive-v0/Kbm5gTNMlfu7B_O1YFLnm/ninja-1.13.2.dist-info 
+archive-v0/lSKRQJUWsiZKEAhRp70Yr: __editable__.vgacap-0.0.1.pth vgacap-0.0.1.dist-info  archive-v0/lSKRQJUWsiZKEAhRp70Yr/vgacap-0.0.1.dist-info 
+archive-v0/NarsA-lV8MlMLgzItZHWd: pyproject_metadata pyproject_metadata-0.12.1.dist-info  archive-v0/NarsA-lV8MlMLgzItZHWd/pyproject_metadata-0.12.1.dist-info 
+archive-v0/-p8x0tYeiZIWOq9q: cmake cmake-4.4.5.dist-info  archive-v0/-p8x0tYeiZIWOq9q/cmake-4.4.5.dist-info 
+archive-v0/PEMGQamrmz0KC-ufxFCL1: patchelf-0.19.3.0.data patchelf-0.19.3.0.dist-info  archive-v0/PEMGQamrmz0KC-ufxFCL1/patchelf-0.19.3.0.dist-info 
+archive-v0/PygXPBkkMtGkPNYLwddSt: __editable__.vgacap-0.0.1.pth vgacap-0.0.1.dist-info  archive-v0/PygXPBkkMtGkPNYLwddSt/vgacap-0.0.1.dist-info 
+archive-v0/rw1ispDQQ7V1Rt9_ortoi: __editable__.vgacap-0.0.1.pth vgacap-0.0.1.dist-info  archive-v0/rw1ispDQQ7V1Rt9_ortoi/vgacap-0.0.1.dist-info 
+archive-v0/tqU3rL_lzy_9XY01CicPL: packaging packaging-26.4.dist-info  archive-v0/tqU3rL_lzy_9XY01CicPL/packaging-26.4.dist-info 
+archive-v0/U5ut_38gNO06t-4JSt51D: pybind11 pybind11-3.1.0.dist-info  archive-v0/U5ut_38gNO06t-4JSt51D/pybind11-3.1.0.dist-info 
+archive-v0/xG2Fb8RD5R_1vnDXRCcG3: _distutils_hack distutils-precedence.pth setuptools setuptools-84.2.1.dist-info  archive-v0/xG2Fb8RD5R_1vnDXRCcG3/setuptools-84.2.1.dist-info 
+archive-v0/xS5D6hGkPeQnFfoV7YJN2: numpy numpy-2.4.6.dist-info  archive-v0/xS5D6hGkPeQnFfoV7YJN2/numpy-2.4.6.dist-info 

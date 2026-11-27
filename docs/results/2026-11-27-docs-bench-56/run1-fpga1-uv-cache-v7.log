@@ -1,0 +1,39 @@
+.:
+total 8
+drwxr-xr-x 12 pi pi 300 2026-11-27T05:34:01 .
+drwxr-xr-x  3 pi pi  60 2026-11-27T01:04:53 ..
+drwxr-xr-x 10 pi pi 200 2026-11-27T05:37:55 archive-v0
+drwxr-xr-x  2 pi pi  40 2026-11-27T05:34:01 builds-v0
+-rw-r--r--  1 pi pi  43 2026-11-27T01:04:53 CACHEDIR.TAG
+drwxr-xr-x  3 pi pi  60 2026-11-27T01:25:53 environments-v2
+-rw-r--r--  1 pi pi   1 2026-11-27T01:04:53 .gitignore
+drwxr-xr-x  3 pi pi  60 2026-11-27T01:04:54 interpreter-v4
+-rw-rw-rw-  1 pi pi   0 2026-11-27T01:04:53 .lock
+drwxr-xr-x  2 pi pi  80 2026-11-27T03:42:32 sdists-v10
+drwxr-xr-x  3 pi pi 100 2026-11-27T05:37:56 sdists-v9
+drwxr-xr-x  3 pi pi  60 2026-11-27T01:04:54 simple-v20
+drwxr-xr-x  3 pi pi  60 2026-11-27T03:42:33 simple-v26
+drwxr-xr-x  3 pi pi  60 2026-11-27T01:04:54 wheels-v6
+drwxr-xr-x  3 pi pi  60 2026-11-27T03:42:33 wheels-v7
+
+wheels-v7:
+total 0
+drwxr-xr-x  3 pi pi  60 2026-11-27T03:42:33 .
+drwxr-xr-x 12 pi pi 300 2026-11-27T05:34:01 ..
+drwxr-xr-x  3 pi pi  60 2026-11-27T03:42:33 pypi
+
+wheels-v7/pypi:
+total 0
+drwxr-xr-x 3 pi pi  60 2026-11-27T03:42:33 .
+drwxr-xr-x 3 pi pi  60 2026-11-27T03:42:33 ..
+drwxr-xr-x 2 pi pi 120 2026-11-27T03:42:35 cmake
+
+wheels-v7/pypi/cmake:
+total 8
+drwxr-xr-x 2 pi pi 120 2026-11-27T03:42:35 .
+drwxr-xr-x 3 pi pi  60 2026-11-27T03:42:33 ..
+lrwxrwxrwx 1 pi pi  36 2026-11-27T03:42:35 4.4.5-py3-none-manylinux_2_31_armv7l -> ../../../archive-v0/-p8x0tYeiZIWOq9q
+-rw-r--r-- 1 pi pi 580 2026-11-27T03:42:35 4.4.5-py3-none-manylinux_2_31_armv7l.http
+-rw-rw-rw- 1 pi pi   0 2026-11-27T03:42:33 4.4.5-py3-none-manylinux_2_31_armv7l.lock
+-rw-r--r-- 1 pi pi 492 2026-11-27T03:42:33 4.4.5-py3-none-manylinux_2_31_armv7l.msgpack
+./wheels-v7/pypi/cmake/4.4.5-py3-none-manylinux_2_31_armv7l

@@ -1,0 +1,14 @@
+enabled: idle_display
+tt_um_counter_7seg demo 10
+tt_um_factory_test demo None
+tt_um_pwm_breathe demo 10000000
+tt_um_uart_hello demo 1000000
+tt_um_vga_pattern demo 25175000
+tthfv_lib_maze upload None
+tthfv_lib_rasterizer upload None
+tthfv_lib_vga_example upload None
+tthfv_lib_znah upload None
+tthfv_vgacal_bars upload None
+tthfv_vgacal_counter upload None
+tthfv_vgacal_grid upload None
+tthfv_vgacal_prbs upload None

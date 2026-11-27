@@ -1,0 +1,67 @@
+uv
+uvx
+uv is /home/pi/.local/bin/uv
+uv is /usr/local/bin/uv
+uvx is /usr/local/bin/uvx
+uvx 0.13.1 (armv7-unknown-linux-gnueabihf)
+== cmake configure (includes uvx cmake install)
+Downloading cmake (26.1MiB)
+ Downloaded cmake
+Installed 1 package in 153ms
+-- The C compiler identification is GNU 12.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- vgacap: VGACAP_JCC_PAD: -Wa,-mbranches-within-32B-boundaries is not supported here (needs GNU or Clang on x86-64 and an assembler that takes it); building without it
+-- vgacap: GStreamer development files not found, skipping the plugin
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (1.3s)
+-- Generating done (0.4s)
+-- Build files have been written to: /home/pi/vgacap/build
+rc=0
+== cmake --version via uvx (cached)
+
+real	0m5.166s
+user	0m3.228s
+sys	0m1.146s
+cmake version 4.4.5
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+== build
+
+real	0m0.413s
+user	0m0.271s
+sys	0m0.051s
+[ 16%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/modes.c.o
+[ 16%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/reader.c.o
+[ 33%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/time.c.o
+[ 50%] Building C object CMakeFiles/vgacap_stream.dir/src/stream/writer.c.o
+[ 66%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/timing.c.o
+[ 66%] Building C object CMakeFiles/vgacap_frame.dir/src/frame/frame.c.o
+[ 83%] Linking C static library libvgacap_frame.a
+[ 83%] Built target vgacap_frame
+[ 83%] Linking C static library libvgacap_stream.a
+[ 83%] Built target vgacap_stream
+[ 83%] Building C object CMakeFiles/vgacap-frames.dir/src/tools/vgacap_frames.c.o
+[100%] Linking C executable vgacap-frames
+[100%] Built target vgacap-frames
+rc=0
+
+real	0m3.376s
+user	0m5.018s
+sys	0m0.630s
+-rwxr-xr-x 1 pi pi 126860 Nov 27 03:42 build/vgacap-frames
+== render as written
+frames=0 glitches_total=0
+png failed: /home/pi/vgacap/build/vgacap-frames exited 2: no frame decoded
+rc=1
+
+real	0m0.541s
+user	0m0.361s
+sys	0m0.088s
+ls: cannot access 'frame*': No such file or directory
+rc=2

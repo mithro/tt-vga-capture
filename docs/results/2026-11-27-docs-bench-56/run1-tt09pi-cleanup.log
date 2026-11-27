@@ -1,0 +1,50 @@
+/home/pi
+/home/pi/.bash_logout
+/home/pi/.bashrc
+/home/pi/.cache
+/home/pi/.cache/uv
+/home/pi/.cache/uv/archive-v0
+/home/pi/.cache/uv/builds-v0
+/home/pi/.cache/uv/CACHEDIR.TAG
+/home/pi/.cache/uv/.gitignore
+/home/pi/.cache/uv/interpreter-v4
+/home/pi/.cache/uv/.lock
+/home/pi/.cache/uv/sdists-v9
+/home/pi/.cache/uv/simple-v20
+/home/pi/.cache/uv/wheels-v6
+/home/pi/Downloads
+/home/pi/.profile
+/home/pi/.ssh
+/home/pi/.ssh/authorized_keys
+/home/pi/.ssh/id_ssh_rsa
+/home/pi/.ssh/id_ssh_rsa.pub
+/home/pi/.sudo_as_admin_successful
+/home/pi/Uploads
+5.9M	/home/pi/.cache
+archive-v0:
+5iU9qEDevkjU7QxAh2RaU
+Hir9GWUu9pZxVjn15jjlt
+JnCUbJUd4synfCAbKS_ka
+opxBLnb4ZpQQooZqgn9Mb
+
+simple-v20/pypi:
+setuptools.rkyv
+
+wheels-v6/pypi:
+pyserial
+setuptools
+websockets
+Filesystem      Size  Used Avail Use% Mounted on
+overlayroot     459M   35M  425M   8% /
+               total        used        free      shared  buff/cache   available
+Mem:             916         209         516          36         278         707
+Swap:              0           0           0
+  PID     ELAPSED COMMAND
+ 1274    04:30:26 /usr/bin/python3 -m fpgas_tt --device /dev/ttboard
+ 6984       04:09 /lib/systemd/systemd --user
+ 6985       04:09 (sd-pam)
+ 7009       04:08 sshd: pi@notty
+ 7534       00:01 bash -c cd ~/.cache/uv && rm -rf environments-v2 wheels-v7 simple-v26 sdists-v10 wheels-v6/pypi/{patchelf,ninja,cython,meson,pyproject-metadata,packaging,meson-python,pybind11} archive-v0/{DRyTsKdabpfBVdQenjo3p,EXgtGt_XjHg3o6PPf5I0R,ZS-lBaLc6C5HxoJK3xNMI,acXFSbFTpiKBckL34LZnG,ep7JVqUcVWGxNQy8upaUD,qsfsapLBw19ArvyOZg7lv,LIE8tJm22Ci-Kr8PSWBPb,PIPDQjRZn3jDjoXdMcQLO,w6hxuM2shNxwc4qF,IUXT-nFh727tGMeN,diofHDbdNLn7csYTqOxeD} simple-v20/pypi/{patchelf,ninja,pyproject-metadata,meson,cython,packaging,meson-python,pybind11}.rkyv builds-v0/.tmp* interpreter-v4/e1aee98bce169837/{4469545f02b6d563,ab794a4578cc6dc1,be9dba4aa6778511}.msgpack sdists-v9/pypi sdists-v9/editable/321422a4351dd6c5; find . -xtype l; find ~ -maxdepth 3 | sort; du -sh ~/.cache; ls archive-v0 simple-v20/pypi wheels-v6/pypi; df -h /; free -m; ps -u pi -o pid,etime,args; systemctl is-active fpgas-tt; curl -s localhost:8765/health
+ 7543       00:00 ps -u pi -o pid,etime,args
+active
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "3b0880b48ee5c388", "chip": "asic"}, "kind": "other", "kind_reason": "/run/fpgas-online/verify.json says board 3b0880b48ee5c388 carries asic", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "not an fpga board"}, "safe_start": {"state": "set: clock stopped (was 10 Hz; its pin released), ui_in driven to 0 (read 1), uio released (uio_oe_pico was 0)"}, "uptime_s": 16225, "version": "0.1.0"}

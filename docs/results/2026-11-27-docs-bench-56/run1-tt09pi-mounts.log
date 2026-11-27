@@ -1,0 +1,18 @@
+udev /dev devtmpfs rw,nosuid,relatime,size=332056k,nr_inodes=83014,mode=755 0 0
+tmpfs /run tmpfs rw,nosuid,nodev,noexec,relatime,size=187780k,mode=755 0 0
+tmpfs-root /media/root-rw tmpfs rw,relatime 0 0
+overlayroot / overlay rw,relatime,lowerdir=/media/root-ro,upperdir=/media/root-rw/overlay,workdir=/media/root-rw/overlay-workdir/_,uuid=on 0 0
+tmpfs /dev/shm tmpfs rw,nosuid,nodev 0 0
+tmpfs /run/lock tmpfs rw,nosuid,nodev,noexec,relatime,size=5120k 0 0
+nfsroot-watchdog /run/nfsroot-watchdog tmpfs rw,nosuid,nodev,relatime,size=16384k,mode=755 0 0
+tmpfs /run/user/1000 tmpfs rw,nosuid,nodev,relatime,size=93888k,nr_inodes=23472,mode=700,uid=1000,gid=1000 0 0
+Filesystem      Size  Used Avail Use% Mounted on
+overlayroot     459M   35M  425M   8% /
+overlayroot     459M   35M  425M   8% /
+tmpfs           184M  752K  183M   1% /run
+cpu pids
+Running scope as unit: run-r4dc26b56e52e4e36846180e4b1d64d45.scope
+sr=0
+/etc/pip.conf
+[global]
+extra-index-url=https://www.piwheels.org/simple
