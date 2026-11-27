@@ -1,0 +1,14 @@
+hil: fpga-1 (ws://127.0.0.1:18034/serial), tt_um_vgacal_bars, 400000 Hz
+PASS  probe          fpga-1 (ws://127.0.0.1:18034/serial) answered in 0.4s: sys.version: 3.4.0; MicroPython 970468103d on 2026-09-08 / GPIOMap.all(): {'mng00': 3, 'mng01': 4, 'mng02': 5, 'mng03': 6, 'adc3': 43, 'mng04': 7, 'mng05': 8, 'mng06': 9, 'mng07': 10, 'uo_out6': 39, 'uo_out7': 40, 'uo_out4': 37, 'uo_out5': 38, 'rp_projclk': 16, 'uo_out0': 33, 'uo_out1': 34, 'uo_out2
+PASS  capture        fpga-1 (ws://127.0.0.1:18034/serial): bytes=3918710 samples=3915776 chunks=240 seconds=10.035 overruns=0 dropped=0 rxstall=0 samples_per_s=390204 mem_free=423040, 3918821 byte(s) on disk
+PASS  reconstruct    8 frame(s) from 3918821 byte(s), wanted >=7 for 10.0s at 400000 Hz; frames=8 glitches_total=0
+PASS  reference      tt_um_vgacal_bars vs f-0004.ppm: PASS: 307200 pixels identical to the reference render
+PASS  frame          2 of 2 picture(s) pixel-exact at 25000000 Hz (640x480@60); board: frames=2 stalls=0 rxstall=0 sysclk_hz=100000000
+PASS  demo-frames    exit 0, 37 png(s) in 11.1s, wanted >=25 at 5 fps
+PASS  video          capture.mkv: 7.40s at 5/1, 18234 byte(s); 37 frames at 5 fps is 7.40s
+PASS  serve          35 MJPEG part(s) from http://127.0.0.1:8099/stream.mjpg (multipart/x-mixed-replace; boundary=vgacapframe)
+PASS  stop           SIGTERM -> exit 0 in 0.25s (budget 15s), 0 orphan(s), capture.mkv duration 2.20s
+PASS  board-usable   fpga-1 (ws://127.0.0.1:18034/serial) answered in 0.3s: sys.version: 3.4.0; MicroPython 970468103d on 2026-09-08 / GPIOMap.all(): {'mng00': 3, 'mng01': 4, 'mng02': 5, 'mng03': 6, 'adc3': 43, 'mng04': 7, 'mng05': 8, 'mng06': 9, 'mng07': 10, 'uo_out6': 39, 'uo_out7': 40, 'uo_out4': 37, 'uo_out5': 38, 'rp_projclk': 16, 'uo_out0': 33, 'uo_out1': 34, 'uo_out2
+
+10 check(s): 10 passed, 0 failed, 0 skipped
+report: tmp/hil/2026-11-27-hil-fpga-1.md
