@@ -1,0 +1,49 @@
+Linux pi-sw2-p35 6.12.109+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.12.109-1+rpt1 (2026-09-11) aarch64 GNU/Linux
+Description:	Raspbian GNU/Linux 12 (bookworm)
+Codename:	bookworm
++ cd /home/pi
++ getconf LONG_BIT
+32
++ curl -LO https://github.com/astral-sh/uv/releases/download/0.10.8/uv-armv7-unknown-linux-musleabihf.tar.gz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:06 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:07 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:08 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:09 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0  0 20.1M    0 76488    0     0   6758      0  0:52:13  0:00:11  0:52:02 15744 30 20.1M   30 6303k    0     0   510k      0  0:00:40  0:00:12  0:00:28 1288k100 20.1M  100 20.1M    0     0  1629k      0  0:00:12  0:00:12 --:--:-- 4894k
+curl exit 0
++ echo 'curl exit 0'
++ tar -xzf uv-armv7-unknown-linux-musleabihf.tar.gz
+tar exit 0
++ echo 'tar exit 0'
++ mkdir -p /home/pi/.local/bin
++ cp uv-armv7-unknown-linux-musleabihf/uv /home/pi/.local/bin/
+cp exit 0
+/home/pi/.local/bin/uv
++ echo 'cp exit 0'
++ command -v uv
++ uv --version
+uv 0.10.8
++ /home/pi/.local/bin/uv --version
+uv 0.10.8
+/home/pi/.local/bin/uv
++ export PATH=/home/pi/.local/bin:/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
++ PATH=/home/pi/.local/bin:/home/pi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
++ command -v uv
++ uv --version
+uv 0.10.8
++ tar -xzf /home/pi/vgacap-73b7f57.tar.gz
++ cd vgacap
++ export UV_NO_DEV=1
++ UV_NO_DEV=1
++ uv sync
+Using CPython 3.11.2 interpreter at: /usr/bin/python3
+Creating virtual environment at: .venv
+Resolved 50 packages in 3ms
+   Building vgacap @ file:///home/pi/vgacap
+      Built vgacap @ file:///home/pi/vgacap
+Prepared 3 packages in 5.64s
+Installed 3 packages in 10ms
+ + pyserial==3.5
+ + vgacap==0.0.1 (from file:///home/pi/vgacap)
+ + websockets==17.1
+uv sync exit 0
++ echo 'uv sync exit 0'

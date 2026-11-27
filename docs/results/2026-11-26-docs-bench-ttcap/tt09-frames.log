@@ -1,0 +1,13 @@
+Thu Nov 26 11:06:12 PM UTC 2026
+profile=rp2350-dbv3 project=tt_um_rejunity_vga_logo enable=index
+bytes=769852 samples=769600 chunks=6 seconds=2.467 overruns=0 dropped=0 rxstall=0 samples_per_s=311964 mem_free=382096
+  board: frame window=410 buffers=29 hsync_active=1 vsync_active=1
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=101000000
+wrote frames.vgacap
+note: each picture is assembled from 2 captured frames (410 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+EXIT 0
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=pos vsync=pos partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=pos vsync=pos partial=0 glitches=0
+frames=2 glitches_total=0
+wrote 2 png(s)
+PNG EXIT 0

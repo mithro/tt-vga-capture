@@ -1,0 +1,20 @@
+== clock 650000
+profile=rp2350-dbv3 project=None enable=None
+bytes=2459532 samples=2457600 chunks=153 seconds=4.021 overruns=2 dropped=32768 rxstall=0 samples_per_s=611153 mem_free=421040
+  board: overrun (x2)
+  board: overruns=2 rxstall=0 sysclk_hz=130000000
+wrote capture-650000.vgacap
+EXIT 0
+== clock 600000
+profile=rp2350-dbv3 project=None enable=None
+bytes=2279176 samples=2277376 chunks=142 seconds=4.031 overruns=2 dropped=32768 rxstall=0 samples_per_s=564988 mem_free=421040
+  board: overrun (x2)
+  board: overruns=2 rxstall=0 sysclk_hz=132000000
+wrote capture-600000.vgacap
+EXIT 0
+== clock 500000
+profile=rp2350-dbv3 project=None enable=None
+bytes=1902002 samples=1900544 chunks=117 seconds=4.035 overruns=0 dropped=0 rxstall=0 samples_per_s=471046 mem_free=421040
+  board: overruns=0 rxstall=0 sysclk_hz=133000000
+wrote capture-500000.vgacap
+EXIT 0

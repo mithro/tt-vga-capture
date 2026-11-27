@@ -1,0 +1,40 @@
+ign tt_um_factory_test[0m
+BOOT: [32;1mDisable (selecting project 0)[0m
+BOOT: [32;1mClock in design 1[0m
+BOOT: [32;1mResetting system clock to default 125000000.0Hz[0m
+BOOT: [32;1mSetting RP2040 system clock to 133000000Hz[0m
+BOOT: [32;1mClocking at 10Hz[0m
+BOOT: [32;1mFirst time loading: Toggling project reset[0m
+BOOT: [32;1mChanging reset to output mode[0m
+
+
+
+The '[31;1mtt[0m' object is available.
+
+Projects may be enabled with [1mtt.shuttle.PROJECT_NAME.enable()[0m, e.g.
+tt.shuttle.tt_um_urish_simon.enable()
+
+The io ports are named as in Verilog, [1mtt.ui_in[0m, [1mtt.uo_out[0m...
+and behave as with cocotb, e.g. [1mtt.uo_out.value = 0xAA[0m or [1mprint(tt.ui_in.value)[0m
+Bits may be accessed by index, e.g. [1mtt.uo_out[7][0m (note: that's the [31;1mhigh bit![0m) to read or [1mtt.ui_in[5] = 1[0m to write.
+Direction of the bidir pins is set using [1mtt.uio_oe_pico[0m, used in the same manner as the io ports themselves.
+
+
+[36;1mTT SDK v3.1.1[0m
+
+
+
+[35mMem info
+stack: 404 out of 12032
+GC: total: 487680, used: 94720, free: 392960
+ No. of 1-blocks: 1556, 2-blocks: 133, max blk sz: 195, max free sz: 21372
+[0m
+<DemoBoard in ASIC_RP_CONTROL, auto-clocking @ 10 tt09 project 'tt_um_factory_test (1) @ '>
+
+boot done: 2649
+tt.sdk_revision=d485c7a9986336024e35d790568fca33be1c5665
+tt.sdk_version=3.1.1
+MicroPython 970468103d on 2026-09-08; TinyTapeout RP2350B Core with RP2350
+Type "help()" for more information.
+>>> 
+EXIT 0

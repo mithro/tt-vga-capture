@@ -1,0 +1,81 @@
+Linux pi-sw2-p35 6.12.109+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.12.109-1+rpt1 (2026-09-11) aarch64 GNU/Linux
+Description:	Raspbian GNU/Linux 12 (bookworm)
+Codename:	bookworm
+++ curl -sS http://127.0.0.1:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "a2961e5cac65b25f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board a2961e5cac65b25f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 104720, "version": "0.1.0"}
+clients=0
++ h='{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "a2961e5cac65b25f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board a2961e5cac65b25f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 104720, "version": "0.1.0"}'
++ echo '{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "a2961e5cac65b25f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board a2961e5cac65b25f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 104720, "version": "0.1.0"}'
++ case "$h" in
++ echo clients=0
++ date -u
+Thu 26 Nov 18:53:19 UTC 2026
++ sudo systemctl stop fpgas-tt
++ systemctl is-active fpgas-tt
+inactive
++ cd /home/pi/vgacap
++ uv run --no-sync ttcap probe serial:/dev/ttyACM0
+sys.version: 3.4.0; MicroPython 970468103d on 2026-09-08
+GPIOMap.all(): {'mng00': 3, 'mng01': 4, 'mng02': 5, 'mng03': 6, 'adc3': 43, 'mng04': 7, 'mng05': 8, 'mng06': 9, 'mng07': 10, 'uo_out6': 39, 'uo_out7': 40, 'uo_out4': 37, 'uo_out5': 38, 'rp_projclk': 16, 'uo_out0': 33, 'uo_out1': 34, 'uo_out2': 35, 'uio7': 32, 'uio4': 29, 'uio5': 30, 'uio2': 27, 'uo_out3': 36, 'uio0': 25, 'uio1': 26, 'uio6': 31, 'uio3': 28, 'adc1': 41, 'adc2': 42, 'manual_project_clock': 15, 'nprojectrst': 14, 'analog_current_source': 12, 'cena': 0, 'cinc': 2, 'adc4': 44, 'ui_in1': 18, 'ui_in0': 17, 'ui_in3': 20, 'ui_in2': 19, 'ui_in5': 22, 'ui_in4': 21, 'ui_in7': 24, 'ui_in6': 23, 'adc5': 45, 'rp_led': 11, 'ncrst': 1}
+probe exit 0
++ echo 'probe exit 0'
++ uv run --no-sync ttcap capture serial:/dev/ttboard --clock-hz 750000 --seconds 4 --out bench.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=2853201 samples=2850816 chunks=182 seconds=4.046 overruns=7 dropped=114688 rxstall=0 samples_per_s=704635 mem_free=419648
+  board: overrun (x7)
+  board: overruns=7 rxstall=0 sysclk_hz=132000000
+wrote bench.vgacap
+capture exit 0
++ echo 'capture exit 0'
++ uv run --no-sync python tools/board_restart.py serial:/dev/ttboard
+ctivated, SS high
+BOOT: [32;1mResetting system clock to default 125000000.0Hz[0m
+BOOT: [32;1mIn "manual inputs" mode but clock freq set--setting up for CLK/RST RP ctrl[0m
+BOOT: [32;1mSetting RP2040 system clock to 133000000Hz[0m
+BOOT: [32;1mClocking at 10Hz[0m
+BOOT: [32;1mFirst time loading: Toggling project reset[0m
+BOOT: [32;1mChanging reset to output mode[0m
+
+
+
+The '[31;1mtt[0m' object is available.
+
+Projects may be enabled with [1mtt.shuttle.PROJECT_NAME.enable()[0m, e.g.
+tt.shuttle.tt_um_urish_simon.enable()
+
+The io ports are named as in Verilog, [1mtt.ui_in[0m, [1mtt.uo_out[0m...
+and behave as with cocotb, e.g. [1mtt.uo_out.value = 0xAA[0m or [1mprint(tt.ui_in.value)[0m
+Bits may be accessed by index, e.g. [1mtt.uo_out[7][0m (note: that's the [31;1mhigh bit![0m) to read or [1mtt.ui_in[5] = 1[0m to write.
+Direction of the bidir pins is set using [1mtt.uio_oe_pico[0m, used in the same manner as the io ports themselves.
+
+
+[36;1mTT SDK v3.1.1[0m
+
+
+
+[35mMem info
+stack: 404 out of 12032
+GC: total: 487680, used: 57440, free: 430240
+ No. of 1-blocks: 1246, 2-blocks: 140, max blk sz: 72, max free sz: 24377
+[0m
+<DemoBoard in ASIC_MANUAL_INPUTS, auto-clocking @ 10 FPGA project 'FPGA:tt_um_factory_test'>
+
+boot done: 2112
+tt.sdk_revision=d485c7a9986336024e35d790568fca33be1c5665
+tt.sdk_version=3.1.1
+MicroPython 970468103d on 2026-09-08; TinyTapeout RP2350B Core with RP2350
+Type "help()" for more information.
+>>> 
+restart exit 0
++ echo 'restart exit 0'
++ sudo systemctl start fpgas-tt
+start exit 0
++ echo 'start exit 0'
++ sleep 3
++ systemctl is-active fpgas-tt
+active
++ sudo fuser /dev/ttboard
+  7352/dev/ttyACM0:       
++ sudo fuser -v /dev/ttboard
+                     USER        PID ACCESS COMMAND
+/dev/ttyACM0:  7352        pi        F.... python3

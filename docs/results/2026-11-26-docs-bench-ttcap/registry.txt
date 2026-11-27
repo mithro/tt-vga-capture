@@ -1,0 +1,17 @@
+pi-sw2-p2 sw2 p2 attention TT chip eea2df10a3c07d1e TT chip eea2df10a3c07d1e fail
+pi-sw2-p3 sw2 p3 attention TT chip de636c65c34d6a25 TT chip de636c65c34d6a25 error
+pi-sw2-p6 sw2 p6 operational TT chip de640cb1d3357125 TT chip de640cb1d3357125 pass
+pi-sw2-p7 sw2 p7 operational TT chip de641070db746f27 TT chip de641070db746f27 pass
+pi-sw2-p8 sw2 p8 attention TT chip de641070db5b2d27 TT chip de641070db5b2d27 fail
+pi-sw2-p9 sw2 p9 attention TT chip bec53804a997cfdb TT chip bec53804a997cfdb fail
+pi-sw2-p10 sw2 p10 attention TT chip 3b0880b48ee5c388 TT chip 3b0880b48ee5c388 fail
+pi-sw2-p11 sw2 p11 attention TT chip ab2a48a7ee008dd9 TT chip ab2a48a7ee008dd9 fail
+pi-sw2-p12 sw2 p12 attention TT chip 5fc4052b3f2b54ff TT chip 5fc4052b3f2b54ff fail
+pi-sw2-p13 sw2 p13 attention TT chip 223925d0950e70a7 TT chip 223925d0950e70a7 fail
+pi-sw2-p33 sw2 p33 operational TT FPGA fd1a167bd863a198 TT FPGA fd1a167bd863a198 pass
+pi-sw2-p34 sw2 p34 operational TT FPGA 4df39a7a6856f86f TT FPGA 4df39a7a6856f86f pass
+pi-sw2-p35 sw2 p35 missing TT FPGA a2961e5cac65b25f TT FPGA a2961e5cac65b25f pass
+pi-sw2-p35 sw2 p35 operational TT FPGA a2961e5cac65b25f TT FPGA a2961e5cac65b25f pass
+pi-sw2-p36 sw2 p36 operational TT FPGA 8c46329b33590ecb TT FPGA 8c46329b33590ecb pass
+pi-sw2-p48 sw2 p48 missing TT chip de637061071e5439 TT chip de637061071e5439 pass
+pi-sw2-p48 sw2 p48 missing TT chip de637061074b1838 TT chip de637061074b1838 fail

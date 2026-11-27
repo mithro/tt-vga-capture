@@ -1,0 +1,21 @@
++ date -u
+Thu 26 Nov 18:37:16 UTC 2026
++ uv run ttcap probe serial:/dev/ttyACM0
+sys.version: 3.4.0; MicroPython 970468103d on 2026-09-08
+GPIOMap.all(): {'mng00': 3, 'mng01': 4, 'mng02': 5, 'mng03': 6, 'adc3': 43, 'mng04': 7, 'mng05': 8, 'mng06': 9, 'mng07': 10, 'uo_out6': 39, 'uo_out7': 40, 'uo_out4': 37, 'uo_out5': 38, 'rp_projclk': 16, 'uo_out0': 33, 'uo_out1': 34, 'uo_out2': 35, 'uio7': 32, 'uio4': 29, 'uio5': 30, 'uio2': 27, 'uo_out3': 36, 'uio0': 25, 'uio1': 26, 'uio6': 31, 'uio3': 28, 'adc1': 41, 'adc2': 42, 'manual_project_clock': 15, 'nprojectrst': 14, 'analog_current_source': 12, 'cena': 0, 'cinc': 2, 'adc4': 44, 'ui_in1': 18, 'ui_in0': 17, 'ui_in3': 20, 'ui_in2': 19, 'ui_in5': 22, 'ui_in4': 21, 'ui_in7': 24, 'ui_in6': 23, 'adc5': 45, 'rp_led': 11, 'ncrst': 1}
+EXIT 0
++ echo 'EXIT 0'
++ uv run ttcap throughput serial:/dev/ttyACM0
+bytes=1000000 seconds=1.364 kbytes_per_s=716.1 corrupt=no
+EXIT 0
++ echo 'EXIT 0'
++ uv run ttcap capture serial:/dev/ttyACM0 --clock-hz 750000 --seconds 4 --out capture.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=2836805 samples=2834432 chunks=181 seconds=4.017 overruns=7 dropped=114688 rxstall=0 samples_per_s=705606 mem_free=422640
+  board: overrun (x7)
+  board: overruns=7 rxstall=0 sysclk_hz=132000000
+wrote capture.vgacap
+EXIT 0
++ echo 'EXIT 0'
++ ls -la capture.vgacap
+-rw-r--r-- 1 pi pi 2836890 Nov 26 18:37 capture.vgacap

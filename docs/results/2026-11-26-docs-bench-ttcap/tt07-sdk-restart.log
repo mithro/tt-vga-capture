@@ -1,0 +1,40 @@
+[0m
+BOOT: [32;1mLoading shuttle file /shuttles/tt07.json[0m
+BOOT: [32;1mDeserializing from v1 file /shuttles/tt07.json.bin[0m
+BOOT: [32;1mEnable design tt_um_factory_test[0m
+BOOT: [32;1mResetting system clock to default 1.25e+08Hz[0m
+BOOT: [32;1mSetting RP2040 system clock to 133000000Hz[0m
+BOOT: [32;1mClocking at 10Hz[0m
+BOOT: [32;1mFirst time loading: Toggling project reset[0m
+BOOT: [32;1mChanging reset to output mode[0m
+
+
+
+The '[31;1mtt[0m' object is available.
+
+Projects may be enabled with [1mtt.shuttle.PROJECT_NAME.enable()[0m, e.g.
+tt.shuttle.tt_um_urish_simon.enable()
+
+The io ports are named as in Verilog, [1mtt.ui_in[0m, [1mtt.uo_out[0m...
+and behave as with cocotb, e.g. [1mtt.uo_out.value = 0xAA[0m or [1mprint(tt.ui_in.value)[0m
+Bits may be accessed by index, e.g. [1mtt.uo_out[7][0m (note: that's the [31;1mhigh bit![0m) to read or [1mtt.ui_in[5] = 1[0m to write.
+Direction of the bidir pins is set using [1mtt.uio_oe_pico[0m, used in the same manner as the io ports themselves.
+
+
+[36;1mTT SDK v2.0.4[0m
+
+
+
+[35mMem info
+stack: 524 out of 7936
+GC: total: 233664, used: 148768, free: 84896
+ No. of 1-blocks: 1918, 2-blocks: 533, max blk sz: 482, max free sz: 2221
+[0m
+<DemoBoard in ASIC_RP_CONTROL, auto-clocking @ 10 tt07 project 'tt_um_factory_test (1) @ '>
+
+boot done: 3916
+tt.sdk_version=2.0.4
+MicroPython v1.24.0 on 2024-10-25; Raspberry Pi Pico with RP2040
+Type "help()" for more information.
+>>> 
+RESTART EXIT 0

@@ -1,0 +1,23 @@
++ sudo mkdir -p /mnt/rp2350
++ sudo mount /dev/disk/by-label/RP2350 /mnt/rp2350
++ cat /mnt/rp2350/INFO_UF2.TXT
+UF2 Bootloader v1.1
+Model: Raspberry Pi RP2350
+Board-ID: RP2350
++ sudo cp /home/pi/bench43/vgacap_fw.uf2 /mnt/rp2350/
++ sync
++ sudo umount /mnt/rp2350
++ sleep 5
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 025: ID 2e8a:0009 vgacap vgacap capture firmware
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
++ ls -la /dev/ttyACM0 /dev/serial/by-id/
+crw-rw---- 1 root dialout 166, 0 Nov 26 18:40 /dev/ttyACM0
+
+/dev/serial/by-id/:
+total 0
+drwxr-xr-x 2 root root 60 Nov 26 18:40 .
+drwxr-xr-x 4 root root 80 Nov 26 18:40 ..
+lrwxrwxrwx 1 root root 13 Nov 26 18:40 usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00 -> ../../ttyACM0

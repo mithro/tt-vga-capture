@@ -1,0 +1,11 @@
+Using CPython 3.11.2 interpreter at: /usr/bin/python3
+Creating virtual environment at: .venv
+Resolved 50 packages in 5ms
+   Building vgacap @ file:///home/pi/bench43/vgacap
+      Built vgacap @ file:///home/pi/bench43/vgacap
+Prepared 3 packages in 3.02s
+Installed 3 packages in 9ms
+ + pyserial==3.5
+ + vgacap==0.0.1 (from file:///home/pi/bench43/vgacap)
+ + websockets==17.1
+EXIT 0

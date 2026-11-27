@@ -1,0 +1,11 @@
+Linux pi-sw2-p35 6.12.109+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.12.109-1+rpt1 (2026-09-11) aarch64 GNU/Linux
+Description:	Raspbian GNU/Linux 12 (bookworm)
+Codename:	bookworm
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
++ echo /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
++ /usr/local/bin/uv --version
+uv 0.13.1 (armv7-unknown-linux-gnueabihf)
++ file /usr/local/bin/uv
+/usr/local/bin/uv: symbolic link to /opt/pipx/venvs/uv/bin/uv
++ ls -la /usr/local/bin/uv
+lrwxrwxrwx 1 root root 25 Oct 15 17:30 /usr/local/bin/uv -> /opt/pipx/venvs/uv/bin/uv
