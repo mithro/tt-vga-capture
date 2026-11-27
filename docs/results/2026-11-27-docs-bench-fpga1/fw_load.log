@@ -1,0 +1,129 @@
+== load: before 2026-11-27T01:05:12Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 730, "version": "0.1.0"}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 730, "version": "0.1.0", "reachable": true}
+######## step1 2026-11-27T01:05:12Z
++ curl -s localhost:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "loaded"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 730, "version": "0.1.0"}######## rc=0 2026-11-27T01:05:12Z
+######## step2 2026-11-27T01:05:12Z
++ sudo systemctl stop fpgas-tt
++ systemctl is-active fpgas-tt
+inactive
+######## rc=3 2026-11-27T01:05:12Z
+######## step3 2026-11-27T01:05:12Z
++ uv run --no-sync ttcap reboot serial:/dev/ttboard --to bootsel
+the board runs micropython
+rebooting to bootsel
++ sleep 5
++ ls -l /dev/disk/by-label/
+total 0
+lrwxrwxrwx 1 root root 10 Nov 27 01:05 RP2350 -> ../../sda1
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 004: ID 2e8a:000f Raspberry Pi RP2350 Boot
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+######## rc=0 2026-11-27T01:05:20Z
+######## step4 2026-11-27T01:05:26Z
++ sudo mkdir -p /mnt/rp2350
++ sudo mount /dev/disk/by-label/RP2350 /mnt/rp2350
++ sudo cp vgacap_fw.uf2 /mnt/rp2350/
++ sync
++ sudo umount /mnt/rp2350
+######## rc=0 2026-11-27T01:05:27Z
+######## step5 2026-11-27T01:05:27Z
++ sleep 3
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
+FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ echo FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 005: ID 2e8a:0009 vgacap vgacap capture firmware
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+######## rc=0 2026-11-27T01:05:30Z
+######## step7 (attempt 1) 2026-11-27T01:07:25Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ uv run --no-sync ttcap reboot serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
+the board runs picosdk
+rebooting to flash
++ sleep 5
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 006: ID 2e8a:0005 MicroPython Board in FS mode
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
++ ls -l /dev/ttboard
+lrwxrwxrwx 1 root root 7 Nov 27 01:07 /dev/ttboard -> ttyACM0
+######## rc=0 2026-11-27T01:07:30Z
+######## step8 (attempt 1) 2026-11-27T01:07:30Z
++ sudo systemctl start fpgas-tt
++ systemctl is-active fpgas-tt
+active
+######## rc=0 2026-11-27T01:07:30Z
+== load attempt1: after 2026-11-27T01:07:35Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 4, "version": "0.1.0"}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 4, "version": "0.1.0", "reachable": true}
+== load attempt2: before 2026-11-27T01:09:00Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 88, "version": "0.1.0"}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 88, "version": "0.1.0", "reachable": true}
+######## step1 (attempt 2) 2026-11-27T01:09:00Z
++ curl -s localhost:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 89, "version": "0.1.0"}######## rc=0 2026-11-27T01:09:00Z
+######## step2 (attempt 2) 2026-11-27T01:09:00Z
++ sudo systemctl stop fpgas-tt
++ systemctl is-active fpgas-tt
+inactive
+######## rc=3 2026-11-27T01:09:01Z
+######## step3 (attempt 2) 2026-11-27T01:09:01Z
++ uv run --no-sync ttcap reboot serial:/dev/ttboard --to bootsel
+the board runs micropython
+rebooting to bootsel
++ sleep 5
++ ls -l /dev/disk/by-label/
+total 0
+lrwxrwxrwx 1 root root 10 Nov 27 01:09 RP2350 -> ../../sda1
+######## rc=0 2026-11-27T01:09:08Z
+######## step4 (attempt 2) 2026-11-27T01:09:08Z
++ sudo mkdir -p /mnt/rp2350
++ sudo mount /dev/disk/by-label/RP2350 /mnt/rp2350
++ sudo cp vgacap_fw.uf2 /mnt/rp2350/
++ sync
++ sudo umount /mnt/rp2350
+######## rc=0 2026-11-27T01:09:10Z
+######## step5 (attempt 2) 2026-11-27T01:09:10Z
++ sleep 3
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
+FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ echo FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 008: ID 2e8a:0009 vgacap vgacap capture firmware
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+######## rc=0 2026-11-27T01:09:13Z
+######## step7 (attempt 2) 2026-11-27T01:09:39Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ uv run --no-sync ttcap reboot serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
+the board runs picosdk
+rebooting to flash
++ sleep 5
++ lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 009: ID 2e8a:0005 MicroPython Board in FS mode
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
++ ls -l /dev/ttboard
+lrwxrwxrwx 1 root root 7 Nov 27 01:09 /dev/ttboard -> ttyACM0
+######## rc=0 2026-11-27T01:09:45Z
+######## step8 (attempt 2) 2026-11-27T01:09:45Z
++ sudo systemctl start fpgas-tt
++ systemctl is-active fpgas-tt
+active
+######## rc=0 2026-11-27T01:09:45Z
+== load attempt2: after 2026-11-27T01:09:50Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 4, "version": "0.1.0"}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 4, "version": "0.1.0", "reachable": true}

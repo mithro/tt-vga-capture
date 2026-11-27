@@ -1,0 +1,103 @@
+== mpy capture: before (bridge stopped) 2026-11-27T01:13:25Z
+
+{"reachable": false, "error": "HTTPConnectionPool(host='10.21.2.34', port=8765): Max retries exceeded with url: /health (Caused by NewConnectionError(\"HTTPConnection(host='10.21.2.34', port=8765): Failed to establish a new connection: [Errno 111] Connection refused\"))"}
+######## step1 2026-11-27T01:13:25Z
++ DEV=/dev/ttboard
++ uv run --no-sync ttcap capture --firmware mpy-module serial:/dev/ttboard --clock-hz 25000000 --mode frame --frames 2 --out mframe.vgacap --project tt_um_vga_pattern
+capture failed: CaptureError: board rejected print(getattr(getattr(tt.shuttle, 'enabled', None), 'name', None) == 'tt_um_vga_pattern'):
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'tt' isn't defined
+######## rc=1 2026-11-27T01:13:26Z
+######## step1 (as written, no --project) 2026-11-27T01:13:33Z
++ DEV=/dev/ttboard
++ uv run --no-sync ttcap capture --firmware mpy-module serial:/dev/ttboard --clock-hz 25000000 --mode frame --frames 2 --out frame.vgacap
+capture failed: CaptureError: board rejected tt.clock_project_stop():
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'tt' isn't defined
+######## rc=1 2026-11-27T01:13:34Z
+######## recovery: restart the SDK 2026-11-27T01:13:38Z
++ uv run --no-sync python tools/board_restart.py serial:/dev/ttboard
++ tail -n 8
+<DemoBoard in ASIC_MANUAL_INPUTS, auto-clocking @ 10 FPGA project 'FPGA:tt_um_factory_test'>
+
+boot done: 1909
+tt.sdk_revision=d485c7a9986336024e35d790568fca33be1c5665
+tt.sdk_version=3.1.1
+MicroPython b006887db6 on 2026-11-24; TinyTapeout RP2350B Core with RP2350
+Type "help()" for more information.
+>>> 
+######## rc=0 2026-11-27T01:13:42Z
+######## step1 (after SDK restart, --project tt_um_vga_pattern) 2026-11-27T01:13:42Z
++ DEV=/dev/ttboard
++ uv run --no-sync ttcap capture --firmware mpy-module serial:/dev/ttboard --clock-hz 25000000 --mode frame --frames 2 --out frame.vgacap --project tt_um_vga_pattern
+capture failed: CaptureError: board rejected getattr(tt.shuttle, 'tt_um_vga_pattern').enable():
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "ttboard/fpga/fpga_mux.py", line 199, in __getattr__
+AttributeError: What is 'tt_um_vga_pattern'?
+'tt_um_vga_pattern' is not a shuttle entry on this board and is not the enabled design either; an uploaded FPGA bitstream has to be enabled through the board's daemon first
+######## rc=1 2026-11-27T01:13:43Z
+######## recovery: enable tt_um_vga_pattern through the daemon 2026-11-27T01:13:48Z
++ sudo systemctl start fpgas-tt
+++ seq 1 30
++ for i in $(seq 1 30)
++ curl -sf localhost:8765/health
++ sleep 1
++ for i in $(seq 1 30)
++ curl -sf localhost:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 0, "version": "0.1.0"}
+{"enabled": "tt_um_vga_pattern", "clock_hz": null, "ui_in": null, "ui_in_mask": 0, "ui_in_driven": [], "ui_in_held": [], "ui_in_inputs": [], "released": []}
++ break
++ curl -s localhost:8765/health
++ echo
++ curl -s -X POST localhost:8765/designs/tt_um_vga_pattern/enable
++ echo
++ sleep 2
++ curl -s localhost:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "waiting"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 5, "version": "0.1.0"}
+inactive
++ echo
++ sudo systemctl stop fpgas-tt
++ systemctl is-active fpgas-tt
+######## rc=3 2026-11-27T01:13:55Z
+======== attempt 2 (tt_um_vga_pattern enabled through the daemon) ========
+######## step1 (attempt 2) 2026-11-27T01:14:04Z
++ DEV=/dev/ttboard
++ uv run --no-sync ttcap capture --firmware mpy-module serial:/dev/ttboard --clock-hz 25000000 --mode frame --frames 2 --out frame.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=769804 samples=769600 chunks=4 seconds=1.010 overruns=0 dropped=0 rxstall=0 samples_per_s=762212 mem_free=421632
+  board: frame window=481 buffers=52 hsync_active=0 vsync_active=0
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=100000000
+wrote frame.vgacap
+######## rc=0 2026-11-27T01:14:06Z
+######## step2 (attempt 2) 2026-11-27T01:14:06Z
++ DEV=/dev/ttboard
++ uv run --no-sync ttcap capture --firmware mpy-module serial:/dev/ttboard --clock-hz 25000000 --mode window --frames 1 --out window.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=385218 samples=384800 chunks=13 seconds=0.683 overruns=0 dropped=0 rxstall=0 samples_per_s=563085 mem_free=421616
+  board: frame window=48 buffers=1 hsync_active=0 vsync_active=0
+  board: frames=1 stalls=0 rxstall=0 sysclk_hz=100000000
+wrote window.vgacap
+note: each picture is assembled from 11 captured frames (48 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+######## rc=0 2026-11-27T01:14:07Z
+######## step3 (attempt 2) 2026-11-27T01:14:07Z
++ DEV=/dev/ttboard
++ uv run --no-sync ttcap capture --firmware mpy-module serial:/dev/ttboard --clock-hz 500000 --seconds 4 --out stream.vgacap
+profile=rp2350-dbv3 project=None enable=None
+bytes=2016774 samples=2015232 chunks=124 seconds=4.018 overruns=0 dropped=0 rxstall=0 samples_per_s=501606 mem_free=421616
+  board: overruns=0 rxstall=0 sysclk_hz=133000000
+wrote stream.vgacap
+-rw-r--r-- 1 pi pi  769939 Nov 27 01:14 frame.vgacap
+-rw-r--r-- 1 pi pi 2016859 Nov 27 01:14 stream.vgacap
+-rw-r--r-- 1 pi pi  385354 Nov 27 01:14 window.vgacap
++ ls -l frame.vgacap stream.vgacap window.vgacap
+######## rc=0 2026-11-27T01:14:13Z
+######## step4 (attempt 2, workstation checkout at 08ccd16) 2026-11-27T01:14:18Z
+$ uv run --no-sync ttcap png frame.vgacap frame
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
+wrote 2 png(s)
+rc=0

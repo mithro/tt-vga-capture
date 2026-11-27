@@ -1,0 +1,15 @@
+== before restart1 2026-11-27T01:18:59Z
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "left: the SDK is not running"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 197, "version": "0.1.0"}
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "4df39a7a6856f86f", "chip": "fpga"}, "kind": "fpga", "kind_reason": "/run/fpgas-online/verify.json says board 4df39a7a6856f86f carries fpga", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "left: the SDK is not running"}, "safe_start": {"state": "not a chip board"}, "uptime_s": 194, "version": "0.1.0", "reachable": true}
+2026-11-27T01:18:59Z
+[SDK boot banner left out]
+<DemoBoard in ASIC_MANUAL_INPUTS, auto-clocking @ 10 FPGA project 'FPGA:tt_um_factory_test'>
+
+boot done: 2075
+tt.sdk_revision=d485c7a9986336024e35d790568fca33be1c5665
+tt.sdk_version=3.1.1
+MicroPython 970468103d on 2026-09-08; TinyTapeout RP2350B Core with RP2350
+Type "help()" for more information.
+>>> 
+exit 0
+2026-11-27T01:19:03Z

@@ -1,0 +1,25 @@
+######## step4 2026-11-27T01:22:33Z
+$ tools/hil.sh --board fpga-1 --link ws://127.0.0.1:18034/serial --design tt_um_vgacal_bars --clock-hz 500000 tmp/hil/
+Using CPython 3.14.3
+Creating virtual environment at: .venv
+   Building vgacap @ file:///home/tim/github/TinyTapeout/vgacap/.worktrees/bench-33
+      Built vgacap @ file:///home/tim/github/TinyTapeout/vgacap/.worktrees/bench-33
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 13 packages in 38ms
+hil: fpga-1 (ws://127.0.0.1:18034/serial), tt_um_vgacal_bars, 500000 Hz
+PASS  probe          fpga-1 (ws://127.0.0.1:18034/serial) answered in 0.4s: sys.version: 3.4.0; MicroPython 970468103d on 2026-09-08 / GPIOMap.all(): {'mng00': 3, 'mng01': 4, 'mng02': 5, 'mng03': 6, 'adc3': 43, 'mng04': 7, 'mng05': 8, 'mng06': 9, 'mng07': 10, 'uo_out6': 39, 'uo_out7': 40, 'uo_out4': 37, 'uo_out5': 38, 'rp_projclk': 16, 'uo_out0': 33, 'uo_out1': 34, 'uo_out2
+FAIL  capture        fpga-1 (ws://127.0.0.1:18034/serial): bytes=4902569 samples=4898816 chunks=303 seconds=10.034 overruns=3 dropped=49152 rxstall=0 samples_per_s=488244 mem_free=421472, 4902680 byte(s) on disk
+SKIP  reconstruct    not run: the capture failed
+SKIP  reference      tt-vga-testpatterns is not next door: no /home/tim/github/TinyTapeout/vgacap/.worktrees/tt-vga-testpatterns/tools/compare_capture.py
+SKIP  frame          tt-vga-testpatterns is not next door: no /home/tim/github/TinyTapeout/vgacap/.worktrees/tt-vga-testpatterns/tools/compare_capture.py
+PASS  demo-frames    exit 0, 43 png(s) in 11.1s, wanted >=25 at 5 fps
+PASS  video          capture.mkv: 8.60s at 5/1, 19098 byte(s); 43 frames at 5 fps is 8.60s
+PASS  serve          39 MJPEG part(s) from http://127.0.0.1:8099/stream.mjpg (multipart/x-mixed-replace; boundary=vgacapframe)
+PASS  stop           SIGTERM -> exit 0 in 0.26s (budget 15s), 0 orphan(s), capture.mkv duration 1.00s
+PASS  board-usable   fpga-1 (ws://127.0.0.1:18034/serial) answered in 0.2s: sys.version: 3.4.0; MicroPython 970468103d on 2026-09-08 / GPIOMap.all(): {'mng00': 3, 'mng01': 4, 'mng02': 5, 'mng03': 6, 'adc3': 43, 'mng04': 7, 'mng05': 8, 'mng06': 9, 'mng07': 10, 'uo_out6': 39, 'uo_out7': 40, 'uo_out4': 37, 'uo_out5': 38, 'rp_projclk': 16, 'uo_out0': 33, 'uo_out1': 34, 'uo_out2
+
+10 check(s): 6 passed, 1 failed, 3 skipped
+report: tmp/hil/2026-11-27-hil-fpga-1.md
+rc=1 2026-11-27T01:23:04Z

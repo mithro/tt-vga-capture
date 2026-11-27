@@ -1,0 +1,19 @@
+-rwxrwxr-x 1 tim tim 129952 Nov 27 11:39 build/vgacap-frames
+[ 33%] Built target vgacap_frame
+[ 66%] Built target vgacap_stream
+[100%] Built target vgacap-frames
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 8 packages in 22ms
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=pos vsync=pos partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=pos vsync=pos partial=0 glitches=0
+frames=2 glitches_total=0
+wrote 2 png(s)
+total 3500
+-rw-rw-r-- 1 tim tim  95273 Nov 27 11:44 frame-0000.png
+-rw-rw-r-- 1 tim tim 921615 Nov 27 11:44 frame-0000.ppm
+-rw-rw-r-- 1 tim tim  90528 Nov 27 11:44 frame-0001.png
+-rw-rw-r-- 1 tim tim 921615 Nov 27 11:44 frame-0001.ppm
+-rw-r--r-- 1 tim tim 769938 Nov 27 11:40 frame2.vgacap
+-rw-r--r-- 1 tim tim 769938 Nov 27 11:40 frame.vgacap

@@ -1,0 +1,13 @@
+######## re-restore 2026-11-27T01:15:29Z
++ curl -s localhost:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "3b0880b48ee5c388", "chip": "asic"}, "kind": "other", "kind_reason": "/run/fpgas-online/verify.json says board 3b0880b48ee5c388 carries asic", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "not an fpga board"}, "safe_start": {"state": "left: the factory test is not being clocked (not the SDK's start state)"}, "uptime_s": 65, "version": "0.1.0"}
++ echo
++ sudo systemctl stop fpgas-tt
++ mpremote connect /dev/ttboard resume reset
++ sleep 8
++ ls -l /dev/ttboard
+lrwxrwxrwx 1 root root 7 Nov 27 01:15 /dev/ttboard -> ttyACM0
++ sudo systemctl start fpgas-tt
++ systemctl is-active fpgas-tt
+active
+######## rc=0

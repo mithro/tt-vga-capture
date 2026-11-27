@@ -1,0 +1,68 @@
+######## load step 1 2026-11-27T01:09:29Z
++ curl -s localhost:8765/health
+{"board": {"present": true, "device": "/dev/ttboard", "vid_pid": "2e8a:0005", "usb_serial": "3b0880b48ee5c388", "chip": "asic"}, "kind": "other", "kind_reason": "/run/fpgas-online/verify.json says board 3b0880b48ee5c388 carries asic", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "not an fpga board"}, "safe_start": {"state": "set: clock stopped (was 10 Hz; its pin released), ui_in driven to 0 (read 1), uio released (uio_oe_pico was 0)"}, "uptime_s": 288, "version": "0.1.0"}+ echo
+
+######## rc=0 2026-11-27T01:09:29Z
+######## load step 2 2026-11-27T01:09:29Z
++ sudo systemctl stop fpgas-tt
++ systemctl is-active fpgas-tt
+inactive
++ ls -l /dev/ttboard
+lrwxrwxrwx 1 root root 7 Nov 27 01:04 /dev/ttboard -> ttyACM0
+######## rc=0 2026-11-27T01:09:30Z
+######## load step 3 2026-11-27T01:09:36Z
++ uv run --no-sync ttcap reboot serial:/dev/ttboard --to bootsel
+the board runs micropython
+rebooting to bootsel
++ sleep 4
++ ls -l /dev/disk/by-label/
+ls: cannot access '/dev/disk/by-label/': No such file or directory
++ lsusb
+Bus 001 Device 006: ID 2e8a:000f Raspberry Pi RP2350 Boot
+Bus 001 Device 005: ID 0424:7800 Microchip Technology, Inc. (formerly SMSC) 
+Bus 001 Device 003: ID 0424:2514 Microchip Technology, Inc. (formerly SMSC) USB 2.0 Hub
+Bus 001 Device 002: ID 0424:2514 Microchip Technology, Inc. (formerly SMSC) USB 2.0 Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+######## rc=0 2026-11-27T01:09:43Z
+######## load step 4 2026-11-27T01:09:43Z
++ sudo mkdir -p /mnt/rp2350
++ sudo mount /dev/disk/by-label/RP2350 /mnt/rp2350
++ sudo cp vgacap_fw.uf2 /mnt/rp2350/
++ sync
++ sudo umount /mnt/rp2350
+######## rc=0 2026-11-27T01:09:46Z
+######## load step 5 + check 2026-11-27T01:09:46Z
++ sleep 3
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00
+FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00
++ echo FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00
++ lsusb
+Bus 001 Device 007: ID 2e8a:0009 vgacap vgacap capture firmware
+Bus 001 Device 005: ID 0424:7800 Microchip Technology, Inc. (formerly SMSC) 
+Bus 001 Device 003: ID 0424:2514 Microchip Technology, Inc. (formerly SMSC) USB 2.0 Hub
+Bus 001 Device 002: ID 0424:2514 Microchip Technology, Inc. (formerly SMSC) USB 2.0 Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+######## rc=0 2026-11-27T01:09:50Z
+######## load step 7 + check 2026-11-27T01:10:23Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00
++ uv run --no-sync ttcap reboot serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_3B0880B48EE5C388-if00
+the board runs picosdk
+rebooting to flash
++ sleep 5
++ lsusb
+Bus 001 Device 008: ID 2e8a:0005 MicroPython Board in FS mode
+Bus 001 Device 005: ID 0424:7800 Microchip Technology, Inc. (formerly SMSC) 
+Bus 001 Device 003: ID 0424:2514 Microchip Technology, Inc. (formerly SMSC) USB 2.0 Hub
+Bus 001 Device 002: ID 0424:2514 Microchip Technology, Inc. (formerly SMSC) USB 2.0 Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
++ ls -l /dev/ttboard
+lrwxrwxrwx 1 root root 7 Nov 27 01:10 /dev/ttboard -> ttyACM0
+######## rc=0 2026-11-27T01:10:30Z
+######## load step 8 2026-11-27T01:10:30Z
++ sudo systemctl start fpgas-tt
++ sleep 3
++ systemctl is-active fpgas-tt
+active
+######## rc=0 2026-11-27T01:10:33Z

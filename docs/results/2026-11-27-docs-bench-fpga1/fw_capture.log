@@ -1,0 +1,80 @@
+######## step1 2026-11-27T01:05:36Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ uv run --no-sync ttcap capture --firmware picosdk serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00 --clock-hz 25000000 --mode frame --frames 2 --out frame.vgacap
+profile=rp2350-dbv3 project=None enable=kept (capture firmware)
+bytes=82 samples=0 chunks=1 seconds=30.002 overruns=0 dropped=0 rxstall=0 samples_per_s=0 timed_out=yes error="board went quiet: timed out waiting for 8 bytes; buffered: b''"
+  board: frame window=481 buffers=1 hsync_active=1 vsync_active=1
+wrote frame.vgacap
+######## rc=1 2026-11-27T01:06:07Z
+######## step2 2026-11-27T01:06:07Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ uv run --no-sync ttcap capture --firmware picosdk serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00 --clock-hz 25000000 --mode window --frames 1 --out window.vgacap
+profile=rp2350-dbv3 project=None enable=kept (capture firmware)
+bytes=81 samples=0 chunks=1 seconds=30.002 overruns=0 dropped=0 rxstall=0 samples_per_s=0 timed_out=yes error="board went quiet: timed out waiting for 8 bytes; buffered: b''"
+  board: frame window=48 buffers=1 hsync_active=1 vsync_active=1
+wrote window.vgacap
+note: each picture is assembled from 11 captured frames (48 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+######## rc=1 2026-11-27T01:06:37Z
+######## step3 2026-11-27T01:06:37Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ uv run --no-sync ttcap capture --firmware picosdk serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00 --clock-hz 750000 --seconds 4 --out stream.vgacap
+profile=rp2350-dbv3 project=None enable=kept (capture firmware)
+bytes=3000534 samples=2998272 chunks=184 seconds=4.017 overruns=0 dropped=0 rxstall=0 samples_per_s=746351
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote stream.vgacap
++ ls -l frame.vgacap stream.vgacap window.vgacap
+-rw-r--r-- 1 pi pi     217 Nov 27 01:06 frame.vgacap
+-rw-r--r-- 1 pi pi 3000619 Nov 27 01:06 stream.vgacap
+-rw-r--r-- 1 pi pi     217 Nov 27 01:06 window.vgacap
+######## rc=0 2026-11-27T01:06:42Z
+======== attempt 2 (tt_um_vga_pattern enabled) ========
+######## step1 (attempt 2) 2026-11-27T01:09:19Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ uv run --no-sync ttcap capture --firmware picosdk serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00 --clock-hz 25000000 --mode frame --frames 2 --out frame.vgacap
+profile=rp2350-dbv3 project=None enable=kept (capture firmware)
+bytes=769803 samples=769600 chunks=4 seconds=1.044 overruns=0 dropped=0 rxstall=0 samples_per_s=737287
+  board: frame window=481 buffers=1 hsync_active=0 vsync_active=0
+  board: frames=2 stalls=0 rxstall=0 sysclk_hz=100000000
+wrote frame.vgacap
+######## rc=0 2026-11-27T01:09:20Z
+######## step2 (attempt 2) 2026-11-27T01:09:20Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ uv run --no-sync ttcap capture --firmware picosdk serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00 --clock-hz 25000000 --mode window --frames 1 --out window.vgacap
+profile=rp2350-dbv3 project=None enable=kept (capture firmware)
+bytes=385218 samples=384800 chunks=13 seconds=0.647 overruns=0 dropped=0 rxstall=0 samples_per_s=595018
+  board: frame window=48 buffers=1 hsync_active=0 vsync_active=0
+  board: frames=1 stalls=0 rxstall=0 sysclk_hz=100000000
+wrote window.vgacap
+note: each picture is assembled from 11 captured frames (48 of its 481 lines per frame): exact for a static design, torn for one that changes from frame to frame
+######## rc=0 2026-11-27T01:09:22Z
+######## step3 (attempt 2) 2026-11-27T01:09:22Z
+++ ls /dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ FW=/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00
++ uv run --no-sync ttcap capture --firmware picosdk serial:/dev/serial/by-id/usb-vgacap_vgacap_capture_firmware_4DF39A7A6856F86F-if00 --clock-hz 750000 --seconds 4 --out stream.vgacap
+profile=rp2350-dbv3 project=None enable=kept (capture firmware)
+bytes=3000534 samples=2998272 chunks=184 seconds=4.017 overruns=0 dropped=0 rxstall=0 samples_per_s=746351
+  board: overruns=0 rxstall=0 sysclk_hz=132000000
+wrote stream.vgacap
++ ls -l frame.vgacap stream.vgacap window.vgacap
+-rw-r--r-- 1 pi pi  769938 Nov 27 01:09 frame.vgacap
+-rw-r--r-- 1 pi pi 3000619 Nov 27 01:09 stream.vgacap
+-rw-r--r-- 1 pi pi  385354 Nov 27 01:09 window.vgacap
+######## rc=0 2026-11-27T01:09:26Z
+######## step4 (attempt 2, on the Pi) 2026-11-27T01:09:31Z
++ uv run --no-sync ttcap png frame.vgacap frame
+png failed: cannot find vgacap-frames: build it (cmake --build build), set $VGACAP_FRAMES, or pass --vgacap-frames
+######## rc=1 2026-11-27T01:09:31Z
+######## step4 (attempt 2, workstation checkout at 08ccd16) 2026-11-27T01:10:04Z
+$ uv run --no-sync ttcap png frame.vgacap frame
+frame 0: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frame 1: 640x480 mode=640x480@60 cpl=800 lpf=525 hsync=neg vsync=neg partial=0 glitches=0
+frames=2 glitches_total=0
+wrote 2 png(s)
+rc=0
+-rw-rw-r-- 1 tim tim 1997 Nov 27 11:40 frame-0000.png
+-rw-rw-r-- 1 tim tim 1998 Nov 27 11:40 frame-0001.png
