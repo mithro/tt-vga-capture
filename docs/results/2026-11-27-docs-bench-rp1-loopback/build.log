@@ -1,0 +1,72 @@
++ date -u
+Fri 27 Nov 01:02:40 UTC 2026
++ mkdir -p /home/pi/bench46
++ cd /home/pi/bench46
++ git clone https://github.com/mithro/vgacap
+Cloning into 'vgacap'...
+clone exit=0
++ echo 'clone exit=0'
++ git -C vgacap checkout ad7c418
+Note: switching to 'ad7c418'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at ad7c418 capture-rp1/how-to-build.md: how to get the checkout
+checkout exit=0
++ echo 'checkout exit=0'
++ git -C vgacap log -1 '--format=%H %s'
+ad7c418998792e4f146652c0ad3573183b668218 capture-rp1/how-to-build.md: how to get the checkout
++ cd vgacap
++ git init -q utils
+step1 exit=0
++ echo 'step1 exit=0'
++ git -C utils remote add origin https://github.com/raspberrypi/utils.git
+step2 exit=0
++ echo 'step2 exit=0'
++ git -C utils fetch -q --depth 1 origin 05e8808e84ed99b168b14a4025dddb9118fa1c17
+step3 exit=0
++ echo 'step3 exit=0'
++ git -C utils checkout -q FETCH_HEAD
+step4 exit=0
++ echo 'step4 exit=0'
++ git -C utils rev-parse HEAD
+05e8808e84ed99b168b14a4025dddb9118fa1c17
++ make -C capture-rp1 PIOLIB=/home/pi/bench46/vgacap/utils/piolib
+make: Entering directory '/home/pi/bench46/vgacap/capture-rp1'
+cc -O2 -Wall -Wextra -DLIBRARY_BUILD=1 -I/home/pi/bench46/vgacap/utils/piolib/include -I../include \
+    -o vgacap-rp1 vgacap_rp1.c ../src/stream/writer.c \
+    /home/pi/bench46/vgacap/utils/piolib/piolib.c /home/pi/bench46/vgacap/utils/piolib/library_piochips.c /home/pi/bench46/vgacap/utils/piolib/pio_rp1.c -lpthread
+cc -O2 -Wall -Wextra -I/home/pi/bench46/vgacap/utils/piolib/include -o vgacap-rp1-programs print_programs.c
+make: Leaving directory '/home/pi/bench46/vgacap/capture-rp1'
+step5 exit=0
++ echo 'step5 exit=0'
++ ls -l capture-rp1/vgacap-rp1 capture-rp1/vgacap-rp1-programs
+-rwxr-xr-x 1 pi pi 44612 Nov 27 01:02 capture-rp1/vgacap-rp1
+-rwxr-xr-x 1 pi pi  7964 Nov 27 01:02 capture-rp1/vgacap-rp1-programs
++ ./capture-rp1/vgacap-rp1
+check1 exit=2
+usage: vgacap-rp1 --out F --samples N [--data-base 4] [--clk 12] [--edge rising|falling] [--clock-hz HZ [--unproven-rate]]
+                  [--desc TEXT] [--gen FILE | --gen-counter] [--gen-div D] [--gen-delay K<=15]
++ echo 'check1 exit=2'
++ ./capture-rp1/vgacap-rp1-programs 12 rising 3
+sampler 200c 208c 4008
+generator 6308 b342
+counter a301 1340
+check2 exit=0
++ echo 'check2 exit=0'
++ date -u
+Fri 27 Nov 01:02:45 UTC 2026
+ssh exit=0

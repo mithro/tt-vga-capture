@@ -1,0 +1,57 @@
++ date -u
+Fri 27 Nov 01:03:18 UTC 2026
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 4 no
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 5 no
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 6 no
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 7 no
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 8 no
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 9 no
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 10 no
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 11 no
++ for n in 4 5 6 7 8 9 10 11 12
++ sudo pinctrl set 12 no
++ pinctrl get 4-12
+ 4: no    pu | -- // GPIO4 = none
+ 5: no    pu | -- // GPIO5 = none
+ 6: no    pu | -- // GPIO6 = none
+ 7: no    pu | -- // GPIO7 = none
+ 8: no    pu | -- // GPIO8 = none
+ 9: no    pd | -- // GPIO9 = none
+10: no    pd | -- // GPIO10 = none
+11: no    pd | -- // GPIO11 = none
+12: no    pd | -- // GPIO12 = none
++ rm -rf /home/pi/bench46
++ ls -la /home/pi
+total 24
+drwx------ 1 pi   pi     60 Nov 27 01:03 .
+drwxr-xr-x 1 root root   60 Oct 15 17:26 ..
+-rw-r--r-- 1 pi   pi    220 Jul  4  2024 .bash_logout
+-rw-r--r-- 1 pi   pi   3541 Oct 15 17:27 .bashrc
+drwxr-xr-x 2 pi   pi   4096 Oct 15 17:30 Downloads
+-rw-r--r-- 1 pi   pi    807 Jul  4  2024 .profile
+drwx------ 2 pi   pi   4096 Nov 26 23:05 .ssh
+-rw-r--r-- 1 pi   pi      0 Nov 27 01:02 .sudo_as_admin_successful
+drwxr-xr-x 2 pi   pi   4096 Oct 15 17:30 Uploads
++ ps -u pi -o pid,etime,args
+  PID     ELAPSED COMMAND
+ 1004    01:18:45 /usr/bin/python3 -m fpgas_tt --device /dev/ttboard
+ 2923       00:38 /lib/systemd/systemd --user
+ 2924       00:38 (sd-pam)
+ 3053       00:00 sshd: pi@notty
+ 3054       00:00 bash -s
+ 3077       00:00 ps -u pi -o pid,etime,args
++ sudo fuser -v /dev/pio0
++ w
+ 01:03:18 up  1:19,  0 user,  load average: 0.19, 0.05, 0.02
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
++ date -u
+Fri 27 Nov 01:03:18 UTC 2026
+ssh exit=0

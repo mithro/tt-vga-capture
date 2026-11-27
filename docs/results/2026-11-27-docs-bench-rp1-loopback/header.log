@@ -1,0 +1,37 @@
+ls: cannot access '/dev/ttboard': No such file or directory
+/dev/serial/by-id/:
+total 0
+lrwxrwxrwx 1 root root 13 Nov 26 23:44 usb-1a86_USB_Serial-if00-port0 -> ../../ttyUSB0
+{"board": {"present": false, "device": "/dev/ttboard", "vid_pid": null, "usb_serial": null, "chip": null}, "kind": "unknown", "kind_reason": "no USB device with a serial number is behind /dev/ttboard", "clients": 0, "idle_display": {"design": "/usr/share/fpgas-online/tt-fpga/bitstreams/tt-display-tt-fpga/tt_fpga_platform.bin", "state": "board not present"}, "safe_start": {"state": "board not present"}, "uptime_s": 4668, "version": "0.1.0"}
+=== header check 2026-11-27T01:02:21Z
+--- before
+ 4: no    pu | -- // GPIO4 = none
+ 5: no    pu | -- // GPIO5 = none
+ 6: no    pu | -- // GPIO6 = none
+ 7: no    pu | -- // GPIO7 = none
+ 8: no    pu | -- // GPIO8 = none
+ 9: no    pd | -- // GPIO9 = none
+10: no    pd | -- // GPIO10 = none
+11: no    pd | -- // GPIO11 = none
+12: no    pd | -- // GPIO12 = none
+gpio 4:  4: ip    pu | hi // GPIO4 = input | lev=1 want=1
+gpio 5:  5: ip    pu | hi // GPIO5 = input | lev=1 want=1
+gpio 6:  6: ip    pu | hi // GPIO6 = input | lev=1 want=1
+gpio 7:  7: ip    pu | hi // GPIO7 = input | lev=1 want=1
+gpio 8:  8: ip    pu | hi // GPIO8 = input | lev=1 want=1
+gpio 9:  9: ip    pd | lo // GPIO9 = input | lev=0 want=0
+gpio 10: 10: ip    pd | lo // GPIO10 = input | lev=0 want=0
+gpio 11: 11: ip    pd | lo // GPIO11 = input | lev=0 want=0
+gpio 12: 12: ip    pd | lo // GPIO12 = input | lev=0 want=0
+--- restore
+ 4: no    pu | -- // GPIO4 = none
+ 5: no    pu | -- // GPIO5 = none
+ 6: no    pu | -- // GPIO6 = none
+ 7: no    pu | -- // GPIO7 = none
+ 8: no    pu | -- // GPIO8 = none
+ 9: no    pd | -- // GPIO9 = none
+10: no    pd | -- // GPIO10 = none
+11: no    pd | -- // GPIO11 = none
+12: no    pd | -- // GPIO12 = none
+HEADER_RESULT fail=0
+ssh exit=0
