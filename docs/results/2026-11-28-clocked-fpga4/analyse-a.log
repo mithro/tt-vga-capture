@@ -1,0 +1,29 @@
+== a_n4.vgacap: mode 1 clock_hz 500000 samples 4 uo_out sha256 163e20524a7528de
+   TIME clocked clocks=4 reset_clocks=1 pio_div=14 cycles_per_clock=19
+   TIME samples=4 stalled_buffers=0 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8
+   first samples: [153, 170, 170, 170]; reference clocks 0..15: [153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 170, 170, 170, 153, 153, 153]
+== a_n8.vgacap: mode 1 clock_hz 500000 samples 8 uo_out sha256 d30a2af241d15f30
+   TIME clocked clocks=8 reset_clocks=1 pio_div=14 cycles_per_clock=19
+   TIME samples=8 stalled_buffers=0 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=7
+   first samples: [153, 170, 170, 170, 153, 153, 153, 153]; reference clocks 0..15: [153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 170, 170, 170, 153, 153, 153]
+== a_n12.vgacap: mode 1 clock_hz 500000 samples 12 uo_out sha256 d09de6efead5caab
+   TIME clocked clocks=12 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=12 stalled_buffers=0 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=7
+   first samples: [153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 170, 170]; reference clocks 0..15: [153, 153, 153, 153, 153, 153, 153, 153, 153, 153, 170, 170, 170, 153, 153, 153]
+== a_big0.vgacap: mode 1 clock_hz 500000 samples 4194304 uo_out sha256 4248775f5bae2d2f
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8498
+   placed at reference clock 0 (1 tied, earliest 0); exact: 4194304 compared, first diff None, diff clocks 0
+== a_big1.vgacap: mode 1 clock_hz 500000 samples 4194304 uo_out sha256 4248775f5bae2d2f
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8502
+   placed at reference clock 0 (1 tied, earliest 0); exact: 4194304 compared, first diff None, diff clocks 0
+== a_big2.vgacap: mode 1 clock_hz 500000 samples 4194304 uo_out sha256 4248775f5bae2d2f
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8501
+   placed at reference clock 0 (1 tied, earliest 0); exact: 4194304 compared, first diff None, diff clocks 0
+== identical sample sets:
+   163e20524a7528de: a_n4.vgacap
+   d30a2af241d15f30: a_n8.vgacap
+   d09de6efead5caab: a_n12.vgacap
+   4248775f5bae2d2f: a_big0.vgacap, a_big1.vgacap, a_big2.vgacap

@@ -1,0 +1,18 @@
+== c_max.vgacap: mode 1 clock_hz 9500000 samples 4194304 uo_out sha256 4248775f5bae2d2f
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=1 cycles_per_clock=14
+   TIME samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=5080
+   placed at reference clock 0 (1 tied, earliest 0); exact: 4194304 compared, first diff None, diff clocks 0
+== c_bridge.vgacap: mode 1 clock_hz 500000 samples 4194304 uo_out sha256 4248775f5bae2d2f
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8490
+   placed at reference clock 0 (1 tied, earliest 0); exact: 4194304 compared, first diff None, diff clocks 0
+== c_killed.vgacap: mode 1 clock_hz 500000 samples 2834432 uo_out sha256 9b127a0c8a8114d1
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   placed at reference clock 0 (1 tied, earliest 0); exact: 2834432 compared, first diff None, diff clocks 0
+== a_big0.vgacap: mode 1 clock_hz 500000 samples 4194304 uo_out sha256 4248775f5bae2d2f
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8498
+   placed at reference clock 0 (1 tied, earliest 0); exact: 4194304 compared, first diff None, diff clocks 0
+== identical sample sets:
+   4248775f5bae2d2f: c_max.vgacap, c_bridge.vgacap, a_big0.vgacap
+   9b127a0c8a8114d1: c_killed.vgacap

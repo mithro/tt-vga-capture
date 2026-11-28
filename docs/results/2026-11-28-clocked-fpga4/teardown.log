@@ -1,0 +1,10 @@
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 rm -rf tthfv-4e; ls -A ~
+.bash_logout
+.bashrc
+.cache
+Downloads
+.profile
+.ssh
+.sudo_as_admin_successful
+Uploads
+[exit 0]
