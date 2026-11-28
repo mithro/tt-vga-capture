@@ -142,7 +142,7 @@ The 40 ns default before this came from the clock-exact design note, which is no
 | bridge | WebSocket | 500,000 Hz | 14 | 8 | 7 | 4,194,304 | 4,194,304 | 0 |
 
 - **max:** the batch read `machine.freq()`, which gave 133,000,000. It asked for ceil(133,000,000 / 14) Hz, the fastest clock with an 80 ns read. The run took 5.08 s on the board, with `overruns=0`. Its samples are identical to batch a's.
-- **killed:** the host was sent `SIGKILL` 12 s after the capture started. The load takes about 5 s, so streaming had begun. After a 40 s wait the board's state equalled the state before. The file has the opening `TIME` record and no closing one ([`analyse-c.log`](analyse-c.log) lists a single `TIME` line for it). Every sample in it is exact.
+- **killed:** the host was sent `SIGKILL` 12 s after the capture started. A held load of this bitstream took 4.86 s in [mithro/vgacap#89](https://github.com/mithro/vgacap/pull/89)'s hardware runs, so streaming had begun. After a 40 s wait the board's state equalled the state before. The file has the opening `TIME` record and no closing one ([`analyse-c.log`](analyse-c.log) lists a single `TIME` line for it). Every sample in it is exact.
 - **bridge:** the bridge was running, and the capture went through `ws://127.0.0.1:8765/serial` on the Pi. `overruns=0`, and the samples are identical to batch a's.
 
 ### kk: the design from vgacap#73 ([`batch-kk.log`](batch-kk.log), [`analyse-kk.log`](analyse-kk.log), [`kkruns.log`](kkruns.log), [`kkmodels.log`](kkmodels.log))
@@ -183,7 +183,6 @@ The 40 ns default before this came from the clock-exact design note, which is no
 ## Files
 
 The `.vgacap` capture files, about 45 MB in all, are not in this repository. Without them the scripts here can't be re-run; ask on [mithro/vgacap#95](https://github.com/mithro/vgacap/pull/95) for a copy.
-
 
 | File | What |
 |---|---|

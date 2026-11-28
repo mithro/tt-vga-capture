@@ -93,6 +93,7 @@ def killed_host(out):
     """Start a 4 M-clock run, SIGKILL the host 12 s after start (about 5 s of load, then streaming), wait 40 s."""
     args = [PY, "ttcap_main.py", "capture", f"serial:{PORT}", "--profile", "rp2350", "--mode", "clocked",
             "--bitstream", BIN, "--clocks", BIG, "--clock-hz", RATE, "--out", out]
+    # this print is kept as it ran, to match batch-c.log; the kill is 12 s after start (below)
     print("$", " ".join(str(a) for a in args), "(SIGKILL after the load + 3 s)", flush=True)
     p = subprocess.Popen([str(a) for a in args])
     time.sleep(12)  # the load takes about 5 s; then 3+ s of streaming
