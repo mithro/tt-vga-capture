@@ -1,0 +1,92 @@
+[
+ {
+  "run": "n4",
+  "exit": 0,
+  "want_exit": 0,
+  "state": [
+   "['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']",
+   "False",
+   "2",
+   "n/a",
+   "1"
+  ],
+  "same": true,
+  "rst_n_released": true,
+  "ok": true
+ },
+ {
+  "run": "n8",
+  "exit": 0,
+  "want_exit": 0,
+  "state": [
+   "['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']",
+   "False",
+   "2",
+   "n/a",
+   "1"
+  ],
+  "same": true,
+  "rst_n_released": true,
+  "ok": true
+ },
+ {
+  "run": "n12",
+  "exit": 0,
+  "want_exit": 0,
+  "state": [
+   "['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']",
+   "False",
+   "2",
+   "n/a",
+   "1"
+  ],
+  "same": true,
+  "rst_n_released": true,
+  "ok": true
+ },
+ {
+  "run": "big0",
+  "exit": 0,
+  "want_exit": 0,
+  "state": [
+   "['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']",
+   "False",
+   "2",
+   "n/a",
+   "1"
+  ],
+  "same": true,
+  "rst_n_released": true,
+  "ok": true
+ },
+ {
+  "run": "big1",
+  "exit": 0,
+  "want_exit": 0,
+  "state": [
+   "['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']",
+   "False",
+   "2",
+   "n/a",
+   "1"
+  ],
+  "same": true,
+  "rst_n_released": true,
+  "ok": true
+ },
+ {
+  "run": "big2",
+  "exit": 0,
+  "want_exit": 0,
+  "state": [
+   "['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']",
+   "False",
+   "2",
+   "n/a",
+   "1"
+  ],
+  "same": true,
+  "rst_n_released": true,
+  "ok": true
+ }
+]

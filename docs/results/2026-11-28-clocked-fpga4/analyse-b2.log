@@ -1,0 +1,69 @@
+== b2_h00.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 014098263572c644
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19 below_floor=1
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=494
+   no match; best partial {'clock': 12799, 'anchor_clocks': 4096, 'diff_clocks': 11, 'first_diff_clock': 12799, 'reference': 255, 'capture': 0, 'bits': 255, 'first_diff_bit': 0}
+== b2_h01.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 014098263572c644
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19 below_floor=1
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=492
+   no match; best partial {'clock': 12799, 'anchor_clocks': 4096, 'diff_clocks': 11, 'first_diff_clock': 12799, 'reference': 255, 'capture': 0, 'bits': 255, 'first_diff_bit': 0}
+== b2_h02.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 014098263572c644
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19 below_floor=1
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=493
+   no match; best partial {'clock': 12799, 'anchor_clocks': 4096, 'diff_clocks': 11, 'first_diff_clock': 12799, 'reference': 255, 'capture': 0, 'bits': 255, 'first_diff_bit': 0}
+== b2_h03.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 014098263572c644
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19 below_floor=1
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=492
+   no match; best partial {'clock': 12799, 'anchor_clocks': 4096, 'diff_clocks': 11, 'first_diff_clock': 12799, 'reference': 255, 'capture': 0, 'bits': 255, 'first_diff_bit': 0}
+== b2_h04.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 014098263572c644
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19 below_floor=1
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=494
+   no match; best partial {'clock': 12799, 'anchor_clocks': 4096, 'diff_clocks': 11, 'first_diff_clock': 12799, 'reference': 255, 'capture': 0, 'bits': 255, 'first_diff_bit': 0}
+== b2_h05.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 566cacfaf1cc5418
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=494
+   no match; best partial {'clock': 12799, 'anchor_clocks': 4096, 'diff_clocks': 21, 'first_diff_clock': 12799, 'reference': 255, 'capture': 152, 'bits': 103, 'first_diff_bit': 0}
+== b2_h06.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 9aa4e8cf6b4d49d9
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=494
+   no match; best partial {'clock': 0, 'anchor_clocks': 4096, 'diff_clocks': 324, 'first_diff_clock': 10, 'reference': 170, 'capture': 171, 'bits': 1, 'first_diff_bit': 0}
+== b2_h07.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=492
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b2_h08.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=490
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b2_h09.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=490
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b2_h10.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=493
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b2_h11.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=494
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b2_h12.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=492
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b2_h13.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=492
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b2_h14.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=491
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b2_h15.vgacap: mode 1 clock_hz 7000000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=1 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=492
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== identical sample sets:
+   014098263572c644: b2_h00.vgacap, b2_h01.vgacap, b2_h02.vgacap, b2_h03.vgacap, b2_h04.vgacap
+   566cacfaf1cc5418: b2_h05.vgacap
+   9aa4e8cf6b4d49d9: b2_h06.vgacap
+   f85406bff1bf10a0: b2_h07.vgacap, b2_h08.vgacap, b2_h09.vgacap, b2_h10.vgacap, b2_h11.vgacap, b2_h12.vgacap, b2_h13.vgacap, b2_h14.vgacap, b2_h15.vgacap

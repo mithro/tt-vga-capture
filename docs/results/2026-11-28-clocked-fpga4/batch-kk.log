@@ -1,0 +1,91 @@
+11:24:43 start
+$ git -C TT/vgacap-tthfv/.worktrees/clocked archive --format=tar --prefix=vgacap/ -o HOST/vgacap-python.tar eb4ccb8 python
+[exit 0]
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 ls -A ~; test ! -e tthfv-4e && mkdir tthfv-4e
+.bash_logout
+.bashrc
+.cache
+Downloads
+.profile
+.ssh
+.sudo_as_admin_successful
+Uploads
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 HOST/vgacap-python.tar fpgas-welland-pi-sw2-p35:tthfv-4e/vgacap-python.tar
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 BITSTREAMS/ttsky26c/tt_um_vga_ca/ttsky26c_vga_ca-c388675321d9.bin fpgas-welland-pi-sw2-p35:tthfv-4e/va.bin
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 BITSTREAMS/ttsky26b/tt_um_KK_VGA01/ttsky26b_kk_vga01-7354ab9e6292.bin fpgas-welland-pi-sw2-p35:tthfv-4e/kk.bin
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 TT/tt-harness-fpga-vga/scripts/hardware_library/pi_helper.py fpgas-welland-pi-sw2-p35:tthfv-4e/pi_helper.py
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 HOST/clocked_batch.py fpgas-welland-pi-sw2-p35:tthfv-4e/clocked_batch.py
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 TT/tmp/vgaharness/d4/hw/ttcap_main.py fpgas-welland-pi-sw2-p35:tthfv-4e/ttcap_main.py
+[exit 0]
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 cd tthfv-4e && tar xf vgacap-python.tar && rm vgacap-python.tar && uv venv -q .venv && uv pip install -q --python .venv/bin/python pyserial websockets && ls -A
+clocked_batch.py
+kk.bin
+pi_helper.py
+ttcap_main.py
+va.bin
+.venv
+vgacap
+[exit 0]
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 cd tthfv-4e && PYTHONPATH=vgacap/python PYTHONDONTWRITEBYTECODE=1 .venv/bin/python clocked_batch.py kk
+$ /home/pi/tthfv-4e/.venv/bin/python pi_helper.py stop-if-idle
+clients 0
+clients 0
+clients 0
+state before: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1']
+$ /home/pi/tthfv-4e/.venv/bin/python ttcap_main.py capture serial:/dev/ttboard --profile rp2350 --mode clocked --bitstream kk.bin --clocks 4194304 --clock-hz 500000 --out kk_500k.vgacap
+profile=rp2350-dbv3 bitstream=kk.bin clocks=4194304 reset_clocks=10 clock_hz=500000 pio_div=14 high=8 low=7
+bytes=4197589 samples=4194304 chunks=258 seconds=8.806 overruns=0 dropped=0 rxstall=0 samples_per_s=476283 mem_free=419664 status=ok board_samples=4194304 stalled_buffers=255
+  board: clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+  board: samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8549
+wrote kk_500k.vgacap
+[kk_500k.vgacap: exit 0 in 14.8 s]
+post-state kk500k: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1'] same=True rst_n_released=True ok=True
+$ /home/pi/tthfv-4e/.venv/bin/python ttcap_main.py capture serial:/dev/ttboard --profile rp2350 --mode clocked --bitstream kk.bin --clocks 4194304 --clock-hz 9500000 --out kk_max.vgacap
+profile=rp2350-dbv3 bitstream=kk.bin clocks=4194304 reset_clocks=10 clock_hz=9500000 pio_div=1 high=10 low=0
+bytes=4197588 samples=4194304 chunks=258 seconds=5.154 overruns=0 dropped=0 rxstall=0 samples_per_s=813749 mem_free=419344 status=ok board_samples=4194304 stalled_buffers=255
+  board: clocked clocks=4194304 reset_clocks=10 pio_div=1 cycles_per_clock=14
+  board: samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=4895
+wrote kk_max.vgacap
+[kk_max.vgacap: exit 0 in 11.1 s]
+post-state kkmax: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1'] same=True rst_n_released=True ok=True
+restart_sdk ok=True
+ in ASIC_MANUAL_INPUTS, auto-clocking @ 10 FPGA project 'FPGA:tt_um_factory_test'>
+
+boot done: 2067
+tt.sdk_revision=d485c7a9986336024e35d790568fca33be1c5665
+tt.sdk_version=3.1.1
+MicroPython 970468103d on 2026-09-08; TinyTapeout RP2350B Core with RP2350
+Type "help()" for more information.
+>>> 
+$ sudo systemctl start fpgas-tt
+$ /home/pi/tthfv-4e/.venv/bin/python pi_helper.py wait-loaded 170
+loaded
+start exit 0, wait-loaded exit 0
+RESULT PASS
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 fpgas-welland-pi-sw2-p35:tthfv-4e/results_kk.json HOST/results_kk.json
+[exit 0]
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 cd tthfv-4e && ls -la *.vgacap
+-rw-r--r-- 1 pi pi 4197800 Nov 28 00:55 kk_500k.vgacap
+-rw-r--r-- 1 pi pi 4197799 Nov 28 00:55 kk_max.vgacap
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 fpgas-welland-pi-sw2-p35:tthfv-4e/kk_*.vgacap HOST/
+[exit 0]
+RUNNER EXIT 0
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 rm -rf tthfv-4e; ls -A ~
+.bash_logout
+.bashrc
+.cache
+Downloads
+.profile
+.ssh
+.sudo_as_admin_successful
+Uploads
+[exit 0]
+TEARDOWN EXIT 0

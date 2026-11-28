@@ -1,0 +1,32 @@
+[
+ {
+  "run": "kk500k",
+  "exit": 0,
+  "want_exit": 0,
+  "state": [
+   "['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']",
+   "False",
+   "2",
+   "n/a",
+   "1"
+  ],
+  "same": true,
+  "rst_n_released": true,
+  "ok": true
+ },
+ {
+  "run": "kkmax",
+  "exit": 0,
+  "want_exit": 0,
+  "state": [
+   "['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']",
+   "False",
+   "2",
+   "n/a",
+   "1"
+  ],
+  "same": true,
+  "rst_n_released": true,
+  "ok": true
+ }
+]

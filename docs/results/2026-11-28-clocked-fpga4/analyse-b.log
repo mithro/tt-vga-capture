@@ -1,0 +1,66 @@
+== b_h00.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=834
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h01.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=824
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h02.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=826
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h03.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=826
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h04.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=824
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h05.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=823
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h06.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=824
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h07.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=825
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h08.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=826
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h09.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=823
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h10.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=824
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h11.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=825
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h12.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=826
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h13.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=826
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h14.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=823
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== b_h15.vgacap: mode 1 clock_hz 500000 samples 400000 uo_out sha256 f85406bff1bf10a0
+   TIME clocked clocks=400000 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=400000 stalled_buffers=24 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=824
+   placed at reference clock 0 (1 tied, earliest 0); exact: 400000 compared, first diff None, diff clocks 0
+== identical sample sets:
+   f85406bff1bf10a0: b_h00.vgacap, b_h01.vgacap, b_h02.vgacap, b_h03.vgacap, b_h04.vgacap, b_h05.vgacap, b_h06.vgacap, b_h07.vgacap, b_h08.vgacap, b_h09.vgacap, b_h10.vgacap, b_h11.vgacap, b_h12.vgacap, b_h13.vgacap, b_h14.vgacap, b_h15.vgacap

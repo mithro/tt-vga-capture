@@ -1,0 +1,12 @@
+frame 6: 14 clocks, lines 401-407
+   line 401 col 330 len 1 ['0x88>0xbb']
+   line 401 col 337 len 1 ['0xfb>0xf8']
+frame 7: 14 clocks, lines 401-407
+   line 401 col 331 len 1 ['0x88>0xbb']
+   line 401 col 338 len 1 ['0xfb>0xf8']
+frame 8: 28 clocks, lines 401-407
+   line 401 col 331 len 2 ['0x88>0xbb', '0x88>0xbb']
+   line 401 col 338 len 2 ['0xfb>0xf8', '0xfb>0xf8']
+frame 9: 28 clocks, lines 401-407
+   line 401 col 332 len 2 ['0x88>0xbb', '0x88>0xbb']
+   line 401 col 339 len 2 ['0xfb>0xf8', '0xfb>0xf8']

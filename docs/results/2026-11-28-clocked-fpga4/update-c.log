@@ -1,0 +1,56 @@
+$ git -C TT/vgacap-tthfv/.worktrees/clocked archive --format=tar --prefix=vgacap/ -o HOST/vgacap-python.tar eb4ccb8 python
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 HOST/vgacap-python.tar fpgas-welland-pi-sw2-p35:tthfv-4e/vgacap-python.tar
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 HOST/clocked_batch.py fpgas-welland-pi-sw2-p35:tthfv-4e/clocked_batch.py
+[exit 0]
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 cd tthfv-4e && rm -rf vgacap && tar xf vgacap-python.tar && rm vgacap-python.tar && ls -A && grep -n '^CLOCKED_SAMPLE_NS' vgacap/python/ttcap/capture.py
+a_big0.vgacap
+a_big1.vgacap
+a_big2.vgacap
+a_n12.vgacap
+a_n4.vgacap
+a_n8.vgacap
+b2_h00.vgacap
+b2_h01.vgacap
+b2_h02.vgacap
+b2_h03.vgacap
+b2_h04.vgacap
+b2_h05.vgacap
+b2_h06.vgacap
+b2_h07.vgacap
+b2_h08.vgacap
+b2_h09.vgacap
+b2_h10.vgacap
+b2_h11.vgacap
+b2_h12.vgacap
+b2_h13.vgacap
+b2_h14.vgacap
+b2_h15.vgacap
+b_h00.vgacap
+b_h01.vgacap
+b_h02.vgacap
+b_h03.vgacap
+b_h04.vgacap
+b_h05.vgacap
+b_h06.vgacap
+b_h07.vgacap
+b_h08.vgacap
+b_h09.vgacap
+b_h10.vgacap
+b_h11.vgacap
+b_h12.vgacap
+b_h13.vgacap
+b_h14.vgacap
+b_h15.vgacap
+clocked_batch.py
+pi_helper.py
+results_a.json
+results_b2.json
+results_b.json
+ttcap_main.py
+va.bin
+.venv
+vgacap
+118:CLOCKED_SAMPLE_NS = 80
+[exit 0]

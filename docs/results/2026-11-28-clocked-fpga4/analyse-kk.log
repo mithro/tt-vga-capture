@@ -1,0 +1,10 @@
+== kk_500k.vgacap: mode 1 clock_hz 500000 samples 4194304 uo_out sha256 09239a7e5ed4cb43
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+   TIME samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8549
+   placed at reference clock 0 (1 tied, earliest 0); mismatch: 4194304 compared, first diff 2841130, diff clocks 84
+== kk_max.vgacap: mode 1 clock_hz 9500000 samples 4194304 uo_out sha256 09239a7e5ed4cb43
+   TIME clocked clocks=4194304 reset_clocks=10 pio_div=1 cycles_per_clock=14
+   TIME samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=4895
+   placed at reference clock 0 (1 tied, earliest 0); mismatch: 4194304 compared, first diff 2841130, diff clocks 84
+== identical sample sets:
+   09239a7e5ed4cb43: kk_500k.vgacap, kk_max.vgacap

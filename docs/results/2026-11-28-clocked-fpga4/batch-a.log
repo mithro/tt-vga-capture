@@ -1,0 +1,82 @@
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 cd tthfv-4e && PYTHONPATH=vgacap/python PYTHONDONTWRITEBYTECODE=1 .venv/bin/python clocked_batch.py a
+$ /home/pi/tthfv-4e/.venv/bin/python pi_helper.py stop-if-idle
+clients 0
+clients 0
+clients 0
+state before: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1']
+$ /home/pi/tthfv-4e/.venv/bin/python ttcap_main.py capture serial:/dev/ttboard --profile rp2350 --mode clocked --bitstream va.bin --clocks 4 --clock-hz 500000 --out a_n4.vgacap --reset-clocks 1
+profile=rp2350-dbv3 bitstream=va.bin clocks=4 reset_clocks=1 clock_hz=500000 pio_div=14 high=8 low=7
+bytes=211 samples=4 chunks=3 seconds=0.262 overruns=0 dropped=0 rxstall=0 samples_per_s=15 mem_free=419664 status=ok board_samples=4 stalled_buffers=0
+  board: clocked clocks=4 reset_clocks=1 pio_div=14 cycles_per_clock=19
+  board: samples=4 stalled_buffers=0 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8
+wrote a_n4.vgacap
+[a_n4.vgacap: exit 0 in 6.4 s]
+post-state n4: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1'] same=True rst_n_released=True ok=True
+$ /home/pi/tthfv-4e/.venv/bin/python ttcap_main.py capture serial:/dev/ttboard --profile rp2350 --mode clocked --bitstream va.bin --clocks 8 --clock-hz 500000 --out a_n8.vgacap --reset-clocks 1
+profile=rp2350-dbv3 bitstream=va.bin clocks=8 reset_clocks=1 clock_hz=500000 pio_div=14 high=8 low=7
+bytes=215 samples=8 chunks=3 seconds=0.262 overruns=0 dropped=0 rxstall=0 samples_per_s=31 mem_free=419248 status=ok board_samples=8 stalled_buffers=0
+  board: clocked clocks=8 reset_clocks=1 pio_div=14 cycles_per_clock=19
+  board: samples=8 stalled_buffers=0 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=7
+wrote a_n8.vgacap
+[a_n8.vgacap: exit 0 in 6.2 s]
+post-state n8: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1'] same=True rst_n_released=True ok=True
+$ /home/pi/tthfv-4e/.venv/bin/python ttcap_main.py capture serial:/dev/ttboard --profile rp2350 --mode clocked --bitstream va.bin --clocks 12 --clock-hz 500000 --out a_n12.vgacap --reset-clocks 10
+profile=rp2350-dbv3 bitstream=va.bin clocks=12 reset_clocks=10 clock_hz=500000 pio_div=14 high=8 low=7
+bytes=222 samples=12 chunks=3 seconds=0.265 overruns=0 dropped=0 rxstall=0 samples_per_s=45 mem_free=419248 status=ok board_samples=12 stalled_buffers=0
+  board: clocked clocks=12 reset_clocks=10 pio_div=14 cycles_per_clock=19
+  board: samples=12 stalled_buffers=0 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=7
+wrote a_n12.vgacap
+[a_n12.vgacap: exit 0 in 6.2 s]
+post-state n12: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1'] same=True rst_n_released=True ok=True
+$ /home/pi/tthfv-4e/.venv/bin/python ttcap_main.py capture serial:/dev/ttboard --profile rp2350 --mode clocked --bitstream va.bin --clocks 4194304 --clock-hz 500000 --out a_big0.vgacap
+profile=rp2350-dbv3 bitstream=va.bin clocks=4194304 reset_clocks=10 clock_hz=500000 pio_div=14 high=8 low=7
+bytes=4197589 samples=4194304 chunks=258 seconds=8.757 overruns=0 dropped=0 rxstall=0 samples_per_s=478966 mem_free=419248 status=ok board_samples=4194304 stalled_buffers=255
+  board: clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+  board: samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8498
+wrote a_big0.vgacap
+[a_big0.vgacap: exit 0 in 14.7 s]
+post-state big0: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1'] same=True rst_n_released=True ok=True
+$ /home/pi/tthfv-4e/.venv/bin/python ttcap_main.py capture serial:/dev/ttboard --profile rp2350 --mode clocked --bitstream va.bin --clocks 4194304 --clock-hz 500000 --out a_big1.vgacap
+profile=rp2350-dbv3 bitstream=va.bin clocks=4194304 reset_clocks=10 clock_hz=500000 pio_div=14 high=8 low=7
+bytes=4197589 samples=4194304 chunks=258 seconds=8.763 overruns=0 dropped=0 rxstall=0 samples_per_s=478618 mem_free=419248 status=ok board_samples=4194304 stalled_buffers=255
+  board: clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+  board: samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8502
+wrote a_big1.vgacap
+[a_big1.vgacap: exit 0 in 14.7 s]
+post-state big1: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1'] same=True rst_n_released=True ok=True
+$ /home/pi/tthfv-4e/.venv/bin/python ttcap_main.py capture serial:/dev/ttboard --profile rp2350 --mode clocked --bitstream va.bin --clocks 4194304 --clock-hz 500000 --out a_big2.vgacap
+profile=rp2350-dbv3 bitstream=va.bin clocks=4194304 reset_clocks=10 clock_hz=500000 pio_div=14 high=8 low=7
+bytes=4197589 samples=4194304 chunks=258 seconds=8.754 overruns=0 dropped=0 rxstall=0 samples_per_s=479122 mem_free=419248 status=ok board_samples=4194304 stalled_buffers=255
+  board: clocked clocks=4194304 reset_clocks=10 pio_div=14 cycles_per_clock=19
+  board: samples=4194304 stalled_buffers=255 overruns=0 status=ok sysclk_hz=133000000 elapsed_ms=8501
+wrote a_big2.vgacap
+[a_big2.vgacap: exit 0 in 14.9 s]
+post-state big2: ["['VERSION', 'bitstreams', 'boot.log', 'config.ini', 'examples', 'main.py', 'shuttles']", 'False', '2', 'n/a', '1'] same=True rst_n_released=True ok=True
+restart_sdk ok=True
+ in ASIC_MANUAL_INPUTS, auto-clocking @ 10 FPGA project 'FPGA:tt_um_factory_test'>
+
+boot done: 2037
+tt.sdk_revision=d485c7a9986336024e35d790568fca33be1c5665
+tt.sdk_version=3.1.1
+MicroPython 970468103d on 2026-09-08; TinyTapeout RP2350B Core with RP2350
+Type "help()" for more information.
+>>> 
+$ sudo systemctl start fpgas-tt
+$ /home/pi/tthfv-4e/.venv/bin/python pi_helper.py wait-loaded 170
+loaded
+start exit 0, wait-loaded exit 0
+RESULT PASS
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 fpgas-welland-pi-sw2-p35:tthfv-4e/results_a.json HOST/results_a.json
+[exit 0]
+$ ssh -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 -o ServerAliveInterval=15 fpgas-welland-pi-sw2-p35 cd tthfv-4e && ls -la *.vgacap
+-rw-r--r-- 1 pi pi 4197800 Nov 27 23:39 a_big0.vgacap
+-rw-r--r-- 1 pi pi 4197800 Nov 27 23:39 a_big1.vgacap
+-rw-r--r-- 1 pi pi 4197800 Nov 27 23:40 a_big2.vgacap
+-rw-r--r-- 1 pi pi     428 Nov 27 23:39 a_n12.vgacap
+-rw-r--r-- 1 pi pi     415 Nov 27 23:39 a_n4.vgacap
+-rw-r--r-- 1 pi pi     419 Nov 27 23:39 a_n8.vgacap
+[exit 0]
+$ scp -q -F ssh_config -o BatchMode=yes -o ConnectTimeout=20 fpgas-welland-pi-sw2-p35:tthfv-4e/a_*.vgacap HOST/
+[exit 0]
+RUNNER EXIT 0
