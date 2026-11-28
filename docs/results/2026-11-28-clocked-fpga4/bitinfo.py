@@ -1,4 +1,7 @@
-"""Print each file's size in bytes and its sha256."""
+"""Print each file's size in bytes and its sha256.
+
+usage (in BITSTREAMS): python bitinfo.py FILE.bin ...
+"""
 import hashlib, sys
 from pathlib import Path
 for p in sys.argv[1:]:

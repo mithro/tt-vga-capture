@@ -142,7 +142,7 @@ The 40 ns default before this came from the clock-exact design note, which is no
 | bridge | WebSocket | 500,000 Hz | 14 | 8 | 7 | 4,194,304 | 4,194,304 | 0 |
 
 - **max:** the batch read `machine.freq()`, which gave 133,000,000. It asked for ceil(133,000,000 / 14) Hz, the fastest clock with an 80 ns read. The run took 5.08 s on the board, with `overruns=0`. Its samples are identical to batch a's.
-- **killed:** the host was sent `SIGKILL` 12 s after the capture started. A held load of this bitstream took 4.86 s in [mithro/vgacap#89](https://github.com/mithro/vgacap/pull/89)'s hardware runs, so streaming had begun. After a 40 s wait the board's state equalled the state before. The file has the opening `TIME` record and no closing one ([`analyse-c.log`](analyse-c.log) lists a single `TIME` line for it). Every sample in it is exact.
+- **killed:** the host was sent `SIGKILL` 12 s after the capture started. A held load of this bitstream took 4.86 s in [mithro/vgacap#89](https://github.com/mithro/vgacap/pull/89)'s hardware runs, so streaming had begun. After a 40 s wait the board's state equalled the state before. This run gave no `--ui-in`, and fpga-4's firmware has no manual-clock monitor, so it does not show those two being put back. When ttcap itself is killed, only the board's own clean-up runs: it releases reset and leaves the clock pin low on PIO1. The input mode and the monitor stay as the capture set them ([how-to](https://github.com/mithro/vgacap/blob/main/python/ttcap/how-to-capture-clocked.md)). The file has the opening `TIME` record and no closing one ([`analyse-c.log`](analyse-c.log) lists a single `TIME` line for it). Every sample in it is exact.
 - **bridge:** the bridge was running, and the capture went through `ws://127.0.0.1:8765/serial` on the Pi. `overruns=0`, and the samples are identical to batch a's.
 
 ### kk: the design from vgacap#73 ([`batch-kk.log`](batch-kk.log), [`analyse-kk.log`](analyse-kk.log), [`kkruns.log`](kkruns.log), [`kkmodels.log`](kkmodels.log))
@@ -171,6 +171,7 @@ The 40 ns default before this came from the clock-exact design note, which is no
   - **Stimulus:** `ui_in` 0 and `uio_in` 0xc0, for 6,000,000 clocks.
   - **RTL model:** the design's sources.
   - **Netlist model:** the FPGA build's own synthesised netlist (`out-default.json`), written as Verilog by Yosys 0.69+24 and simulated with the iCE40 `cells_sim.v`.
+  - The tool versions were read with `--version` from the harness's oss-cad-suite when this page was written, not from a kept log of the 2026-11-27 runs. The `cells_sim.v` step is from the investigation's script.
 - It is not explained. [mithro/vgacap#96](https://github.com/mithro/vgacap/issues/96) tracks it, with an unchecked hypothesis.
 
 ## Not measured
