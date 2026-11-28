@@ -129,7 +129,7 @@ So H 0-4 read exactly the previous clock's output. H 5 mostly reads the previous
 
 For this design on this board, the output starts changing after 37.6 ns of read time and is complete by 60.2 ns. In pin time, that is 22.6 to 45.1 ns. The last wholly wrong read is H 4, and the first exact one is H 7.
 
-At eb4ccb8 ([mithro/vgacap#95](https://github.com/mithro/vgacap/pull/95)), vgacap reads at least 80 ns after the edge by default. This floor was measured on `tt_um_vga_ca` only. `--clock-high` sets the read point per run, and [mithro/vgacap#97](https://github.com/mithro/vgacap/issues/97) asks for a value in ns.
+At eb4ccb8 ([mithro/vgacap#95](https://github.com/mithro/vgacap/pull/95)), vgacap reads at least 80 ns after the edge by default. After these runs, #95 moved the floor to pin time: the read must see the pin at least 65 ns after the edge. The pin is sampled 2 system clocks before the read. At 133 MHz this gives the same H 10 and the same 9.5 MHz fastest clock, so batch c's max run is still the default. This floor was measured on `tt_um_vga_ca` only. `--clock-high` sets the read point per run, and [mithro/vgacap#97](https://github.com/mithro/vgacap/issues/97) asks for a value in ns.
 
 The 40 ns default before this came from the clock-exact design note, which is not published, and not from a run. Its 25 ns basis was frame mode on `tt_um_vgacal_bars` on fpga-4, with a 25 MHz project clock at sysclk 100 MHz ([2026-11-24-frame-capture-fpga4](../2026-11-24-frame-capture-fpga4/README.md)). There, sampling at falling+0 was wrong, and falling+1 and rising+0 were exact; that page puts the change at about 25 ns. Frame mode times its sample from a different edge, so its figure is not directly comparable with these.
 
@@ -141,7 +141,7 @@ The 40 ns default before this came from the clock-exact design note, which is no
 | killed | serial | 500,000 Hz | 14 | 8 | 7 | 2,834,432 | 2,834,432 | 0 |
 | bridge | WebSocket | 500,000 Hz | 14 | 8 | 7 | 4,194,304 | 4,194,304 | 0 |
 
-- **max:** the batch read `machine.freq()`, which gave 133,000,000. It asked for ceil(133,000,000 / 14) Hz, the fastest clock with an 80 ns read. The run took 5.08 s on the board, with `overruns=0`. Its samples are identical to batch a's.
+- **max:** the batch read `machine.freq()`, which gave 133,000,000. It asked for ceil(133,000,000 / 14) Hz, the fastest clock with an 80 ns read at eb4ccb8. The run took 5.08 s on the board, with `overruns=0`. Its samples are identical to batch a's.
 - **killed:** the host was sent `SIGKILL` 12 s after the capture started. A held load of this bitstream took 4.86 s in [mithro/vgacap#89](https://github.com/mithro/vgacap/pull/89)'s hardware runs, so streaming had begun. After a 40 s wait the board's state equalled the state before. This run gave no `--ui-in`, and fpga-4's firmware has no manual-clock monitor, so it does not show those two being put back. When ttcap itself is killed, only the board's own clean-up runs: it releases reset and leaves the clock pin low on PIO1. The input mode and the monitor stay as the capture set them ([how-to](https://github.com/mithro/vgacap/blob/main/python/ttcap/how-to-capture-clocked.md)). The file has the opening `TIME` record and no closing one ([`analyse-c.log`](analyse-c.log) lists a single `TIME` line for it). Every sample in it is exact.
 - **bridge:** the bridge was running, and the capture went through `ws://127.0.0.1:8765/serial` on the Pi. `overruns=0`, and the samples are identical to batch a's.
 
