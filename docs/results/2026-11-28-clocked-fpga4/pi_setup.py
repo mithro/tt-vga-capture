@@ -1,6 +1,10 @@
-"""Set up ~/tthfv-4d on fpga-4's Pi (setup), run hold_run there (run), or remove it (teardown).
+"""Set up ~/tthfv-4e on fpga-4's Pi (setup), replace its vgacap tree (update), run a batch there (batch B),
+or remove it (teardown).
 
-usage: uv run --no-project python pi_setup.py setup|run|teardown   (logs to stdout; caller redirects)
+usage: uv run --no-project python pi_setup.py setup|update|teardown|batch B   (logs to stdout; caller redirects)
+
+This copy was tidied after the runs: the docstring, a dead run() for an earlier batch, and ttcap_main.py's path,
+which is now beside this file. COMMIT names eb4ccb8; batches a, b and b2 ran with it set to fc65c91.
 """
 
 import subprocess
@@ -37,7 +41,7 @@ def setup() -> int:
     rc = sh(SSH + ["ls -A ~; test ! -e tthfv-4e && mkdir tthfv-4e"])
     if rc:
         return rc
-    for src in (tar, BIN, KK, HELPER, HERE / "clocked_batch.py", HERE.parent.parent / "d4/hw/ttcap_main.py"):
+    for src in (tar, BIN, KK, HELPER, HERE / "clocked_batch.py", HERE / "ttcap_main.py"):
         dst = {BIN: "va.bin", KK: "kk.bin"}.get(src, src.name)
         if sh(SCP + [str(src), f"{ALIAS}:{D}/{dst}"]):
             return 1
@@ -57,14 +61,6 @@ def update() -> int:
     tar.unlink()
     return sh(SSH + [f"cd {D} && rm -rf vgacap && tar xf vgacap-python.tar && rm vgacap-python.tar && ls -A"
                      " && grep -n '^CLOCKED_SAMPLE_NS' vgacap/python/ttcap/capture.py"])
-
-
-def run() -> int:
-    rc = sh(SSH + [f"cd {D} && PYTHONPATH=vgacap/python PYTHONDONTWRITEBYTECODE=1 .venv/bin/python hold_run.py va.bin"],
-            900)
-    if sh(SSH + [f"test -s {D}/held.vgacap"]) == 0:
-        sh(SCP + [f"{ALIAS}:{D}/held.vgacap", str(HERE / "held.vgacap")])
-    return rc
 
 
 def teardown() -> int:

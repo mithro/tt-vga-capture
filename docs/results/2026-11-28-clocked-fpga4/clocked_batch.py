@@ -7,6 +7,7 @@ BATCH is one of:
   b      H sweep: --clock-high 0..15, 400,000 clocks at 500 kHz (divider 14: every H reads >= 105 ns late)
   b2     H sweep at 7 MHz, divider 1: --clock-high 0..15, 400,000 clocks
   c      the fastest rate, 4,194,304 clocks; one run over the bridge (daemon up); a killed-host run
+  kk     tt_um_KK_VGA01 (kk.bin), 4,194,304 clocks at 500 kHz and at the fastest rate
 
 Each serial run is `ttcap capture serial:/dev/ttboard --mode clocked ...` with the daemon stopped
 (pi_helper stop-if-idle, 0 clients). After every run the board's state is read over the raw REPL and
@@ -89,7 +90,7 @@ def capture(out, clocks, extra=(), link=f"serial:{PORT}", rate=RATE, reset=None,
 
 
 def killed_host(out):
-    """Start a 4 M-clock run, SIGKILL the host 3 s in, wait for the board to finish on its own."""
+    """Start a 4 M-clock run, SIGKILL the host 12 s after start (about 5 s of load, then streaming), wait 40 s."""
     args = [PY, "ttcap_main.py", "capture", f"serial:{PORT}", "--profile", "rp2350", "--mode", "clocked",
             "--bitstream", BIN, "--clocks", BIG, "--clock-hz", RATE, "--out", out]
     print("$", " ".join(str(a) for a in args), "(SIGKILL after the load + 3 s)", flush=True)
@@ -178,6 +179,7 @@ def main() -> int:
         print(f"start exit {start}, wait-loaded exit {loaded}", flush=True)
         with open(f"results_{batch}.json", "w") as f:
             json.dump(results, f, indent=1)
+    # wait-loaded exit 6: a visitor took the board after the restart (idle_display 'in use'), not a fault
     good = ok and okr and loaded in (0, 6)
     print("RESULT", "PASS" if good else "FAIL", flush=True)
     return 0 if good else 1

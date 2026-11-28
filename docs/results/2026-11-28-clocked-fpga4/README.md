@@ -11,15 +11,23 @@ Code: vgacap branch `clocked` ([mithro/vgacap#95](https://github.com/mithro/vgac
 | c | [eb4ccb8](https://github.com/mithro/vgacap/commit/eb4ccb8) |
 | kk | [eb4ccb8](https://github.com/mithro/vgacap/commit/eb4ccb8) |
 
-[`pi_setup.py`](pi_setup.py) names the commit it installs, and it named fc65c91 for batches a, b and b2. The copy here names eb4ccb8, the commit [`update-c.log`](update-c.log) and [`batch-kk.log`](batch-kk.log) show being archived. The 40 ns warnings in [`batch-b2.log`](batch-b2.log) are fc65c91's floor. `git diff fc65c91 eb4ccb8 -- python/ttcap/mp` is empty, so the board body is the same in every batch. Between the two commits, only the host side changed: the read floor (40 ns, then 80 ns) and the too-fast rule. Nothing was flashed.
+[`pi_setup.py`](pi_setup.py) names the commit it installs. It named fc65c91 for batches a, b and b2, and the copy here names eb4ccb8. [`update-c.log`](update-c.log) and [`batch-kk.log`](batch-kk.log) show eb4ccb8 being archived. The 40 ns warnings in [`batch-b2.log`](batch-b2.log) are fc65c91's floor.
 
-`ttcap capture --mode clocked` loads the bitstream with the clock and reset held. The board's PIO then makes the project clock and reads `uo_out` once per clock, so sample k is the design's output after rising edge k, counted from reset. Each capture here was placed in the [tt-harness-fpga-vga](https://github.com/mithro/tt-harness-fpga-vga) RTL reference for fpga-4 and compared exactly over the overlap ([`analyse.py`](analyse.py)).
+`git diff fc65c91 eb4ccb8 -- python/ttcap/mp` is empty, so the board body is the same in every batch. Between the two commits only the host changed, in two ways:
+- the read floor went from 40 ns to 80 ns;
+- a `--clock-hz` above the fastest clock is now refused.
+
+Nothing was flashed.
+
+[`ttcap capture --mode clocked`](https://github.com/mithro/vgacap/blob/eb4ccb8/python/ttcap/how-to-capture-clocked.md) loads the bitstream with the clock and reset held. The board's PIO then makes the project clock and reads `uo_out` once per clock. So sample k is the design's output after rising edge k, counted from reset.
+
+Each capture of 4,096 clocks or more was placed in the [tt-harness-fpga-vga](https://github.com/mithro/tt-harness-fpga-vga) RTL reference for fpga-4 and compared exactly over the overlap ([`analyse.py`](analyse.py)). The shorter ones were compared by hand (batch a, below).
 
 ## Board
 
-| Board | Pi | USB serial | Firmware | SDK | sysclk |
-|---|---|---|---|---|---|
-| fpga-4 | pi-sw2-p35 | `a2961e5cac65b25f` | MicroPython 970468103d | 3.1.1 (d485c7a) | 133 MHz |
+| Board | Pi | USB serial | Firmware | SDK version | SDK revision | sysclk |
+|---|---|---|---|---|---|---|
+| fpga-4 | pi-sw2-p35 | `a2961e5cac65b25f` | MicroPython 970468103d | 3.1.1 | d485c7a | 133 MHz |
 
 ## Designs
 
@@ -32,7 +40,7 @@ The sizes and hashes are in [`bitstreams.log`](bitstreams.log). Both references 
 
 ## Claims
 
-Each batch had its own claim from the fpgas.online broker. Each was taken at 0 clients with `idle_display` loaded ([`status-a.json`](status-a.json), [`status-b.json`](status-b.json), [`status-b2.json`](status-b2.json), [`status-c.json`](status-c.json), [`status-kk.json`](status-kk.json)), and released. The claim ids are from the broker's claim and release replies, which are not kept in this folder.
+Each batch had its own claim from the [fpgas.online](https://fpgas.online) board broker. Each was taken at 0 clients with `idle_display` loaded ([`status-a.json`](status-a.json), [`status-b.json`](status-b.json), [`status-b2.json`](status-b2.json), [`status-c.json`](status-c.json), [`status-kk.json`](status-kk.json)), and released. The claim ids are from the broker's claim and release replies, which are not kept in this folder.
 
 | Batch | Claim |
 |---|---|
@@ -46,10 +54,10 @@ Each batch had its own claim from the fpgas.online broker. Each was taken at 0 c
 
 [`clocked_batch.py`](clocked_batch.py) ran on the Pi, and [`pi_setup.py`](pi_setup.py) set it up there from `git archive` of the named commit.
 
-1. The bridge was stopped only through `pi_helper.py stop-if-idle`, which reads 0 clients three times.
+1. The bridge was stopped only through [`pi_helper.py`](https://github.com/mithro/tt-harness-fpga-vga/blob/6cf157b/scripts/hardware_library/pi_helper.py) `stop-if-idle`, which reads 0 clients three times.
 2. Before the first run, the board's state was read over the raw REPL: the root listing, whether `/_vgacap` exists, `tt.mode`, the manual-clock monitor, and `rst_n`.
 3. After every run the same state was read again. The first four must equal the state before, and `rst_n` must read 1.
-4. At the end: `restart_sdk`, the bridge started, and `idle_display` loaded.
+4. At the end: [`restart_sdk`](https://github.com/mithro/vgacap/blob/eb4ccb8/python/ttcap/repl.py), the bridge started, and `idle_display` loaded.
 
 Every post-run state in every batch equalled the state before, with `rst_n` released ([`results_a.json`](results_a.json), [`results_b.json`](results_b.json), [`results_b2.json`](results_b2.json), [`results_c.json`](results_c.json), [`results_kk.json`](results_kk.json)). Every batch ended `RESULT PASS`. The Pi's home listing was the same before the kk setup and after its teardown ([`batch-kk.log`](batch-kk.log)), and after batch c's teardown ([`teardown.log`](teardown.log)).
 
@@ -70,12 +78,12 @@ Every post-run state in every batch equalled the state before, with `rst_n` rele
 | n4 | 4 | 1 | by hand | 9 | 4 | 0 |
 | n8 | 8 | 1 | by hand | 9 | 7 | 0 |
 | n12 | 12 | 10 | by hand | 0 | 12 | 0 |
-| big0 | 4,194,304 | 10 | `locate_capture` | 0 | 4,194,304 | 0 |
-| big1 | 4,194,304 | 10 | `locate_capture` | 0 | 4,194,304 | 0 |
-| big2 | 4,194,304 | 10 | `locate_capture` | 0 | 4,194,304 | 0 |
+| big0 | 4,194,304 | 10 | [`locate_capture`](https://github.com/mithro/tt-harness-fpga-vga/blob/6cf157b/tthfv/compare.py) | 0 | 4,194,304 | 0 |
+| big1 | 4,194,304 | 10 | [`locate_capture`](https://github.com/mithro/tt-harness-fpga-vga/blob/6cf157b/tthfv/compare.py) | 0 | 4,194,304 | 0 |
+| big2 | 4,194,304 | 10 | [`locate_capture`](https://github.com/mithro/tt-harness-fpga-vga/blob/6cf157b/tthfv/compare.py) | 0 | 4,194,304 | 0 |
 
 - The clock was 500 kHz exactly: divider 14, 19 cycles per clock, H 8, L 7.
-- The short runs are under `locate_capture`'s 4,096-clock anchor. Their samples were compared by hand with the reference's first 16 clocks, which `analyse-a.log` prints. n8's last sample falls at reference clock 16, which is not printed, so 7 of its 8 were compared.
+- The short runs are under [`locate_capture`](https://github.com/mithro/tt-harness-fpga-vga/blob/6cf157b/tthfv/compare.py)'s 4,096-clock anchor. Their samples were compared by hand with the reference's first 16 clocks, which `analyse-a.log` prints. n8's last sample falls at reference clock 16, which is not printed, so 7 of its 8 were compared.
 - The reference resets for 10 clocks, so a run with 1 reset clock starts 9 clocks earlier in the design's life. That is the shift of 9.
 - The three long runs have identical samples (uo_out sha256 prefix `4248775f5bae2d2f`).
 - Each long run reported `overruns=0` and `stalled_buffers=255`. That is the number of buffers during which the link held the clock, which does not lose samples.
@@ -96,11 +104,19 @@ Every post-run state in every batch equalled the state before, with `rst_n` rele
 | 4 | 37.6 ns | 22.6 ns | `014098263572c644` | no |
 | 5 | 45.1 ns | 30.1 ns | `566cacfaf1cc5418` | no |
 | 6 | 52.6 ns | 37.6 ns | `9aa4e8cf6b4d49d9` | no |
-| 7-15 | 60.2-120.3 ns | 45.1-105.3 ns | `f85406bff1bf10a0` | yes |
+| 7 | 60.2 ns | 45.1 ns | `f85406bff1bf10a0` | yes |
+| 8 | 67.7 ns | 52.6 ns | `f85406bff1bf10a0` | yes |
+| 9 | 75.2 ns | 60.2 ns | `f85406bff1bf10a0` | yes |
+| 10 | 82.7 ns | 67.7 ns | `f85406bff1bf10a0` | yes |
+| 11 | 90.2 ns | 75.2 ns | `f85406bff1bf10a0` | yes |
+| 12 | 97.7 ns | 82.7 ns | `f85406bff1bf10a0` | yes |
+| 13 | 105.3 ns | 90.2 ns | `f85406bff1bf10a0` | yes |
+| 14 | 112.8 ns | 97.7 ns | `f85406bff1bf10a0` | yes |
+| 15 | 120.3 ns | 105.3 ns | `f85406bff1bf10a0` | yes |
 
 H 7-15 give the same samples as batch b. H 1-4 give the same samples as H 0.
 
-[`shiftcheck.py`](shiftcheck.py) compared four of the captures with the reference shifted by s clocks: capture sample k + s against reference clock k, over the whole capture.
+[`shiftcheck.py`](shiftcheck.py) compared four captures with the reference shifted by s clocks. It compares capture sample k + s with reference clock k, over the whole capture.
 
 | H | Differ at shift 0 | Differ at shift 1 |
 |---|---|---|
@@ -111,9 +127,11 @@ H 7-15 give the same samples as batch b. H 1-4 give the same samples as H 0.
 
 So H 0-4 read exactly the previous clock's output. H 5 mostly reads the previous one, H 6 mostly the new one, and H 7 reads the new one exactly.
 
-For this design on this board, the read must come between 52.6 and 60.2 ns of read time after the edge, or between 37.6 and 45.1 ns of pin time. vgacap now reads at least 80 ns of read time after the edge by default. A design with a longer clock-to-output path needs more, and `--clock-high` sets it per run ([mithro/vgacap#97](https://github.com/mithro/vgacap/issues/97) asks for a value in ns).
+For this design on this board, the output starts changing after 37.6 ns of read time and is complete by 60.2 ns. In pin time, that is 22.6 to 45.1 ns. The last wholly wrong read is H 4, and the first exact one is H 7.
 
-The 40 ns default before this came from the design note, not from a run. Its 25 ns basis was frame mode on the tt09 bars design, with a 25 MHz project clock at sysclk 100 MHz ([2026-11-24-frame-capture-fpga4](../2026-11-24-frame-capture-fpga4/README.md)). There, sampling at falling+0 was wrong, and falling+1 and rising+0 were exact; that page puts the change at about 25 ns. Frame mode times its sample from a different edge, so its figure is not directly comparable with these.
+At eb4ccb8 ([mithro/vgacap#95](https://github.com/mithro/vgacap/pull/95)), vgacap reads at least 80 ns after the edge by default. This floor was measured on `tt_um_vga_ca` only. `--clock-high` sets the read point per run, and [mithro/vgacap#97](https://github.com/mithro/vgacap/issues/97) asks for a value in ns.
+
+The 40 ns default before this came from the clock-exact design note, which is not published, and not from a run. Its 25 ns basis was frame mode on `tt_um_vgacal_bars` on fpga-4, with a 25 MHz project clock at sysclk 100 MHz ([2026-11-24-frame-capture-fpga4](../2026-11-24-frame-capture-fpga4/README.md)). There, sampling at falling+0 was wrong, and falling+1 and rising+0 were exact; that page puts the change at about 25 ns. Frame mode times its sample from a different edge, so its figure is not directly comparable with these.
 
 ### c: the fastest clock, a killed host, and the bridge ([`batch-c.log`](batch-c.log), [`analyse-c.log`](analyse-c.log))
 
@@ -123,7 +141,7 @@ The 40 ns default before this came from the design note, not from a run. Its 25 
 | killed | serial | 500,000 Hz | 14 | 8 | 7 | 2,834,432 | 2,834,432 | 0 |
 | bridge | WebSocket | 500,000 Hz | 14 | 8 | 7 | 4,194,304 | 4,194,304 | 0 |
 
-- **max:** the batch read `machine.freq()` (133,000,000) and asked for ceil(133,000,000 / 14) Hz, the fastest clock with an 80 ns read. 5.08 s on the board, `overruns=0`. Its samples are identical to batch a's.
+- **max:** the batch read `machine.freq()`, which gave 133,000,000. It asked for ceil(133,000,000 / 14) Hz, the fastest clock with an 80 ns read. The run took 5.08 s on the board, with `overruns=0`. Its samples are identical to batch a's.
 - **killed:** the host was sent `SIGKILL` 12 s after the capture started. The load takes about 5 s, so streaming had begun. After a 40 s wait the board's state equalled the state before. The file has the opening `TIME` record and no closing one ([`analyse-c.log`](analyse-c.log) lists a single `TIME` line for it). Every sample in it is exact.
 - **bridge:** the bridge was running, and the capture went through `ws://127.0.0.1:8765/serial` on the Pi. `overruns=0`, and the samples are identical to batch a's.
 
@@ -147,6 +165,12 @@ The 40 ns default before this came from the design note, not from a run. Its 25 
 | 9 | 332 | 339 | 2 | 28 |
 
 - The RTL simulation and the FPGA build's synthesised netlist, both reset from clock 0, differ from the capture at the same 84 clocks ([`kkmodels.log`](kkmodels.log)). So the difference is neither a synthesis difference nor reset.
+- Both dumps came from the harness's mismatch investigation on 2026-11-27. Its scripts are not published.
+  - **Simulator:** Verilator 5.053, from the harness's oss-cad-suite.
+  - **Testbench:** the harness's [`ref_tb.cpp`](https://github.com/mithro/tt-harness-fpga-vga/blob/f7786c9/tthfv/harness/ref_tb.cpp) at f7786c9, sha256 prefix `b5f9c6c3ac25`, the same testbench the reference names.
+  - **Stimulus:** `ui_in` 0 and `uio_in` 0xc0, for 6,000,000 clocks.
+  - **RTL model:** the design's sources.
+  - **Netlist model:** the FPGA build's own synthesised netlist (`out-default.json`), written as Verilog by Yosys 0.69+24 and simulated with the iCE40 `cells_sim.v`.
 - It is not explained. [mithro/vgacap#96](https://github.com/mithro/vgacap/issues/96) tracks it, with an unchecked hypothesis.
 
 ## Not measured
@@ -157,6 +181,9 @@ The 40 ns default before this came from the design note, not from a run. Its 25 
 - designs other than these two.
 
 ## Files
+
+The `.vgacap` capture files, about 45 MB in all, are not in this repository. Without them the scripts here can't be re-run; ask on [mithro/vgacap#95](https://github.com/mithro/vgacap/pull/95) for a copy.
+
 
 | File | What |
 |---|---|
@@ -195,6 +222,7 @@ The 40 ns default before this came from the design note, not from a run. Its 25 
 | [`kkdiff.py`](kkdiff.py) | the differing clocks |
 | [`kkruns.py`](kkruns.py) | the differing runs |
 | [`kkmodels.py`](kkmodels.py) | the model comparison |
+| [`ttcap_main.py`](ttcap_main.py) | runs the ttcap CLI from the archived tree on the Pi |
 | [`bitinfo.py`](bitinfo.py) | the bitstream sizes and hashes |
 
 In the logs, `HOST` stands for the host's working directory, `TT` for its checkout root, and `BITSTREAMS` for its bitstream store.

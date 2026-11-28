@@ -1,3 +1,4 @@
+"""Print each file's size in bytes and its sha256."""
 import hashlib, sys
 from pathlib import Path
 for p in sys.argv[1:]:

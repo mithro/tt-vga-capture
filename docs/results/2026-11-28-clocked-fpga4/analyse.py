@@ -1,6 +1,6 @@
 """Analyse 4e clocked captures: samples, closing records, and placement and comparison in the harness reference.
 
-usage (from the tt-harness-fpga-vga checkout): uv run python ANALYSE.py DESIGN_KEY FILE.vgacap ...
+usage (from the tt-harness-fpga-vga checkout): uv run python analyse.py DESIGN_KEY FILE.vgacap ...
 
 For each file: header mode and clock_hz, the TIME records, the sample count, and where the samples sit in the
 design's fpga-4 reference (tthfv.compare.locate_capture over the first 840,000 reference clocks), then the
